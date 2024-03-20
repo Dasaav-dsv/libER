@@ -11,6 +11,8 @@ target_include_directories("libER" PRIVATE
     "dependencies/thirdparty"
 )
 
+# Confirm libER is being compiled with MSVC or clang-cl
+# Check the source file for more details
 target_sources("libER" PRIVATE
     "source/core/compiler.cpp"
 )
