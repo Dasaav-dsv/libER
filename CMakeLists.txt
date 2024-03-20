@@ -22,3 +22,8 @@ target_sources("libER" PRIVATE
 target_sources("libER" PRIVATE
     "source/core/base_address.cpp"
 )
+
+# Memory source files
+target_sources("libER" PRIVATE
+    "source/memory/from_allocator.cpp"
+)
