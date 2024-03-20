@@ -1,0 +1,3 @@
+[submodule "dependencies/cppsv"]
+	path = dependencies/cppsv
+	url = https://github.com/Dasaav-dsv/cppsv.git
