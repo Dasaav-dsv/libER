@@ -2,15 +2,15 @@
 
 #include <type_traits>
 
-namespace libER {
+namespace liber {
     template <typename>
-    union ExtMethodHolder;
+    union ext_method_holder;
 
     template <class Class, auto Function, typename = decltype(Function)>
-    class ExtMethod;
+    class ext_method;
 
     template <class Class, auto Function, typename Result, class ClassP, typename...Args>
-    class ExtMethod<Class, Function, Result(*)(ClassP, Args...)> {
+    class ext_method<Class, Function, Result(*)(ClassP, Args...)> {
         static_assert(std::is_same_v<const volatile Class, const volatile typename std::remove_pointer_t<ClassP>>,
             "Bound function must take a pointer of its class type");
         Class* instance;
