@@ -7,6 +7,7 @@ target_compile_features("libER" PRIVATE cxx_std_20)
 target_include_directories("libER" PRIVATE
     "include"
     "include/core"
+    "include/memory/containers"
     "dependencies"
     "dependencies/cppsv/include"
     "dependencies/thirdparty"
