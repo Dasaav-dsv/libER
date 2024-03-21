@@ -4,7 +4,7 @@
 
 // Default internal libER allocator
 // Implements all necessary methods
-class fromlike_allocator : public from::DLKR::DLAllocator {
+static class fromlike_allocator : public from::DLKR::DLAllocator {
 public:
     virtual ~fromlike_allocator() = default;
 
@@ -79,12 +79,7 @@ public:
     void* get_memory_block(void* p) override {
         return nullptr;
     }
-};
+} default_allocator;
 
-// Statically allocated
-// Inequality by address guarantees unowned memory is not shared
-static fromlike_allocator default_allocator;
-
-from::DLKR::DLAllocator& from::default_fromlike_allocator() noexcept {
-    return default_allocator;
-}
+from::allocator_proxy<void>::allocator_proxy()
+    noexcept : allocator(&default_allocator) {}

@@ -108,18 +108,39 @@ namespace from {
             // Get the memory block that this memory belongs to
             // May panic if this memory isn't owned by this allocator
             virtual void* get_memory_block(void* p) = 0;
+
+            struct MAIN_tag {};
+            struct GFX_tag {};
+            struct GFXTEMP_tag {};
+            struct INGAME_tag {};
+            struct TEMP_tag {};
+            struct CORERES_tag {};
+            struct MO_WWISE_tag {};
+            struct MO_WWISE_ISORATION_tag {};
+            struct LUA_tag {};
+            struct HAVOK_tag {};
+            struct NETWORK_tag {};
+            struct DEBUG_tag {};
+            struct GFX_SystemShared_tag {};
+            struct GFX_Graphics_tag {};
         };
     }
 
-    // Get default from-like allocator libER uses
-    DLKR::DLAllocator& default_fromlike_allocator() noexcept;
+    template <typename AllocatorTag>
+    struct allocator_proxy;
 
     // The main libER stand-in for ER allocator proxies:
     // Uses the DLKR::DLAllocator interface
     // Fulfils allocator completeness requirements
-    template <typename T>
-    class allocator {
-        DLKR::DLAllocator* alloc;
+    template <typename T, typename AllocatorTag = void>
+    class allocator : private allocator_proxy<AllocatorTag> {
+        using base_type = allocator_proxy<AllocatorTag>;
+        using proxy_type = DLKR::DLAllocator;
+
+        base_type& base() noexcept { return static_cast<base_type&>(*this); }
+        const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
+
+        DLKR::DLAllocator& proxy() noexcept { return this->base()->get_allocator(); }
     public:
         using value_type = T;
         using size_type = size_t;
@@ -132,10 +153,10 @@ namespace from {
         // Equality checks via operator == are required on assignment
         using is_always_equal = std::false_type;
 
-        allocator() noexcept : alloc(std::addressof(default_fromlike_allocator())) {}
+        allocator() noexcept : base_type() {}
 
         template <typename U>
-        allocator(const allocator<U>& other) noexcept : alloc(other.alloc) {}
+        allocator(const allocator<U>& other) noexcept : base_type(other.base()) {}
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
@@ -155,4 +176,81 @@ namespace from {
     bool operator == (const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept {
         return lhs.alloc == rhs.alloc;
     }
+
+    template <>
+    struct allocator_proxy<void> {
+        DLKR::DLAllocator* allocator;
+        allocator_proxy() noexcept;
+        DLKR::DLAllocator& get_allocator() noexcept { return *this->allocator; }
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::MAIN_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::GFX_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::GFXTEMP_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::INGAME_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::TEMP_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::CORERES_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::MO_WWISE_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::MO_WWISE_ISORATION_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::LUA_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::HAVOK_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::NETWORK_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::DEBUG_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::GFX_Graphics_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
+
+    template <>
+    struct allocator_proxy<DLKR::DLAllocator::GFX_SystemShared_tag> {
+        DLKR::DLAllocator& get_allocator() noexcept;
+    };
 }
