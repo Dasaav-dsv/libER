@@ -2,6 +2,8 @@
 #include <malloc.h>
 #include <limits>
 
+// Default internal libER allocator
+// Implements all necessary methods
 class fromlike_allocator : public from::DLKR::DLAllocator {
 public:
     virtual ~fromlike_allocator() = default;
@@ -14,7 +16,7 @@ public:
         return 0;
     }
 
-    void* get_free_bin() override {
+    void* _get_free_bin() override {
         return nullptr;
     }
 
@@ -79,6 +81,8 @@ public:
     }
 };
 
+// Statically allocated
+// Inequality by address guarantees unowned memory is not shared
 static fromlike_allocator default_allocator;
 
 from::DLKR::DLAllocator& from::default_fromlike_allocator() noexcept {

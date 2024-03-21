@@ -21,40 +21,102 @@
 
 namespace from {
     namespace DLKR {
-        // TODO: fill out virtual function table, don't forget msize
+        // Common ER allocator interface
+        // Can support two allocators at once (for container allocation)
         class DLAllocator {
         public:
             virtual ~DLAllocator() = default;
+
+            // Unique allocator id sometimes used for comparing allocators
             virtual int _allocator_id() { return -1; }
+
+            // Unknown function which is defined in the interface, never overriden or used
             virtual int _unused() { return -1; }
+
+            // Allocator and heap compatibility flags.
+            // 0x10 indicates thread safety (most commonly checked)
             virtual std::bitset<8> heap_flags() { return 0x73; }
+
+            // The total capacity of the heap, in bytes
             virtual size_t heap_capacity() = 0;
+
+            // How many bytes out of the total capacity are allocated
             virtual size_t heap_size() = 0;
-            virtual void* get_free_bin() = 0;
+
+            // Internal method, returns a free allocation bin hint
+            virtual void* _get_free_bin() = 0;
+
+            // How many objects are allocated
             virtual size_t heap_allocation_count() = 0;
+
+            // See _msize
             virtual size_t msize(void* p) = 0;
+
+            // Allocate count bytes, an alignment of at least 16 bytes is expected by ER
             virtual void* allocate(size_t cb) = 0;
+            
+            // Allocate count bytes with an alignment of 16 bytes or more
             virtual void* allocate_aligned(size_t cb, size_t alignment) = 0;
+
+            // Reallocate memory, only valid for trivial types
             virtual void* reallocate(void* p, size_t cb) = 0;
+
+            // Reallocate memory with alignment, only valid for trivial types
             virtual void* reallocate_aligned(void* p, size_t cb, size_t alignment) = 0;
+
+            // Free memory
             virtual void deallocate(void* p) = 0;
+
+            // Unknown method, isn't supported by any classes that implement DLKR::DLAllocator
             virtual void _unsupported() { std::terminate(); }
+
+            // Allocate count bytes, an alignment of at least 16 bytes is expected by ER
+            // Use the second allocator if it is bound, first if not
             virtual void* allocate_second(size_t cb) = 0;
+            
+            // Allocate count bytes with an alignment of 16 bytes or more
+            // Use the second allocator if it is bound, first if not
             virtual void* allocate_second_aligned(size_t cb, size_t alignment) = 0;
+
+            // Reallocate memory, only valid for trivial types
+            // Use the second allocator if it is bound, first if not
             virtual void* reallocate_second(void* p, size_t cb) = 0;
+
+            // Reallocate memory with alignment, only valid for trivial types
+            // Use the second allocator if it is bound, first if not
             virtual void* reallocate_second_aligned(void* p, size_t cb, size_t alignment) = 0;
+
+            // Free memory
+            // Use the second allocator if it is bound, first if not
             virtual void deallocate_second(void* p) = 0;
+
+            // Unknown method, seeminly unused
             virtual bool _unknown_bool() { return false; }
+
+            // Does memory belong to the first bound allocator?
             virtual bool belongs_to_first(void* p) = 0;
+
+            // Does memory belong to the second bound allocator?
             virtual bool belongs_to_second(void* p) = 0;
+
+            // Lock the allocator's mutex (if present and accessible)
             virtual void lock() {}
+
+            // Unlock the allocator's mutex (if present and accessible)
             virtual void unlock() {}
+
+            // Get the memory block that this memory belongs to
+            // May panic if this memory isn't owned by this allocator
             virtual void* get_memory_block(void* p) = 0;
         };
     }
 
+    // Get default from-like allocator libER uses
     DLKR::DLAllocator& default_fromlike_allocator() noexcept;
 
+    // The main libER stand-in for ER allocator proxies:
+    // Uses the DLKR::DLAllocator interface
+    // Fulfils allocator completeness requirements
     template <typename T>
     class allocator {
         DLKR::DLAllocator* alloc;
@@ -62,19 +124,26 @@ namespace from {
         using value_type = T;
         using size_type = size_t;
         using difference_type = ptrdiff_t;
+
+        // Allocator is move assigned along with the contents
         using propagate_on_container_move_assignment = std::true_type;
+
+        // Allocator may proxy different stateful allocators
+        // Equality checks via operator == are required on assignment
         using is_always_equal = std::false_type;
 
-        allocator() noexcept : interface(default_fromlike_allocator()) {}
+        allocator() noexcept : alloc(std::addressof(default_fromlike_allocator())) {}
 
         template <typename U>
-        allocator(const allocator<U>& other) noexcept : interface(other.alloc) {}
+        allocator(const allocator<U>& other) noexcept : alloc(other.alloc) {}
 
+        // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
             return reinterpret_cast<T*>(alloc->allocate_aligned(n * sizeof(T), alignof(T)));
         }
 
-        void deallocate(T* p, size_type n) {
+        // Deallocate memory, n is ignored by DLKR::DLAllocator and can be zero
+        void deallocate(T* p, size_type n = 0) {
             alloc->deallocate((void*)p);
         }
 
