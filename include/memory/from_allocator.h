@@ -14,7 +14,7 @@
 * in the binary and referenced by stateless proxy objects.
 * from::allocator<T> provides a proxy object that fulfils Allocator
 * completeness requirements and uses the DLKR::DLAllocator interface.
-* Due to implementing msize (actively used, see CS::CSGrassAllocator)
+* Due to implementing _msize (actively used, see CS::CSGrassAllocator)
 * the default allocator proxied by from::allocator
 * cannot be based on std::allocator<T>.
 */
@@ -34,7 +34,7 @@ namespace from {
             virtual int _unused() { return -1; }
 
             // Allocator and heap compatibility flags.
-            // 0x10 indicates thread safety (most commonly checked)
+            // 0x20 indicates thread safety (most commonly checked)
             virtual std::bitset<8> heap_flags() { return 0x73; }
 
             // The total capacity of the heap, in bytes
@@ -67,7 +67,7 @@ namespace from {
             // Free memory
             virtual void deallocate(void* p) = 0;
 
-            // Unknown method, isn't supported by any classes that implement DLKR::DLAllocator
+            // Unknown method, isn't supported by any class that implements DLKR::DLAllocator
             virtual void _unsupported() { std::terminate(); }
 
             // Allocate count bytes, an alignment of at least 16 bytes is expected by ER
@@ -90,7 +90,7 @@ namespace from {
             // Use the second allocator if it is bound, first if not
             virtual void deallocate_second(void* p) = 0;
 
-            // Unknown method, seeminly unused
+            // Unknown method, seemingly unused
             virtual bool _unknown_bool() { return false; }
 
             // Does memory belong to the first bound allocator?
@@ -109,21 +109,28 @@ namespace from {
             // May panic if this memory isn't owned by this allocator
             virtual void* get_memory_block(void* p) = 0;
 
-            struct MAIN_tag {};
-            struct GFX_tag {};
-            struct GFXTEMP_tag {};
-            struct INGAME_tag {};
-            struct TEMP_tag {};
-            struct CORERES_tag {};
-            struct MO_WWISE_tag {};
-            struct MO_WWISE_ISORATION_tag {};
-            struct LUA_tag {};
-            struct HAVOK_tag {};
-            struct NETWORK_tag {};
-            struct DEBUG_tag {};
-            struct GFX_SystemShared_tag {};
-            struct GFX_Graphics_tag {};
+            // ER allocator tags
+            struct MAIN {};
+            struct GFX {};
+            struct GFXTEMP {};
+            struct INGAME {};
+            struct TEMP {};
+            struct CORERES {};
+            struct MO_WWISE_ISORATION {};
+            struct LUA {};
+            struct HAVOK {};
+            struct MENU {};
+            struct DEBUG {};
+            struct GFX_SystemShared {};
+            struct GFX_GraphicsPrivate {};
         };
+
+        struct DLBackAllocator {};
+    }
+
+    namespace CS {
+        struct CSMoWwiseAllocator{};
+        struct CSNetworkAllocator{};
     }
 
     template <typename AllocatorTag>
@@ -140,7 +147,7 @@ namespace from {
         base_type& base() noexcept { return static_cast<base_type&>(*this); }
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
-        DLKR::DLAllocator& proxy() noexcept { return this->base()->get_allocator(); }
+        DLKR::DLAllocator& proxy() noexcept { return this->base().get_allocator(); }
     public:
         using value_type = T;
         using size_type = size_t;
@@ -160,12 +167,12 @@ namespace from {
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
-            return reinterpret_cast<T*>(alloc->allocate_aligned(n * sizeof(T), alignof(T)));
+            return reinterpret_cast<T*>(proxy()->allocate_aligned(n * sizeof(T), alignof(T)));
         }
 
         // Deallocate memory, n is ignored by DLKR::DLAllocator and can be zero
         void deallocate(T* p, size_type n = 0) {
-            alloc->deallocate((void*)p);
+            proxy()->deallocate((void*)p);
         }
 
         template <typename T1, typename T2>
@@ -174,83 +181,27 @@ namespace from {
 
     template <typename T1, typename T2>
     bool operator == (const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept {
-        return lhs.alloc == rhs.alloc;
+        return std::addressof(lhs.proxy()) == std::addressof(rhs.proxy());
     }
 
     template <>
     struct allocator_proxy<void> {
         DLKR::DLAllocator* allocator;
+
         allocator_proxy() noexcept;
-        DLKR::DLAllocator& get_allocator() noexcept { return *this->allocator; }
+
+        DLKR::DLAllocator& get_allocator() noexcept {
+            return *this->allocator;
+        }
     };
 
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::MAIN_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
+#define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)       \
+    template <>                                      \
+    struct allocator_proxy<NAME> {                   \
+        DLKR::DLAllocator& get_allocator() noexcept; \
     };
 
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::GFX_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
+#include "from_allocator.inl"
 
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::GFXTEMP_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::INGAME_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::TEMP_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::CORERES_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::MO_WWISE_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::MO_WWISE_ISORATION_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::LUA_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::HAVOK_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::NETWORK_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::DEBUG_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::GFX_Graphics_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
-
-    template <>
-    struct allocator_proxy<DLKR::DLAllocator::GFX_SystemShared_tag> {
-        DLKR::DLAllocator& get_allocator() noexcept;
-    };
+#undef LIBER_SPECIALIZE_ALLOCATOR_PROXY
 }
