@@ -14,4 +14,9 @@ namespace liber {
         }
         return result;
     }
+
+    void* base_offset(int offset) noexcept {
+        void* base = base_address();
+        return (void*)(reinterpret_cast<char*>(base) + offset);
+    }
 }
