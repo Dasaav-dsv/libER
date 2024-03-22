@@ -1,6 +1,8 @@
 #pragma once
 
-#include <cppsv.h>
+#include <cstddef>
+#include <cstdint>
+#include <algorithm>
 
 /*
 * A symbol repository header that pulls
@@ -9,16 +11,24 @@
 */
 
 namespace liber {
-    CPPSV_VIEW_BEGIN
-#include <1.10.1_0.csv>
-    CPPSV_VIEW_NAME(symbol_list)
+    template <typename CharT, size_t N>
+    struct symbol_name {
+        consteval symbol_name() = default;
 
-    template <cppsv::cppsv_field Name>
+        consteval symbol_name(const CharT(&str)[N]) {
+            std::copy_n(str, N, this->string);
+        }
+
+        CharT string[N]{};
+    };
+
+    template <symbol_name Name>
     struct symbol;
     
 #define LIBER_ADD_SYMBOL(NAME)       \
     template <>                      \
     struct symbol<#NAME> {           \
+        static int value;            \
         static void* get() noexcept; \
     };
 
