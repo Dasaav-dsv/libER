@@ -10,9 +10,16 @@ namespace liber {
     // Default internal libER allocator
     // Implements all necessary methods
     // Uses C allocation functions (needs _msize)
+    // Models DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
     static class fromlike_allocator : public from::DLKR::DLAllocator {
     public:
         virtual ~fromlike_allocator() = default;
+
+        // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
+        int _allocator_id() override { return 0x401; }
+
+        // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
+        std::bitset<8> heap_flags() override { return 0x3B; }
 
         size_t heap_capacity() override {
             return std::numeric_limits<size_t>::max();
@@ -51,7 +58,7 @@ namespace liber {
         }
 
         void deallocate(void* p) override {
-            free(p);
+            if (p) free(p);
         }
 
         void* allocate_second(size_t cb) override {
@@ -87,6 +94,7 @@ namespace liber {
         }
     } default_allocator;
 }
+
 namespace from {
     allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
 
@@ -94,11 +102,11 @@ namespace from {
         return liber::function<"DLKR::DLAllocator::get_allocator_of", DLAllocator*>::call(p);
     }
 
-// TODO: Allocator initialization check
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
     DLKR::DLAllocator& allocator_proxy<NAME>::get_allocator() noexcept {         \
         DLKR::DLAllocator* allocator =                                           \
             *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
+        if (!allocator) std::terminate();                                        \
         return *allocator;                                                       \
     }
 
