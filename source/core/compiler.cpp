@@ -11,5 +11,5 @@
 #if !defined(_MSVC_STL_UPDATE)
 #error libER only supports the Microsoft Visual Compiler/clang \
        with MSVC STL for ELDEN RING ABI compatibility reasons. \
-       Check libER/source/core/compiler.cpp for details.
+       Check libER/source/detail/compiler.cpp for details.
 #endif

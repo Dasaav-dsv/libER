@@ -1,5 +1,5 @@
 #include <base_address.h>
-#include <core/windows.inl>
+#include <detail/windows.inl>
 
 namespace liber {
     static void* cached_base_address;

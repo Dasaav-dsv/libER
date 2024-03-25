@@ -3,7 +3,7 @@
 #include <detail/version_fileio.h>
 #include <detail/version_winhttp.h>
 
-#include <core/windows.inl>
+#include <detail/windows.inl>
 #include <atomic>
 #include <string>
 #include <sstream>

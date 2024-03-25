@@ -3,7 +3,7 @@
 * ELDEN RING is already dynamically linked against winhttp.dll.
 */
 
-#include <core/windows.inl>
+#include <detail/windows.inl>
 #include <winhttp.h>
 
 #include <cstddef>

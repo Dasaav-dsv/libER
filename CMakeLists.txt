@@ -18,26 +18,26 @@ PUBLIC
     "include/memory"
     "include/memory/containers"
 PRIVATE
-    "include/core"
+    "include/detail"
     "include/version"
     "symbols"
 )
 
-# Confirm libER is being compiled with MSVC or clang-cl
-# Check the source file for more details
+# Confirm libER is compiled with MSVC or clang-cl
+# with MSVC STL. Check the source file for more details
 target_sources("objlibER" PUBLIC
-    "source/core/compiler.cpp"
+    "source/detail/compiler.cpp"
 )
 
 # Core source files
 target_sources("objlibER" PUBLIC
-    "source/core/base_address.cpp"
+    "source/detail/base_address.cpp"
+    "source/detail/symbols.cpp"
 )
 
 # Versioning source files
 target_sources("objlibER" PUBLIC
     "source/version/version.cpp"
-    "source/version/symbols.cpp"
     "source/version/detail/version_fileio.cpp"
     "source/version/detail/version_winhttp.cpp"
 )
@@ -51,5 +51,5 @@ target_sources("objlibER" PUBLIC
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER>)
 # Target libER_static[d].lib
 add_library("libER_static" STATIC $<TARGET_OBJECTS:objlibER>)
-
+# Debug build "d" postfix in libERd.*
 set_target_properties("libER" "libER_static" PROPERTIES DEBUG_POSTFIX d)

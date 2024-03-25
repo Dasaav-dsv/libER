@@ -10,6 +10,6 @@
 namespace liber {
     // Try to download symbol .csv files online,
     // and cache them. The lookup variables (domain etc.)
-    // can be found in core/liber_defines.hpp
+    // can be found in detail/liber_defines.hpp
     std::string load_versioned_csv_from_repo() noexcept;
 }
