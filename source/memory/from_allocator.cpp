@@ -87,8 +87,9 @@ namespace liber {
 namespace from {
 allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
 
+// TODO: Allocator initialization check
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
-    DLKR::DLAllocator& allocator_proxy<NAME>::get_allocator() noexcept { \
+    DLKR::DLAllocator& allocator_proxy<NAME>::get_allocator() noexcept {         \
         DLKR::DLAllocator* allocator =                                           \
             *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
         return *allocator;                                                       \
