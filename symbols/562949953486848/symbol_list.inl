@@ -15,4 +15,5 @@ LIBER_ADD_SYMBOL(CS::CSNetworkAllocator)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::DEBUG)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::GFX_SystemShared)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::GFX_GraphicsPrivate)
+LIBER_ADD_SYMBOL(DLKR::DLBackAllocator::res_allocator_of)
 #endif

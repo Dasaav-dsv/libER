@@ -125,7 +125,9 @@ namespace from {
             struct GFX_GraphicsPrivate {};
         };
 
-        struct DLBackAllocator {};
+        struct DLBackAllocator : public DLAllocator {
+            DLAllocator* res_allocator_of(const void* resource);
+        };
     }
 
     namespace CS {

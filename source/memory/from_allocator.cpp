@@ -1,5 +1,8 @@
 #include <from_allocator.h>
+
 #include <symbols.h>
+#include <functions.h>
+
 #include <malloc.h>
 #include <limits>
 
@@ -86,6 +89,10 @@ namespace liber {
 }
 namespace from {
 allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
+
+DLKR::DLAllocator* DLKR::DLBackAllocator::res_allocator_of(const void* resource) {
+    return liber::function<"DLKR::DLBackAllocator::res_allocator_of", DLKR::DLAllocator*>::call(resource);
+}
 
 // TODO: Allocator initialization check
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
