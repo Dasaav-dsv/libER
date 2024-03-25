@@ -3,6 +3,7 @@
 #include <version.h>
 
 #include <cppsv_rt.h>
+#include <NamedMutex.h>
 #include <liber_preprocessor.h>
 #include <shlobj_core.h>
 
@@ -15,21 +16,25 @@
 namespace liber {
     namespace fs = std::filesystem;
 
-    static std::mutex load_store_mutex;
-
+    // Get %APPDATA% using the shell SHGetKnownFolderPath function
     fs::path get_appdata() {
-        wchar_t* path;
+        wchar_t* path = nullptr;
         HRESULT result = SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, NULL, &path);
+        if (!path) return L"";
         fs::path appdata{ path };
+        // Free memory (also correct on error)
         CoTaskMemFree(path);
         return result == S_OK ? path : L"";
     }
 
+    // Get the full path to the symbol directory
+    // for the currently running version of the binary
     fs::path resolve_file_path(const std::string& filename = "") {
         const auto& version = get_version_string();
         if (version.empty()) return "";
         fs::path base_path = get_appdata();
         if (base_path.empty()) return "";
+        // ELDEN RING savefile folder in %APPDATA%
         base_path.append("EldenRing/libER/symbols/" + version);
         std::error_code err;
         fs::create_directories(base_path, err);
@@ -38,8 +43,10 @@ namespace liber {
         return base_path;
     }
 
+    // TODO: error reporting instead of std::terminate
     std::string load_versioned_csv_from_disk() noexcept {
-        std::scoped_lock lock{ load_store_mutex };
+        WinTypes::NamedMutex mutex{ LIBER_VERSION_FILEIO_MUTEX };
+        std::scoped_lock lock{ mutex };
         fs::path file_path = resolve_file_path(LIBER_STRINGIFY(LIBER_FILE_LIST));
         if (file_path.empty()) return "";
         std::stringstream out;
@@ -65,8 +72,10 @@ namespace liber {
         return out.str();
     }
 
+    // TODO: error reporting instead of std::terminate
     void save_file_to_disk(const std::string& filename, const std::string& data) noexcept {
-        std::scoped_lock lock{ load_store_mutex };
+        WinTypes::NamedMutex mutex{ LIBER_VERSION_FILEIO_MUTEX };
+        std::scoped_lock lock{ mutex };
         fs::path file_path = resolve_file_path(filename);
         if (file_path.empty()) return;
         try {
@@ -84,6 +93,10 @@ namespace liber {
     std::pair<std::string, std::wstring> filename_from_line(const std::string& line) noexcept {
         std::string out;
         std::wstring wout;
+        // In an #include "header.h" statement,
+        // pass through string until the first quote,
+        // then copy substring until the next quote.
+        // Result: (header.h)
         for (bool in_quotes = false; char chr : line) {
             if (in_quotes) {
                 if (chr == '"') break;
