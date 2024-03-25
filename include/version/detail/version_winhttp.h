@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 /*
 * Internal header to support fetching symbol .csv files online,
 * based on the ELDEN RING binary version of the currently running executable.
