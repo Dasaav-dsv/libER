@@ -1,3 +1,6 @@
 [submodule "dependencies/cppsv"]
 	path = dependencies/cppsv
 	url = https://github.com/Dasaav-dsv/cppsv.git
+[submodule "dependencies/wintypes"]
+	path = dependencies/wintypes
+	url = https://github.com/Dasaav-dsv/wintypes.git
