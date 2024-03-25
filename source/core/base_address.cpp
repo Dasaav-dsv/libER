@@ -1,16 +1,18 @@
 #include <base_address.h>
-#include <win.inl>
-
-static void* base_address = nullptr;
+#include <core/windows.inl>
 
 namespace liber {
+    static void* cached_base_address;
+  
+    // There is no need for synchronization as
+    // GetModuleHandle is cheap and thread-safe
     void* base_address() noexcept {
-        void* result = ::base_address;
+        void* result = cached_base_address;
         if (!result) [[unlikely]]  {
             // GetModuleHandle(NULL) returns a pseudohandle
             // (which is a module's base address) of the calling process
             result = (void*)GetModuleHandle(NULL);
-            ::base_address = result;
+            cached_base_address = result;
         }
         return result;
     }
