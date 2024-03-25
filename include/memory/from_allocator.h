@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <utility>
+#include <memory>
 #include <bitset>
 
 // For std::terminate
@@ -128,14 +129,12 @@ namespace from {
             struct GFX_GraphicsPrivate {};
         };
 
-        struct DLBackAllocator : public DLAllocator {
-            DLAllocator* res_allocator_of(const void* resource);
-        };
+        struct DLBackAllocator : public DLAllocator {};
     }
 
     namespace CS {
-        struct CSMoWwiseAllocator{};
-        struct CSNetworkAllocator{};
+        struct CSMoWwiseAllocator : public DLKR::DLAllocator {};
+        struct CSNetworkAllocator : public DLKR::DLAllocator {};
     }
 
     template <typename AllocatorTag>
@@ -153,6 +152,7 @@ namespace from {
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
         DLKR::DLAllocator& proxy() noexcept { return this->base().get_allocator(); }
+        allocator(DLKR::DLAllocator* dlalloc) noexcept : base_type(dlalloc) {}
     public:
         using value_type = T;
         using size_type = size_t;
@@ -180,6 +180,11 @@ namespace from {
             proxy()->deallocate((void*)p);
         }
 
+        // Get the allocator used to allocate this memory
+        static allocator<T, void> get_allocator_of(T* p) {
+            return DLKR::DLAllocator::get_allocator_of(p);
+        }
+
         template <typename T1, typename T2>
         friend bool operator == (const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept;
     };
@@ -204,6 +209,7 @@ namespace from {
     template <>                                      \
     struct allocator_proxy<NAME> {                   \
         DLKR::DLAllocator& get_allocator() noexcept; \
+        allocator_proxy(DLKR::DLAllocator*) {}       \
     };
 
 #include "from_allocator.inl"
