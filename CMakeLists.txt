@@ -12,11 +12,13 @@ add_subdirectory("dependencies/wintypes" "wintypes")
 target_include_directories("objlibER" PUBLIC "dependencies/cppsv/include")
 
 # Include directories:
-target_include_directories("objlibER" PUBLIC
+target_include_directories("objlibER"
+PUBLIC
     "include"
+    "include/memory/containers"
+PRIVATE
     "include/core"
     "include/version"
-    "include/memory/containers"
     "symbols"
 )
 
