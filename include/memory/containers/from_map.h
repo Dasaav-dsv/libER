@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-#include <memory/from_allocator.h>
+#include <from_allocator.h>
 
 namespace from {
     template <typename K, typename V, typename Pred = std::less<K>>
