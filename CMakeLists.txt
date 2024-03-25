@@ -14,6 +14,7 @@ target_include_directories("libER" PRIVATE
     "symbols"
     "include"
     "include/core"
+    "include/version"
     "include/memory/containers"
     "dependencies"
     "dependencies/thirdparty"
@@ -30,8 +31,14 @@ target_sources("libER" PRIVATE
 # Core source files
 target_sources("libER" PRIVATE
     "source/core/base_address.cpp"
-    "source/core/game_ver.cpp"
-    "source/core/symbols.cpp"
+)
+
+# Versioning source files
+target_sources("libER" PRIVATE
+    "source/version/version.cpp"
+    "source/version/symbols.cpp"
+    "source/version/detail/version_fileio.cpp"
+    "source/version/detail/version_winhttp.cpp"
 )
 
 # Memory source files
