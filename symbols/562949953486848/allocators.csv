@@ -1,5 +1,4 @@
 "\"" R","cppsv-fmt(cppsv"
-symbol,offset
 DLKR::DLAllocator::MAIN,0x3CFDF40
 DLKR::DLBackAllocator,0x3CFDF48
 DLKR::DLAllocator::GFX,0x3CFDF50
