@@ -4,10 +4,12 @@
 #include <cstdint>
 #include <algorithm>
 
+#include <liber_preprocessor.h>
+
 /*
 * A symbol repository header that pulls
 * addresses of objects and functions from versioned
-* .csv files. Check the root/symbols folder for more.
+* .csv files. Check the root/symbols directory for more.
 */
 
 namespace liber {
@@ -32,7 +34,7 @@ namespace liber {
         static void* get() noexcept; \
     };
 
-#include <symbols.inl>
+#include LIBER_INCLUDIFY(LIBER_TARGET_VERSION/LIBER_SYMBOL_LIST)
 
 #undef LIBER_ADD_SYMBOL
 }
