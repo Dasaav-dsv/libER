@@ -15,5 +15,5 @@ CS::CSNetworkAllocator,0x3CFDFB0
 DLKR::DLAllocator::DEBUG,0x3CFDFB8
 DLKR::DLAllocator::GFX_SystemShared,0x3CFDFC0
 DLKR::DLAllocator::GFX_GraphicsPrivate,0x3CFDFD8
-DLKR::DLBackAllocator::res_allocator_of,0x1E810D0
+DLKR::DLAllocator::get_allocator_of,0x1E810D0
 ),"cppsv-fmt"

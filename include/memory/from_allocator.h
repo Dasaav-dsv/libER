@@ -109,6 +109,9 @@ namespace from {
             // May panic if this memory isn't owned by this allocator
             virtual void* get_memory_block(void* p) = 0;
 
+            // Get the allocator used to allocate this memory
+            static DLAllocator* get_allocator_of(void* p);
+
             // ER allocator tags
             struct MAIN {};
             struct GFX {};

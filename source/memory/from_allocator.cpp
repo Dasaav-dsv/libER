@@ -88,11 +88,11 @@ namespace liber {
     } default_allocator;
 }
 namespace from {
-allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
+    allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
 
-DLKR::DLAllocator* DLKR::DLBackAllocator::res_allocator_of(const void* resource) {
-    return liber::function<"DLKR::DLBackAllocator::res_allocator_of", DLKR::DLAllocator*>::call(resource);
-}
+    DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
+        return liber::function<"DLKR::DLAllocator::get_allocator_of", DLAllocator*>::call(p);
+    }
 
 // TODO: Allocator initialization check
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
