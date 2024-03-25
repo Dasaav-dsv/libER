@@ -4,6 +4,6 @@
 #include <from_allocator.h>
 
 namespace from {
-    template <typename T, typename Hash, typename Eq>
-    using unordered_set = std::unordered_set<T, Hash, Eq, from::allocator<T>>;
+    template <typename T, typename Hash, typename Eq, typename AllocatorTag = void>
+    using unordered_set = std::unordered_set<T, Hash, Eq, from::allocator<T, AllocatorTag>>;
 }
