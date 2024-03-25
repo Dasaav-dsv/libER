@@ -5,7 +5,7 @@
 * Provides additional function-like macros.
 */
 
-#include <liber_defines.h>
+#include <liber_defines.hpp>
 
 #define LIBER_STRINGIFY_(X) #X
 #define LIBER_STRINGIFY(X) LIBER_STRINGIFY_(X)

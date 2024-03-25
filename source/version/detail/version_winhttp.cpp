@@ -1,7 +1,7 @@
 #include <detail/version_winhttp.h>
 #include <detail/version_fileio.h>
 
-#include <liber_preprocessor.h>
+#include <liber_preprocessor.hpp>
 #include <detail/winhttp.inl>
 
 #include <string>

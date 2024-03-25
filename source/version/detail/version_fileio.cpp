@@ -4,7 +4,7 @@
 
 #include <cppsv_rt.h>
 #include <NamedMutex.h>
-#include <liber_preprocessor.h>
+#include <liber_preprocessor.hpp>
 #include <shlobj_core.h>
 
 #include <filesystem>

@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <algorithm>
 
-#include <liber_preprocessor.h>
+#include <liber_preprocessor.hpp>
 
 /*
 * A symbol repository header that pulls
