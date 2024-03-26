@@ -2,11 +2,14 @@
 
 #include <detail/symbols.h>
 #include <detail/functions.h>
+#include <detail/windows.inl>
 
-#include <malloc.h>
-#include <limits>
+// For DLPlainLightMutex
+#include <dantelion2/kernel_runtime.h>
 
 namespace liber {
+    static HANDLE default_heap = GetProcessHeap();
+
     // Default internal libER allocator
     // Implements all necessary methods
     // Uses C allocation functions (needs _msize)
@@ -38,27 +41,51 @@ namespace liber {
         }
 
         size_t msize(void* p) override {
-            return _msize(p);
+            if (!p) return 0; 
+            return HeapSize(default_heap, 0, _block_pointer(p));
         }
 
         void* allocate(size_t cb) override {
-            return _aligned_malloc(cb, 16);
+            return this->allocate_aligned(cb, MEMORY_ALLOCATION_ALIGNMENT);
         }
 
         void* allocate_aligned(size_t cb, size_t alignment) override {
-            return _aligned_malloc(cb, alignment > 16 ? alignment : 16);
+            _adjust_alignment(alignment);
+            _adjust_size(cb, alignment);
+            void* alloc = HeapAlloc(default_heap, 0, cb);
+            if (alloc) {
+                void* alloc_base = _adjust_block(alloc, alignment);
+                _block_pointer(alloc) = alloc_base;
+            }
+            return alloc;
         }
 
         void* reallocate(void* p, size_t cb) override {
-            return _aligned_realloc(p, cb, 16);
+            return this->reallocate_aligned(p, cb, MEMORY_ALLOCATION_ALIGNMENT);
         }
 
         void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
-            return _aligned_realloc(p, cb, alignment > 16 ? alignment : 16);
+            void* alloc = nullptr;
+            if (p) {
+                if (cb) {
+                    _adjust_alignment(alignment);
+                    _adjust_size(cb, alignment);
+                    alloc = HeapReAlloc(default_heap, 0, _block_pointer(p), cb);
+                    if (alloc) {
+                        void* alloc_base = _adjust_block(alloc, alignment);
+                        _block_pointer(alloc) = alloc_base;
+                    }
+                }
+                else {
+                    this->deallocate(p);
+                }
+            }
+            return alloc;
         }
 
         void deallocate(void* p) override {
-            if (p) _aligned_free(p);
+            if (!p) return;
+            HeapFree(default_heap, 0, _block_pointer(p));
         }
 
         void* allocate_second(size_t cb) override {
@@ -92,11 +119,33 @@ namespace liber {
         void* get_memory_block(void* p) override {
             return nullptr;
         }
+
+        // ER allocator implementation details
+        // These are necessary for ABI compatibility
+    private:
+        static void _adjust_alignment(size_t& alignment) {
+            alignment = alignment > MEMORY_ALLOCATION_ALIGNMENT ? alignment : MEMORY_ALLOCATION_ALIGNMENT;
+        }
+
+        static void _adjust_size(size_t& size, size_t alignment) {
+            size += alignment;
+        }
+
+        static void* _adjust_block(void*& p, size_t alignment = MEMORY_ALLOCATION_ALIGNMENT) {
+            void* tmp = p;
+            p = reinterpret_cast<void*>((reinterpret_cast<uintptr_t>(p) + alignment) & ~(alignment - 1));
+            return tmp;
+        }
+
+        static void*& _block_pointer(void* p) {
+            return *(reinterpret_cast<void**>(p) - 1);
+        }
     } default_allocator;
 }
 
 namespace from {
-    allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
+    allocator_proxy<void>::allocator_proxy() noexcept
+        : allocator(&liber::default_allocator) {}
 
     DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
         // Check if it's possible memory was allocated on
@@ -104,7 +153,7 @@ namespace from {
         DLKR::DLAllocator* allocator =
             *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<"DLKR::DLBackAllocator">::get());
         if (allocator) // Allocators are initialized, safe to check ownership
-            return liber::function<"DLKR::DLAllocator::get_allocator_of", DLAllocator*>::call(p);
+            return liber::function<"DLKR::DLAllocator::get_allocator_of", DLKR::DLAllocator*>::call(p);
         else // Memory likely malloc-ed by us or DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
             return &liber::default_allocator;
     }
