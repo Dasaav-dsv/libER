@@ -74,9 +74,16 @@ namespace from {
                 if (this->get()) this->counter().ref();
             }
         
+            DLReferenceCountPtr(const DLReferenceCountPtr& other) noexcept
+                : DLReferenceCountPtr(other.get()) {}
+        
             template <class U> requires std::convertible_to<U*, T*>
             DLReferenceCountPtr(const DLReferenceCountPtr<U>& other) noexcept
-                : DLReferenceCountPtr(other->get()) {}
+                : DLReferenceCountPtr(other.get()) {}
+        
+            DLReferenceCountPtr(DLReferenceCountPtr&& other) noexcept {
+                this->raw = std::exchange(other.raw, nullptr);
+            }
         
             template <class U> requires std::convertible_to<U*, T*>
             DLReferenceCountPtr(DLReferenceCountPtr<U>&& other) noexcept {
