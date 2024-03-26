@@ -4,9 +4,6 @@
 #include <detail/functions.h>
 #include <detail/windows.inl>
 
-// For DLPlainLightMutex
-#include <dantelion2/kernel_runtime.h>
-
 namespace liber {
     static HANDLE default_heap = GetProcessHeap();
 
