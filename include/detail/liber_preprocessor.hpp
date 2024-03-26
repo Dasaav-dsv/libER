@@ -5,7 +5,7 @@
 * Provides additional function-like macros.
 */
 
-#include <liber_defines.hpp>
+#include "liber_defines.hpp"
 
 #define LIBER_STRINGIFY_(X) #X
 #define LIBER_STRINGIFY(X) LIBER_STRINGIFY_(X)
@@ -15,3 +15,5 @@
 #define LIBER_WSTRINGIFY(X) LIBER_WSTRINGIFY_(X)
 
 #define LIBER_INCLUDIFY(X) <X>
+
+#define LIBER_UNIMPLEMENTED [[maybe_unused]]
