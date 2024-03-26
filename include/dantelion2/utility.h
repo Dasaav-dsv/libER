@@ -61,7 +61,7 @@ namespace from {
         };
 
         // A refcounted pointer that models std::shared_ptr
-        // Use DLReferenceCountPtr<T>::make(...) to create refcounted objects
+        // Use from::make_refcounted<T>(...) to create refcounted objects
         // These objects must derive from DLReferenceCountObject
         template <typename T> requires std::derived_from<T, DLReferenceCountObject>
         class DLReferenceCountPtr {
@@ -80,7 +80,7 @@ namespace from {
         
             template <class U> requires std::convertible_to<U*, T*>
             DLReferenceCountPtr(DLReferenceCountPtr<U>&& other) noexcept {
-                this->raw = std::exchange(other.raw, nullptr)
+                this->raw = std::exchange(other.raw, nullptr);
             }
 
             ~DLReferenceCountPtr() {
@@ -98,7 +98,7 @@ namespace from {
             template <class U> requires std::convertible_to<U*, T*>
             DLReferenceCountPtr& operator = (DLReferenceCountPtr<U>&& other) {
                 if (this->get()) this->counter().unref();
-                this->raw = std::exchange(other.raw, nullptr)
+                this->raw = std::exchange(other.raw, nullptr);
                 return *this;
             }
 
@@ -166,25 +166,26 @@ namespace from {
 
     // Construct a reference counted object using a provided allocator
     template <typename T, typename U, typename...Args> requires std::derived_from<T, DLUT::DLReferenceCountObject>
-    inline DLUT::DLReferenceCountPtr<T> allocate_refcounted(const from::allocator<U>& allocator, Args&&...args) {
+    [[nodiscard]] inline DLUT::DLReferenceCountPtr<T> allocate_refcounted(const from::allocator<U>& allocator, Args&&...args) {
         using allocator_rebind_type = typename std::allocator_traits<from::allocator<U>>::template rebind_alloc<T>;
         allocator_rebind_type allocator_rebind{ allocator };
         T* raw = std::allocator_traits<allocator_rebind_type>::allocate(allocator_rebind, 1);
         std::allocator_traits<allocator_rebind_type>::construct(allocator_rebind, raw, std::forward<Args>(args)...);
-        return DLUT::DLReferenceCountPtr(raw);
+        return DLUT::DLReferenceCountPtr<T>(raw);
     }
 
     // Construct a reference counted object using a provided allocator
     template <typename T, typename...Args> requires std::derived_from<T, DLUT::DLReferenceCountObject>
-    inline DLUT::DLReferenceCountPtr<T> allocate_refcounted(const from::allocator<T>& allocator, Args&&...args) {
-        T* raw = std::allocator_traits<from::allocator<T>>::allocate(allocator, 1);
-        std::allocator_traits<from::allocator<T>>::construct(allocator, raw, std::forward<Args>(args)...);
-        return DLUT::DLReferenceCountPtr(raw);
+    [[nodiscard]] inline DLUT::DLReferenceCountPtr<T> allocate_refcounted(const from::allocator<T>& allocator, Args&&...args) {
+        from::allocator<T> proxy_allocator{ allocator };
+        T* raw = std::allocator_traits<from::allocator<T>>::allocate(proxy_allocator, 1);
+        std::allocator_traits<from::allocator<T>>::construct(proxy_allocator, raw, std::forward<Args>(args)...);
+        return DLUT::DLReferenceCountPtr<T>(raw);
     }
 
     // Construct a reference counted object with the default libER allocator
     template <typename T, typename...Args> requires std::derived_from<T, DLUT::DLReferenceCountObject>
-    inline DLUT::DLReferenceCountPtr<T> make_refcounted(Args&&...args) {
+    [[nodiscard]] inline DLUT::DLReferenceCountPtr<T> make_refcounted(Args&&...args) {
         return allocate_refcounted(from::allocator<T>{}, std::forward<Args>(args)...);
     }
 }
