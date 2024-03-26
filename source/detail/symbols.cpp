@@ -36,7 +36,7 @@ namespace liber {
     void* symbol<#NAME>::get() noexcept {                                \
         constexpr auto row = symbol_list.find_row([](const auto& field){ \
             const auto& [name, offset] = field;                          \
-            return !name.compare(#NAME);                                 \
+            return name == #NAME;                                        \
         });                                                              \
         constexpr int this_version_result =                              \
             symbol_list.get_field<1>(row).as<int>();                     \
