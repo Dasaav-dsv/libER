@@ -152,7 +152,7 @@ namespace from {
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
         DLKR::DLAllocator& proxy() noexcept { return this->base().get_allocator(); }
-        allocator(DLKR::DLAllocator* dlalloc) noexcept : base_type(dlalloc) {}
+        allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
     public:
         using value_type = T;
         using size_type = size_t;
@@ -172,12 +172,12 @@ namespace from {
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
-            return reinterpret_cast<T*>(proxy()->allocate_aligned(n * sizeof(T), alignof(T)));
+            return reinterpret_cast<T*>(proxy().allocate_aligned(n * sizeof(T), alignof(T)));
         }
 
         // Deallocate memory, n is ignored by DLKR::DLAllocator and can be zero
         void deallocate(T* p, size_type n = 0) {
-            proxy()->deallocate((void*)p);
+            proxy().deallocate((void*)p);
         }
 
         // Get the allocator used to allocate this memory
@@ -199,6 +199,8 @@ namespace from {
         DLKR::DLAllocator* allocator;
 
         allocator_proxy() noexcept;
+
+        allocator_proxy(DLKR::DLAllocator* dl_allocator) : allocator(dl_allocator) {}
 
         DLKR::DLAllocator& get_allocator() noexcept {
             return *this->allocator;
