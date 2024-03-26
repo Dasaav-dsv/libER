@@ -58,7 +58,7 @@ namespace liber {
         }
 
         void deallocate(void* p) override {
-            if (p) free(p);
+            if (p) _aligned_free(p);
         }
 
         void* allocate_second(size_t cb) override {
