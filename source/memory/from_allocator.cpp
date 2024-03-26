@@ -99,7 +99,14 @@ namespace from {
     allocator_proxy<void>::allocator_proxy() noexcept : allocator(&liber::default_allocator) {}
 
     DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
-        return liber::function<"DLKR::DLAllocator::get_allocator_of", DLAllocator*>::call(p);
+        // Check if it's possible memory was allocated on
+        // one of the ER heaps by checking allocator initialization
+        DLKR::DLAllocator* allocator =
+            *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<"DLKR::DLBackAllocator">::get());
+        if (allocator) // Allocators are initialized, safe to check ownership
+            return liber::function<"DLKR::DLAllocator::get_allocator_of", DLAllocator*>::call(p);
+        else // Memory likely malloc-ed by us or DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
+            return &liber::default_allocator;
     }
 
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
