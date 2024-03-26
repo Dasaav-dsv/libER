@@ -1,8 +1,8 @@
-#include <detail/version_winhttp.h>
-#include <detail/version_fileio.h>
+#include <version/detail/version_winhttp.h>
+#include <version/detail/version_fileio.h>
 
-#include <liber_preprocessor.hpp>
-#include <detail/winhttp.inl>
+#include <detail/liber_preprocessor.hpp>
+#include <version/detail/winhttp.inl>
 
 #include <string>
 #include <sstream>

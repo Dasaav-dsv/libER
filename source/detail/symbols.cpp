@@ -1,7 +1,7 @@
-#include <symbols.h>
-#include <version.h>
-#include <base_address.h>
-#include <liber_preprocessor.hpp>
+#include <detail/symbols.h>
+#include <version/version.h>
+#include <detail/base_address.h>
+#include <detail/liber_preprocessor.hpp>
 
 #include <cppsv.h>
 #include <cppsv_rt.h>

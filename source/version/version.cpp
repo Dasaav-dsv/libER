@@ -1,7 +1,7 @@
-#include <version.h>
-#include <liber_defines.hpp>
-#include <detail/version_fileio.h>
-#include <detail/version_winhttp.h>
+#include <version/version.h>
+#include <detail/liber_defines.hpp>
+#include <version/detail/version_fileio.h>
+#include <version/detail/version_winhttp.h>
 
 #include <detail/windows.inl>
 #include <atomic>

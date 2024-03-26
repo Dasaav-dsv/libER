@@ -15,11 +15,8 @@ target_include_directories("objlibER" PUBLIC "dependencies/cppsv/include")
 target_include_directories("objlibER"
 PUBLIC
     "include"
-    "include/memory"
     "include/memory/containers"
 PRIVATE
-    "include/detail"
-    "include/version"
     "symbols"
 )
 

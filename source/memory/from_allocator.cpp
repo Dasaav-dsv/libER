@@ -1,7 +1,7 @@
-#include <from_allocator.h>
+#include <memory/from_allocator.h>
 
-#include <symbols.h>
-#include <functions.h>
+#include <detail/symbols.h>
+#include <detail/functions.h>
 
 #include <malloc.h>
 #include <limits>

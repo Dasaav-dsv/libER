@@ -1,10 +1,11 @@
-#include <detail/version_fileio.h>
-#include <detail/version_winhttp.h>
-#include <version.h>
+#include <version/detail/version_fileio.h>
+#include <version/detail/version_winhttp.h>
+#include <version/version.h>
+
+#include <detail/liber_preprocessor.hpp>
 
 #include <cppsv_rt.h>
 #include <NamedMutex.h>
-#include <liber_preprocessor.hpp>
 #include <shlobj_core.h>
 
 #include <filesystem>
