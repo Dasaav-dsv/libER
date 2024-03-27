@@ -44,6 +44,11 @@ target_sources("objlibER" PUBLIC
     "source/memory/from_allocator.cpp"
 )
 
+# Namespace DL source files
+target_sources("objlibER" PUBLIC
+    "source/dantelion2/kernel_runtime.cpp"
+)
+
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER>)
 # Target libER_static[d].lib
