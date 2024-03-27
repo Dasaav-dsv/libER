@@ -147,20 +147,20 @@ namespace from {
     struct default_empty_base_allocator_tag {};
 
     template <typename AllocatorTag>
-    struct allocator_proxy;
+    struct allocator_base;
 
     // The main libER stand-in for ER allocator proxies:
     // Uses the DLKR::DLAllocator interface
     // Fulfils allocator completeness requirements
     template <typename T, typename AllocatorTag = default_allocator_tag>
-    class allocator : private allocator_proxy<AllocatorTag> {
-        using base_type = allocator_proxy<AllocatorTag>;
+    class allocator : private allocator_base<AllocatorTag> {
+        using base_type = allocator_base<AllocatorTag>;
         using proxy_type = DLKR::DLAllocator;
 
         base_type& base() noexcept { return static_cast<base_type&>(*this); }
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
-        DLKR::DLAllocator& proxy() { return this->base().get_allocator(); }
+        proxy_type& proxy() { return this->base().get_allocator(); }
         allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
     public:
         using value_type = T;
@@ -204,12 +204,13 @@ namespace from {
     }
 
     template <>
-    struct allocator_proxy<default_allocator_tag> {
+    struct allocator_base<default_allocator_tag> {
         DLKR::DLAllocator* allocator;
 
-        allocator_proxy() noexcept;
+        allocator_base() noexcept;
 
-        allocator_proxy(DLKR::DLAllocator* dl_allocator) : allocator(dl_allocator) {}
+        allocator_base(DLKR::DLAllocator* dl_allocator) noexcept
+            : allocator(dl_allocator) {}
 
         DLKR::DLAllocator& get_allocator() noexcept {
             return *this->allocator;
@@ -221,28 +222,28 @@ namespace from {
     };
 
     template <>
-    struct allocator_proxy<default_empty_base_allocator_tag> {
-        allocator_proxy() noexcept {};
+    struct allocator_base<default_empty_base_allocator_tag> {
+        allocator_base() noexcept {};
 
-        allocator_proxy(DLKR::DLAllocator* dl_allocator) {}
+        allocator_base(DLKR::DLAllocator* dl_allocator) noexcept {}
 
         DLKR::DLAllocator& get_allocator();
         DLKR::DLAllocator& get_allocator_of(void* p);
     };
 
-#define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)         \
-    template <>                                        \
-    struct allocator_proxy<NAME> {                     \
-        DLKR::DLAllocator& get_allocator();            \
-                                                       \
-        DLKR::DLAllocator& get_allocator_of(void* p) { \
-            return this->get_allocator();              \
-        }                                              \
-                                                       \
-        allocator_proxy(DLKR::DLAllocator*) {}         \
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)          \
+    template <>                                         \
+    struct allocator_base<NAME> {                      \
+        DLKR::DLAllocator& get_allocator();             \
+                                                        \
+        DLKR::DLAllocator& get_allocator_of(void* p) {  \
+            return this->get_allocator();               \
+        }                                               \
+                                                        \
+        allocator_base(DLKR::DLAllocator*) noexcept {} \
     };
 
 #include "from_allocator.inl"
 
-#undef LIBER_SPECIALIZE_ALLOCATOR_PROXY
+#undef LIBER_SPECIALIZE_ALLOCATOR_BASE
 }
