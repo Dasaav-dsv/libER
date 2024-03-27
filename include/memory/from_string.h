@@ -13,9 +13,13 @@ namespace from {
     template <typename CharT, typename Traits = std::char_traits<CharT>, typename AllocatorTag = from::default_allocator_tag>
     using basic_string = std::basic_string<CharT, Traits, from::allocator<T, AllocatorTag>>;
 
-    template <typename AllocatorTag = from::default_allocator_tag>
-    using string = from::basic_string<char, std::char_traits<char>, AllocatorTag>;
+    // Embedded allocator char string
+    using string = from::basic_string<char, std::char_traits<char>, from::default_allocator_tag>;
+    // Embedded allocator wchar_t string
+    using wstring = from::basic_string<wchar_t, std::char_traits<wchar_t>, from::default_allocator_tag>;
 
-    template <typename AllocatorTag = from::default_allocator_tag>
-    using wstring = from::basic_string<wchar_t, std::char_traits<wchar_t>, AllocatorTag>;
+    // Empty base allocator char string
+    using ebstring = from::basic_string<char, std::char_traits<char>, from::default_empty_base_allocator_tag>;
+    // Empty base allocator wchar_t string
+    using ebwstring = from::basic_string<wchar_t, std::char_traits<wchar_t>, from::default_empty_base_allocator_tag>;
 }
