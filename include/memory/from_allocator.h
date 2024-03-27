@@ -137,13 +137,22 @@ namespace from {
         struct CSNetworkAllocator : public DLKR::DLAllocator {};
     }
 
+    // Default libER allocator that gets embedded
+    // in objects as needed for ER ABI compatibility.
+    struct default_allocator_tag {};
+
+    // Default libER allocator with an empty base:
+    // ELDEN RING may use it instead of explicitly specifying
+    // the allocator for an object.
+    struct default_empty_base_allocator_tag {};
+
     template <typename AllocatorTag>
     struct allocator_proxy;
 
     // The main libER stand-in for ER allocator proxies:
     // Uses the DLKR::DLAllocator interface
     // Fulfils allocator completeness requirements
-    template <typename T, typename AllocatorTag = void>
+    template <typename T, typename AllocatorTag = default_allocator_tag>
     class allocator : private allocator_proxy<AllocatorTag> {
         using base_type = allocator_proxy<AllocatorTag>;
         using proxy_type = DLKR::DLAllocator;
@@ -195,7 +204,7 @@ namespace from {
     }
 
     template <>
-    struct allocator_proxy<void> {
+    struct allocator_proxy<default_allocator_tag> {
         DLKR::DLAllocator* allocator;
 
         allocator_proxy() noexcept;
@@ -205,6 +214,15 @@ namespace from {
         DLKR::DLAllocator& get_allocator() noexcept {
             return *this->allocator;
         }
+    };
+
+    template <>
+    struct allocator_proxy<default_empty_base_allocator_tag> {
+        allocator_proxy() noexcept {};
+
+        allocator_proxy(DLKR::DLAllocator* dl_allocator) {}
+
+        DLKR::DLAllocator& get_allocator() noexcept;
     };
 
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)       \

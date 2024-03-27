@@ -10,6 +10,6 @@
 #pragma pop_macro("_DEBUG")
 
 namespace from {
-    template <typename T, typename AllocatorTag = void>
+    template <typename T, typename AllocatorTag = from::default_allocator_tag>
     using forward_list = std::forward_list<T, from::allocator<T, AllocatorTag>>;
 }

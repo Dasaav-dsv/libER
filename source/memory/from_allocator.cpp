@@ -141,8 +141,12 @@ namespace liber {
 }
 
 namespace from {
-    allocator_proxy<void>::allocator_proxy() noexcept
+    allocator_proxy<default_allocator_tag>::allocator_proxy() noexcept
         : allocator(&liber::default_allocator) {}
+
+    DLKR::DLAllocator& allocator_proxy<default_empty_base_allocator_tag>::get_allocator() noexcept {
+        return liber::default_allocator;
+    }
 
     DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
         // Check if it's possible memory was allocated on
