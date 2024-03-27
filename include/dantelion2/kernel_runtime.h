@@ -6,8 +6,9 @@
 // Part of namespace DLKR and DLKRD
 #include <memory/from_allocator.h>
 
-// Forward declaration
+// Forward declarations to not include Windows.h
 struct _RTL_CRITICAL_SECTION;
+using HANDLE = void*;
 
 namespace from {
     // Windows Kernel runtime functionality;
@@ -25,7 +26,7 @@ namespace from {
         class DLPlainLightMutex : public DLUT::DLNonCopyable {
         public:
             DLPlainLightMutex() noexcept;
-            ~DLPlainLightMutex() noexcept override;
+            virtual ~DLPlainLightMutex() noexcept;
 
             void lock() noexcept;
             void unlock() noexcept;
@@ -44,6 +45,23 @@ namespace from {
                     return reinterpret_cast<_RTL_CRITICAL_SECTION*>(this);
                 }
             } _dummy_section;
+        };
+
+        // A wrapper around a Windows kernel mutex
+        // Satisfies the C++ Mutex requirement
+        // Recursive, not TimedLockable
+        class DLPlainMutex : public DLUT::DLNonCopyable {
+        public:
+            DLPlainMutex() noexcept;
+            virtual ~DLPlainMutex() noexcept;
+
+            void lock() noexcept;
+            void unlock() noexcept;
+            bool try_lock() noexcept;
+            
+            DLPlainMutex(DLPlainMutex&&) noexcept = delete;
+        private:
+            HANDLE mutex_handle;
         };
     }
 }
