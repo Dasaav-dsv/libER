@@ -190,7 +190,7 @@ namespace from {
         }
 
         // Get the allocator used to allocate this memory
-        static allocator<T, void> get_allocator_of(T* p) {
+        static allocator<T, default_allocator_tag> get_allocator_of(T* p) {
             return DLKR::DLAllocator::get_allocator_of(p);
         }
 
@@ -215,7 +215,7 @@ namespace from {
             return *this->allocator;
         }
 
-        DLKR::DLAllocator& allocator_of(void* p) noexcept {
+        DLKR::DLAllocator& get_allocator_of(void* p) noexcept {
             return this->get_allocator();
         }
     };
