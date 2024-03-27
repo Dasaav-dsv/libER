@@ -160,7 +160,7 @@ namespace from {
         base_type& base() noexcept { return static_cast<base_type&>(*this); }
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
-        DLKR::DLAllocator& proxy() noexcept { return this->base().get_allocator(); }
+        DLKR::DLAllocator& proxy() { return this->base().get_allocator(); }
         allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
     public:
         using value_type = T;
@@ -181,12 +181,12 @@ namespace from {
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
-            return reinterpret_cast<T*>(proxy().allocate_aligned(n * sizeof(T), alignof(T)));
+            return reinterpret_cast<T*>(this->proxy().allocate_aligned(n * sizeof(T), alignof(T)));
         }
 
         // Deallocate memory, n is ignored by DLKR::DLAllocator and can be zero
         void deallocate(T* p, size_type n = 0) {
-            proxy().deallocate((void*)p);
+            this->base().get_allocator_of((void*)p).deallocate((void*)p);
         }
 
         // Get the allocator used to allocate this memory
@@ -214,6 +214,10 @@ namespace from {
         DLKR::DLAllocator& get_allocator() noexcept {
             return *this->allocator;
         }
+
+        DLKR::DLAllocator& allocator_of(void* p) noexcept {
+            return this->get_allocator();
+        }
     };
 
     template <>
@@ -222,14 +226,20 @@ namespace from {
 
         allocator_proxy(DLKR::DLAllocator* dl_allocator) {}
 
-        DLKR::DLAllocator& get_allocator() noexcept;
+        DLKR::DLAllocator& get_allocator();
+        DLKR::DLAllocator& get_allocator_of(void* p);
     };
 
-#define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)       \
-    template <>                                      \
-    struct allocator_proxy<NAME> {                   \
-        DLKR::DLAllocator& get_allocator() noexcept; \
-        allocator_proxy(DLKR::DLAllocator*) {}       \
+#define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)         \
+    template <>                                        \
+    struct allocator_proxy<NAME> {                     \
+        DLKR::DLAllocator& get_allocator();            \
+                                                       \
+        DLKR::DLAllocator& get_allocator_of(void* p) { \
+            return this->get_allocator();              \
+        }                                              \
+                                                       \
+        allocator_proxy(DLKR::DLAllocator*) {}         \
     };
 
 #include "from_allocator.inl"

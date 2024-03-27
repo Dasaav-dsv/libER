@@ -144,8 +144,12 @@ namespace from {
     allocator_proxy<default_allocator_tag>::allocator_proxy() noexcept
         : allocator(&liber::default_allocator) {}
 
-    DLKR::DLAllocator& allocator_proxy<default_empty_base_allocator_tag>::get_allocator() noexcept {
+    DLKR::DLAllocator& allocator_proxy<default_empty_base_allocator_tag>::get_allocator() {
         return liber::default_allocator;
+    }
+
+    DLKR::DLAllocator& allocator_proxy<default_empty_base_allocator_tag>::get_allocator_of(void* p) {
+        return *DLKR::DLAllocator::get_allocator_of(p);
     }
 
     DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
@@ -160,7 +164,7 @@ namespace from {
     }
 
 #define LIBER_SPECIALIZE_ALLOCATOR_PROXY(NAME)                                   \
-    DLKR::DLAllocator& allocator_proxy<NAME>::get_allocator() noexcept {         \
+    DLKR::DLAllocator& allocator_proxy<NAME>::get_allocator() {                  \
         DLKR::DLAllocator* allocator =                                           \
             *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
         if (!allocator) std::terminate();                                        \
