@@ -29,6 +29,7 @@ target_sources("objlibER" PUBLIC
 # Core source files
 target_sources("objlibER" PUBLIC
     "source/detail/base_address.cpp"
+    "source/detail/unimplemented.cpp"
     "source/detail/symbols.cpp"
 )
 
