@@ -15,5 +15,3 @@
 #define LIBER_WSTRINGIFY(X) LIBER_WSTRINGIFY_(X)
 
 #define LIBER_INCLUDIFY(X) <X>
-
-#define LIBER_UNIMPLEMENTED [[maybe_unused]]
