@@ -25,8 +25,8 @@ namespace liber {
 
     // Terminate an unimplemented function.
     // Runs into its own noexcept from the lambda (no warning)
-    [[noreturn]] static void unimplemented_terminate(std::stringstream& err, void* caller) noexcept {
-        [&] { throw liber::unimplemented(std::move(err.str())); } ();
+    [[noreturn]] [[maybe_unused]] static void unimplemented_terminate(std::stringstream& err, void* caller) noexcept {
+        [&] { throw liber::unimplemented(err.str()); } ();
         std::terminate();
     }
 
