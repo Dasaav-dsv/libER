@@ -1,6 +1,6 @@
 #pragma once
 
-#include <detail/liber_preprocessor.hpp>
+#include <detail/unimplemented.h>
 
 #include <memory/from_vector.h>
 #include <memory/from_string.h>
@@ -10,9 +10,11 @@
 #include <string>
 #include <algorithm>
 
+#include <
+
 namespace from {
     namespace DLRF {
-        class LIBER_UNIMPLEMENTED DLMethodInvoker {};
+        class LIBER_DUMMY DLMethodInvoker {};
 
         struct DLRuntimeMethod {
             DLRuntimeClass* owner;
@@ -80,6 +82,9 @@ namespace from {
                 });
                 return iter != this->unique_invokers.end() ? *iter : nullptr;
             }
+    
+        // Tag for DLRuntimeClassImpl (below this class)
+        struct Unimplemented {};
 
         private:
             // A pointer to the base class, if class is derived
@@ -90,7 +95,8 @@ namespace from {
             from::vector<DLRuntimeMethod*> unique_invokers;
         };
 
-        int s = sizeof(DLRuntimeClass);
+        template <class Impl>
+        class DLRuntimeClassImpl;
 
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {

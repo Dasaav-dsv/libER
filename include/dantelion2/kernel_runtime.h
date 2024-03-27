@@ -1,6 +1,6 @@
 #pragma once
 
-#include <detail/liber_preprocessor.hpp>
+#include <detail/unimplemented.h>
 #include <dantelion2/utility.h>
 
 // Part of namespace DLKR and DLKRD
@@ -18,7 +18,7 @@ namespace from {
         class DLDummySyncObject : public DLUT::DLNonCopyable {};
 
         // Rarely used, size 0x60 bytes
-        class LIBER_UNIMPLEMENTED DLFastSmallObjectAllocator : public DLUT::DLNonCopyable {};
+        class LIBER_DUMMY DLFastSmallObjectAllocator : public DLUT::DLNonCopyable {};
 
         // A wrapper around a Windows Critical Section
         // Satisfies the C++ Mutex requirement
