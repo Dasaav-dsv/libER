@@ -10,8 +10,6 @@
 #include <string>
 #include <algorithm>
 
-#include <
-
 namespace from {
     namespace DLRF {
         class LIBER_DUMMY DLMethodInvoker {};
@@ -27,20 +25,24 @@ namespace from {
         };
 
         class DLRuntimeClass {
+            DLRuntimeClass() noexcept : base_class(nullptr),
+                constructor_invokers(nullptr) {}
+
             virtual ~DLRuntimeClass() = default;
 
             virtual const char* class_name() const noexcept = 0;
             virtual const wchar_t* class_name_w() const noexcept = 0;
 
+        private:
             virtual char* control_byte1() = 0;
             virtual char* control_byte2() = 0;
             virtual char* control_byte3() = 0;
             virtual char* control_byte4() = 0;
 
             virtual bool unk_bool() = 0;
+            virtual void free_base(DLRuntimeClass** base_of, DLKR::DLAllocator* allocator) = 0;
 
-            virtual void unk() = 0;
-
+        public:
             virtual size_t class_size() const noexcept = 0;
 
             virtual void add_ctor_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w) = 0;
@@ -87,7 +89,7 @@ namespace from {
         struct Unimplemented {};
 
         private:
-            // A pointer to the base class, if class is derived
+            // A pointer to the base class, if the class is derived
             DLRuntimeClass* base_class;
             // TODO: confirm it's a DLRuntimeMethod of the constructor
             DLRuntimeMethod* constructor_invokers;
@@ -100,11 +102,25 @@ namespace from {
 
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {
+        public:
             virtual ~DLRuntimeClassImpl() = default;
+
+            DLRuntimeClassImpl(const char* class_name, const wchar_t* class_name_w) noexcept
+                : DLRuntimeClass(), class_name(class_name), class_name_w(class_name_w) {}
 
             const char* get_name() const noexcept override { return this->class_name; }
             const wchar_t* get_name_w() const noexcept override { return this->class_name_w; }
 
+        private:
+            char* control_byte1() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* control_byte2() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* control_byte3() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* control_byte4() LIBER_UNIMPLEMENTED_OVERRIDE
+
+            bool unk_bool() LIBER_UNIMPLEMENTED_OVERRIDE
+            void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_UNIMPLEMENTED_OVERRIDE
+
+        public:
             size_t class_size() const noexcept override { return sizeof(Impl); }
 
         private:
