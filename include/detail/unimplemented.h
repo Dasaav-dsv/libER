@@ -44,3 +44,7 @@ namespace liber {
     liber::append_module_name_and_base(err, caller);               \
     liber::unimplemented_terminate(err, caller);                   \
 }
+
+#define LIBER_UNIMPLEMENTED_OVERRIDE override LIBER_UNIMPLEMENTED
+
+#define LIBER_UNIMPLEMENTED_RETURN [] LIBER_UNIMPLEMENTED
