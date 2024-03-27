@@ -1,13 +1,11 @@
 #pragma once
 
-// Cannot use debug containers
-#pragma push_macro("_DEBUG")
-#undef _DEBUG
+#if defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL > 0
+#error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
+#endif
 
 #include <forward_list>
 #include <memory/from_allocator.h>
-
-#pragma pop_macro("_DEBUG")
 
 namespace from {
     template <typename T, typename AllocatorTag = from::default_allocator_tag>

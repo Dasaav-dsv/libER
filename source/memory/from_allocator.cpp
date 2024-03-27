@@ -144,11 +144,11 @@ namespace from {
     allocator_base<default_allocator_tag>::allocator_base() noexcept
         : allocator(&liber::default_allocator) {}
 
-    DLKR::DLAllocator& allocator_base<default_empty_base_allocator_tag>::get_allocator() {
+    DLKR::DLAllocator& allocator_base<default_empty_base_allocator_tag>::get_allocator() const noexcept {
         return liber::default_allocator;
     }
 
-    DLKR::DLAllocator& allocator_base<default_empty_base_allocator_tag>::get_allocator_of(void* p) {
+    DLKR::DLAllocator& allocator_base<default_empty_base_allocator_tag>::get_allocator_of(void* p) const {
         return *DLKR::DLAllocator::get_allocator_of(p);
     }
 
@@ -163,8 +163,8 @@ namespace from {
             return &liber::default_allocator;
     }
 
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                   \
-    DLKR::DLAllocator& allocator_base<NAME>::get_allocator() {                  \
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                    \
+    DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {             \
         DLKR::DLAllocator* allocator =                                           \
             *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
         if (!allocator) std::terminate();                                        \

@@ -1,5 +1,9 @@
 #pragma once
 
+#if defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL > 0
+#error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
+#endif
+
 #include <cstddef>
 #include <cstdint>
 #include <utility>
@@ -212,11 +216,11 @@ namespace from {
         allocator_base(DLKR::DLAllocator* dl_allocator) noexcept
             : allocator(dl_allocator) {}
 
-        DLKR::DLAllocator& get_allocator() noexcept {
+        DLKR::DLAllocator& get_allocator() const noexcept {
             return *this->allocator;
         }
 
-        DLKR::DLAllocator& get_allocator_of(void* p) noexcept {
+        DLKR::DLAllocator& get_allocator_of(void* p) const noexcept {
             return this->get_allocator();
         }
     };
@@ -227,20 +231,20 @@ namespace from {
 
         allocator_base(DLKR::DLAllocator* dl_allocator) noexcept {}
 
-        DLKR::DLAllocator& get_allocator();
-        DLKR::DLAllocator& get_allocator_of(void* p);
+        DLKR::DLAllocator& get_allocator() const noexcept;
+        DLKR::DLAllocator& get_allocator_of(void* p) const;
     };
 
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)          \
-    template <>                                         \
-    struct allocator_base<NAME> {                      \
-        DLKR::DLAllocator& get_allocator();             \
-                                                        \
-        DLKR::DLAllocator& get_allocator_of(void* p) {  \
-            return this->get_allocator();               \
-        }                                               \
-                                                        \
-        allocator_base(DLKR::DLAllocator*) noexcept {} \
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                 \
+    template <>                                               \
+    struct allocator_base<NAME> {                             \
+        DLKR::DLAllocator& get_allocator() const;             \
+                                                              \
+        DLKR::DLAllocator& get_allocator_of(void* p) const {  \
+            return this->get_allocator();                     \
+        }                                                     \
+                                                              \
+        allocator_base(DLKR::DLAllocator*) noexcept {}        \
     };
 
 #include "from_allocator.inl"

@@ -11,6 +11,9 @@ add_subdirectory("dependencies/wintypes" "wintypes")
 
 target_include_directories("objlibER" PUBLIC "dependencies/cppsv/include")
 
+# Compile definitions:
+target_compile_definitions("objlibER" PUBLIC _ITERATOR_DEBUG_LEVEL=0)
+
 # Include directories:
 target_include_directories("objlibER"
 PUBLIC
