@@ -4,7 +4,8 @@
 #include <cstdint>
 #include <algorithm>
 
-#include "liber_preprocessor.hpp"
+#include <detail/liber_preprocessor.hpp>
+#include <detail/literal_string.h>
 
 /*
 * A symbol repository header that pulls
@@ -13,18 +14,7 @@
 */
 
 namespace liber {
-    template <typename CharT, size_t N>
-    struct symbol_name {
-        consteval symbol_name() = default;
-
-        consteval symbol_name(const CharT(&str)[N]) {
-            std::copy_n(str, N, this->string);
-        }
-
-        CharT string[N]{};
-    };
-
-    template <symbol_name Name>
+    template <literal_string Name>
     struct symbol;
     
 #define LIBER_ADD_SYMBOL(NAME)       \

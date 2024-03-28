@@ -20,7 +20,7 @@ namespace liber {
     // Passing references to the ELDEN RING ABI
     // is more error-prone, automatic moves are
     // not an option. 
-    template <symbol_name Name, typename Return>
+    template <literal_string Name, typename Return>
     struct function {
         template <typename...Args>
         static inline Return call(Args...args) {
@@ -31,7 +31,7 @@ namespace liber {
 
     // Template partial specialization 
     // for functions or methods without a return value
-    template <symbol_name Name>
+    template <literal_string Name>
     struct function<Name, void> {
         template <typename...Args>
         static inline void call(Args&&...args) {
