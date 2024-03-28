@@ -15,7 +15,10 @@
 namespace from {
     // Dantelion reflection
     namespace DLRF {
-        class LIBER_DUMMY DLMethodInvoker {};
+        class LIBER_DUMMY DLMethodInvoker {
+            virtual ~DLMethodInvoker() = default;
+            void* method;
+        };
 
         // Forward declaration
         class DLRuntimeClass;
