@@ -16,4 +16,7 @@ LIBER_ADD_SYMBOL(DLKR::DLAllocator::DEBUG)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::GFX_SystemShared)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::GFX_GraphicsPrivate)
 LIBER_ADD_SYMBOL(DLKR::DLAllocator::get_allocator_of)
+LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::register_runtime_class)
+LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_registered_classes)
+LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
 #endif
