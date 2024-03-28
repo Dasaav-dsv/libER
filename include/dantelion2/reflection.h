@@ -3,18 +3,32 @@
 #include <detail/unimplemented.h>
 
 #include <memory/from_vector.h>
-#include <memory/from_string.h>
+#include <memory/from_unique_ptr.h>
 
 #include <dantelion2/kernel_runtime.h>
 
+#include <cstddef>
+#include <cstdint>
+#include <utility>
 #include <string>
-#include <algorithm>
 
 namespace from {
+    // Dantelion reflection
     namespace DLRF {
         class LIBER_DUMMY DLMethodInvoker {};
 
+        // Forward declaration
+        class DLRuntimeClass;
+
+        // A wrapper that represents a method
+        // with a vector of invoker objects
         struct DLRuntimeMethod {
+            DLRuntimeMethod() noexcept : owner(nullptr), method_name(nullptr),
+                method_name_w(nullptr), unk_ptr(nullptr) {}
+
+            DLRuntimeMethod(DLRuntimeClass* owner, const char* method_name, const wchar_t* method_name_w) noexcept
+                : owner(owner), method_name(method_name), method_name_w(method_name_w), unk_ptr(nullptr) {}
+
             DLRuntimeClass* owner;
             const char* method_name;
             const wchar_t* method_name_w;
@@ -24,108 +38,115 @@ namespace from {
             DLKR::DLPlainMutex mutex;
         };
 
+        // A wrapper for the DLRuntimeMethod wrapper
+        struct DLRuntimeMethodHolder {
+            DLRuntimeMethodHolder() noexcept : method_name(nullptr),
+                method_name_w(nullptr), length(0) {}
+
+            DLRuntimeMethodHolder(from::unique_ptr<DLRuntimeMethod>&& method, const char* method_name, const wchar_t* method_name_w, size_t length) noexcept
+                : method(std::move(method)), method_name(method_name), method_name_w(method_name_w), length(length) {}
+
+            from::unique_ptr<DLRuntimeMethod> method;
+            const char* method_name;
+            const wchar_t* method_name_w;
+            size_t length;
+        };
+
+        // (Typically statically allocated) reflection based
+        // object for an implementing class. Allows for runtime
+        // type introspection and for binding method invokers.
         class DLRuntimeClass {
-            DLRuntimeClass() noexcept : base_class(nullptr),
-                constructor_invokers(nullptr) {}
+        public:
+            DLRuntimeClass() noexcept : base_class(nullptr) {}
 
             virtual ~DLRuntimeClass() = default;
 
+            // Class name
             virtual const char* class_name() const noexcept = 0;
+            // Class name (wide)
             virtual const wchar_t* class_name_w() const noexcept = 0;
 
         private:
-            virtual char* control_byte1() = 0;
-            virtual char* control_byte2() = 0;
-            virtual char* control_byte3() = 0;
-            virtual char* control_byte4() = 0;
+            // Methods that return pointers to null
+            // bytes in static memory (bad for re-implementation),
+            // adresses of which are used for sorting DLRuntimeClass instances
+            virtual char* ref_byte1() = 0;
+            virtual char* ref_byte2() = 0;
+            virtual char* ref_byte3() = 0;
+            virtual char* ref_byte4() = 0;
 
-            virtual bool unk_bool() = 0;
+            // Always false?
+            virtual bool always_false() = 0;
+
+            // Potentially a method that frees a base class of
+            // a DLRuntimeClass, or a DLRuntimeClass from a similar structure
             virtual void free_base(DLRuntimeClass** base_of, DLKR::DLAllocator* allocator) = 0;
 
         public:
+            // The size of the runtime class
             virtual size_t class_size() const noexcept = 0;
 
-            virtual void add_ctor_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w) = 0;
-            virtual void add_unique_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w) = 0;
+            // Add an invoker to a vector of invokers for the class's constructor
+            virtual void add_constructor_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w);
+
+            // Add an invoker to a vector of invokers for a given method
+            virtual void add_method_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w);
 
             // Get class's base, nullptr if it's not derived
             DLRuntimeClass* get_base() noexcept {
                 return this->base_class;
             }
 
-            // Get the constructor method
+            // Get the constructor method (may be null)
             DLRuntimeMethod* get_constructor() noexcept {
-                return this->constructor_invokers;
+                return this->runtime_constructor.get();
             }
 
             // Get a vector of all methods
-            from::vector<DLRuntimeMethod*>& get_methods() noexcept {
-                return this->unique_invokers;
+            from::vector<DLRuntimeMethodHolder>& get_methods() noexcept {
+                return this->runtime_methods;
             }
 
             // Get a method by name if it exists
-            DLRuntimeMethod* find_method(const char* name) noexcept {
-                std::string_view name_sv{ name };
-                auto iter = std::find_if(this->unique_invokers.begin(),
-                    this->unique_invokers.end(),
-                    [&name_sv](const DLRuntimeMethod*& method) {
-                    return method->method_name == name_sv;
-                });
-                return iter != this->unique_invokers.end() ? *iter : nullptr;
-            }
-
-            // Get a method by name if it exists
-            DLRuntimeMethod* find_method_w(const wchar_t* name) noexcept {
-                std::wstring_view name_sv{ name };
-                auto iter = std::find_if(this->unique_invokers.begin(),
-                    this->unique_invokers.end(),
-                    [&name_sv](const DLRuntimeMethod*& method) {
-                    return method->method_name_w == name_sv;
-                });
-                return iter != this->unique_invokers.end() ? *iter : nullptr;
-            }
-    
-        // Tag for DLRuntimeClassImpl (below this class)
-        struct Unimplemented {};
+            DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
 
         private:
             // A pointer to the base class, if the class is derived
             DLRuntimeClass* base_class;
-            // TODO: confirm it's a DLRuntimeMethod of the constructor
-            DLRuntimeMethod* constructor_invokers;
-            // A sorted vector of unique DLRuntimeMethods
-            from::vector<DLRuntimeMethod*> unique_invokers;
+            // A DLRuntimeMethod of the class's constructor
+            from::unique_ptr<DLRuntimeMethod> runtime_constructor;
+            // A vector of DLRuntimeMethodHolders sorted by string length
+            from::vector<DLRuntimeMethodHolder> runtime_methods;
         };
 
-        template <class Impl>
-        class DLRuntimeClassImpl;
-
+        // DLRuntimeClass for Impl class
+        // Additionally stores the class name
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {
         public:
             virtual ~DLRuntimeClassImpl() = default;
 
             DLRuntimeClassImpl(const char* class_name, const wchar_t* class_name_w) noexcept
-                : DLRuntimeClass(), class_name(class_name), class_name_w(class_name_w) {}
+                : DLRuntimeClass(), _class_name(class_name), _class_name_w(class_name_w) {}
 
-            const char* get_name() const noexcept override { return this->class_name; }
-            const wchar_t* get_name_w() const noexcept override { return this->class_name_w; }
+            const char* class_name() const noexcept override { return this->_class_name; }
+            const wchar_t* class_name_w() const noexcept override { return this->_class_name_w; }
 
         private:
-            char* control_byte1() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* control_byte2() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* control_byte3() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* control_byte4() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* ref_byte1() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* ref_byte2() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* ref_byte3() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* ref_byte4() LIBER_UNIMPLEMENTED_OVERRIDE
 
-            bool unk_bool() LIBER_UNIMPLEMENTED_OVERRIDE
+            bool always_false() LIBER_UNIMPLEMENTED_OVERRIDE
             void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_UNIMPLEMENTED_OVERRIDE
 
         public:
             size_t class_size() const noexcept override { return sizeof(Impl); }
 
         private:
-            const char* class_name;
-            const wchar_t* class_name_w;
+            const char* _class_name;
+            const wchar_t* _class_name_w;
         };
     }
 }
