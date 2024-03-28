@@ -51,6 +51,7 @@ target_sources("objlibER" PUBLIC
 # Namespace DL source files
 target_sources("objlibER" PUBLIC
     "source/dantelion2/kernel_runtime.cpp"
+    "source/dantelion2/reflection.cpp"
 )
 
 # Target libER[d].dll
