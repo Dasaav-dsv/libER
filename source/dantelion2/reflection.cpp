@@ -1,4 +1,5 @@
 #include <dantelion2/reflection.h>
+#include <detail/functions.h>
 
 #include <cstddef>
 #include <cstdint>
@@ -36,6 +37,18 @@ namespace from {
                 this->runtime_methods.insert(iter, { std::move(method_unique), method_name, method_name_w, length });
             }
             method->invokers.push_back(invoker);
+        }
+
+        void DLRuntimeClass::register_class() {
+            liber::function<"DLRF::DLRuntimeClass::register_runtime_class", void>::call(this);
+        }
+
+        from::vector<DLRuntimeMethodHolder>& DLRuntimeClass::get_registered_classes() noexcept {
+            return *reinterpret_cast<from::vector<DLRuntimeMethodHolder>*>(liber::symbol<"DLRF::DLRuntimeClass::GLOBAL_registered_classes">::get());
+        }
+
+        from::vector<DLRuntimeClassPair>& DLRuntimeClass::get_runtime_pairs() noexcept {
+            return *reinterpret_cast<from::vector<DLRuntimeClassPair>*>(liber::symbol<"DLRF::DLRuntimeClass::GLOBAL_runtime_pairs">::get());
         }
     }
 }

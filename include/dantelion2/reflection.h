@@ -15,8 +15,29 @@
 namespace from {
     // Dantelion reflection
     namespace DLRF {
-        class LIBER_DUMMY DLMethodInvoker {
-            virtual ~DLMethodInvoker() = default;
+        // DLMethodInvoker trait tags
+        struct DLMethodInvokeContext {};
+        struct DLFunctionInvokeContext {};
+        struct DLRuntimeConstructionContext {};
+
+        // DLRF runtime method invocation interface
+        template <typename Ctx = DLMethodInvokeContext>
+        class DLMethodInvokerImpl {
+        public:
+            virtual int invoke(Ctx* context) = 0;
+            virtual ~DLMethodInvokerImpl() = default;
+            virtual int arg_count() = 0;
+            virtual void zero_context(Ctx* context) = 0;
+            virtual void zero_context2(Ctx* context) = 0;
+            virtual char* ref_byte() = 0;
+        };
+
+        // Default template
+        using DLMethodInvoker = DLMethodInvokerImpl<DLMethodInvokeContext>;
+
+        // Concrete method invoker class
+        // Is not implemented in libER, exposition only
+        struct LIBER_DUMMY DLConcreteMethodInvoker : public DLMethodInvoker {
             void* method;
         };
 
@@ -54,6 +75,9 @@ namespace from {
             const wchar_t* method_name_w;
             size_t length;
         };
+
+        // Ref byte/runtime class pair
+        using DLRuntimeClassPair = std::pair<char*, DLRuntimeClass*>;
 
         // (Typically statically allocated) reflection based
         // object for an implementing class. Allows for runtime
@@ -113,6 +137,15 @@ namespace from {
             // Get a method by name if it exists
             DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
 
+            // Globally register this DLRuntimeClass
+            void register_class();
+
+            // Get a vector of all globally registered DLRuntimeClasses
+            static from::vector<DLRuntimeMethodHolder>& get_registered_classes() noexcept;
+
+            // Get a vector of all globally registered DLRuntimeClass pairs
+            static from::vector<DLRuntimeClassPair>& get_runtime_pairs() noexcept;
+
         private:
             // A pointer to the base class, if the class is derived
             DLRuntimeClass* base_class;
@@ -122,7 +155,7 @@ namespace from {
             from::vector<DLRuntimeMethodHolder> runtime_methods;
         };
 
-        // DLRuntimeClass for Impl class
+        // Concrete DLRuntimeClass for class Impl
         // Additionally stores the class name
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {
