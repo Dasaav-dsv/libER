@@ -3,8 +3,11 @@
 #include <dantelion2/reflection.h>
 #include <detail/literal_string.h>
 
-// Macro for classes that implement FD4::FD4ComponentBase
+// Derive and implement FD4::FD4ComponentBase for a class CLASSNAME
 #define FD4_COMPONENT_CLASS(CLASSNAME) class CLASSNAME : public from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>
+
+// Avoid ambigous name lookup with multiple inheritance
+#define FD4_GET_RUNTIME_CLASS(CLASSNAME) from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { return from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>::get_runtime_class(); }
 
 namespace from {
     namespace FD4 {
@@ -19,7 +22,7 @@ namespace from {
                 FD4ComponentBase::name, FD4ComponentBase::name_w
             };
         public:
-            virtual DLRF::DLRuntimeClass* get_runtime_class() {
+            virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept {
                 return &FD4ComponentBase::runtime_class;
             }
 
