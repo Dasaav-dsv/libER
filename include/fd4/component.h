@@ -1,12 +1,17 @@
 #pragma once
 
+#include <detail/liber_preprocessor.hpp>
 #include <dantelion2/reflection.h>
 #include <detail/literal_string.h>
 
 // Derive and implement FD4::FD4ComponentBase for a class CLASSNAME
 #define FD4_COMPONENT_CLASS(CLASSNAME) class CLASSNAME : public from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>
 
+// Derive and implement FD4::FD4ComponentBase for a class CLASSNAME with template parameters ...
+#define FD4_COMPONENT_TEMPLATE_CLASS(CLASSNAME, ...) class CLASSNAME : public from::FD4::FD4ComponentBase<CLASSNAME<__VA_ARGS__>, LIBER_STRINGIFY(CLASSNAME<__VA_ARGS__>)>
+
 // Avoid ambigous name lookup with multiple inheritance
+// when overriding the get_runtime_class virtual method
 #define FD4_RUNTIME_CLASS_OVERRIDE(CLASSNAME) from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { return from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>::get_runtime_class(); }
 
 namespace from {
