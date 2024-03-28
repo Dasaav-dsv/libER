@@ -7,7 +7,7 @@
 #define FD4_COMPONENT_CLASS(CLASSNAME) class CLASSNAME : public from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>
 
 // Avoid ambigous name lookup with multiple inheritance
-#define FD4_GET_RUNTIME_CLASS(CLASSNAME) from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { return from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>::get_runtime_class(); }
+#define FD4_RUNTIME_CLASS_OVERRIDE(CLASSNAME) from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { return from::FD4::FD4ComponentBase<CLASSNAME, #CLASSNAME>::get_runtime_class(); }
 
 namespace from {
     namespace FD4 {
