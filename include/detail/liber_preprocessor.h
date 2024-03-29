@@ -56,14 +56,14 @@
     liber::bad_call_terminate(err, caller);                        \
 }
 
-#define LIBER_CLASS_TRAITS(TYPE, SIZE, ...) TYPE SIZE __VA_ARGS__
+#define LIBER_CLASS_TRAITS(TRAITS) TRAITS
 
-
-#define LIBER_SIZE(SIZE)                          \
-LIBER_NO_UNIQUE_ADDRESS liber::_consume<__LINE__> \
-    _liber_checksize = [this]{                    \
-    static_assert(sizeof(*this) == (SIZE));       \
-    return 0;                                     \
+#define LIBER_SIZE(SIZE)                                            \
+LIBER_NO_UNIQUE_ADDRESS liber::_consume<__COUNTER__>                \
+    _liber_checksize = [this]{                                      \
+    static_assert(sizeof(*this) == (SIZE),                          \
+        LIBER_STRINGIFY(Invalid object size; expected SIZE bytes)); \
+    return 0;                                                       \
 }();
 
 #define LIBER_CLASS(CLASSNAME) using self = CLASSNAME;
@@ -77,11 +77,12 @@ CLASSNAME& operator = (const CLASSNAME&) = delete;     \
 CLASSNAME& operator = (CLASSNAME&&) noexcept = delete;
 
 // Requires LIBER_CLASS_TRAITS to be defined
-#define LIBER_OFFSET(MEMBER, OFFSET)                           \
-LIBER_NO_UNIQUE_ADDRESS liber::_consume<__LINE__>              \
-_ ## MEMBER ## _at_ ## OFFSET = []{                            \
-    static_assert(__builtin_offsetof(self, MEMBER) == OFFSET); \
-    return 0;                                                  \
+#define LIBER_OFFSET(OFFSET, MEMBER)                               \
+LIBER_NO_UNIQUE_ADDRESS liber::_consume<__COUNTER__>               \
+_ ## MEMBER ## _at_ ## OFFSET = []{                                \
+    static_assert(__builtin_offsetof(self, MEMBER) == OFFSET,      \
+        LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET)); \
+    return 0;                                                      \
 }();
 
 namespace liber {
