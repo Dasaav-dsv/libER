@@ -10,6 +10,8 @@
 
 #include "liber_defines.hpp"
 
+#include <cstddef>
+#include <cstdint>
 #include <sstream>
 #include <stdexcept>
 #include <source_location>
@@ -22,11 +24,25 @@
 #define LIBER_WSTRINGIFY_(X) LIBER_WSTRINGIFY__(#X)
 #define LIBER_WSTRINGIFY(X) LIBER_WSTRINGIFY_(X)
 
+#ifdef __clang__
+#define LIBER_NO_UNIQUE_ADDRESS [[no_unique_address]]
+#else
+#define LIBER_NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
+#endif
+
 #define LIBER_INCLUDIFY(X) <X>
 
 #define LIBER_BIT_FLAG(INDEX) (1ull << (INDEX))
 
 #define LIBER_DUMMY [[maybe_unused]]
+
+#define LIBER_UNIMPLEMENTED LIBER_BAD_CALL(unimplemented function)
+
+#define LIBER_UNIMPLEMENTED_RETURN _unimplemented_return()
+
+#define LIBER_INTERFACE_ONLY = 0;
+
+#define LIBER_INTERFACE LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from explicitly constructed objects:)
 
 #define LIBER_BAD_CALL(REASON) {                                   \
     void* caller = _ReturnAddress();                               \
@@ -40,13 +56,32 @@
     liber::bad_call_terminate(err, caller);                        \
 }
 
-#define LIBER_UNIMPLEMENTED LIBER_BAD_CALL(unimplemented function)
+#define LIBER_CLASS_TRAITS(TYPE, SIZE) TYPE       \
+LIBER_NO_UNIQUE_ADDRESS liber::_consume<__LINE__> \
+    _liber_checksize = [this]{                    \
+    static_assert(sizeof(*this) == SIZE);         \
+    return 0;                                     \
+}();
 
-#define LIBER_UNIMPLEMENTED_RETURN _unimplemented_return()
+#define LIBER_SIZE(SIZE) (SIZE)
 
-#define LIBER_INTERFACE_ONLY = 0;
+#define LIBER_CLASS(CLASSNAME) using self = CLASSNAME;
 
-#define LIBER_INTERFACE LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from explicitly constructed objects:)
+#define LIBER_INTERFACE_CLASS(CLASSNAME)               \
+CLASSNAME() = delete;                                  \
+CLASSNAME(const CLASSNAME&) = delete;                  \
+CLASSNAME(CLASSNAME&&) noexcept = delete;              \
+CLASSNAME& operator = (const CLASSNAME&) = delete;     \
+CLASSNAME& operator = (CLASSNAME&&) noexcept = delete; \
+LIBER_CLASS(CLASSNAME)                  
+
+// Requires LIBER_CLASS_TRAITS to be defined
+#define LIBER_OFFSET(MEMBER, OFFSET)                           \
+LIBER_NO_UNIQUE_ADDRESS liber::_consume<__LINE__>              \
+_ ## MEMBER ## _at_ ## OFFSET = []{                            \
+    static_assert(__builtin_offsetof(self, MEMBER) == OFFSET); \
+    return 0;                                                  \
+}();
 
 namespace liber {
     // Exception type for calling functions
@@ -64,6 +99,11 @@ namespace liber {
         [&] { throw liber::bad_call(err.str()); } ();
         std::terminate();
     }
+
+    // An empty dummy class with a constructor that
+    // accepts any type of arguments. Used for compile
+    // time checks together with LIBER_NO_UNIQUE_ADDRESS
+    template <int> struct _consume { _consume(auto...) noexcept {} };
 
     void append_module_name_and_base(std::ostream& out, void* caller) noexcept;
 
