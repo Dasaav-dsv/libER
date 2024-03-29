@@ -56,24 +56,25 @@
     liber::bad_call_terminate(err, caller);                        \
 }
 
-#define LIBER_CLASS_TRAITS(TYPE, SIZE) TYPE       \
+#define LIBER_CLASS_TRAITS(TYPE, SIZE, ...) TYPE SIZE __VA_ARGS__
+
+
+#define LIBER_SIZE(SIZE)                          \
 LIBER_NO_UNIQUE_ADDRESS liber::_consume<__LINE__> \
     _liber_checksize = [this]{                    \
-    static_assert(sizeof(*this) == SIZE);         \
+    static_assert(sizeof(*this) == (SIZE));       \
     return 0;                                     \
 }();
-
-#define LIBER_SIZE(SIZE) (SIZE)
 
 #define LIBER_CLASS(CLASSNAME) using self = CLASSNAME;
 
 #define LIBER_INTERFACE_CLASS(CLASSNAME)               \
+LIBER_CLASS(CLASSNAME)                                 \
 CLASSNAME() = delete;                                  \
 CLASSNAME(const CLASSNAME&) = delete;                  \
 CLASSNAME(CLASSNAME&&) noexcept = delete;              \
 CLASSNAME& operator = (const CLASSNAME&) = delete;     \
-CLASSNAME& operator = (CLASSNAME&&) noexcept = delete; \
-LIBER_CLASS(CLASSNAME)                  
+CLASSNAME& operator = (CLASSNAME&&) noexcept = delete;
 
 // Requires LIBER_CLASS_TRAITS to be defined
 #define LIBER_OFFSET(MEMBER, OFFSET)                           \
