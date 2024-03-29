@@ -14,7 +14,7 @@ namespace from {
     namespace FD4 {
         FD4_COMPONENT_CLASS(FD4TaskBase) {
         public:
-            FD4_RUNTIME_CLASS_OVERRIDE(FD4TaskBase)
+            FD4_RUNTIME_CLASS(FD4TaskBase)
 
             virtual ~FD4TaskBase() = default;
 
@@ -30,7 +30,7 @@ namespace from {
         template <>
         FD4_COMPONENT_CLASS(FD4StepTemplateInterface<FD4TaskBase>), public FD4TaskBase {
         public:
-            FD4_RUNTIME_CLASS_OVERRIDE(FD4StepTemplateInterface<FD4TaskBase>)
+            FD4_RUNTIME_CLASS(FD4StepTemplateInterface<FD4TaskBase>)
 
         private:
             virtual void execute_2() LIBER_INTERFACE
@@ -60,7 +60,7 @@ namespace from {
         template <class Impl>
         FD4_COMPONENT_TEMPLATE_CLASS(FD4StepTemplateBase, Impl), public FD4StepTemplateInterface<FD4TaskBase> {
         public:
-            FD4_RUNTIME_CLASS_OVERRIDE(FD4StepTemplateBase<Impl>)
+            FD4_RUNTIME_CLASS(FD4StepTemplateBase<Impl>)
 
         private:
             virtual bool unk_tree_op11() LIBER_INTERFACE
@@ -83,7 +83,7 @@ namespace from {
         template <class Impl>
         FD4_COMPONENT_TEMPLATE_CLASS(FD4StepTaskBase, Impl), public FD4StepTemplateBase<Impl> {
         public:
-            FD4_RUNTIME_CLASS_OVERRIDE(FD4StepTaskBase<Impl>)
+            FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>)
 
         private:
             int _unk_int1 = 0;
