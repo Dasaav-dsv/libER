@@ -1,6 +1,6 @@
 #pragma once
 
-#include <detail/unimplemented.h>
+#include <detail/liber_preprocessor.h>
 #include <memory/from_allocator.h>
 #include <memory/from_string.h>
 #include <memory/from_set.h>
@@ -33,19 +33,19 @@ namespace from {
             FD4_RUNTIME_CLASS_OVERRIDE(FD4StepTemplateInterface<FD4TaskBase>)
 
         private:
-            virtual void execute_2() LIBER_UNIMPLEMENTED
-            virtual bool test_int_0x48() LIBER_UNIMPLEMENTED
-            virtual int get_int_0x48() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op1() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op2() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op3() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op4() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op5() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op6() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op7() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op8() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op9() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op10() LIBER_UNIMPLEMENTED
+            virtual void execute_2() LIBER_INTERFACE
+            virtual bool test_int_0x48() LIBER_INTERFACE
+            virtual int get_int_0x48() LIBER_INTERFACE
+            virtual bool unk_tree_op1() LIBER_INTERFACE
+            virtual bool unk_tree_op2() LIBER_INTERFACE
+            virtual bool unk_tree_op3() LIBER_INTERFACE
+            virtual bool unk_tree_op4() LIBER_INTERFACE
+            virtual bool unk_tree_op5() LIBER_INTERFACE
+            virtual bool unk_tree_op6() LIBER_INTERFACE
+            virtual bool unk_tree_op7() LIBER_INTERFACE
+            virtual bool unk_tree_op8() LIBER_INTERFACE
+            virtual bool unk_tree_op9() LIBER_INTERFACE
+            virtual bool unk_tree_op10() LIBER_INTERFACE
         };
 
         // TODO:
@@ -63,9 +63,9 @@ namespace from {
             FD4_RUNTIME_CLASS_OVERRIDE(FD4StepTemplateBase<Impl>)
 
         private:
-            virtual bool unk_tree_op11() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op12() LIBER_UNIMPLEMENTED
-            virtual bool unk_tree_op13() LIBER_UNIMPLEMENTED
+            virtual bool unk_tree_op11() LIBER_INTERFACE
+            virtual bool unk_tree_op12() LIBER_INTERFACE
+            virtual bool unk_tree_op13() LIBER_INTERFACE
 
 
             std::pair<void(*)(Impl*), const char*>* steps;

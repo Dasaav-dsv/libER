@@ -1,6 +1,6 @@
 #pragma once
 
-#include <detail/unimplemented.h>
+#include <detail/liber_preprocessor.h>
 
 #include <memory/from_vector.h>
 #include <memory/from_unique_ptr.h>
@@ -103,7 +103,7 @@ namespace from {
             virtual char* ref_byte4() = 0;
 
             // Always false?
-            virtual bool always_false() = 0;
+            virtual bool unk_always_false() = 0;
 
             // Potentially a method that frees a base class of
             // a DLRuntimeClass, or a DLRuntimeClass from a similar structure
@@ -120,9 +120,8 @@ namespace from {
             virtual void add_method_invoker(DLMethodInvoker* invoker, const char* method_name, const wchar_t* method_name_w);
 
             // Get class's base, nullptr if it's not derived
-            DLRuntimeClass* get_base() noexcept {
-                return this->base_class;
-            }
+            DLRuntimeClass* get_base() noexcept { return this->base_class; }
+            const DLRuntimeClass* get_base() const noexcept { return this->base_class; }
 
             // Get the constructor method (may be null)
             DLRuntimeMethod* get_constructor() noexcept {
@@ -169,13 +168,13 @@ namespace from {
             const wchar_t* class_name_w() const noexcept override { return this->_class_name_w; }
 
         private:
-            char* ref_byte1() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* ref_byte2() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* ref_byte3() LIBER_UNIMPLEMENTED_OVERRIDE
-            char* ref_byte4() LIBER_UNIMPLEMENTED_OVERRIDE
+            char* ref_byte1() LIBER_INTERFACE
+            char* ref_byte2() LIBER_INTERFACE
+            char* ref_byte3() LIBER_INTERFACE
+            char* ref_byte4() LIBER_INTERFACE
 
-            bool always_false() LIBER_UNIMPLEMENTED_OVERRIDE
-            void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_UNIMPLEMENTED_OVERRIDE
+            bool unk_always_false() LIBER_INTERFACE
+            void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_INTERFACE
 
         public:
             size_t class_size() const noexcept override { return sizeof(Impl); }

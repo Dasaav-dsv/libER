@@ -2,7 +2,7 @@
 #include <version/detail/version_winhttp.h>
 #include <version/version.h>
 
-#include <detail/liber_preprocessor.hpp>
+#include <detail/liber_preprocessor.h>
 
 #include <cppsv_rt.h>
 #include <NamedMutex.h>
