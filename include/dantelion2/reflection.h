@@ -1,6 +1,7 @@
 #pragma once
 
 #include <detail/liber_preprocessor.h>
+#include <detail/literal_string.h>
 
 #include <memory/from_vector.h>
 #include <memory/from_unique_ptr.h>
@@ -182,6 +183,17 @@ namespace from {
         private:
             const char* _class_name;
             const wchar_t* _class_name_w;
+        };
+
+        // DLRuntimeClass reflection implentation in libER
+        template <class Impl, liber::literal_string ImplName>
+        struct DLRuntimeClassTemplate {
+            static constexpr auto dl_runtime_class_name = ImplName.trunc().string;
+            static constexpr auto dl_runtime_class_name_w = ImplName.widen().string;
+
+            inline static DLRF::DLRuntimeClassImpl<Impl> dl_runtime_class{
+                DLRuntimeClassTemplate::dl_runtime_class_name, DLRuntimeClassTemplate::dl_runtime_class_name_w
+            };
         };
     }
 }

@@ -12,9 +12,12 @@
 
 namespace from {
     namespace FD4 {
-        FD4_COMPONENT_CLASS(FD4TaskBase) {
+        class FD4TaskBase : public FD4::FD4ComponentBase {
         public:
-            FD4_RUNTIME_CLASS(FD4TaskBase)
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(FD4TaskBase)
+                FD4_RUNTIME_CLASS(FD4TaskBase)
+            )
 
             virtual ~FD4TaskBase() = default;
 
@@ -28,9 +31,12 @@ namespace from {
         class FD4StepTemplateInterface;
         
         template <>
-        FD4_COMPONENT_CLASS(FD4StepTemplateInterface<FD4TaskBase>), public FD4TaskBase {
+        class FD4StepTemplateInterface<FD4TaskBase> : public FD4TaskBase {
         public:
-            FD4_RUNTIME_CLASS(FD4StepTemplateInterface<FD4TaskBase>)
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(FD4StepTemplateInterface)
+                FD4_RUNTIME_CLASS(FD4StepTemplateInterface<FD4TaskBase>)
+            )
 
         private:
             virtual void execute_2() LIBER_INTERFACE
@@ -52,21 +58,30 @@ namespace from {
         struct _unk_tree {
             virtual ~_unk_tree() = default;
             from::set<void*> _tree;
-            DLKR::DLAllocator* _allocator;
+            DLKR::DLAllocator* _allocator1;
+            DLKR::DLAllocator* _allocator2;
         };
 
         static_assert(sizeof(_unk_tree) == 0x30);
 
         template <class Impl>
-        FD4_COMPONENT_TEMPLATE_CLASS(FD4StepTemplateBase, Impl), public FD4StepTemplateInterface<FD4TaskBase> {
+        class FD4StepTemplateBase : public FD4StepTemplateInterface<FD4TaskBase> {
         public:
-            FD4_RUNTIME_CLASS(FD4StepTemplateBase<Impl>)
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(FD4StepTemplateBase)
+                FD4_RUNTIME_CLASS(FD4StepTemplateBase<Impl>)
+                LIBER_SIZE(0xB0)
+            )
+
+            LIBER_OFFSET(steps, 0x10)
+            LIBER_OFFSET(_tree, 0x18)
+            LIBER_OFFSET(unk_wstr, 0x70)
+            LIBER_OFFSET(state, 0xA0)
 
         private:
             virtual bool unk_tree_op11() LIBER_INTERFACE
             virtual bool unk_tree_op12() LIBER_INTERFACE
             virtual bool unk_tree_op13() LIBER_INTERFACE
-
 
             std::pair<void(*)(Impl*), const char*>* steps;
             _unk_tree _tree;
@@ -81,7 +96,7 @@ namespace from {
         };
 
         template <class Impl>
-        FD4_COMPONENT_TEMPLATE_CLASS(FD4StepTaskBase, Impl), public FD4StepTemplateBase<Impl> {
+        class FD4StepTaskBase : public FD4StepTemplateBase<Impl> {
         public:
             FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>)
 

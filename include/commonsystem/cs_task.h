@@ -28,7 +28,7 @@ namespace from {
             bool active;
         };
 
-        FD4_COMPONENT_CLASS(CSEzTaskProxy), public FD4::FD4TaskBase {
+        class CSEzTaskProxy : public FD4::FD4TaskBase {
         public:
             FD4_RUNTIME_CLASS(CSEzTaskProxy)
 
@@ -37,7 +37,7 @@ namespace from {
             int task_id;
         };
 
-        FD4_COMPONENT_CLASS(CSEzTask), public FD4::FD4TaskBase {
+        class CSEzTask : public FD4::FD4TaskBase {
         public:
             FD4_RUNTIME_CLASS(CSEzTask)
 
