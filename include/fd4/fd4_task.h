@@ -56,8 +56,8 @@ namespace from {
         struct _unk_tree {
             virtual ~_unk_tree() = default;
             from::set<void*> _tree;
-            DLKR::DLAllocator* _allocator1;
-            DLKR::DLAllocator* _allocator2;
+            LIBER_UNKNOWN(from::allocator<void>);
+            LIBER_UNKNOWN(from::allocator<void>);
         };
 
         template <class Impl>
