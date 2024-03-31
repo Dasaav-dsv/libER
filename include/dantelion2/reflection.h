@@ -185,13 +185,13 @@ namespace from {
             const wchar_t* class_name_w() const noexcept override { return this->_class_name_w; }
 
         private:
-            char* ref_byte1() LIBER_INTERFACE
-            char* ref_byte2() LIBER_INTERFACE
-            char* ref_byte3() LIBER_INTERFACE
-            char* ref_byte4() LIBER_INTERFACE
+            char* ref_byte1() LIBER_INTERFACE_OVERRIDE;
+            char* ref_byte2() LIBER_INTERFACE_OVERRIDE;
+            char* ref_byte3() LIBER_INTERFACE_OVERRIDE;
+            char* ref_byte4() LIBER_INTERFACE_OVERRIDE;
 
-            bool unk_always_false() LIBER_INTERFACE
-            void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_INTERFACE
+            bool unk_always_false() LIBER_INTERFACE_OVERRIDE;
+            void free_base(DLRuntimeClass**, DLKR::DLAllocator*) LIBER_INTERFACE_OVERRIDE;
 
         public:
             size_t class_size() const noexcept override { return sizeof(Impl); }

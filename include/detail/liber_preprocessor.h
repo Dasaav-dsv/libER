@@ -44,6 +44,8 @@
 
 #define LIBER_INTERFACE LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from explicitly constructed objects:)
 
+#define LIBER_INTERFACE_OVERRIDE override LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from explicitly constructed objects:)
+
 #define LIBER_BAD_CALL(REASON) {                                   \
     void* caller = _ReturnAddress();                               \
     std::stringstream err;                                         \
