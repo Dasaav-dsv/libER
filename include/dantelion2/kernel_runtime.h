@@ -17,14 +17,15 @@ namespace from {
         // Non-copyable dummy (empty) synchronization object
         class DLDummySyncObject : public DLUT::DLNonCopyable {};
 
-        // Rarely used, size 0x60 bytes
-        class LIBER_DUMMY DLFastSmallObjectAllocator : public DLUT::DLNonCopyable {};
-
         // A wrapper around a Windows Critical Section
         // Satisfies the C++ Mutex requirement
         // Recursive, not TimedLockable
         class DLPlainLightMutex : public DLUT::DLNonCopyable {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLPlainLightMutex)
+            );
+
             DLPlainLightMutex() noexcept;
             virtual ~DLPlainLightMutex() noexcept;
 
@@ -47,11 +48,19 @@ namespace from {
             } _dummy_section;
         };
 
+        LIBER_ASSERTS_BEGIN(DLPlainLightMutex);
+        LIBER_ASSERT_SIZE(0x30);
+        LIBER_ASSERTS_END;
+
         // A wrapper around a Windows kernel mutex
         // Satisfies the C++ Mutex requirement
         // Recursive, not TimedLockable
         class DLPlainMutex : public DLUT::DLNonCopyable {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLPlainMutex)
+            );
+
             DLPlainMutex() noexcept;
             virtual ~DLPlainMutex() noexcept;
 
@@ -63,5 +72,9 @@ namespace from {
         private:
             HANDLE mutex_handle;
         };
+
+        LIBER_ASSERTS_BEGIN(DLPlainMutex);
+        LIBER_ASSERT_SIZE(0x10);
+        LIBER_ASSERTS_END;
     }
 }

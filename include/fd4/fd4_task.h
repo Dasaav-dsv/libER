@@ -8,8 +8,6 @@
 
 #include <utility>
 
-// TODO: DLKR::DLAllocator* to from::allocator<T>
-
 namespace from {
     namespace FD4 {
         class FD4TaskBase : public FD4::FD4ComponentBase {
@@ -17,14 +15,14 @@ namespace from {
             LIBER_CLASS_TRAITS(
                 LIBER_CLASS(FD4TaskBase)
                 FD4_RUNTIME_CLASS(FD4TaskBase)
-            )
+            );
 
             virtual ~FD4TaskBase() = default;
 
-            virtual void execute_1() {}
+            virtual void execute1() {}
 
         private:
-            void* _unk_void = nullptr;
+            LIBER_UNKNOWN(void*);
         };
 
         template <class Impl>
@@ -39,7 +37,7 @@ namespace from {
             )
 
         private:
-            virtual void execute_2() LIBER_INTERFACE
+            virtual void execute2() LIBER_INTERFACE
             virtual bool test_int_0x48() LIBER_INTERFACE
             virtual int get_int_0x48() LIBER_INTERFACE
             virtual bool unk_tree_op1() LIBER_INTERFACE
@@ -62,49 +60,55 @@ namespace from {
             DLKR::DLAllocator* _allocator2;
         };
 
-        static_assert(sizeof(_unk_tree) == 0x30);
-
         template <class Impl>
         class FD4StepTemplateBase : public FD4StepTemplateInterface<FD4TaskBase> {
         public:
             LIBER_CLASS_TRAITS(
                 LIBER_CLASS(FD4StepTemplateBase)
                 FD4_RUNTIME_CLASS(FD4StepTemplateBase<Impl>)
-                LIBER_SIZE(0xB0)
             )
-
-            LIBER_OFFSET(steps, 0x10)
-            LIBER_OFFSET(_tree, 0x18)
-            LIBER_OFFSET(unk_wstr, 0x70)
-            LIBER_OFFSET(state, 0xA0)
 
         private:
             virtual bool unk_tree_op11() LIBER_INTERFACE
             virtual bool unk_tree_op12() LIBER_INTERFACE
             virtual bool unk_tree_op13() LIBER_INTERFACE
 
-            std::pair<void(*)(Impl*), const char*>* steps;
+            using steps_type = std::pair<void(*)(Impl*), const char*>;
+
+            steps_type* steps;
             _unk_tree _tree;
-            void* _unk_ptr1 = nullptr;
-            void* _unk_ptr2 = nullptr;
-            bool _unk_bool1 = true;
-            bool _unk_bool2 = false;
+            LIBER_UNKNOWN(void*);
+            LIBER_UNKNOWN(bool);
+            LIBER_UNKNOWN(DLKR::DLAllocator*);
+            LIBER_UNKNOWN(void*);
+            LIBER_UNKNOWN(bool);
+            LIBER_UNKNOWN(bool);
             from::wstring unk_wstr;
+            LIBER_UNKNOWN(bool);
             const wchar_t* state = L"NotExecuting";
-            bool _unk_bool3 = false;
-            int _unk_int = -1;
+            LIBER_UNKNOWN(bool);
+            LIBER_UNKNOWN(int);
         };
 
         template <class Impl>
         class FD4StepTaskBase : public FD4StepTemplateBase<Impl> {
         public:
-            FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>)
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(FD4StepTaskBase)
+                FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>)
+            );
 
         private:
-            int _unk_int1 = 0;
-            int _unk_int2 = 0;
+            LIBER_UNKNOWN(int)
+            LIBER_UNKNOWN(int)
         };
 
-        static_assert(sizeof(FD4StepTemplateBase<int>) == 0xb0);
+        LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
+        LIBER_ASSERT_SIZE(0xB0);
+        LIBER_ASSERT_OFFS(0x10, steps);
+        LIBER_ASSERT_OFFS(0x18, _tree);
+        LIBER_ASSERT_OFFS(0x70, unk_wstr);
+        LIBER_ASSERT_OFFS(0xA0, state);
+        LIBER_ASSERTS_END;
     }
 }

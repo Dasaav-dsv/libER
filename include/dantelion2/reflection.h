@@ -25,12 +25,12 @@ namespace from {
         template <typename Ctx = DLMethodInvokeContext>
         class DLMethodInvokerImpl {
         public:
-            virtual int invoke(Ctx* context) = 0;
-            virtual ~DLMethodInvokerImpl() = default;
-            virtual int arg_count() = 0;
-            virtual void zero_context(Ctx* context) = 0;
-            virtual void zero_context2(Ctx* context) = 0;
-            virtual char* ref_byte() = 0;
+            virtual int invoke(Ctx* context) LIBER_INTERFACE_ONLY;
+            virtual ~DLMethodInvokerImpl() LIBER_INTERFACE_ONLY;
+            virtual int arg_count() LIBER_INTERFACE_ONLY;
+            virtual void zero_context1(Ctx* context) LIBER_INTERFACE_ONLY;
+            virtual void zero_context2(Ctx* context) LIBER_INTERFACE_ONLY;
+            virtual char* ref_byte() LIBER_INTERFACE_ONLY;
         };
 
         // Default template
@@ -48,23 +48,31 @@ namespace from {
         // A wrapper that represents a method
         // with a vector of invoker objects
         struct DLRuntimeMethod {
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLRuntimeMethod)
+            );
+
             DLRuntimeMethod() noexcept : owner(nullptr), method_name(nullptr),
-                method_name_w(nullptr), unk_ptr(nullptr) {}
+                method_name_w(nullptr) {}
 
             DLRuntimeMethod(DLRuntimeClass* owner, const char* method_name, const wchar_t* method_name_w) noexcept
-                : owner(owner), method_name(method_name), method_name_w(method_name_w), unk_ptr(nullptr) {}
+                : owner(owner), method_name(method_name), method_name_w(method_name_w) {}
 
             DLRuntimeClass* owner;
             const char* method_name;
             const wchar_t* method_name_w;
             from::vector<DLMethodInvoker*> invokers;
-            from::vector<void*> unk_vec;
-            void* unk_ptr;
+            LIBER_UNKNOWN(from::vector<void*>);
+            LIBER_UNKNOWN(void*);
             DLKR::DLPlainMutex mutex;
         };
 
         // A wrapper for the DLRuntimeMethod wrapper
         struct DLRuntimeMethodHolder {
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLRuntimeMethodHolder)
+            );
+
             DLRuntimeMethodHolder() noexcept : method_name(nullptr),
                 method_name_w(nullptr), length(0) {}
 
@@ -85,6 +93,10 @@ namespace from {
         // type introspection and for binding method invokers.
         class DLRuntimeClass {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLRuntimeClass)
+            );
+
             DLRuntimeClass() noexcept : base_class(nullptr) {}
 
             virtual ~DLRuntimeClass() = default;
@@ -160,6 +172,10 @@ namespace from {
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLRuntimeClassImpl)
+            );
+
             virtual ~DLRuntimeClassImpl() = default;
 
             DLRuntimeClassImpl(const char* class_name, const wchar_t* class_name_w) noexcept
@@ -195,5 +211,23 @@ namespace from {
                 DLRuntimeClassTemplate::dl_runtime_class_name, DLRuntimeClassTemplate::dl_runtime_class_name_w
             };
         };
+
+        LIBER_ASSERTS_BEGIN(DLRuntimeMethod);
+        LIBER_ASSERT_SIZE(0x70);
+        LIBER_ASSERT_OFFS(0x18, invokers);
+        LIBER_ASSERT_OFFS(0x60, mutex);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_BEGIN(DLRuntimeMethodHolder);
+        LIBER_ASSERT_SIZE(0x20);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_BEGIN(DLRuntimeClass);
+        LIBER_ASSERT_SIZE(0x38);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_TEMPLATE_BEGIN(DLRuntimeClassImpl, liber::dummy);
+        LIBER_ASSERT_SIZE(0x48);
+        LIBER_ASSERTS_END;
     }
 }
