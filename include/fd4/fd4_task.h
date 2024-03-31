@@ -99,8 +99,8 @@ namespace from {
             );
 
         private:
-            LIBER_UNKNOWN(int)
-            LIBER_UNKNOWN(int)
+            LIBER_UNKNOWN(int);
+            LIBER_UNKNOWN(int);
         };
 
         LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
