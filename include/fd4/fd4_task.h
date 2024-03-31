@@ -84,7 +84,7 @@ namespace from {
         template <class Impl>
         class FD4StepTaskBase : public FD4StepTemplateBase<Impl> {
         public:
-            FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>);
+            FD4_RUNTIME_CLASS(FD4StepTaskBase);
 
         private:
             LIBER_UNKNOWN(int);
