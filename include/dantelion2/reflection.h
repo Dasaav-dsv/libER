@@ -2,6 +2,7 @@
 
 #include <detail/liber_preprocessor.h>
 #include <detail/literal_string.h>
+#include <detail/optref.h>
 
 #include <memory/from_vector.h>
 #include <memory/from_unique_ptr.h>
@@ -131,8 +132,10 @@ namespace from {
             const DLRuntimeClass* get_base() const noexcept { return this->base_class; }
 
             // Get the constructor method (may be null)
-            DLRuntimeMethod* get_constructor() noexcept {
-                return this->runtime_constructor.get();
+            liber::optref<DLRuntimeMethod> get_constructor() noexcept {
+                DLRuntimeMethod* method_ptr = this->runtime_constructor.get();
+                if (!method_ptr) return std::nullopt;
+                return *method_ptr;
             }
 
             // Get a vector of all methods
