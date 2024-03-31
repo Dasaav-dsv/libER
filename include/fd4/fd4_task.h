@@ -31,19 +31,19 @@ namespace from {
             FD4_RUNTIME_CLASS(FD4StepTemplateInterface);
 
         private:
-            virtual void execute2() LIBER_INTERFACE
-            virtual bool test_int_0x48() LIBER_INTERFACE
-            virtual int get_int_0x48() LIBER_INTERFACE
-            virtual bool unk_tree_op1() LIBER_INTERFACE
-            virtual bool unk_tree_op2() LIBER_INTERFACE
-            virtual bool unk_tree_op3() LIBER_INTERFACE
-            virtual bool unk_tree_op4() LIBER_INTERFACE
-            virtual bool unk_tree_op5() LIBER_INTERFACE
-            virtual bool unk_tree_op6() LIBER_INTERFACE
-            virtual bool unk_tree_op7() LIBER_INTERFACE
-            virtual bool unk_tree_op8() LIBER_INTERFACE
-            virtual bool unk_tree_op9() LIBER_INTERFACE
-            virtual bool unk_tree_op10() LIBER_INTERFACE
+            virtual void execute2() LIBER_INTERFACE;
+            virtual bool test_int_0x48() LIBER_INTERFACE;
+            virtual int get_int_0x48() LIBER_INTERFACE;
+            virtual bool unk_tree_op1() LIBER_INTERFACE;
+            virtual bool unk_tree_op2() LIBER_INTERFACE;
+            virtual bool unk_tree_op3() LIBER_INTERFACE;
+            virtual bool unk_tree_op4() LIBER_INTERFACE;
+            virtual bool unk_tree_op5() LIBER_INTERFACE;
+            virtual bool unk_tree_op6() LIBER_INTERFACE;
+            virtual bool unk_tree_op7() LIBER_INTERFACE;
+            virtual bool unk_tree_op8() LIBER_INTERFACE;
+            virtual bool unk_tree_op9() LIBER_INTERFACE;
+            virtual bool unk_tree_op10() LIBER_INTERFACE;
         };
 
         // TODO:
@@ -60,9 +60,9 @@ namespace from {
             FD4_RUNTIME_CLASS(FD4StepTemplateBase);
 
         private:
-            virtual bool unk_tree_op11() LIBER_INTERFACE
-            virtual bool unk_tree_op12() LIBER_INTERFACE
-            virtual bool unk_tree_op13() LIBER_INTERFACE
+            virtual bool unk_tree_op11() LIBER_INTERFACE;
+            virtual bool unk_tree_op12() LIBER_INTERFACE;
+            virtual bool unk_tree_op13() LIBER_INTERFACE;
 
             using steps_type = std::pair<void(*)(Impl*), const char*>;
 
