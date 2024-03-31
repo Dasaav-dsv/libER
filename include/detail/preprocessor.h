@@ -69,7 +69,7 @@ CLASSNAME(CLASSNAME&&) noexcept = delete;              \
 CLASSNAME& operator = (const CLASSNAME&) = delete;     \
 CLASSNAME& operator = (CLASSNAME&&) noexcept = delete
 
-#define LIBER_ASSERTS_BEGIN(CLASSNAME) class _liber_assert_ ## CLASSNAME { \
+#define LIBER_ASSERTS_BEGIN(CLASSNAME) class _liber_asserts_ ## CLASSNAME { \
     using _liber_asserts_type = CLASSNAME
 
 #define LIBER_ASSERTS_TEMPLATE_BEGIN(CLASSNAME, ...) class _liber_asserts_ ## CLASSNAME { \
