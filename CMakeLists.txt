@@ -54,6 +54,11 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/reflection.cpp"
 )
 
+# Namespace CS source files
+target_sources("objlibER" PUBLIC
+    "source/commonsystem/cs_task.cpp"
+)
+
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER>)
 # Target libER_static[d].lib
