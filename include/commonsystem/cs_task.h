@@ -4,6 +4,8 @@
 #include <memory/from_allocator.h>
 #include <memory/from_unique_ptr.h>
 #include <memory/from_vector.h>
+#include <memory/from_list.h>
+#include <dantelion2/text.h>
 #include <fd4/component.h>
 #include <fd4/singleton.h>
 #include <fd4/fd4_task.h>
@@ -94,6 +96,35 @@ namespace from {
             LIBER_UNKNOWN(bool);
         };
 
+        class CSTaskGroupIns {
+        public:
+            LIBER_CLASS(CSTaskGroupIns);
+
+            virtual ~CSTaskGroupIns() LIBER_INTERFACE_ONLY;
+
+        private:
+            virtual void unk_fn1() LIBER_INTERFACE_ONLY;
+            virtual void unk_fn2() LIBER_INTERFACE_ONLY;
+
+            DLTX::FD4BasicHashString group_name;
+            LIBER_UNK_ARR(int, 4);
+        };
+
+        class CSTimeLineTaskGroupIns : public CSTaskGroupIns {
+        public:
+            LIBER_CLASS(CSTimeLineTaskGroupIns);
+
+            virtual ~CSTimeLineTaskGroupIns() LIBER_INTERFACE;
+
+        private:
+            virtual void unk_fn1() LIBER_INTERFACE;
+            virtual void unk_fn2() LIBER_INTERFACE;
+
+            CSTask* task_manager;
+            LIBER_UNKNOWN(from::list<liber::dummy>);
+            LIBER_UNKNOWN(int);
+        };
+
         class CSTaskGroup {
             struct cstg_locator {
                 int id;
@@ -107,11 +138,18 @@ namespace from {
             virtual ~CSTaskGroup() LIBER_INTERFACE_ONLY;
 
             #include "taskgroups.inl"
+
+        private:
             void* task_groups[TaskGroups::SIZE];
         };
 
         LIBER_ASSERTS_BEGIN(CSTask);
         LIBER_ASSERT_SIZE(0xE8);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_BEGIN(CSTimeLineTaskGroupIns);
+        LIBER_ASSERT_OFFS(0x58, task_manager);
+        LIBER_ASSERT_SIZE(0x80);
         LIBER_ASSERTS_END;
     }
 }
