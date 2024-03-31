@@ -1,5 +1,6 @@
 #pragma once
 
+#include <detail/liber_preprocessor.h>
 #include <memory/from_allocator.h>
 
 #include <atomic>
@@ -28,6 +29,10 @@ namespace from {
         // Derived classes provide a deleter method
         class DLReferenceCountObject {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLReferenceCountObject)
+            );
+
             DLReferenceCountObject() : counter(0) {};
 
             virtual void deleter() = 0;
@@ -66,6 +71,10 @@ namespace from {
         template <typename T> requires std::derived_from<T, DLReferenceCountObject>
         class DLReferenceCountPtr {
         public:
+            LIBER_CLASS_TRAITS(
+                LIBER_CLASS(DLReferenceCountPtr)
+            );
+
             DLReferenceCountPtr()  noexcept : raw(nullptr) {}
             DLReferenceCountPtr(std::nullptr_t) noexcept : raw(nullptr) {}
 
@@ -169,6 +178,14 @@ namespace from {
         inline std::strong_ordering operator <=> (const DLReferenceCountPtr<T>& lhs, std::nullptr_t) {
             return lhs.get() <=> nullptr;
         }
+
+        LIBER_ASSERTS_BEGIN(DLReferenceCountObject);
+        LIBER_ASSERT_SIZE(0x10);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_TEMPLATE_BEGIN(DLReferenceCountPtr, liber::dummy);
+        LIBER_ASSERT_SIZE(0x8);
+        LIBER_ASSERTS_END;
     }
 
     // Construct a reference counted object using a provided allocator
