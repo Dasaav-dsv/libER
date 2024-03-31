@@ -78,11 +78,11 @@ CLASSNAME& operator = (CLASSNAME&&) noexcept = delete
 #define LIBER_ASSERT_SIZE(SIZE) static_assert(sizeof(_liber_asserts_type) == (SIZE), \
 LIBER_STRINGIFY(size of type is not SIZE))
 
-#define LIBER_ASSERT_OFFS(OFFSET, MEMBER)                               \
+#define LIBER_ASSERT_OFFS(OFFSET, MEMBER)                                  \
 static_assert(__builtin_offsetof(_liber_asserts_type, MEMBER) == (OFFSET), \
 LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET))
 
-#define LIBER_ASSERTS_END };
+#define LIBER_ASSERTS_END }
 
 #define LIBER_UNKNOWN__(TYPE, COUNTER) _liber_unk_ ## COUNTER
 #define LIBER_UNKNOWN_(TYPE, COUNTER) LIBER_UNKNOWN__(TYPE, COUNTER)
