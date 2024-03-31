@@ -40,7 +40,7 @@
 
 #define LIBER_UNIMPLEMENTED_RETURN _unimplemented_return()
 
-#define LIBER_INTERFACE_ONLY = 0;
+#define LIBER_INTERFACE_ONLY = 0
 
 #define LIBER_INTERFACE LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from explicitly constructed objects:)
 
@@ -58,15 +58,8 @@
 
 #define LIBER_CLASS_TRAITS(TRAITS) TRAITS
 
-#define LIBER_SIZE(SIZE)                                            \
-LIBER_NO_UNIQUE_ADDRESS liber::_consume<__COUNTER__>                \
-    _liber_checksize = [this]{                                      \
-    static_assert(sizeof(*this) == (SIZE),                          \
-        LIBER_STRINGIFY(Invalid object size; expected SIZE bytes)); \
-    return 0;                                                       \
-}();
-
-#define LIBER_CLASS(CLASSNAME) using self = CLASSNAME;
+#define LIBER_CLASS(CLASSNAME) using self = CLASSNAME; \
+friend class _liber_asserts_ ## CLASSNAME;
 
 #define LIBER_INTERFACE_CLASS(CLASSNAME)               \
 LIBER_CLASS(CLASSNAME)                                 \
@@ -76,14 +69,28 @@ CLASSNAME(CLASSNAME&&) noexcept = delete;              \
 CLASSNAME& operator = (const CLASSNAME&) = delete;     \
 CLASSNAME& operator = (CLASSNAME&&) noexcept = delete;
 
-// Requires LIBER_CLASS_TRAITS to be defined
-#define LIBER_OFFSET(OFFSET, MEMBER)                               \
-LIBER_NO_UNIQUE_ADDRESS liber::_consume<__COUNTER__>               \
-_ ## MEMBER ## _at_ ## OFFSET = []{                                \
-    static_assert(__builtin_offsetof(self, MEMBER) == OFFSET,      \
-        LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET)); \
-    return 0;                                                      \
-}();
+#define LIBER_ASSERTS_BEGIN(CLASSNAME) class _liber_assert_ ## CLASSNAME { \
+    using _liber_asserts_type = CLASSNAME
+
+#define LIBER_ASSERTS_TEMPLATE_BEGIN(CLASSNAME, ...) class _liber_asserts_ ## CLASSNAME { \
+    using _liber_asserts_type = CLASSNAME<__VA_ARGS__>
+
+#define LIBER_ASSERT_SIZE(SIZE) static_assert(sizeof(_liber_asserts_type) == (SIZE), \
+LIBER_STRINGIFY(size of type is not SIZE))
+
+#define LIBER_ASSERT_OFFS(OFFSET, MEMBER)                               \
+static_assert(__builtin_offsetof(_liber_asserts_type, MEMBER) == (OFFSET), \
+LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET))
+
+#define LIBER_ASSERTS_END };
+
+#define LIBER_UNKNOWN__(TYPE, COUNTER) _liber_unk_ ## COUNTER
+#define LIBER_UNKNOWN_(TYPE, COUNTER) LIBER_UNKNOWN__(TYPE, COUNTER)
+#define LIBER_UNKNOWN(TYPE, ...) TYPE LIBER_UNKNOWN_(TYPE, __COUNTER__){__VA_ARGS__}
+
+#define LIBER_PAD__(TYPE, COUNTER) _liber_pad_ ## TYPE ## _ ## COUNTER
+#define LIBER_PAD_(TYPE, COUNTER) LIBER_PAD__(TYPE, COUNTER)
+#define LIBER_PAD(TYPE, ...) TYPE LIBER_PAD_(TYPE, __COUNTER__)[(1,##__VA_ARGS__)]{};
 
 namespace liber {
     // Exception type for calling functions
@@ -102,10 +109,8 @@ namespace liber {
         std::terminate();
     }
 
-    // An empty dummy class with a constructor that
-    // accepts any type of arguments. Used for compile
-    // time checks together with LIBER_NO_UNIQUE_ADDRESS
-    template <int> struct _consume { _consume(auto...) noexcept {} };
+    // Empty dummy object
+    struct dummy {};
 
     void append_module_name_and_base(std::ostream& out, void* caller) noexcept;
 
