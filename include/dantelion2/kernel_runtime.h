@@ -22,9 +22,7 @@ namespace from {
         // Recursive, not TimedLockable
         class DLPlainLightMutex : public DLUT::DLNonCopyable {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLPlainLightMutex)
-            );
+            LIBER_CLASS(DLPlainLightMutex);
 
             DLPlainLightMutex() noexcept;
             virtual ~DLPlainLightMutex() noexcept;
@@ -57,9 +55,7 @@ namespace from {
         // Recursive, not TimedLockable
         class DLPlainMutex : public DLUT::DLNonCopyable {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLPlainMutex)
-            );
+            LIBER_CLASS(DLPlainMutex);
 
             DLPlainMutex() noexcept;
             virtual ~DLPlainMutex() noexcept;

@@ -12,10 +12,7 @@ namespace from {
     namespace FD4 {
         class FD4TaskBase : public FD4::FD4ComponentBase {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(FD4TaskBase)
-                FD4_RUNTIME_CLASS(FD4TaskBase)
-            );
+            FD4_RUNTIME_CLASS(FD4TaskBase);
 
             virtual ~FD4TaskBase() = default;
 
@@ -31,10 +28,7 @@ namespace from {
         template <>
         class FD4StepTemplateInterface<FD4TaskBase> : public FD4TaskBase {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(FD4StepTemplateInterface)
-                FD4_RUNTIME_CLASS(FD4StepTemplateInterface<FD4TaskBase>)
-            )
+            FD4_RUNTIME_CLASS(FD4StepTemplateInterface);
 
         private:
             virtual void execute2() LIBER_INTERFACE
@@ -63,10 +57,7 @@ namespace from {
         template <class Impl>
         class FD4StepTemplateBase : public FD4StepTemplateInterface<FD4TaskBase> {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(FD4StepTemplateBase)
-                FD4_RUNTIME_CLASS(FD4StepTemplateBase<Impl>)
-            )
+            FD4_RUNTIME_CLASS(FD4StepTemplateBase);
 
         private:
             virtual bool unk_tree_op11() LIBER_INTERFACE
@@ -93,10 +84,7 @@ namespace from {
         template <class Impl>
         class FD4StepTaskBase : public FD4StepTemplateBase<Impl> {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(FD4StepTaskBase)
-                FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>)
-            );
+            FD4_RUNTIME_CLASS(FD4StepTaskBase<Impl>);
 
         private:
             LIBER_UNKNOWN(int);

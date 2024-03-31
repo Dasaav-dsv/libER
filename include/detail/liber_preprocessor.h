@@ -58,18 +58,16 @@
     liber::bad_call_terminate(err, caller);                        \
 }
 
-#define LIBER_CLASS_TRAITS(TRAITS) TRAITS
-
 #define LIBER_CLASS(CLASSNAME) using self = CLASSNAME; \
-friend class _liber_asserts_ ## CLASSNAME;
+friend class _liber_asserts_ ## CLASSNAME
 
 #define LIBER_INTERFACE_CLASS(CLASSNAME)               \
-LIBER_CLASS(CLASSNAME)                                 \
+LIBER_CLASS(CLASSNAME);                                \
 CLASSNAME() = delete;                                  \
 CLASSNAME(const CLASSNAME&) = delete;                  \
 CLASSNAME(CLASSNAME&&) noexcept = delete;              \
 CLASSNAME& operator = (const CLASSNAME&) = delete;     \
-CLASSNAME& operator = (CLASSNAME&&) noexcept = delete;
+CLASSNAME& operator = (CLASSNAME&&) noexcept = delete
 
 #define LIBER_ASSERTS_BEGIN(CLASSNAME) class _liber_assert_ ## CLASSNAME { \
     using _liber_asserts_type = CLASSNAME

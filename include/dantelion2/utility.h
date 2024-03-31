@@ -29,9 +29,7 @@ namespace from {
         // Derived classes provide a deleter method
         class DLReferenceCountObject {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLReferenceCountObject)
-            );
+            LIBER_CLASS(DLReferenceCountObject);
 
             DLReferenceCountObject() : counter(0) {};
 
@@ -71,9 +69,7 @@ namespace from {
         template <typename T> requires std::derived_from<T, DLReferenceCountObject>
         class DLReferenceCountPtr {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLReferenceCountPtr)
-            );
+            LIBER_CLASS(DLReferenceCountPtr);
 
             DLReferenceCountPtr()  noexcept : raw(nullptr) {}
             DLReferenceCountPtr(std::nullptr_t) noexcept : raw(nullptr) {}

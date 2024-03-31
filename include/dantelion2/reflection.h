@@ -48,9 +48,7 @@ namespace from {
         // A wrapper that represents a method
         // with a vector of invoker objects
         struct DLRuntimeMethod {
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLRuntimeMethod)
-            );
+            LIBER_CLASS(DLRuntimeMethod);
 
             DLRuntimeMethod() noexcept : owner(nullptr), method_name(nullptr),
                 method_name_w(nullptr) {}
@@ -69,9 +67,7 @@ namespace from {
 
         // A wrapper for the DLRuntimeMethod wrapper
         struct DLRuntimeMethodHolder {
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLRuntimeMethodHolder)
-            );
+            LIBER_CLASS(DLRuntimeMethodHolder);
 
             DLRuntimeMethodHolder() noexcept : method_name(nullptr),
                 method_name_w(nullptr), length(0) {}
@@ -93,9 +89,7 @@ namespace from {
         // type introspection and for binding method invokers.
         class DLRuntimeClass {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLRuntimeClass)
-            );
+            LIBER_CLASS(DLRuntimeClass);
 
             DLRuntimeClass() noexcept : base_class(nullptr) {}
 
@@ -172,9 +166,7 @@ namespace from {
         template <class Impl>
         class DLRuntimeClassImpl : public DLRuntimeClass {
         public:
-            LIBER_CLASS_TRAITS(
-                LIBER_CLASS(DLRuntimeClassImpl)
-            );
+            LIBER_CLASS(DLRuntimeClassImpl);
 
             virtual ~DLRuntimeClassImpl() = default;
 
