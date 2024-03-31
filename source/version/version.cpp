@@ -1,5 +1,5 @@
 #include <version/version.h>
-#include <detail/liber_defines.hpp>
+#include <detail/defines.hpp>
 #include <version/detail/version_fileio.h>
 #include <version/detail/version_winhttp.h>
 

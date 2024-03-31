@@ -1,6 +1,6 @@
 #pragma once
 
-#include <detail/liber_preprocessor.h>
+#include <detail/preprocessor.h>
 #include <memory/from_allocator.h>
 #include <memory/from_string.h>
 #include <memory/from_set.h>
@@ -70,7 +70,7 @@ namespace from {
             _unk_tree _tree;
             LIBER_UNKNOWN(void*);
             LIBER_UNKNOWN(bool);
-            LIBER_UNKNOWN(DLKR::DLAllocator*);
+            LIBER_UNKNOWN(from::allocator<void>);
             LIBER_UNKNOWN(void*);
             LIBER_UNKNOWN(bool);
             LIBER_UNKNOWN(bool);

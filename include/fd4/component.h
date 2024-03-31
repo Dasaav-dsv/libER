@@ -1,15 +1,15 @@
 #pragma once
 
-#include <detail/liber_preprocessor.h>
+#include <detail/preprocessor.h>
 #include <dantelion2/reflection.h>
 #include <detail/literal_string.h>
 
 // Implement DLRuntimeClass reflection for CLASSNAME
 // The class must inherit from FD4ComponentBase
-#define FD4_RUNTIME_CLASS(CLASSNAME)                                 \
- from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { \
-    return &from::DLRF::DLRuntimeClassTemplate<CLASSNAME,            \
-    LIBER_STRINGIFY(CLASSNAME)>::dl_runtime_class;                   \
+#define FD4_RUNTIME_CLASS(CLASSNAME)                                \
+from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { \
+    return &from::DLRF::DLRuntimeClassTemplate<CLASSNAME,           \
+    LIBER_STRINGIFY(CLASSNAME)>::dl_runtime_class;                  \
 }   LIBER_CLASS(CLASSNAME)
 
 namespace from {
