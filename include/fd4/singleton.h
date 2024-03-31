@@ -5,4 +5,4 @@
 
 #define FD4_SINGLETON_CLASS(CLASSNAME)        \
 liber::optref<CLASSNAME> instance() noexcept; \
-LIBER_CLASS(CLASSNAME)
+LIBER_INTERFACE_CLASS(CLASSNAME)
