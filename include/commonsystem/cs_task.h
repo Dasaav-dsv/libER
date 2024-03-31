@@ -30,7 +30,7 @@ namespace from {
 
         class CSEzTaskProxy : public FD4::FD4TaskBase {
         public:
-            FD4_RUNTIME_CLASS(CSEzTaskProxy)
+            FD4_RUNTIME_CLASS(CSEzTaskProxy);
 
         private:
             CSEzTask* owner;
@@ -39,7 +39,7 @@ namespace from {
 
         class CSEzTask : public FD4::FD4TaskBase {
         public:
-            FD4_RUNTIME_CLASS(CSEzTask)
+            FD4_RUNTIME_CLASS(CSEzTask);
 
         private:
             CSEzTaskProxy* proxy;
