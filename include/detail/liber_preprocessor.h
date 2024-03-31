@@ -90,9 +90,9 @@ LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET))
 #define LIBER_UNKNOWN_(TYPE, COUNTER) LIBER_UNKNOWN__(TYPE, COUNTER)
 #define LIBER_UNKNOWN(TYPE, ...) TYPE LIBER_UNKNOWN_(TYPE, __COUNTER__){__VA_ARGS__}
 
-#define LIBER_PAD__(TYPE, COUNTER) _liber_pad_ ## TYPE ## _ ## COUNTER
-#define LIBER_PAD_(TYPE, COUNTER) LIBER_PAD__(TYPE, COUNTER)
-#define LIBER_PAD(TYPE, ...) TYPE LIBER_PAD_(TYPE, __COUNTER__)[(1,##__VA_ARGS__)]{};
+#define LIBER_UNK_ARR__(TYPE, COUNTER) _liber_unk_ ## COUNTER
+#define LIBER_UNK_ARR_(TYPE, COUNTER) LIBER_UNK_ARR__(TYPE, COUNTER)
+#define LIBER_UNK_ARR(TYPE, COUNT, ...) TYPE LIBER_UNK_ARR_(TYPE, __COUNTER__)[COUNT]{__VA_ARGS__};
 
 namespace liber {
     // Exception type for calling functions
