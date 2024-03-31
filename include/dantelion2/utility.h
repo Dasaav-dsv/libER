@@ -183,7 +183,8 @@ namespace from {
         LIBER_ASSERT_SIZE(0x10);
         LIBER_ASSERTS_END;
 
-        LIBER_ASSERTS_TEMPLATE_BEGIN(DLReferenceCountPtr, liber::dummy);
+        struct dummy_rfco : DLReferenceCountObject {};
+        LIBER_ASSERTS_TEMPLATE_BEGIN(DLReferenceCountPtr, dummy_rfco);
         LIBER_ASSERT_SIZE(0x8);
         LIBER_ASSERTS_END;
     }
