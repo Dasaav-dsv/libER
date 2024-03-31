@@ -19,6 +19,6 @@ LIBER_ADD_SYMBOL(DLKR::DLAllocator::get_allocator_of)
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::register_runtime_class)
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_registered_classes)
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
-LIBER_ADD_SYMBOL(CS::CSTask::instance)
+LIBER_ADD_SYMBOL(CS::CSTaskImp::instance)
 LIBER_ADD_SYMBOL(CS::CSTaskGroup::instance)
 #endif

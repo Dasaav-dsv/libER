@@ -44,13 +44,18 @@ namespace from {
 
         class CSTaskImp {
         public:
+            FD4_SINGLETON_CLASS(CSTaskImp);
+
             virtual ~CSTaskImp() LIBER_INTERFACE_ONLY;
 
-            CSTask* get() noexcept { return this->instance; }
-            CSTask* get() const noexcept { return this->instance; }
+            // Get the associated CSTask instance (may be null)
+            liber::optref<CSTask> get() noexcept {
+                if (!this->inst) return std::nullopt;
+                return *this->inst;
+            }
 
         private:
-            CSTask* instance;
+            CSTask* inst;
         };
 
         class CSTaskBase {
@@ -74,8 +79,6 @@ namespace from {
         // Not constructible, exposition only
         class CSTask : private CSTaskBase {
         public:
-            FD4_SINGLETON_CLASS(CSTask);
-
             virtual ~CSTask() LIBER_INTERFACE_ONLY;
             virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
             virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY;
