@@ -5,6 +5,7 @@
 #include <memory/from_string.h>
 #include <memory/from_set.h>
 #include <fd4/component.h>
+#include <fd4/singleton.h>
 
 #include <utility>
 
@@ -89,6 +90,10 @@ namespace from {
         private:
             LIBER_UNKNOWN(int);
             LIBER_UNKNOWN(int);
+        };
+
+        class FD4TaskManager {
+            FD4_SINGLETON_CLASS(FD4TaskManager);
         };
 
         LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
