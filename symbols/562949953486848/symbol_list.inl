@@ -21,4 +21,5 @@ LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_registered_classes)
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
 LIBER_ADD_SYMBOL(CS::CSTaskImp::instance)
 LIBER_ADD_SYMBOL(CS::CSTaskGroup::instance)
+LIBER_ADD_SYMBOL(FD4::FD4TaskManager::instance)
 #endif
