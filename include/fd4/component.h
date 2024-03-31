@@ -17,11 +17,11 @@ namespace from {
         // Commonly used in the ELDEN RING codebase
         class FD4ComponentBase {
         public:
-        DLRF::DLRuntimeClass* get_runtime_class() noexcept {
-            return &DLRF::DLRuntimeClassTemplate<FD4ComponentBase, LIBER_STRINGIFY(FD4ComponentBase)>::dl_runtime_class;
-        }
+            virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept {
+                return &DLRF::DLRuntimeClassTemplate<FD4ComponentBase, LIBER_STRINGIFY(FD4ComponentBase)>::dl_runtime_class;
+            }
 
-        virtual ~FD4ComponentBase() = default;
+            virtual ~FD4ComponentBase() = default;
         };
     }
 }
