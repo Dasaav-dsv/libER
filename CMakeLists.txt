@@ -54,6 +54,11 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/reflection.cpp"
 )
 
+# Namespace FD4 source files
+target_sources("objlibER" PUBLIC
+    "source/fd4/fd4_task.cpp"
+)
+
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
     "source/commonsystem/cs_task.cpp"
