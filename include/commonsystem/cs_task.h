@@ -42,7 +42,7 @@ namespace from {
             FD4_RUNTIME_CLASS(CSEzTask)
 
         private:
-            CSEzTaskProxy* _proxy;
+            CSEzTaskProxy* proxy;
         };
 
         class CSTask;
@@ -60,10 +60,9 @@ namespace from {
 
         class CSTaskBase {
         public:
-            virtual ~CSTaskBase() LIBER_INTERFACE_ONLY
+            virtual ~CSTaskBase() LIBER_INTERFACE_ONLY;
 
-            // TODO: from::allocator
-            DLKR::DLAllocator* allocator;
+            LIBER_UNKNOWN(from::allocator<void>);
             from::vector<cstg_descriptor> task_groups;
             cstgi task_group_count;
         };
@@ -71,20 +70,19 @@ namespace from {
         // Not constructible, exposition only
         class CSTask : private CSTaskBase {
         public:
-            virtual ~CSTask() LIBER_INTERFACE_ONLY
-            virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY
-            virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY
-            virtual bool set_task_group_state(cstgi id, bool state) LIBER_INTERFACE_ONLY
-            virtual void debug_print() LIBER_INTERFACE_ONLY
-            virtual void queue_tasks(void* unk1, void* unk2) LIBER_INTERFACE_ONLY
+            virtual ~CSTask() LIBER_INTERFACE_ONLY;
+            virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
+            virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY;
+            virtual bool set_task_group_state(cstgi id, bool state) LIBER_INTERFACE_ONLY;
+            virtual void debug_print() LIBER_INTERFACE_ONLY;
+            virtual void queue_tasks(void* unk1, void* unk2) LIBER_INTERFACE_ONLY;
 
         private:
-            // TODO: from::allocator
-            DLKR::DLAllocator* allocator;
-            void* _unk_ptrs1[8];
+            LIBER_UNKNOWN(from::allocator<void>);
+            LIBER_UNK_ARR(void*, 8);
             void* task_seeds_0x30[6];
             void* task_seeds_0x60[6];
-            bool _unk_bool1;
+            LIBER_UNKNOWN(bool);
         };
     }
 }
