@@ -160,11 +160,14 @@ namespace from {
     class allocator : private allocator_base<AllocatorTag> {
         using base_type = allocator_base<AllocatorTag>;
         using proxy_type = DLKR::DLAllocator;
+        using alloc_type = std::conditional_t<std::is_same_v<T, void>, char, T>;
 
         base_type& base() noexcept { return static_cast<base_type&>(*this); }
         const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
 
-        proxy_type& proxy() { return this->base().get_allocator(); }
+        proxy_type& proxy() noexcept { return this->base().get_allocator(); }
+        const proxy_type& proxy() const noexcept { return this->base().get_allocator(); }
+
         allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
     public:
         using value_type = T;
@@ -185,7 +188,7 @@ namespace from {
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
-            return reinterpret_cast<T*>(this->proxy().allocate_aligned(n * sizeof(T), alignof(T)));
+            return reinterpret_cast<T*>(this->proxy().allocate_aligned(n * sizeof(alloc_type), alignof(alloc_type)));
         }
 
         // Deallocate memory, n is ignored by DLKR::DLAllocator and can be zero
