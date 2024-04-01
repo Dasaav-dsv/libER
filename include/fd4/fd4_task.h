@@ -6,6 +6,7 @@
 #include <memory/from_set.h>
 #include <fd4/component.h>
 #include <fd4/singleton.h>
+#include <dantelion2/kernel_runtime.h>
 
 #include <utility>
 
@@ -20,7 +21,7 @@ namespace from {
             virtual void execute1() {}
 
         private:
-            LIBER_UNKNOWN(void*);
+            void* liber_unknown = nullptr;
         };
 
         template <class Impl>
@@ -51,8 +52,8 @@ namespace from {
         struct _unk_tree {
             virtual ~_unk_tree() = default;
             from::set<void*> _tree;
-            LIBER_UNKNOWN(from::allocator<void>);
-            LIBER_UNKNOWN(from::allocator<void>);
+            from::allocator<void> liber_unknown;
+            from::allocator<void> liber_unknown;
         };
 
         template <class Impl>
@@ -69,17 +70,17 @@ namespace from {
 
             steps_type* steps;
             _unk_tree _tree;
-            LIBER_UNKNOWN(void*);
-            LIBER_UNKNOWN(bool);
-            LIBER_UNKNOWN(from::allocator<void>);
-            LIBER_UNKNOWN(void*);
-            LIBER_UNKNOWN(bool);
-            LIBER_UNKNOWN(bool);
+            void* liber_unknown = nullptr;
+            bool liber_unknown = false;
+            from::allocator<void> liber_unknown;
+            void* liber_unknown = nullptr;
+            bool liber_unknown = true;
+            bool liber_unknown = false;
             from::wstring unk_wstr;
-            LIBER_UNKNOWN(bool);
+            bool liber_unknown = false;
             const wchar_t* state = L"NotExecuting";
-            LIBER_UNKNOWN(bool);
-            LIBER_UNKNOWN(int);
+            bool liber_unknown = false;
+            int liber_unknown = 0;
         };
 
         template <class Impl>
@@ -88,12 +89,29 @@ namespace from {
             FD4_RUNTIME_CLASS(FD4StepTaskBase);
 
         private:
-            LIBER_UNKNOWN(int);
-            LIBER_UNKNOWN(int);
+            int liber_unknown = 0;
+            int liber_unknown = 0;
         };
+
+        namespace CS { class CSTask; } 
 
         class FD4TaskManager {
             FD4_SINGLETON_CLASS(FD4TaskManager);
+
+            virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
+
+        private:
+            //void* liber_unknown[3];
+            struct {
+                void* liber_unknown;
+                DLKR::DLPlainLightMutex* mutex;
+                from::vector<liber::dummy> liber_unknown;
+            } *unk[3];
+            void* liber_unknown;
+            void* liber_unknown;
+            bool liber_unknown;
+            bool liber_unknown;
+            CS::CSTask* cs_task;
         };
 
         LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
@@ -102,6 +120,11 @@ namespace from {
         LIBER_ASSERT_OFFS(0x18, _tree);
         LIBER_ASSERT_OFFS(0x70, unk_wstr);
         LIBER_ASSERT_OFFS(0xA0, state);
+        LIBER_ASSERTS_END;
+
+        LIBER_ASSERTS_BEGIN(FD4TaskManager);
+        //LIBER_ASSERT_SIZE(0x58);
+        //LIBER_ASSERT_OFFS(0x40, cs_task);
         LIBER_ASSERTS_END;
     }
 }

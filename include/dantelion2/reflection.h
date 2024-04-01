@@ -61,8 +61,8 @@ namespace from {
             const char* method_name;
             const wchar_t* method_name_w;
             from::vector<DLMethodInvoker*> invokers;
-            LIBER_UNKNOWN(from::vector<void*>);
-            LIBER_UNKNOWN(void*);
+            from::vector<void*> liber_unknown;
+            void* liber_unknown = nullptr;
             DLKR::DLPlainMutex mutex;
         };
 

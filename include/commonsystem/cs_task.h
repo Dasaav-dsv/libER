@@ -73,7 +73,7 @@ namespace from {
         public:
             virtual ~CSTaskBase() LIBER_INTERFACE_ONLY;
 
-            LIBER_UNKNOWN(from::allocator<void>);
+            from::allocator<void> liber_unknown;
             from::vector<cstg_control> task_groups;
             cstgi task_group_count;
         };
@@ -81,6 +81,8 @@ namespace from {
         // Not constructible, exposition only
         class CSTask : private CSTaskBase {
         public:
+            LIBER_INTERFACE_CLASS(CSTask);
+
             virtual ~CSTask() LIBER_INTERFACE_ONLY;
             virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
             virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY;
@@ -89,11 +91,11 @@ namespace from {
             virtual void queue_tasks(void* unk1, void* unk2) LIBER_INTERFACE_ONLY;
 
         private:
-            LIBER_UNKNOWN(from::allocator<void>);
-            LIBER_UNK_ARR(void*, 8);
+            from::allocator<void> liber_unknown;
+            void* liber_unknown[8];
             void* task_seeds_0x30[6];
             void* task_seeds_0x60[6];
-            LIBER_UNKNOWN(bool);
+            bool liber_unknown;
         };
 
         class CSTaskGroupIns {
@@ -107,7 +109,7 @@ namespace from {
             virtual void unk_fn2() LIBER_INTERFACE_ONLY;
 
             DLTX::FD4BasicHashString group_name;
-            LIBER_UNK_ARR(int, 4);
+            int liber_unknown[4];
         };
 
         class CSTimeLineTaskGroupIns : public CSTaskGroupIns {
@@ -120,16 +122,16 @@ namespace from {
             virtual void unk_fn1() LIBER_INTERFACE;
             virtual void unk_fn2() LIBER_INTERFACE;
 
-            CSTask* task_manager;
-            LIBER_UNKNOWN(from::list<liber::dummy>);
-            LIBER_UNKNOWN(int);
+            CSTask* cs_task;
+            from::list<liber::dummy> liber_unknown;
+            int liber_unknown;
         };
 
         class CSTaskGroup {
             struct cstg_locator {
                 int id;
                 wchar_t* name;
-                LIBER_UNK_ARR(int, 4);
+                int liber_unknown[4];
             };
 
         public:
@@ -148,7 +150,7 @@ namespace from {
         LIBER_ASSERTS_END;
 
         LIBER_ASSERTS_BEGIN(CSTimeLineTaskGroupIns);
-        LIBER_ASSERT_OFFS(0x58, task_manager);
+        LIBER_ASSERT_OFFS(0x58, cs_task);
         LIBER_ASSERT_SIZE(0x80);
         LIBER_ASSERTS_END;
     }

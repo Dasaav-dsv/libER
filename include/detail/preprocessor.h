@@ -84,13 +84,9 @@ LIBER_STRINGIFY(MEMBER is not at expected offset OFFSET))
 
 #define LIBER_ASSERTS_END }
 
-#define LIBER_UNKNOWN__(TYPE, COUNTER) _liber_unk_ ## COUNTER
-#define LIBER_UNKNOWN_(TYPE, COUNTER) LIBER_UNKNOWN__(TYPE, COUNTER)
-#define LIBER_UNKNOWN(TYPE, ...) TYPE LIBER_UNKNOWN_(TYPE, __COUNTER__){__VA_ARGS__}
-
-#define LIBER_UNK_ARR__(TYPE, COUNTER) _liber_unk_ ## COUNTER
-#define LIBER_UNK_ARR_(TYPE, COUNTER) LIBER_UNK_ARR__(TYPE, COUNTER)
-#define LIBER_UNK_ARR(TYPE, COUNT, ...) TYPE LIBER_UNK_ARR_(TYPE, __COUNTER__)[COUNT]{__VA_ARGS__};
+#define LIBER_XUNKNOWN_(COUNTER) _liber_unk_ ## COUNTER
+#define LIBER_XUNKNOWN(COUNTER) LIBER_XUNKNOWN_(COUNTER)
+#define liber_unknown LIBER_XUNKNOWN(__COUNTER__)
 
 namespace liber {
     // Exception type for calling functions
