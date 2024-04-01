@@ -22,4 +22,7 @@ LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
 LIBER_ADD_SYMBOL(CS::CSTaskImp::instance)
 LIBER_ADD_SYMBOL(CS::CSTaskGroup::instance)
 LIBER_ADD_SYMBOL(FD4::FD4TaskManager::instance)
+LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)
+LIBER_ADD_SYMBOL(GLOBAL_init_flip_counter)
+LIBER_ADD_SYMBOL(CS::CSTaskImp::register_task)
 #endif
