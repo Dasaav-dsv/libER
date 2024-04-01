@@ -8,15 +8,13 @@
 #include <dantelion2/text.h>
 #include <fd4/component.h>
 #include <fd4/singleton.h>
-#include <fd4/fd4_task.h>
+#include <fd4/detail/fd4_task.h>
 
 #include <span>
 #include <string>
 #include <algorithm>
 
 // TODO: annotate
-
-#define CS_TASK_GROUP_ID(INDEX) (INDEX ^ LIBER_BIT_FLAG(28) ^ LIBER_BIT_FLAG(31))
 
 namespace from {
     namespace CS {
@@ -29,26 +27,70 @@ namespace from {
         public:
             FD4_RUNTIME_CLASS(CSEzTaskProxy);
 
+            virtual cstgi get_task_group() const noexcept {
+                return this->task_group;
+            }
+
         private:
             CSEzTask* owner;
-            int task_id;
+            cstgi task_group;
         };
 
         class CSEzTask : public FD4::FD4TaskBase {
         public:
             FD4_RUNTIME_CLASS(CSEzTask);
 
+            void execute() override {
+                this->execute_eztask();
+            }
+
+            virtual void execute_eztask() = 0;
+            virtual void register_eztask(cstgi task_group) = 0;
+            virtual void free_eztask() = 0;
+
         private:
             CSEzTaskProxy* proxy;
         };
 
+        class EzChildStepBase {
+        public:
+            LIBER_CLASS(EzChildStepBase);
+
+            virtual ~EzChildStepBase() = default;
+
+        private:
+            CSEzTask* task = nullptr;
+            bool run = false;
+            void* liber_unknown;
+        };
+
         class CSTask;
+
+        class CSTaskGroup {
+            struct cstg_locator {
+                int id;
+                wchar_t* name;
+                int liber_unknown[4];
+            };
+
+        public:
+            FD4_SINGLETON_CLASS(CSTaskGroup);
+
+            virtual ~CSTaskGroup() LIBER_INTERFACE_ONLY;
+
+            #include "taskgroups.inl"
+
+        private:
+            void* task_groups[TaskGroups::SIZE];
+        };
 
         class CSTaskImp {
         public:
             FD4_SINGLETON_CLASS(CSTaskImp);
 
             virtual ~CSTaskImp() LIBER_INTERFACE_ONLY;
+
+            void register_task(FD4::FD4TaskBase& task, CSTaskGroup::TaskGroups task_group);
 
             // Get the associated CSTask instance (may be null)
             liber::optref<CSTask> get() noexcept {
@@ -66,7 +108,7 @@ namespace from {
                     : id(id), active(active) {}
 
                 cstgi id;
-                wchar_t name[40]{};
+                wchar_t name[64]{};
                 bool active;
             };
 
@@ -125,24 +167,6 @@ namespace from {
             CSTask* cs_task;
             from::list<liber::dummy> liber_unknown;
             int liber_unknown;
-        };
-
-        class CSTaskGroup {
-            struct cstg_locator {
-                int id;
-                wchar_t* name;
-                int liber_unknown[4];
-            };
-
-        public:
-            FD4_SINGLETON_CLASS(CSTaskGroup);
-
-            virtual ~CSTaskGroup() LIBER_INTERFACE_ONLY;
-
-            #include "taskgroups.inl"
-
-        private:
-            void* task_groups[TaskGroups::SIZE];
         };
 
         LIBER_ASSERTS_BEGIN(CSTask);
