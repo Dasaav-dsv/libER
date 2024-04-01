@@ -162,7 +162,7 @@ DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
         return &default_allocator;
 }
 
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                    \
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                \
 DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {             \
     DLKR::DLAllocator* allocator =                                           \
         *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
