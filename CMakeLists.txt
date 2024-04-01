@@ -52,16 +52,17 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/dantelion2/kernel_runtime.cpp"
     "source/dantelion2/reflection.cpp"
+    "source/dantelion2/system.cpp"
 )
 
 # Namespace FD4 source files
 target_sources("objlibER" PUBLIC
-    "source/fd4/fd4_task.cpp"
+    "source/fd4/detail/fd4_task.cpp"
 )
 
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
-    "source/commonsystem/cs_task.cpp"
+    "source/commonsystem/task.cpp"
 )
 
 # Target libER[d].dll
