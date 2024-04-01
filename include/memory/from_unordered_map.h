@@ -9,5 +9,5 @@
 
 namespace from {
     template <typename K, typename V, typename Hash = std::hash<K>, typename Eq = std::equal_to<K>, typename AllocatorTag = from::default_allocator_tag>
-    using unordered_map = std::unordered_map<K, V, Hash, Eq, from::allocator<T, AllocatorTag>>;
+    using unordered_map = std::unordered_map<K, V, Hash, Eq, from::allocator<std::pair<const K, V>, AllocatorTag>>;
 }

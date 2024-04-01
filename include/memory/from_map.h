@@ -9,5 +9,5 @@
 
 namespace from {
     template <typename K, typename V, typename Pred = std::less<K>, typename AllocatorTag = from::default_allocator_tag>
-    using map = std::map<K, V, Pred, from::allocator<T, AllocatorTag>>;
+    using map = std::map<K, V, Pred, from::allocator<std::pair<const K, V>, AllocatorTag>>;
 }
