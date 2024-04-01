@@ -8,6 +8,10 @@ DLPlainLightMutex::DLPlainLightMutex() noexcept {
     InitializeCriticalSection(this->critical_section());
 }
 
+DLPlainLightMutex::DLPlainLightMutex(int spin_count) noexcept {
+    InitializeCriticalSectionAndSpinCount(this->critical_section(), spin_count);
+}
+
 DLPlainLightMutex::~DLPlainLightMutex() noexcept {
     DeleteCriticalSection(this->critical_section());
 }
