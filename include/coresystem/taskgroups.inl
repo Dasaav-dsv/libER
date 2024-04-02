@@ -1,4 +1,5 @@
-enum TaskGroups {
+enum class CSTaskGroup : int {
+INVALID = -1,
 FrameBegin = 0,
 SteamThread0,
 SteamThread1,
