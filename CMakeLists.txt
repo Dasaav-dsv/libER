@@ -63,7 +63,7 @@ target_sources("objlibER" PUBLIC
 
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
-    "source/commonsystem/task.cpp"
+    "source/coresystem/task.cpp"
 )
 
 # Target libER[d].dll
