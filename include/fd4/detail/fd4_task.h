@@ -28,9 +28,8 @@ namespace from {
         public:
             FD4_RUNTIME_CLASS(FD4TaskBase);
 
-            virtual ~FD4TaskBase() = default;
-
-            virtual void execute() {}
+            virtual ~FD4TaskBase();
+            virtual void execute() = 0;
 
         private:
             void* liber_unknown = nullptr;

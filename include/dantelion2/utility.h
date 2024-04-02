@@ -18,7 +18,7 @@ namespace from {
         class DLNonCopyable {
         public:
             DLNonCopyable() = default;
-            virtual ~DLNonCopyable() = default;
+            virtual ~DLNonCopyable();
         
             DLNonCopyable(const DLNonCopyable&) = delete;
             DLNonCopyable& operator = (const DLNonCopyable&) = delete;
