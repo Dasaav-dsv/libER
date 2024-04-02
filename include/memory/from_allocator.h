@@ -167,8 +167,7 @@ namespace from {
 
         proxy_type& proxy() noexcept { return this->base().get_allocator(); }
         const proxy_type& proxy() const noexcept { return this->base().get_allocator(); }
-
-        allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
+        
     public:
         using value_type = T;
         using size_type = size_t;
@@ -185,6 +184,8 @@ namespace from {
 
         template <typename U>
         allocator(const allocator<U>& other) noexcept : base_type(other.base()) {}
+
+        allocator(DLKR::DLAllocator* dl_allocator) noexcept : base_type(dl_allocator) {}
 
         // Allocate n instances of uninitialized memory for T
         [[nodiscard]] T* allocate(size_type n) {
