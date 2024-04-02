@@ -2,9 +2,7 @@
 
 #include <detail/preprocessor.h>
 #include <memory/from_allocator.h>
-#include <memory/from_unique_ptr.h>
 #include <memory/from_vector.h>
-#include <memory/from_list.h>
 #include <dantelion2/text.h>
 #include <fd4/component.h>
 #include <fd4/singleton.h>
@@ -18,38 +16,47 @@
 
 namespace from {
     namespace CS {
-        class CSEzTask;
+        // All task groups:
+#include "taskgroups.inl"
 
         // CSTaskGroupId
         using cstgi = unsigned int;
+
+        // Forward declaration
+        class CSEzTaskProxy;
+
+        // TODO: execute struct passed in RDX
+        class CSEzTask : public FD4::FD4TaskBase {
+        public:
+            FD4_RUNTIME_CLASS(CSEzTask);
+
+            CSEzTask() = default;
+
+            virtual ~CSEzTask() { this->free_task(); }
+            void execute() override { this->eztask_execute(); }
+            virtual void eztask_execute() = 0;
+            virtual void register_task(CSTaskGroup task_group);
+            virtual void free_task();
+            
+            CSTaskGroup get_task_group() const noexcept;
+
+        private:
+            CSEzTaskProxy* proxy = nullptr;
+        };
 
         class CSEzTaskProxy : public FD4::FD4TaskBase {
         public:
             FD4_RUNTIME_CLASS(CSEzTaskProxy);
 
-            virtual cstgi get_task_group() const noexcept {
+            void execute() override;
+
+            virtual CSTaskGroup get_task_group() const noexcept {
                 return this->task_group;
             }
 
         private:
             CSEzTask* owner;
-            cstgi task_group;
-        };
-
-        class CSEzTask : public FD4::FD4TaskBase {
-        public:
-            FD4_RUNTIME_CLASS(CSEzTask);
-
-            void execute() override {
-                this->execute_eztask();
-            }
-
-            virtual void execute_eztask() = 0;
-            virtual void register_eztask(cstgi task_group) = 0;
-            virtual void free_eztask() = 0;
-
-        private:
-            CSEzTaskProxy* proxy;
+            CSTaskGroup task_group;
         };
 
         class EzChildStepBase {
@@ -66,31 +73,11 @@ namespace from {
 
         class CSTask;
 
-        class CSTaskGroup {
-            struct cstg_locator {
-                int id;
-                wchar_t* name;
-                int liber_unknown[4];
-            };
-
-        public:
-            FD4_SINGLETON_CLASS(CSTaskGroup);
-
-            virtual ~CSTaskGroup() LIBER_INTERFACE_ONLY;
-
-            #include "taskgroups.inl"
-
-        private:
-            void* task_groups[TaskGroups::SIZE];
-        };
-
         class CSTaskImp {
         public:
             FD4_SINGLETON_CLASS(CSTaskImp);
 
             virtual ~CSTaskImp() LIBER_INTERFACE_ONLY;
-
-            void register_task(FD4::FD4TaskBase& task, CSTaskGroup::TaskGroups task_group);
 
             // Get the associated CSTask instance (may be null)
             liber::optref<CSTask> get() noexcept {
@@ -140,42 +127,8 @@ namespace from {
             bool liber_unknown;
         };
 
-        class CSTaskGroupIns {
-        public:
-            LIBER_CLASS(CSTaskGroupIns);
-
-            virtual ~CSTaskGroupIns() LIBER_INTERFACE_ONLY;
-
-        private:
-            virtual void unk_fn1() LIBER_INTERFACE_ONLY;
-            virtual void unk_fn2() LIBER_INTERFACE_ONLY;
-
-            DLTX::FD4BasicHashString group_name;
-            int liber_unknown[4];
-        };
-
-        class CSTimeLineTaskGroupIns : public CSTaskGroupIns {
-        public:
-            LIBER_CLASS(CSTimeLineTaskGroupIns);
-
-            virtual ~CSTimeLineTaskGroupIns() LIBER_INTERFACE;
-
-        private:
-            virtual void unk_fn1() LIBER_INTERFACE;
-            virtual void unk_fn2() LIBER_INTERFACE;
-
-            CSTask* cs_task;
-            from::list<liber::dummy> liber_unknown;
-            int liber_unknown;
-        };
-
         LIBER_ASSERTS_BEGIN(CSTask);
         LIBER_ASSERT_SIZE(0xE8);
-        LIBER_ASSERTS_END;
-
-        LIBER_ASSERTS_BEGIN(CSTimeLineTaskGroupIns);
-        LIBER_ASSERT_OFFS(0x58, cs_task);
-        LIBER_ASSERT_SIZE(0x80);
         LIBER_ASSERTS_END;
     }
 }
