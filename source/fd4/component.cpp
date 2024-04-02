@@ -3,7 +3,7 @@
 using namespace from::FD4;
 using namespace from::DLRF;
 
-DLRuntimeClass* get_runtime_class() noexcept {
+DLRuntimeClass* FD4ComponentBase::get_runtime_class() noexcept {
     return &DLRuntimeClassTemplate<FD4ComponentBase,
         LIBER_STRINGIFY(FD4ComponentBase)>::dl_runtime_class;
 }
