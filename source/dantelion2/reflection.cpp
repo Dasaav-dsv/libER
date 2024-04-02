@@ -39,10 +39,6 @@ void DLRuntimeClass::add_method_invoker(DLMethodInvoker* invoker, const char* me
     method->invokers.push_back(invoker);
 }
 
-void DLRuntimeClass::register_class() {
-    liber::function<"DLRF::DLRuntimeClass::register_runtime_class", void>::call(this);
-}
-
 from::vector<DLRuntimeMethodHolder>& DLRuntimeClass::get_registered_classes() noexcept {
     return *reinterpret_cast<from::vector<DLRuntimeMethodHolder>*>(liber::symbol<"DLRF::DLRuntimeClass::GLOBAL_registered_classes">::get());
 }

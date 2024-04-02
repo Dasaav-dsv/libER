@@ -3,33 +3,11 @@
 #include <memory>
 #include <concepts>
 #include <memory/from_allocator.h>
+#include <memory/from_delay_delete.h>
 
 namespace from {
-    template <typename T, typename AllocatorTag>
-    class default_delete : private from::allocator<T, AllocatorTag> {
-        using base_type = from::allocator<T, AllocatorTag>;
-
-        const base_type& base() const noexcept { return static_cast<const base_type&>(*this); }
-    public:
-        default_delete() noexcept : base_type() {}
-
-        template <typename U> requires std::convertible_to<U*, T*>
-        default_delete(const default_delete<U, AllocatorTag>&) noexcept : base_type() {}
-
-        void operator()(T* p) const noexcept {
-            base_type proxy{ this->base() };
-            std::allocator_traits<base_type>::destroy(proxy, p);
-            proxy.deallocate(p, 1);
-        }
-    };
-
-    // Not implemented due to incompatibility
-    // with ELDEN RING's allocation strategy
-    template <typename T, typename AllocatorTag>
-    class default_delete<T[], AllocatorTag> {};
-
     template <typename T, typename AllocatorTag = from::default_empty_base_allocator_tag>
-    using unique_ptr = std::unique_ptr<T, from::default_delete<T, AllocatorTag>>;
+    using unique_ptr = std::unique_ptr<T, from::delay_delete<T, AllocatorTag>>;
 
     template <typename T, typename AllocatorTag = from::default_empty_base_allocator_tag, typename...Args>
     from::unique_ptr<T, AllocatorTag> make_unique(Args&&...args) {
