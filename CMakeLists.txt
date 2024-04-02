@@ -18,7 +18,6 @@ target_compile_definitions("objlibER" PUBLIC _ITERATOR_DEBUG_LEVEL=0)
 target_include_directories("objlibER"
 PUBLIC
     "include"
-    "include/memory/containers"
 PRIVATE
     "symbols"
 )
@@ -53,10 +52,12 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/kernel_runtime.cpp"
     "source/dantelion2/reflection.cpp"
     "source/dantelion2/system.cpp"
+    "source/dantelion2/utility.cpp"
 )
 
 # Namespace FD4 source files
 target_sources("objlibER" PUBLIC
+    "source/fd4/component.cpp"
     "source/fd4/detail/fd4_task.cpp"
 )
 
