@@ -13,9 +13,14 @@
 
 #include <utility>
 
+// The indices used for task groups contain additional
+// bit flags. Some functions may expect the flags to be on.
+// This macro converts a raw index into a task group id,
+// or a task group id into an index.
 #define CS_TASK_GROUP_ID(INDEX) (INDEX ^ LIBER_BIT_FLAG(28) ^ LIBER_BIT_FLAG(31))
 
 namespace from {
+    // Forward declaration
     namespace CS {
         class CSTask;
         
@@ -24,6 +29,9 @@ namespace from {
     }
 
     namespace FD4 {
+        // The base task interface.
+        // Minimal implementation needed for any task,
+        // new tasks must always derive from this class
         class FD4TaskBase : public FD4::FD4ComponentBase {
         public:
             FD4_RUNTIME_CLASS(FD4TaskBase);
@@ -35,9 +43,12 @@ namespace from {
             void* liber_unknown = nullptr;
         };
 
+        // The base step interface.
+        // Only its FD4TaskBase instantiation is implemented
         template <class Impl>
         class FD4StepTemplateInterface;
         
+        // TODO: methods
         template <>
         class FD4StepTemplateInterface<FD4TaskBase> : public FD4TaskBase {
         public:
@@ -60,6 +71,8 @@ namespace from {
         };
 
         // TODO:
+        // Unnamed (no RTTI) structure
+        // Has a virtual destructor
         struct _unk_tree {
             virtual ~_unk_tree() = default;
             from::set<void*> _tree;
@@ -67,6 +80,8 @@ namespace from {
             from::allocator<void> liber_unknown;
         };
 
+        // Base step layout.
+        // Common base class for all steppers
         template <class Impl>
         class FD4StepTemplateBase : public FD4StepTemplateInterface<FD4TaskBase> {
         public:
@@ -94,44 +109,8 @@ namespace from {
             int liber_unknown = 0;
         };
 
-        template <class Impl>
-        class FD4StepTaskBase : public FD4StepTemplateBase<Impl> {
-        public:
-            FD4_RUNTIME_CLASS(FD4StepTaskBase);
-
-        private:
-            int liber_unknown = 0;
-            int liber_unknown = 0;
-        };
-
-        struct task_entry_group {
-            LIBER_CLASS(task_entry_group);
-
-            struct task_entry {
-                virtual ~task_entry() = default;
-                FD4TaskBase* task;
-                void* liber_unknown;
-                CS::cstgi group_id;
-            };
-
-            struct task_state {
-                FD4TaskBase* task;
-                void* liber_unknown;
-                int liber_unknown;
-                bool active;
-            };
-
-            virtual ~task_entry_group() = default;
-            from::vector<task_entry> entries;
-            from::vector<task_state> states;
-            from::deque<task_state> queue;
-            int flags[2];
-            CS::cstgi group_id;
-            DLKR::DLPlainAdaptiveMutex mutex;
-            void* debug_menu_item; // FD4::FD4DebugMenuItem
-            void* liber_unknown;
-        };
-
+        // Singleton responsible for managing all tasks
+        // TODO: expose more functionality
         class FD4TaskManager {
         public:
             FD4_SINGLETON_CLASS(FD4TaskManager);
@@ -139,6 +118,35 @@ namespace from {
             virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
 
         private:
+            // Internal FD4TaskManager strucures
+            struct task_entry_group {
+                LIBER_CLASS(task_entry_group);
+
+                struct task_entry {
+                    virtual ~task_entry() = default;
+                    FD4TaskBase* task;
+                    void* liber_unknown;
+                    CS::cstgi group_id;
+                };
+
+                struct task_state {
+                    FD4TaskBase* task;
+                    void* liber_unknown;
+                    int liber_unknown;
+                    bool active;
+                };
+
+                virtual ~task_entry_group() = default;
+                from::vector<task_entry> entries;
+                from::vector<task_state> states;
+                from::deque<task_state> queue;
+                int flags[2];
+                CS::cstgi group_id;
+                DLKR::DLPlainAdaptiveMutex mutex;
+                void* debug_menu_item; // FD4::FD4DebugMenuItem
+                void* liber_unknown;
+            };
+
             from::allocator<void> liber_unknown;
             struct {
                 void* liber_unknown;
