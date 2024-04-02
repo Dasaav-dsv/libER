@@ -109,6 +109,35 @@ namespace from {
             int liber_unknown = 0;
         };
 
+        // Internal FD4TaskManager strucures
+        struct task_entry_group {
+            LIBER_CLASS(task_entry_group);
+
+            struct task_entry {
+                virtual ~task_entry() = default;
+                FD4TaskBase* task;
+                void* liber_unknown;
+                CS::cstgi group_id;
+            };
+
+            struct task_state {
+                FD4TaskBase* task;
+                void* liber_unknown;
+                int liber_unknown;
+                bool active;
+            };
+
+            virtual ~task_entry_group() = default;
+            from::vector<task_entry> entries;
+            from::vector<task_state> states;
+            from::deque<task_state> queue;
+            int flags[2];
+            CS::cstgi group_id;
+            DLKR::DLPlainAdaptiveMutex mutex;
+            void* debug_menu_item; // FD4::FD4DebugMenuItem
+            void* liber_unknown;
+        };
+
         // Singleton responsible for managing all tasks
         // TODO: expose more functionality
         class FD4TaskManager {
@@ -118,35 +147,6 @@ namespace from {
             virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
 
         private:
-            // Internal FD4TaskManager strucures
-            struct task_entry_group {
-                LIBER_CLASS(task_entry_group);
-
-                struct task_entry {
-                    virtual ~task_entry() = default;
-                    FD4TaskBase* task;
-                    void* liber_unknown;
-                    CS::cstgi group_id;
-                };
-
-                struct task_state {
-                    FD4TaskBase* task;
-                    void* liber_unknown;
-                    int liber_unknown;
-                    bool active;
-                };
-
-                virtual ~task_entry_group() = default;
-                from::vector<task_entry> entries;
-                from::vector<task_state> states;
-                from::deque<task_state> queue;
-                int flags[2];
-                CS::cstgi group_id;
-                DLKR::DLPlainAdaptiveMutex mutex;
-                void* debug_menu_item; // FD4::FD4DebugMenuItem
-                void* liber_unknown;
-            };
-
             from::allocator<void> liber_unknown;
             struct {
                 void* liber_unknown;
