@@ -1,4 +1,5 @@
 "\"" R","cppsv-fmt(cppsv"
 GLOBAL_init_flip_counter,0x3CFC2CC
-CS::CSTaskImp::register_task,0xE724C0
+CS::CSEzTask::register_task,0xE71C70
+CS::CSEzTaskProxy::free_task,0xE71D60
 ),"cppsv-fmt"
