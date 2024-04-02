@@ -23,7 +23,7 @@ namespace liber {
     template <literal_string Name, typename Return>
     struct function {
         template <typename...Args>
-        static inline Return call(Args...args) {
+        static inline Return call(Args&&...args) {
             return reinterpret_cast<Return(*)(std::decay_t<Args>...)>(
                 liber::symbol<Name>::get())(args...);
         }
@@ -35,8 +35,8 @@ namespace liber {
     struct function<Name, void> {
         template <typename...Args>
         static inline void call(Args&&...args) {
-            reinterpret_cast<void(*)(Args...)>(
-                liber::symbol<Name>::get())(std::forward<Args>(args)...);
+            reinterpret_cast<void(*)(std::decay_t<Args>...)>(
+                liber::symbol<Name>::get())(args...);
         }
     };
 }
