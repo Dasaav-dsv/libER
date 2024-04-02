@@ -146,9 +146,6 @@ namespace from {
             // Get a method by name if it exists
             DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
 
-            // Globally register this DLRuntimeClass
-            void register_class();
-
             // Get a vector of all globally registered DLRuntimeClasses
             static from::vector<DLRuntimeMethodHolder>& get_registered_classes() noexcept;
 
