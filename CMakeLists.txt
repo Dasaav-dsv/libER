@@ -45,6 +45,7 @@ target_sources("objlibER" PUBLIC
 # Memory source files
 target_sources("objlibER" PUBLIC
     "source/memory/from_allocator.cpp"
+    "source/memory/from_delay_delete.cpp"
 )
 
 # Namespace DL source files
