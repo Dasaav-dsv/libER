@@ -58,6 +58,7 @@ target_sources("objlibER" PUBLIC
 
 # Namespace FD4 source files
 target_sources("objlibER" PUBLIC
+    "source/fd4/time.cpp"
     "source/fd4/component.cpp"
     "source/fd4/detail/fd4_task.cpp"
 )
