@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory/from_allocator.h>
-#include <memory/from_set.h>
 #include <detail/preprocessor.h>
 #include <fd4/component.h>
 #include <dantelion2/text.h>
@@ -85,7 +84,6 @@ namespace from {
             virtual ~FD4ResRepository() = default;
 
         private:
-            from::set<liber::dummy> liber_unk; // TODO
             FD4ResCapHolder res_holder;
         };
 
@@ -110,7 +108,9 @@ namespace from {
 
         private:
             FD4RepositoryRepository repository_repository;
+            from::allocator<void> repository_repository_allocator;
             FD4ResPathRepository path_repository;
+            from::allocator<void> path_repository_allocator;
         };
 
         LIBER_ASSERTS_BEGIN(FD4ResCapHolderItem);
@@ -122,19 +122,11 @@ namespace from {
         LIBER_ASSERTS_END;
 
         LIBER_ASSERTS_BEGIN(FD4ResCapHolder);
-        LIBER_ASSERT_SIZE(0x20);
+        LIBER_ASSERT_SIZE(0x28);
         LIBER_ASSERTS_END;
 
         LIBER_ASSERTS_BEGIN(FD4ResRepository);
-        LIBER_ASSERT_SIZE(0xA8); // TODO
-        LIBER_ASSERTS_END;
-
-        LIBER_ASSERTS_BEGIN(FD4RepositoryRepository);
-        LIBER_ASSERT_SIZE(0xA8); // TODO
-        LIBER_ASSERTS_END;
-
-        LIBER_ASSERTS_BEGIN(FD4ResPathRepository);
-        LIBER_ASSERT_SIZE(0xA8); // TODO
+        LIBER_ASSERT_SIZE(0xA0);
         LIBER_ASSERTS_END;
 
         LIBER_ASSERTS_BEGIN(FD4ResManagerImp);
