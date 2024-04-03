@@ -8,6 +8,7 @@
 #include <memory/from_set.h>
 #include <memory/from_map.h>
 #include <fd4/component.h>
+#include <fd4/time.h>
 #include <fd4/detail/singleton.h>
 #include <dantelion2/kernel_runtime.h>
 
@@ -29,6 +30,25 @@ namespace from {
     }
 
     namespace FD4 {
+        struct FD4TaskData {
+            float get_dt() const noexcept {
+                return this->delta_time.time;
+            }
+
+            int get_task_group() const noexcept {
+                return CS_TASK_GROUP_ID(this->task_group_id);
+            }
+
+            int get_seed() const noexcept {
+                return this->seed;
+            }
+
+        private:
+            FD4Time delta_time;
+            CS::cstgi task_group_id;
+            int seed;
+        };
+
         // The base task interface.
         // Minimal implementation needed for any task,
         // new tasks must always derive from this class
@@ -37,7 +57,7 @@ namespace from {
             FD4_RUNTIME_CLASS(FD4TaskBase);
 
             virtual ~FD4TaskBase();
-            virtual void execute() = 0;
+            virtual void execute(FD4TaskData* data) = 0;
 
         private:
             void* liber_unknown = nullptr;
@@ -55,7 +75,7 @@ namespace from {
             FD4_RUNTIME_CLASS(FD4StepTemplateInterface);
 
         private:
-            virtual void execute_second() LIBER_INTERFACE;
+            virtual void execute_second(FD4TaskData*) LIBER_INTERFACE;
             virtual bool test_int_0x48() LIBER_INTERFACE;
             virtual int get_int_0x48() LIBER_INTERFACE;
             virtual bool unk_tree_op1() LIBER_INTERFACE;

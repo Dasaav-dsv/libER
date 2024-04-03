@@ -33,8 +33,8 @@ namespace from {
             CSEzTask() = default;
 
             virtual ~CSEzTask() { this->free_task(); }
-            void execute() override { this->eztask_execute(); }
-            virtual void eztask_execute() = 0;
+            void execute(FD4::FD4TaskData* data) override { this->eztask_execute(data); }
+            virtual void eztask_execute(FD4::FD4TaskData* data) = 0;
             virtual void register_task(CSTaskGroup task_group);
             virtual void free_task();
             
@@ -48,7 +48,7 @@ namespace from {
         public:
             FD4_RUNTIME_CLASS(CSEzTaskProxy);
 
-            void execute() override;
+            void execute(FD4::FD4TaskData* data) override;
 
             virtual CSTaskGroup get_task_group() const noexcept {
                 return this->task_group;

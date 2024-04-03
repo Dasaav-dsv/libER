@@ -30,6 +30,6 @@ CSTaskGroup CSEzTask::get_task_group() const noexcept {
     return this->proxy->get_task_group();
 }
 
-void CSEzTaskProxy::execute() {
-    this->owner->eztask_execute();
+void CSEzTaskProxy::execute(FD4::FD4TaskData* data) {
+    this->owner->eztask_execute(data);
 }

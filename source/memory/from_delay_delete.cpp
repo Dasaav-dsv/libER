@@ -14,7 +14,7 @@ struct delay_delete_task : public CS::CSEzTask {
     delay_deleter deleter;
     void* target;
 
-    void eztask_execute() override {
+    void eztask_execute(FD4::FD4TaskData*) override {
         this->deleter(target);
         this->free_task();
         delete this;
