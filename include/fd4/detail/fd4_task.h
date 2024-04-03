@@ -8,7 +8,7 @@
 #include <memory/from_set.h>
 #include <memory/from_map.h>
 #include <fd4/component.h>
-#include <fd4/singleton.h>
+#include <fd4/detail/singleton.h>
 #include <dantelion2/kernel_runtime.h>
 
 #include <utility>

@@ -5,7 +5,7 @@
 #include <memory/from_vector.h>
 #include <dantelion2/text.h>
 #include <fd4/component.h>
-#include <fd4/singleton.h>
+#include <fd4/detail/singleton.h>
 #include <fd4/detail/fd4_task.h>
 
 #include <span>
