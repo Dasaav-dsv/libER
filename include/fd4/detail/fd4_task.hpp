@@ -53,11 +53,11 @@ private:
 // The base task interface.
 // Minimal implementation needed for any task,
 // new tasks must always derive from this class
-class LIBERAPI FD4TaskBase : public FD4::FD4ComponentBase {
+class FD4TaskBase : public FD4::FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4TaskBase);
 
-    virtual ~FD4TaskBase();
+    LIBERAPI virtual ~FD4TaskBase();
     virtual void execute(FD4TaskData* data) = 0;
 
 private:

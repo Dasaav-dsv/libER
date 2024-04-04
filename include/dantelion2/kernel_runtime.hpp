@@ -24,14 +24,14 @@ class DLPlainLightMutex : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(DLPlainLightMutex);
 
-    DLPlainLightMutex() noexcept;
-    explicit DLPlainLightMutex(int spin_count) noexcept;
+    LIBERAPI DLPlainLightMutex() noexcept;
+    LIBERAPI explicit DLPlainLightMutex(int spin_count) noexcept;
 
-    virtual ~DLPlainLightMutex() noexcept;
+    LIBERAPI virtual ~DLPlainLightMutex() noexcept;
 
-    void lock() noexcept;
-    void unlock() noexcept;
-    [[nodiscard]] bool try_lock() noexcept;
+    LIBERAPI void lock() noexcept;
+    LIBERAPI void unlock() noexcept;
+    [[nodiscard]] LIBERAPI bool try_lock() noexcept;
 
     DLPlainLightMutex(DLPlainLightMutex&&) noexcept = delete;
 
@@ -60,13 +60,13 @@ class DLPlainMutex : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(DLPlainMutex);
 
-    DLPlainMutex() noexcept;
+    LIBERAPI DLPlainMutex() noexcept;
 
-    virtual ~DLPlainMutex() noexcept;
+    LIBERAPI virtual ~DLPlainMutex() noexcept;
 
-    void lock() noexcept;
-    void unlock() noexcept;
-    [[nodiscard]] bool try_lock() noexcept;
+    LIBERAPI void lock() noexcept;
+    LIBERAPI void unlock() noexcept;
+    [[nodiscard]] LIBERAPI bool try_lock() noexcept;
 
     DLPlainMutex(DLPlainMutex&&) noexcept = delete;
 
@@ -95,7 +95,7 @@ public:
     DLPlainAdaptiveMutex(DLPlainAdaptiveMutex&&) noexcept = delete;
 
 private:
-    int spin_count;
+    [[maybe_unused]] int spin_count;
 };
 
 LIBER_ASSERTS_BEGIN(DLPlainAdaptiveMutex);

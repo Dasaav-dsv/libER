@@ -121,7 +121,8 @@ public:
 // Empty dummy object
 struct dummy {};
 
-void append_module_name_and_base(std::ostream& out, void* caller) noexcept;
+LIBERAPI void append_module_name_and_base(
+    std::ostream& out, void* caller) noexcept;
 
 [[noreturn]] [[maybe_unused]] static void
 _unimplemented_return() LIBER_UNIMPLEMENTED

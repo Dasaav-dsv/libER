@@ -4,6 +4,8 @@
 #error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
 #endif
 
+#include <detail/preprocessor.hpp>
+
 #include <bitset>
 #include <cstddef>
 #include <cstdint>
@@ -128,7 +130,7 @@ public:
     virtual void* get_memory_block(void* p) = 0;
 
     // Get the allocator used to allocate this memory
-    static DLAllocator* get_allocator_of(void* p);
+    LIBERAPI static DLAllocator* get_allocator_of(void* p);
 
     // ER allocator tags
     struct MAIN {};
@@ -239,7 +241,7 @@ template <>
 struct allocator_base<default_allocator_tag> {
     DLKR::DLAllocator* allocator;
 
-    allocator_base() noexcept;
+    LIBERAPI allocator_base() noexcept;
 
     allocator_base(DLKR::DLAllocator* dl_allocator) noexcept
         : allocator(dl_allocator) {}
@@ -259,14 +261,14 @@ struct allocator_base<default_empty_base_allocator_tag> {
 
     allocator_base(DLKR::DLAllocator* dl_allocator) noexcept {}
 
-    DLKR::DLAllocator& get_allocator() const noexcept;
-    DLKR::DLAllocator& get_allocator_of(void* p) const;
+    LIBERAPI DLKR::DLAllocator& get_allocator() const noexcept;
+    LIBERAPI DLKR::DLAllocator& get_allocator_of(void* p) const;
 };
 
 #define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                  \
     template <>                                                                \
     struct allocator_base<NAME> {                                              \
-        DLKR::DLAllocator& get_allocator() const;                              \
+        LIBERAPI DLKR::DLAllocator& get_allocator() const;                     \
                                                                                \
         DLKR::DLAllocator& get_allocator_of(void* p) const {                   \
             return this->get_allocator();                                      \

@@ -6,7 +6,7 @@
 
 namespace from {
 using delay_deleter = void (*)(void*);
-void request_delete(delay_deleter deleter, void* p);
+LIBERAPI void request_delete(delay_deleter deleter, void* p);
 
 template <typename T, typename AllocatorTag>
 class delay_delete : private from::allocator<T, AllocatorTag> {

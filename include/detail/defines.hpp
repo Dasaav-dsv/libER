@@ -11,7 +11,7 @@
 #ifdef LIBERAPI_EXPORT
 #define LIBERAPI __declspec(dllexport)
 #else
-#define LIBERAPI __declspec(dllimport)
+#define LIBERAPI
 #endif
 
 #ifndef LIBER_TARGET_VERSION

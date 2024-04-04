@@ -25,8 +25,7 @@ using cstgi = unsigned int;
 // Forward declaration
 class CSEzTaskProxy;
 
-// TODO: execute struct passed in RDX
-class LIBERAPI CSEzTask : public FD4::FD4TaskBase {
+class CSEzTask : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTask);
 
@@ -41,8 +40,8 @@ public:
     }
 
     virtual void eztask_execute(FD4::FD4TaskData* data) = 0;
-    virtual void register_task(CSTaskGroup task_group);
-    virtual void free_task();
+    LIBERAPI virtual void register_task(CSTaskGroup task_group);
+    LIBERAPI virtual void free_task();
 
     CSTaskGroup get_task_group() const noexcept;
 
@@ -50,11 +49,11 @@ private:
     CSEzTaskProxy* proxy = nullptr;
 };
 
-class LIBERAPI CSEzTaskProxy : public FD4::FD4TaskBase {
+class CSEzTaskProxy : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTaskProxy);
 
-    void execute(FD4::FD4TaskData* data) override;
+    LIBERAPI void execute(FD4::FD4TaskData* data) override;
 
     virtual CSTaskGroup get_task_group() const noexcept {
         return this->task_group;
