@@ -58,7 +58,7 @@ jobs:
       with:
         name: libER-staticd
         path: |
-          ${{github.workspace}}/build/Release/libER_staticd.lib
+          ${{github.workspace}}/build/Debug/libER_staticd.lib
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
