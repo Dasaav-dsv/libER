@@ -26,7 +26,7 @@ using cstgi = unsigned int;
 class CSEzTaskProxy;
 
 // TODO: execute struct passed in RDX
-class CSEzTask : public FD4::FD4TaskBase {
+class LIBERAPI CSEzTask : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTask);
 
@@ -50,7 +50,7 @@ private:
     CSEzTaskProxy* proxy = nullptr;
 };
 
-class CSEzTaskProxy : public FD4::FD4TaskBase {
+class LIBERAPI CSEzTaskProxy : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTaskProxy);
 

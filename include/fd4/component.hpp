@@ -19,7 +19,7 @@ namespace FD4 {
 // A class that automatically instantiates reflective
 // DLRF::DLRuntimeClass instances for classes that derive from it.
 // Commonly used in the ELDEN RING codebase
-class FD4ComponentBase {
+class LIBERAPI FD4ComponentBase {
 public:
     virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept;
     virtual ~FD4ComponentBase();
