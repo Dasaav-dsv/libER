@@ -35,6 +35,38 @@ jobs:
     - name: Build Release
       run: cmake --build ${{github.workspace}}/build --config Release
 
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-dynamicd
+        path: |
+          ${{github.workspace}}/build/Debug/libERd.dll
+          ${{github.workspace}}/build/Debug/libERd.lib
+          ${{github.workspace}}/build/Debug/libERd.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-dynamic
+        path: |
+          ${{github.workspace}}/build/Release/libER.dll
+          ${{github.workspace}}/build/Release/libER.lib
+          ${{github.workspace}}/build/Release/libER.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-staticd
+        path: |
+          ${{github.workspace}}/build/Release/libER_staticd.lib
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-static
+        path: |
+          ${{github.workspace}}/build/Release/libER_static.lib
+
     # - name: Test
     #   working-directory: ${{github.workspace}}/build
     #   # Execute tests defined by the CMake configuration.
