@@ -1,7 +1,7 @@
 #include <detail/defines.hpp>
-#include <version/detail/version_fileio.h>
-#include <version/detail/version_winhttp.h>
-#include <version/version.h>
+#include <version/detail/version_fileio.hpp>
+#include <version/detail/version_winhttp.hpp>
+#include <version/version.hpp>
 
 #include <atomic>
 #include <detail/windows.inl>

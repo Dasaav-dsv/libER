@@ -1,4 +1,4 @@
-#include <dantelion2/utility.h>
+#include <dantelion2/utility.hpp>
 
 using namespace from::DLUT;
 

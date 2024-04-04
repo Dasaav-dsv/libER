@@ -1,8 +1,8 @@
-#include <version/detail/version_fileio.h>
-#include <version/detail/version_winhttp.h>
-#include <version/version.h>
+#include <version/detail/version_fileio.hpp>
+#include <version/detail/version_winhttp.hpp>
+#include <version/version.hpp>
 
-#include <detail/preprocessor.h>
+#include <detail/preprocessor.hpp>
 
 #include <NamedMutex.h>
 #include <cppsv_rt.h>
@@ -95,10 +95,10 @@ std::pair<std::string, std::wstring> filename_from_line(
     const std::string& line) noexcept {
     std::string out;
     std::wstring wout;
-    // In an #include "header.h" statement,
+    // In an #include "header.*" statement,
     // pass through string until the first quote,
     // then copy substring until the next quote.
-    // Result: (header.h)
+    // Result: (header.*)
     for (bool in_quotes = false; char chr : line) {
         if (in_quotes) {
             if (chr == '"') break;

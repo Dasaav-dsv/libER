@@ -1,7 +1,7 @@
 #pragma once
 
-#include <detail/optref.h>
-#include <detail/preprocessor.h>
+#include <detail/optref.hpp>
+#include <detail/preprocessor.hpp>
 
 // LIBER_INTERFACE_CLASS specialization for ELDEN RING
 // singleton objects in static memory. Declares the instance()

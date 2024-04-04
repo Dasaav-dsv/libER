@@ -4,10 +4,10 @@
 #error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
 #endif
 
-#include <memory/from_allocator.h>
-#include <vector>
+#include <forward_list>
+#include <memory/from_allocator.hpp>
 
 namespace from {
 template <typename T, typename AllocatorTag = from::default_allocator_tag>
-using vector = std::vector<T, from::allocator<T, AllocatorTag>>;
+using forward_list = std::forward_list<T, from::allocator<T, AllocatorTag>>;
 }

@@ -1,13 +1,13 @@
 #pragma once
 
-#include <detail/literal_string.h>
-#include <detail/optref.h>
-#include <detail/preprocessor.h>
+#include <detail/literal_string.hpp>
+#include <detail/optref.hpp>
+#include <detail/preprocessor.hpp>
 
-#include <memory/from_unique_ptr.h>
-#include <memory/from_vector.h>
+#include <memory/from_unique_ptr.hpp>
+#include <memory/from_vector.hpp>
 
-#include <dantelion2/kernel_runtime.h>
+#include <dantelion2/kernel_runtime.hpp>
 
 #include <cstddef>
 #include <cstdint>

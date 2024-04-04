@@ -1,4 +1,4 @@
-#include <dantelion2/kernel_runtime.h>
+#include <dantelion2/kernel_runtime.hpp>
 
 #include <detail/windows.inl>
 

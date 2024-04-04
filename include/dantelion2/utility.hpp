@@ -1,7 +1,7 @@
 #pragma once
 
-#include <detail/preprocessor.h>
-#include <memory/from_allocator.h>
+#include <detail/preprocessor.hpp>
+#include <memory/from_allocator.hpp>
 
 #include <algorithm>
 #include <atomic>

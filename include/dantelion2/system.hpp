@@ -1,7 +1,7 @@
 #pragma once
 
-#include <detail/preprocessor.h>
-#include <fd4/detail/singleton.h>
+#include <detail/preprocessor.hpp>
+#include <fd4/detail/singleton.hpp>
 
 namespace from {
 // Dantelion system

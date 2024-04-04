@@ -4,8 +4,8 @@
 #include <cstddef>
 #include <cstdint>
 
-#include <detail/literal_string.h>
-#include <detail/preprocessor.h>
+#include <detail/literal_string.hpp>
+#include <detail/preprocessor.hpp>
 
 /*
  * A symbol repository header that pulls

@@ -8,6 +8,12 @@
 
 // clang-format off
 
+#ifdef LIBERAPI_EXPORT
+#define LIBERAPI __declspec(dllexport)
+#else
+#define LIBERAPI __declspec(dllimport)
+#endif
+
 #ifndef LIBER_TARGET_VERSION
 // The ELDEN RING binary version this build of libER targets
 // BUILD, REVISION, MINOR, MAJOR 16-bit fields in LE order

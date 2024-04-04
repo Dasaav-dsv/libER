@@ -1,8 +1,8 @@
 #pragma once
 
-#include <dantelion2/reflection.h>
-#include <detail/literal_string.h>
-#include <detail/preprocessor.h>
+#include <dantelion2/reflection.hpp>
+#include <detail/literal_string.hpp>
+#include <detail/preprocessor.hpp>
 
 // LIBER_CLASS specialization that implements
 // DLRuntimeClass reflection for CLASSNAME
@@ -19,7 +19,7 @@ namespace FD4 {
 // A class that automatically instantiates reflective
 // DLRF::DLRuntimeClass instances for classes that derive from it.
 // Commonly used in the ELDEN RING codebase
-class FD4ComponentBase {
+class LIBERAPI FD4ComponentBase {
 public:
     virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept;
     virtual ~FD4ComponentBase();

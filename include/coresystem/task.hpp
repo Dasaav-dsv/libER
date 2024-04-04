@@ -1,12 +1,12 @@
 #pragma once
 
-#include <dantelion2/text.h>
-#include <detail/preprocessor.h>
-#include <fd4/component.h>
-#include <fd4/detail/fd4_task.h>
-#include <fd4/detail/singleton.h>
-#include <memory/from_allocator.h>
-#include <memory/from_vector.h>
+#include <dantelion2/text.hpp>
+#include <detail/preprocessor.hpp>
+#include <fd4/component.hpp>
+#include <fd4/detail/fd4_task.hpp>
+#include <fd4/detail/singleton.hpp>
+#include <memory/from_allocator.hpp>
+#include <memory/from_vector.hpp>
 
 #include <algorithm>
 #include <span>
@@ -26,7 +26,7 @@ using cstgi = unsigned int;
 class CSEzTaskProxy;
 
 // TODO: execute struct passed in RDX
-class CSEzTask : public FD4::FD4TaskBase {
+class LIBERAPI CSEzTask : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTask);
 
@@ -50,7 +50,7 @@ private:
     CSEzTaskProxy* proxy = nullptr;
 };
 
-class CSEzTaskProxy : public FD4::FD4TaskBase {
+class LIBERAPI CSEzTaskProxy : public FD4::FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(CSEzTaskProxy);
 

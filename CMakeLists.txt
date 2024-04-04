@@ -12,7 +12,7 @@ add_subdirectory("dependencies/wintypes" "wintypes")
 target_include_directories("objlibER" PUBLIC "dependencies/cppsv/include")
 
 # Compile definitions:
-target_compile_definitions("objlibER" PUBLIC _ITERATOR_DEBUG_LEVEL=0)
+target_compile_definitions("objlibER" PUBLIC _ITERATOR_DEBUG_LEVEL=0 LIBERAPI_EXPORT)
 
 # Include directories:
 target_include_directories("objlibER"

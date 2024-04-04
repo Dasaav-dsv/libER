@@ -1,5 +1,5 @@
-#include <detail/singleton.h>
-#include <fd4/detail/fd4_task.h>
+#include <detail/singleton.hpp>
+#include <fd4/detail/fd4_task.hpp>
 
 using namespace from;
 

@@ -1,16 +1,16 @@
 #pragma once
 
-#include <dantelion2/kernel_runtime.h>
-#include <detail/preprocessor.h>
-#include <fd4/component.h>
-#include <fd4/detail/singleton.h>
-#include <fd4/time.h>
-#include <memory/from_allocator.h>
-#include <memory/from_deque.h>
-#include <memory/from_map.h>
-#include <memory/from_set.h>
-#include <memory/from_string.h>
-#include <memory/from_vector.h>
+#include <dantelion2/kernel_runtime.hpp>
+#include <detail/preprocessor.hpp>
+#include <fd4/component.hpp>
+#include <fd4/detail/singleton.hpp>
+#include <fd4/time.hpp>
+#include <memory/from_allocator.hpp>
+#include <memory/from_deque.hpp>
+#include <memory/from_map.hpp>
+#include <memory/from_set.hpp>
+#include <memory/from_string.hpp>
+#include <memory/from_vector.hpp>
 
 #include <utility>
 
@@ -53,7 +53,7 @@ private:
 // The base task interface.
 // Minimal implementation needed for any task,
 // new tasks must always derive from this class
-class FD4TaskBase : public FD4::FD4ComponentBase {
+class LIBERAPI FD4TaskBase : public FD4::FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4TaskBase);
 

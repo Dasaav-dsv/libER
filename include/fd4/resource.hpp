@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dantelion2/text.h>
-#include <detail/preprocessor.h>
-#include <fd4/component.h>
-#include <memory/from_allocator.h>
+#include <dantelion2/text.hpp>
+#include <detail/preprocessor.hpp>
+#include <fd4/component.hpp>
+#include <memory/from_allocator.hpp>
 
 // TODO: anchor vtables
 

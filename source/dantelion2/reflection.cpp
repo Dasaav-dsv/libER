@@ -1,5 +1,5 @@
-#include <dantelion2/reflection.h>
-#include <detail/functions.h>
+#include <dantelion2/reflection.hpp>
+#include <detail/functions.hpp>
 
 #include <algorithm>
 #include <cstddef>

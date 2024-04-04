@@ -1,4 +1,4 @@
-#include <fd4/component.h>
+#include <fd4/component.hpp>
 
 using namespace from::FD4;
 using namespace from::DLRF;

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <detail/optref.h>
-#include <detail/preprocessor.h>
-#include <detail/symbols.h>
+#include <detail/optref.hpp>
+#include <detail/preprocessor.hpp>
+#include <detail/symbols.hpp>
 
 // Define the instance() method for a FD4_SINGLETON_CLASS
 // (see fd4/singleton.h). As the symbols.h header is exposed,
