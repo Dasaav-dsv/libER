@@ -9,7 +9,7 @@ static void* cached_base_address;
 // GetModuleHandle is cheap and thread-safe
 void* liber::base_address() noexcept {
     void* result = cached_base_address;
-    if (!result) [[unlikely]]  {
+    if (!result) [[unlikely]] {
         // GetModuleHandle(NULL) returns a pseudohandle
         // (which is a module's base address) of the calling process
         result = (void*)GetModuleHandle(NULL);

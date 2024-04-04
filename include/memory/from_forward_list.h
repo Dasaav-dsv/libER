@@ -8,6 +8,6 @@
 #include <memory/from_allocator.h>
 
 namespace from {
-    template <typename T, typename AllocatorTag = from::default_allocator_tag>
-    using forward_list = std::forward_list<T, from::allocator<T, AllocatorTag>>;
+template <typename T, typename AllocatorTag = from::default_allocator_tag>
+using forward_list = std::forward_list<T, from::allocator<T, AllocatorTag>>;
 }

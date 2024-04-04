@@ -1,10 +1,12 @@
 #pragma once
 
 /*
-* A header containing preprocessor definitions
-* used during the compilation of libER.
-* Some may be overridden.
-*/
+ * A header containing preprocessor definitions
+ * used during the compilation of libER.
+ * Some may be overridden.
+ */
+
+// clang-format off
 
 #ifndef LIBER_TARGET_VERSION
 // The ELDEN RING binary version this build of libER targets
@@ -48,3 +50,5 @@
 // Mutex names used by program-wide Windows mutexes
 // See NamedMutex in dependencies/wintypes
 #define LIBER_VERSION_FILEIO_MUTEX L"LIBER_VERSION_FILEIO_MUTEX"
+
+// clang-format on
