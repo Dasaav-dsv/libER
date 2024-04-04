@@ -1,0 +1,77 @@
+#
+# Trying out a basic workflow, will change later - Dasaav
+#
+# This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
+name: CMake on a single platform
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Configure CMake Debug
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Debug
+
+    - name: Build Debug
+      run: cmake --build ${{github.workspace}}/build --config Debug
+
+    - name: Configure CMake Release
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build Release
+      run: cmake --build ${{github.workspace}}/build --config Release
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-dynamicd
+        path: |
+          ${{github.workspace}}/build/Debug/libERd.dll
+          ${{github.workspace}}/build/Debug/libERd.exp
+          ${{github.workspace}}/build/Debug/libERd.lib
+          ${{github.workspace}}/build/Debug/libERd.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-dynamic
+        path: |
+          ${{github.workspace}}/build/Release/libER.dll
+          ${{github.workspace}}/build/Release/libER.exp
+          ${{github.workspace}}/build/Release/libER.lib
+          ${{github.workspace}}/build/Release/libER.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-staticd
+        path: |
+          ${{github.workspace}}/build/Debug/libER_staticd.lib
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER-static
+        path: |
+          ${{github.workspace}}/build/Release/libER_static.lib
+
+    # - name: Test
+    #   working-directory: ${{github.workspace}}/build
+    #   # Execute tests defined by the CMake configuration.
+    #   # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+    #   run: ctest -C ${{env.BUILD_TYPE}}
+
