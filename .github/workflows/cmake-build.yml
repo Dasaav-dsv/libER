@@ -26,7 +26,7 @@ jobs:
         cmake
         -G "Visual Studio 17 2022"
         -A x64
-        -T $ ${{ matrix.cl_toolset }}
+        -T ${{ matrix.cl_toolset }}
         -S ${{ github.workspace }}
         -B ${{ github.workspace }}/build
 
