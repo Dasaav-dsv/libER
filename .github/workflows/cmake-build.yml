@@ -1,0 +1,48 @@
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        build_type: [Release, Debug]
+        cl_toolset: [Visual Studio, clang-cl]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Configure CMake
+      run: >
+        cmake
+        -G "Visual Studio 17 2022"
+        -A x64
+        -T $ ${{ matrix.cl_toolset }}
+        -S ${{ github.workspace }}
+        -B ${{ github.workspace }}/build
+
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER.dll ${{ matrix.cl_toolset }} ${{ matrix.build_type }}
+        path: |
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.dll
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.exp
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.lib
+          ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.pdb
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER_static.lib ${{ matrix.cl_toolset }} ${{ matrix.build_type }}
+        path: ${{ github.workspace }}/build/${{ matrix.build_type }}/libER_static${{ matrix.build_type == 'Debug' && 'd' || '' }}.lib
