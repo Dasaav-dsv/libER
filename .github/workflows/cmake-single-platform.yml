@@ -38,17 +38,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libER-dynamicd
-        path: |
-          ${{github.workspace}}/build/Debug/libERd.dll
-          ${{github.workspace}}/build/Debug/libERd.exp
-          ${{github.workspace}}/build/Debug/libERd.lib
-          ${{github.workspace}}/build/Debug/libERd.pdb
-
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: libER-dynamic
+        name: libER.dll
         path: |
           ${{github.workspace}}/build/Release/libER.dll
           ${{github.workspace}}/build/Release/libER.exp
@@ -58,16 +48,26 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libER-staticd
+        name: libERd.dll
         path: |
-          ${{github.workspace}}/build/Debug/libER_staticd.lib
+          ${{github.workspace}}/build/Debug/libERd.dll
+          ${{github.workspace}}/build/Debug/libERd.exp
+          ${{github.workspace}}/build/Debug/libERd.lib
+          ${{github.workspace}}/build/Debug/libERd.pdb
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libER-static
+        name: libER_static.lib
         path: |
           ${{github.workspace}}/build/Release/libER_static.lib
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: libER_staticd.lib
+        path: |
+          ${{github.workspace}}/build/Debug/libER_staticd.lib
 
     # - name: Test
     #   working-directory: ${{github.workspace}}/build
