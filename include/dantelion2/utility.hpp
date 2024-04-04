@@ -18,7 +18,7 @@ namespace DLUT {
 class DLNonCopyable {
 public:
     DLNonCopyable() = default;
-    virtual ~DLNonCopyable();
+    LIBERAPI virtual ~DLNonCopyable();
 
     DLNonCopyable(const DLNonCopyable&) = delete;
     DLNonCopyable& operator=(const DLNonCopyable&) = delete;

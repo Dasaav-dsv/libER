@@ -128,11 +128,11 @@ public:
     virtual size_t class_size() const noexcept = 0;
 
     // Add an invoker to a vector of invokers for the class's constructor
-    virtual void add_constructor_invoker(DLMethodInvoker* invoker,
+    LIBERAPI virtual void add_constructor_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
 
     // Add an invoker to a vector of invokers for a given method
-    virtual void add_method_invoker(DLMethodInvoker* invoker,
+    LIBERAPI virtual void add_method_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
 
     // Get class's base, nullptr if it's not derived
@@ -156,14 +156,14 @@ public:
     }
 
     // Get a method by name if it exists
-    DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
+    LIBERAPI DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
 
     // Get a vector of all globally registered DLRuntimeClasses
-    static from::vector<DLRuntimeMethodHolder>&
+    LIBERAPI static from::vector<DLRuntimeMethodHolder>&
     get_registered_classes() noexcept;
 
     // Get a vector of all globally registered DLRuntimeClass pairs
-    static from::vector<DLRuntimeClassPair>& get_runtime_pairs() noexcept;
+    LIBERAPI static from::vector<DLRuntimeClassPair>& get_runtime_pairs() noexcept;
 
 private:
     // A pointer to the base class, if the class is derived
@@ -218,12 +218,12 @@ private:
 // DLRuntimeClass reflection implentation in libER
 template <class Impl, liber::literal_string ImplName>
 struct DLRuntimeClassTemplate {
-    static constexpr auto dl_runtime_class_name = ImplName.trunc().string;
-    static constexpr auto dl_runtime_class_name_w = ImplName.widen().string;
+    static constexpr auto dl_runtime_class_name = ImplName.trunc();
+    static constexpr auto dl_runtime_class_name_w = ImplName.widen();
 
     inline static DLRF::DLRuntimeClassImpl<Impl> dl_runtime_class{
-        DLRuntimeClassTemplate::dl_runtime_class_name,
-        DLRuntimeClassTemplate::dl_runtime_class_name_w
+        DLRuntimeClassTemplate::dl_runtime_class_name.string,
+        DLRuntimeClassTemplate::dl_runtime_class_name_w.string
     };
 };
 

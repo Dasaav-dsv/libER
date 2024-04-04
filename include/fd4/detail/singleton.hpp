@@ -8,5 +8,6 @@
 // method, which is defined separately as to not expose symbols
 // See detail/singleton.h
 #define FD4_SINGLETON_CLASS(CLASSNAME)                                         \
-    [[nodiscard]] static liber::optref<CLASSNAME> instance() noexcept;         \
+    [[nodiscard]] LIBERAPI static liber::optref<CLASSNAME>                     \
+    instance() noexcept;                                                       \
     LIBER_INTERFACE_CLASS(CLASSNAME)

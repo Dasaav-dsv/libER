@@ -17,7 +17,7 @@ namespace DLSY {
 // ^^^ POTENTIAL DEADLOCK vvv
 // DO NOT CALL IT FROM DLLMAIN
 //
-bool wait_for_system(int timeout) noexcept;
+LIBERAPI bool wait_for_system(int timeout) noexcept;
 
 // A singleton that deals with locale
 // and stdio. Seldom used.
