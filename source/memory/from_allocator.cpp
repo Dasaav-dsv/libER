@@ -1,7 +1,7 @@
 #include <memory/from_allocator.h>
 
-#include <detail/symbols.h>
 #include <detail/functions.h>
+#include <detail/symbols.h>
 #include <detail/windows.inl>
 
 static HANDLE default_heap = GetProcessHeap();
@@ -15,10 +15,14 @@ public:
     virtual ~fromlike_allocator() = default;
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
-    int _allocator_id() override { return 0x401; }
+    int _allocator_id() override {
+        return 0x401;
+    }
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
-    std::bitset<8> heap_flags() override { return 0x3B; }
+    std::bitset<8> heap_flags() override {
+        return 0x3B;
+    }
 
     size_t heap_capacity() override {
         return std::numeric_limits<size_t>::max();
@@ -37,7 +41,7 @@ public:
     }
 
     size_t msize(void* p) override {
-        if (!p) return 0; 
+        if (!p) return 0;
         return HeapSize(default_heap, 0, _block_pointer(p));
     }
 
@@ -71,8 +75,7 @@ public:
                     void* alloc_base = _adjust_block(alloc, alignment);
                     _block_pointer(alloc) = alloc_base;
                 }
-            }
-            else {
+            } else {
                 this->deallocate(p);
             }
         }
@@ -96,7 +99,8 @@ public:
         return this->reallocate(p, cb);
     }
 
-    void* reallocate_second_aligned(void* p, size_t cb, size_t alignment) override {
+    void* reallocate_second_aligned(
+        void* p, size_t cb, size_t alignment) override {
         return this->reallocate_aligned(p, cb, 16);
     }
 
@@ -120,16 +124,20 @@ public:
     // These are necessary for ABI compatibility
 private:
     static void _adjust_alignment(size_t& alignment) {
-        alignment = alignment > MEMORY_ALLOCATION_ALIGNMENT ? alignment : MEMORY_ALLOCATION_ALIGNMENT;
+        alignment = alignment > MEMORY_ALLOCATION_ALIGNMENT
+            ? alignment
+            : MEMORY_ALLOCATION_ALIGNMENT;
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
         size += alignment;
     }
 
-    static void* _adjust_block(void*& p, size_t alignment = MEMORY_ALLOCATION_ALIGNMENT) {
+    static void* _adjust_block(
+        void*& p, size_t alignment = MEMORY_ALLOCATION_ALIGNMENT) {
         void* tmp = p;
-        p = reinterpret_cast<void*>((reinterpret_cast<uintptr_t>(p) + alignment) & ~(alignment - 1));
+        p = reinterpret_cast<void*>(
+            (reinterpret_cast<uintptr_t>(p) + alignment) & ~(alignment - 1));
         return tmp;
     }
 
@@ -143,32 +151,38 @@ using namespace from;
 allocator_base<from::default_allocator_tag>::allocator_base() noexcept
     : allocator(&default_allocator) {}
 
-DLKR::DLAllocator& allocator_base<from::default_empty_base_allocator_tag>::get_allocator() const noexcept {
+DLKR::DLAllocator&
+allocator_base<from::default_empty_base_allocator_tag>::get_allocator()
+    const noexcept {
     return default_allocator;
 }
 
-DLKR::DLAllocator& allocator_base<from::default_empty_base_allocator_tag>::get_allocator_of(void* p) const {
+DLKR::DLAllocator&
+allocator_base<from::default_empty_base_allocator_tag>::get_allocator_of(
+    void* p) const {
     return *DLKR::DLAllocator::get_allocator_of(p);
 }
 
 DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
     // Check if it's possible memory was allocated on
     // one of the ER heaps by checking allocator initialization
-    DLKR::DLAllocator* allocator =
-        *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<"DLKR::DLBackAllocator">::get());
+    DLKR::DLAllocator* allocator = *reinterpret_cast<DLKR::DLAllocator**>(
+        liber::symbol<"DLKR::DLBackAllocator">::get());
     if (allocator) // Allocators are initialized, safe to check ownership
-        return liber::function<"DLKR::DLAllocator::get_allocator_of", DLKR::DLAllocator*>::call(p);
-    else // Memory likely malloc-ed by us or DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
+        return liber::function<"DLKR::DLAllocator::get_allocator_of",
+            DLKR::DLAllocator*>::call(p);
+    else // Memory likely malloc-ed by us or
+         // DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
         return &default_allocator;
 }
 
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                \
-DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {             \
-    DLKR::DLAllocator* allocator =                                           \
-        *reinterpret_cast<DLKR::DLAllocator**>(liber::symbol<#NAME>::get()); \
-    if (!allocator) std::terminate();                                        \
-    return *allocator;                                                       \
-}
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                  \
+    DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {           \
+        DLKR::DLAllocator* allocator = *reinterpret_cast<DLKR::DLAllocator**>( \
+            liber::symbol<#NAME>::get());                                      \
+        if (!allocator) std::terminate();                                      \
+        return *allocator;                                                     \
+    }
 
 #include <memory/from_allocator.inl>
 

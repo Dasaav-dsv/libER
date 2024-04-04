@@ -1,5 +1,5 @@
-#include <memory/from_delay_delete.h>
 #include <coresystem/task.h>
+#include <memory/from_delay_delete.h>
 
 using namespace from;
 
@@ -22,5 +22,5 @@ struct delay_delete_task : public CS::CSEzTask {
 };
 
 void from::request_delete(delay_deleter deleter, void* p) {
-    (void)new delay_delete_task({deleter, p});
+    (void)new delay_delete_task({ deleter, p });
 }

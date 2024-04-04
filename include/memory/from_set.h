@@ -4,10 +4,11 @@
 #error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
 #endif
 
-#include <set>
 #include <memory/from_allocator.h>
+#include <set>
 
 namespace from {
-    template <typename T, typename Pred = std::less<T>, typename AllocatorTag = from::default_allocator_tag>
-    using set = std::set<T, Pred, from::allocator<T, AllocatorTag>>;
+template <typename T, typename Pred = std::less<T>,
+    typename AllocatorTag = from::default_allocator_tag>
+using set = std::set<T, Pred, from::allocator<T, AllocatorTag>>;
 }
