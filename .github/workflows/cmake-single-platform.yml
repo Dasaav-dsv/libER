@@ -41,6 +41,7 @@ jobs:
         name: libER-dynamicd
         path: |
           ${{github.workspace}}/build/Debug/libERd.dll
+          ${{github.workspace}}/build/Debug/libERd.exp
           ${{github.workspace}}/build/Debug/libERd.lib
           ${{github.workspace}}/build/Debug/libERd.pdb
 
@@ -50,6 +51,7 @@ jobs:
         name: libER-dynamic
         path: |
           ${{github.workspace}}/build/Release/libER.dll
+          ${{github.workspace}}/build/Release/libER.exp
           ${{github.workspace}}/build/Release/libER.lib
           ${{github.workspace}}/build/Release/libER.pdb
 
