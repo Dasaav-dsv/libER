@@ -1,7 +1,7 @@
 #pragma once
 
-#include <detail/preprocessor.h>
-#include <memory/from_string.h>
+#include <detail/preprocessor.hpp>
+#include <memory/from_string.hpp>
 
 #include <string>
 #include <utility>

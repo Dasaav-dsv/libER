@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dantelion2/utility.h>
-#include <detail/preprocessor.h>
+#include <dantelion2/utility.hpp>
+#include <detail/preprocessor.hpp>
 
 // Part of namespace DLKR and DLKRD
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 
 // Forward declarations to not include Windows.h
 struct _RTL_CRITICAL_SECTION;

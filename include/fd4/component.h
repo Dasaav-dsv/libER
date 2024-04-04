@@ -1,8 +1,8 @@
 #pragma once
 
-#include <dantelion2/reflection.h>
-#include <detail/literal_string.h>
-#include <detail/preprocessor.h>
+#include <dantelion2/reflection.hpp>
+#include <detail/literal_string.hpp>
+#include <detail/preprocessor.hpp>
 
 // LIBER_CLASS specialization that implements
 // DLRuntimeClass reflection for CLASSNAME
