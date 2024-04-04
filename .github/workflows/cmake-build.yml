@@ -14,7 +14,7 @@ jobs:
       fail-fast: true
       matrix:
         build_type: [Release, Debug]
-        cl_toolset: [Visual Studio, ClangCL]
+        cl_toolset: [ {name: Visual Studio, id: v143}, {name: clang-cl, id: ClangCL} ]
 
     steps:
     - uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
         cmake
         -G "Visual Studio 17 2022"
         -A x64
-        -T ${{ matrix.cl_toolset }}
+        -T ${{ matrix.cl_toolset.id }}
         -S ${{ github.workspace }}
         -B ${{ github.workspace }}/build
 
@@ -36,7 +36,7 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libER.dll ${{ matrix.cl_toolset }} ${{ matrix.build_type }}
+        name: libER.dll ${{ matrix.cl_toolset.name }} ${{ matrix.build_type }}
         path: |
           ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.dll
           ${{ github.workspace }}/build/${{ matrix.build_type }}/libER${{ matrix.build_type == 'Debug' && 'd' || '' }}.exp
@@ -46,5 +46,5 @@ jobs:
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: libER_static.lib ${{ matrix.cl_toolset }} ${{ matrix.build_type }}
+        name: libER_static.lib ${{ matrix.cl_toolset.name }} ${{ matrix.build_type }}
         path: ${{ github.workspace }}/build/${{ matrix.build_type }}/libER_static${{ matrix.build_type == 'Debug' && 'd' || '' }}.lib
