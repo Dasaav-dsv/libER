@@ -4,7 +4,7 @@
 #error "_ITERATOR_DEBUG_LEVEL" must be defined as "0" for STL containers to be compatible with the ELDEN RING ABI.
 #endif
 
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 #include <unordered_map>
 
 namespace from {

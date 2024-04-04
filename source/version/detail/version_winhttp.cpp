@@ -1,7 +1,7 @@
-#include <version/detail/version_fileio.h>
-#include <version/detail/version_winhttp.h>
+#include <version/detail/version_fileio.hpp>
+#include <version/detail/version_winhttp.hpp>
 
-#include <detail/preprocessor.h>
+#include <detail/preprocessor.hpp>
 #include <version/detail/winhttp.inl>
 
 #include <mutex>

@@ -5,7 +5,7 @@
 #endif
 
 #include <forward_list>
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 
 namespace from {
 template <typename T, typename AllocatorTag = from::default_allocator_tag>

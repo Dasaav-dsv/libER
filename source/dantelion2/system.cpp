@@ -1,5 +1,5 @@
-#include <dantelion2/system.h>
-#include <detail/singleton.h>
+#include <dantelion2/system.hpp>
+#include <detail/singleton.hpp>
 
 #include <detail/windows.inl>
 

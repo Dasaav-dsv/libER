@@ -5,7 +5,7 @@
 #endif
 
 #include <map>
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 
 namespace from {
 template <typename K, typename V, typename Pred = std::less<K>,

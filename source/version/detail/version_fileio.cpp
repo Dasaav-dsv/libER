@@ -1,8 +1,8 @@
-#include <version/detail/version_fileio.h>
-#include <version/detail/version_winhttp.h>
-#include <version/version.h>
+#include <version/detail/version_fileio.hpp>
+#include <version/detail/version_winhttp.hpp>
+#include <version/version.hpp>
 
-#include <detail/preprocessor.h>
+#include <detail/preprocessor.hpp>
 
 #include <NamedMutex.h>
 #include <cppsv_rt.h>

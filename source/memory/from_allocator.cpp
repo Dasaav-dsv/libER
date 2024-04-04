@@ -1,7 +1,7 @@
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 
-#include <detail/functions.h>
-#include <detail/symbols.h>
+#include <detail/functions.hpp>
+#include <detail/symbols.hpp>
 #include <detail/windows.inl>
 
 static HANDLE default_heap = GetProcessHeap();

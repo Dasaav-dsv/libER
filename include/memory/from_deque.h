@@ -5,7 +5,7 @@
 #endif
 
 #include <deque>
-#include <memory/from_allocator.h>
+#include <memory/from_allocator.hpp>
 
 namespace from {
 template <typename T, typename AllocatorTag = from::default_allocator_tag>

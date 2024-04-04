@@ -1,6 +1,6 @@
-#include <coresystem/task.h>
-#include <detail/functions.h>
-#include <detail/singleton.h>
+#include <coresystem/task.hpp>
+#include <detail/functions.hpp>
+#include <detail/singleton.hpp>
 
 #include <utility>
 

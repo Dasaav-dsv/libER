@@ -1,6 +1,6 @@
 #pragma once
 
-#include "symbols.h"
+#include "symbols.hpp"
 
 #include <type_traits>
 
