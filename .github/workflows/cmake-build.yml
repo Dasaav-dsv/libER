@@ -14,7 +14,7 @@ jobs:
       fail-fast: true
       matrix:
         build_type: [Release, Debug]
-        cl_toolset: [Visual Studio, clang-cl]
+        cl_toolset: [Visual Studio, ClangCL]
 
     steps:
     - uses: actions/checkout@v4
