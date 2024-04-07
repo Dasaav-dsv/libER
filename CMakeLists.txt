@@ -60,6 +60,7 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/fd4/time.cpp"
     "source/fd4/component.cpp"
+    "source/fd4/detail/fd4_memory.cpp"
     "source/fd4/detail/fd4_task.cpp"
 )
 

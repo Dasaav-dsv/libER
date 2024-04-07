@@ -66,18 +66,17 @@ public:
 
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
         void* alloc = nullptr;
-        if (p) {
-            if (cb) {
-                _adjust_alignment(alignment);
-                _adjust_size(cb, alignment);
-                alloc = HeapReAlloc(default_heap, 0, _block_pointer(p), cb);
-                if (alloc) {
-                    void* alloc_base = _adjust_block(alloc, alignment);
-                    _block_pointer(alloc) = alloc_base;
-                }
-            } else {
-                this->deallocate(p);
+        if (!p) return this->allocate_aligned(cb, alignment);
+        if (cb) {
+            _adjust_alignment(alignment);
+            _adjust_size(cb, alignment);
+            alloc = HeapReAlloc(default_heap, 0, _block_pointer(p), cb);
+            if (alloc) {
+                void* alloc_base = _adjust_block(alloc, alignment);
+                _block_pointer(alloc) = alloc_base;
             }
+        } else {
+            this->deallocate(p);
         }
         return alloc;
     }
@@ -130,7 +129,8 @@ private:
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
-        size += alignment;
+        size += alignment * 2 - 1;
+        size &= -static_cast<intptr_t>(alignment);
     }
 
     static void* _adjust_block(
