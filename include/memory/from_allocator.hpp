@@ -146,6 +146,7 @@ public:
     struct DEBUG {};
     struct GFX_SystemShared {};
     struct GFX_GraphicsPrivate {};
+    struct SYSTEM {};
 };
 
 struct DLBackAllocator : public DLAllocator {};
