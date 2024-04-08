@@ -8,6 +8,8 @@
 
 #include <bit>
 
+#define LIBER_ALLOC_MAGIC 0x43'4F'4C'4C'41'52'45'40 // @ERALLOC
+
 using namespace from;
 
 static HANDLE default_heap = GetProcessHeap();
@@ -16,9 +18,13 @@ static HANDLE default_heap = GetProcessHeap();
 // Implements all necessary methods
 // Uses C allocation functions (needs _msize)
 // Models DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
-static class fromlike_allocator : public from::DLKR::DLAllocator {
+static class liber_internal_allocator : public DLKR::DLAllocator {
 public:
-    virtual ~fromlike_allocator() = default;
+    liber_internal_allocator() {
+        mi_option_set(mi_option_reset_delay, 0);
+    }
+
+    virtual ~liber_internal_allocator() = default;
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
     int _allocator_id() override {
@@ -53,7 +59,7 @@ public:
     }
 
     void* allocate(size_t cb) override {
-        return this->allocate_aligned(cb, 8);
+        return this->allocate_aligned(cb, 16);
     }
 
     void* allocate_aligned(size_t cb, size_t alignment) override {
@@ -61,39 +67,30 @@ public:
         _adjust_size(cb, alignment);
         void* alloc = nullptr;
         mi_heap_t* heap = mi_heap_get_backing();
-        alloc = mi_heap_malloc(heap, cb);
-        if (alloc) {
-            void* alloc_base = _adjust_block(alloc, alignment);
-            _block_pointer(alloc) = _encode_ptr(alloc_base);
-        }
+        alloc = mi_heap_malloc_aligned(heap, cb, alignment);
+        if (alloc) _adjust_block_and_encode(alloc, alignment);
         return alloc;
     }
 
     void* reallocate(void* p, size_t cb) override {
-        return this->reallocate_aligned(p, cb, 8);
+        return this->reallocate_aligned(p, cb, 16);
     }
 
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
-        void* alloc = nullptr;
-        if (!p) return this->allocate_aligned(cb, alignment);
-        if (cb) {
-            _adjust_alignment(alignment);
-            _adjust_size(cb, alignment);
-            void* dec_bp = _decode_ptr(_block_pointer(p));
-            alloc = mi_heap_realloc(mi_heap_get_backing(), dec_bp, cb);
-            if (alloc) {
-                void* alloc_base = _adjust_block(alloc, alignment);
-                if (alloc_base != dec_bp)
-                    _block_pointer(alloc) = _encode_ptr(alloc_base);
-            }
-        } else {
-            this->deallocate(p);
-        }
+        void* alloc = cb ? this->allocate_aligned(cb, alignment) : nullptr;
+        this->deallocate(p);
         return alloc;
     }
 
     void deallocate(void* p) override {
         if (!p) return;
+        size_t maybe_align = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        if (maybe_align < 64) {
+            liber_internal_allocator* owner = _block_owner(p);
+            if (owner != this) owner->deallocate(p);
+            else mi_free(p);
+            return;
+        }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
                 DLKR::DLAllocator*>::call());
@@ -102,12 +99,7 @@ public:
             (dl_back_allocator + 4)->deallocate(p);
             return;
         }
-        void* bp = _block_pointer(p);
-        if (_test_ptr(bp)) {
-            mi_free(_decode_ptr(bp));
-            return;
-        }
-        HeapFree(default_heap, 0, bp);
+        HeapFree(default_heap, 0, _block_pointer(p));
     }
 
     void* allocate_second(size_t cb) override {
@@ -124,7 +116,7 @@ public:
 
     void* reallocate_second_aligned(
         void* p, size_t cb, size_t alignment) override {
-        return this->reallocate_aligned(p, cb, 8);
+        return this->reallocate_aligned(p, cb, alignment);
     }
 
     void deallocate_second(void* p) override {
@@ -147,15 +139,14 @@ public:
     // These are necessary for ABI compatibility
 private:
     static void _adjust_alignment(size_t& alignment) {
-        alignment = alignment > 8 ? alignment : 8;
+        alignment = alignment > 16 ? alignment : 16;
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
-        size += alignment * 2 - 1;
-        size &= -static_cast<intptr_t>(alignment);
+        size = (size + alignment * 2 - 1) & -static_cast<ptrdiff_t>(alignment);
     }
 
-    static void* _adjust_block(void*& p, size_t alignment = 8) {
+    static void* _adjust_block(void*& p, size_t alignment = 16) {
         void* tmp = p;
         size_t alignment_minus_one = alignment - 1;
         p = reinterpret_cast<void*>(
@@ -164,20 +155,31 @@ private:
         return tmp;
     }
 
-    static void*& _block_pointer(void* p) {
-        return *(reinterpret_cast<void**>(p) - 1);
+    void _adjust_block_and_encode(void*& p, size_t alignment) {
+        size_t alignment_minus_one = alignment - 1;
+        p = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(p) + alignment);
+        _block_owner(p) = reinterpret_cast<uintptr_t>(this);
+        _block_data(p) = LIBER_ALLOC_MAGIC | std::countr_zero(alignment);
     }
 
-    void* _encode_ptr(void* p) {
+    static liber_internal_allocator*& _block_owner(void* p) {
+        return *(reinterpret_cast<liber_internal_allocator**>(p) - 2);
+    }
+
+    static uintptr_t& _block_data(void* p) {
+        return *(reinterpret_cast<uintptr_t*>(p) - 1);
+    }
+
+    static void* _encode_ptr(const void* p, size_t alignment) {
         auto encoded = std::rotr(reinterpret_cast<uint64_t>(p) + 0b101, 3);
         return reinterpret_cast<void*>(encoded);
     }
 
-    void* _decode_ptr(void* p) {
+    static void* _decode_ptr(void* p) {
         return reinterpret_cast<void*>(reinterpret_cast<uint64_t>(p) << 3);
     }
 
-    bool _test_ptr(void* p) {
+    static bool _test_ptr(void* p) {
         return (reinterpret_cast<uint64_t>(p) >> 48) == 0xA000;
     }
 } default_allocator;
