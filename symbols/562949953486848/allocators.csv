@@ -15,6 +15,7 @@ CS::CSNetworkAllocator,0x3CFDFB0
 DLKR::DLAllocator::DEBUG,0x3CFDFB8
 DLKR::DLAllocator::GFX_SystemShared,0x3CFDFC0
 DLKR::DLAllocator::GFX_GraphicsPrivate,0x3CFDFD8
+DLKR::DLAllocator::SYSTEM,0x459B1E8
 DLKR::DLAllocator::get_allocator_of,0x1E810D0
 FD4::FD4MemoryManager::GLOBAL_allocator_table,0x3CFDF40
 FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count,0x3CFDFE0
