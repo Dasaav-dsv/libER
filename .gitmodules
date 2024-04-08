@@ -4,3 +4,6 @@
 [submodule "dependencies/wintypes"]
 	path = dependencies/wintypes
 	url = https://github.com/Dasaav-dsv/wintypes.git
+[submodule "dependencies/thirdparty/mimalloc"]
+	path = dependencies/thirdparty/mimalloc
+	url = https://github.com/microsoft/mimalloc.git
