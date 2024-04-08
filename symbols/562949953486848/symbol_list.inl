@@ -27,4 +27,5 @@ LIBER_ADD_SYMBOL(CS::CSEzTaskProxy::free_task)
 LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_table)
 LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count)
 LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_ranges)
+LIBER_ADD_SYMBOL(DLKR::DLBackAllocator::get)
 #endif

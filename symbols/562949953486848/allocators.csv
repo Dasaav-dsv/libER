@@ -19,4 +19,5 @@ DLKR::DLAllocator::get_allocator_of,0x1E810D0
 FD4::FD4MemoryManager::GLOBAL_allocator_table,0x3CFDF40
 FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count,0x3CFDFE0
 FD4::FD4MemoryManager::GLOBAL_allocator_ranges,0x3CFDFF0
+DLKR::DLBackAllocator::get,0x1E76970
 ),"cppsv-fmt"
