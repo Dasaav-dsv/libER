@@ -4,9 +4,15 @@
 #include <detail/symbols.hpp>
 #include <detail/windows.inl>
 
+#include <mimalloc.h>
+
+#include <bit>
+
+using namespace from;
+
 static HANDLE default_heap = GetProcessHeap();
 
-// Default internal libER allocator
+// Default internal libER allocator based on mimalloc
 // Implements all necessary methods
 // Uses C allocation functions (needs _msize)
 // Models DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
@@ -41,27 +47,31 @@ public:
     }
 
     size_t msize(void* p) override {
-        if (!p) return 0;
-        return HeapSize(default_heap, 0, _block_pointer(p));
+        void* dec_bp = _decode_ptr(_block_pointer(p));
+        return mi_usable_size(dec_bp) - reinterpret_cast<uintptr_t>(p) +
+            reinterpret_cast<uintptr_t>(dec_bp);
     }
 
     void* allocate(size_t cb) override {
-        return this->allocate_aligned(cb, MEMORY_ALLOCATION_ALIGNMENT);
+        return this->allocate_aligned(cb, 8);
     }
 
     void* allocate_aligned(size_t cb, size_t alignment) override {
         _adjust_alignment(alignment);
         _adjust_size(cb, alignment);
-        void* alloc = HeapAlloc(default_heap, 0, cb);
+        void* alloc = nullptr;
+        mi_heap_t* heap = mi_heap_get_backing();
+        if (cb < MI_SMALL_SIZE_MAX) alloc = mi_heap_malloc_small(heap, cb);
+        else alloc = mi_heap_malloc(heap, cb);
         if (alloc) {
             void* alloc_base = _adjust_block(alloc, alignment);
-            _block_pointer(alloc) = alloc_base;
+            _block_pointer(alloc) = _encode_ptr(alloc_base);
         }
         return alloc;
     }
 
     void* reallocate(void* p, size_t cb) override {
-        return this->reallocate_aligned(p, cb, MEMORY_ALLOCATION_ALIGNMENT);
+        return this->reallocate_aligned(p, cb, 8);
     }
 
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
@@ -70,10 +80,12 @@ public:
         if (cb) {
             _adjust_alignment(alignment);
             _adjust_size(cb, alignment);
-            alloc = HeapReAlloc(default_heap, 0, _block_pointer(p), cb);
+            void* dec_bp = _decode_ptr(_block_pointer(p));
+            alloc = mi_heap_realloc_aligned(
+                mi_heap_get_backing(), dec_bp, cb, alignment);
             if (alloc) {
                 void* alloc_base = _adjust_block(alloc, alignment);
-                _block_pointer(alloc) = alloc_base;
+                _block_pointer(alloc) = _encode_ptr(alloc_base);
             }
         } else {
             this->deallocate(p);
@@ -83,7 +95,20 @@ public:
 
     void deallocate(void* p) override {
         if (!p) return;
-        HeapFree(default_heap, 0, _block_pointer(p));
+        auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
+            liber::function<"DLKR::DLBackAllocator::get",
+                DLKR::DLAllocator*>::call());
+        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p &&
+            reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
+            (dl_back_allocator + 4)->deallocate(p);
+            return;
+        }
+        void* bp = _block_pointer(p);
+        if (_test_ptr(bp)) {
+            mi_free(_decode_ptr(bp));
+            return;
+        }
+        HeapFree(default_heap, 0, bp);
     }
 
     void* allocate_second(size_t cb) override {
@@ -144,9 +169,20 @@ private:
     static void*& _block_pointer(void* p) {
         return *(reinterpret_cast<void**>(p) - 1);
     }
-} default_allocator;
 
-using namespace from;
+    void* _encode_ptr(void* p) {
+        auto encoded = std::rotr(reinterpret_cast<uint64_t>(p) + 0b101, 3);
+        return reinterpret_cast<void*>(encoded);
+    }
+
+    void* _decode_ptr(void* p) {
+        return reinterpret_cast<void*>(reinterpret_cast<uint64_t>(p) << 3);
+    }
+
+    bool _test_ptr(void* p) {
+        return (reinterpret_cast<uint64_t>(p) >> 48) == 0xA000;
+    }
+} default_allocator;
 
 allocator_base<from::default_allocator_tag>::allocator_base() noexcept
     : allocator(&default_allocator) {}
@@ -164,16 +200,7 @@ allocator_base<from::default_empty_base_allocator_tag>::get_allocator_of(
 }
 
 DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
-    // Check if it's possible memory was allocated on
-    // one of the ER heaps by checking allocator initialization
-    DLKR::DLAllocator* allocator = *reinterpret_cast<DLKR::DLAllocator**>(
-        liber::symbol<"DLKR::DLBackAllocator">::get());
-    if (allocator) // Allocators are initialized, safe to check ownership
-        return liber::function<"DLKR::DLAllocator::get_allocator_of",
-            DLKR::DLAllocator*>::call(p);
-    else // Memory likely malloc-ed by us or
-         // DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
-        return &default_allocator;
+    return &default_allocator;
 }
 
 #define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                  \
