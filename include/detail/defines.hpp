@@ -56,5 +56,6 @@
 // Mutex names used by program-wide Windows mutexes
 // See NamedMutex in dependencies/wintypes
 #define LIBER_VERSION_FILEIO_MUTEX L"LIBER_VERSION_FILEIO_MUTEX"
+#define LIBER_SINGLETON_OVERRIDE_MUTEX L"LIBER_SINGLETON_OVERRIDE_MUTEX"
 
 // clang-format on
