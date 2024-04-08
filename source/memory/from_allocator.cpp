@@ -61,8 +61,7 @@ public:
         _adjust_size(cb, alignment);
         void* alloc = nullptr;
         mi_heap_t* heap = mi_heap_get_backing();
-        if (cb < MI_SMALL_SIZE_MAX) alloc = mi_heap_malloc_small(heap, cb);
-        else alloc = mi_heap_malloc(heap, cb);
+        alloc = mi_heap_malloc(heap, cb);
         if (alloc) {
             void* alloc_base = _adjust_block(alloc, alignment);
             _block_pointer(alloc) = _encode_ptr(alloc_base);
@@ -81,11 +80,11 @@ public:
             _adjust_alignment(alignment);
             _adjust_size(cb, alignment);
             void* dec_bp = _decode_ptr(_block_pointer(p));
-            alloc = mi_heap_realloc_aligned(
-                mi_heap_get_backing(), dec_bp, cb, alignment);
+            alloc = mi_heap_realloc(mi_heap_get_backing(), dec_bp, cb);
             if (alloc) {
                 void* alloc_base = _adjust_block(alloc, alignment);
-                _block_pointer(alloc) = _encode_ptr(alloc_base);
+                if (alloc_base != dec_bp)
+                    _block_pointer(alloc) = _encode_ptr(alloc_base);
             }
         } else {
             this->deallocate(p);
@@ -125,7 +124,7 @@ public:
 
     void* reallocate_second_aligned(
         void* p, size_t cb, size_t alignment) override {
-        return this->reallocate_aligned(p, cb, 16);
+        return this->reallocate_aligned(p, cb, 8);
     }
 
     void deallocate_second(void* p) override {
@@ -148,9 +147,7 @@ public:
     // These are necessary for ABI compatibility
 private:
     static void _adjust_alignment(size_t& alignment) {
-        alignment = alignment > MEMORY_ALLOCATION_ALIGNMENT
-            ? alignment
-            : MEMORY_ALLOCATION_ALIGNMENT;
+        alignment = alignment > 8 ? alignment : 8;
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
@@ -158,11 +155,12 @@ private:
         size &= -static_cast<intptr_t>(alignment);
     }
 
-    static void* _adjust_block(
-        void*& p, size_t alignment = MEMORY_ALLOCATION_ALIGNMENT) {
+    static void* _adjust_block(void*& p, size_t alignment = 8) {
         void* tmp = p;
+        size_t alignment_minus_one = alignment - 1;
         p = reinterpret_cast<void*>(
-            (reinterpret_cast<uintptr_t>(p) + alignment) & ~(alignment - 1));
+            (reinterpret_cast<uintptr_t>(p) + alignment_minus_one) &
+            ~alignment_minus_one);
         return tmp;
     }
 
