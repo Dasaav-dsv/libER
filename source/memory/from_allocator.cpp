@@ -31,7 +31,8 @@ static HANDLE default_heap = GetProcessHeap();
 static class alignas(1 << CHAR_BIT) liber_internal_allocator
     : public DLKR::DLAllocator {
 public:
-    liber_internal_allocator() {
+    liber_internal_allocator()
+        : main_allocator(this), other_allocators(LIBER_MY_ALLOCATORS_RESOURCE) {
         mi_option_set(mi_option_purge_delay, 0);
         {
             WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
@@ -39,22 +40,22 @@ public:
             CS::CSMemory*& pcsmem = *reinterpret_cast<CS::CSMemory**>(
                 liber::symbol<"CS::CSMemory::instance">::get());
             if (!pcsmem) pcsmem = new CS::CSMemory();
-            DLKR::DLAllocator*& sysalloc =
-                *reinterpret_cast<DLKR::DLAllocator**>(
+            liber_internal_allocator** sysalloc =
+                reinterpret_cast<liber_internal_allocator**>(
                     liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
-            if (!sysalloc)
-                std::construct_at(
-                    reinterpret_cast<from::allocator<void>*>(&sysalloc));
+            if (InterlockedCompareExchangePointer(
+                    (void**)sysalloc, (void*)this, nullptr))
+                this->main_allocator = *sysalloc;
         }
-        {
-            std::scoped_lock lock{ this->allocators };
-            this->allocators->push_back(this);
+        if (this->main_allocator != this) {
+            std::scoped_lock lock{ this->other_allocators };
+            this->other_allocators->push_back(this);
         }
     }
 
     virtual ~liber_internal_allocator() {
-        std::scoped_lock lock{ this->allocators };
-        std::erase(this->allocators.get(), this);
+        std::scoped_lock lock{ this->other_allocators };
+        std::erase(this->other_allocators.get(), this);
     }
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
@@ -94,12 +95,9 @@ public:
                 size_t offset = 1ull << maybe_align;
                 void* base = _block_base(p, offset);
                 return mi_usable_size(base) - offset;
-            } else {
-                std::shared_lock lock{ this->allocators };
-                auto& allocators = this->allocators.get();
-                auto iter = std::find(
-                    allocators.begin(), allocators.end(), maybe_alloc);
-                if (iter != allocators.end()) return (*iter)->msize(p);
+            } else if (maybe_alloc = this->main_allocator) {
+                return this->main_allocator->_msize_unchecked(
+                    p, 1ull << maybe_align);
             }
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
@@ -109,11 +107,20 @@ public:
             reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
             return dl_back_allocator[4].msize(p);
         }
+        if (maybe_align < 64) {
+            std::shared_lock lock{ this->other_allocators };
+            auto& other_allocators = this->other_allocators.get();
+            auto iter = std::find(
+                other_allocators.begin(), other_allocators.end(), maybe_alloc);
+            if (iter != other_allocators.end()) {
+                return (*iter)->_msize_unchecked(p, 1ull << maybe_align);
+            }
+        }
         return HeapSize(default_heap, 0, _block_pointer(p));
     }
 
     void* allocate(size_t cb) override {
-        return this->allocate_aligned(cb, 8);
+        return this->allocate_aligned(cb, 16);
     }
 
     void* allocate_aligned(size_t cb, size_t alignment) override {
@@ -125,7 +132,7 @@ public:
     }
 
     void* reallocate(void* p, size_t cb) override {
-        return this->reallocate_aligned(p, cb, 8);
+        return this->reallocate_aligned(p, cb, 16);
     }
 
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
@@ -148,15 +155,10 @@ public:
                 void* base = _block_base(p, 1ull << maybe_align);
                 mi_free(base);
                 return;
-            } else {
-                std::shared_lock lock{ this->allocators };
-                auto& allocators = this->allocators.get();
-                auto iter = std::find(
-                    allocators.begin(), allocators.end(), maybe_alloc);
-                if (iter != allocators.end()) {
-                    (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
-                    return;
-                }
+            } else if (maybe_alloc == this->main_allocator) {
+                this->main_allocator->_deallocate_unchecked(
+                    p, 1ull << maybe_align);
+                return;
             }
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
@@ -166,6 +168,16 @@ public:
             reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
             dl_back_allocator[4].deallocate(p);
             return;
+        }
+        if (maybe_align < 64) {
+            std::shared_lock lock{ this->other_allocators };
+            auto& other_allocators = this->other_allocators.get();
+            auto iter = std::find(
+                other_allocators.begin(), other_allocators.end(), maybe_alloc);
+            if (iter != other_allocators.end()) {
+                (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
+                return;
+            }
         }
         HeapFree(default_heap, 0, _block_pointer(p));
     }
@@ -204,14 +216,20 @@ public:
     }
 
 private:
-    using res_type =
+    using allocators_resource_type =
         WinTypes::NamedResource<std::vector<liber_internal_allocator*>>;
 
-    res_type allocators{ LIBER_MY_ALLOCATORS_RESOURCE };
+    liber_internal_allocator* main_allocator;
+    allocators_resource_type other_allocators;
 
     virtual void _deallocate_unchecked(void* p, size_t alignment) {
         void* base = _block_base(p, alignment);
         mi_free(base);
+    }
+
+    virtual size_t _msize_unchecked(void* p, size_t alignment) {
+        void* base = _block_base(p, alignment);
+        return mi_usable_size(base) - alignment;
     }
 
     static void _adjust_alignment(size_t& alignment) {
