@@ -7,12 +7,16 @@
 #include <detail/windows.inl>
 
 #include <NamedMutex.h>
+#include <NamedResource.h>
+#include <SharedMutex.h>
 #include <mimalloc.h>
 
 #include <bit>
 #include <cstring>
 #include <memory>
 #include <mutex>
+#include <shared_mutex>
+#include <vector>
 
 #define LIBER_ALLOC_MAGIC 0x43'4F'4C'4C'41'52'45'40 // @ERALLOC
 
@@ -24,23 +28,34 @@ static HANDLE default_heap = GetProcessHeap();
 // Implements all necessary methods
 // Uses C allocation functions (needs _msize)
 // Models DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
-static class liber_internal_allocator : public DLKR::DLAllocator {
+static class alignas(1 << CHAR_BIT) liber_internal_allocator
+    : public DLKR::DLAllocator {
 public:
     liber_internal_allocator() {
         mi_option_set(mi_option_purge_delay, 0);
-        WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
-        std::scoped_lock lock{ mutex };
-        CS::CSMemory*& pcsmem = *reinterpret_cast<CS::CSMemory**>(
-            liber::symbol<"CS::CSMemory::instance">::get());
-        if (!pcsmem) pcsmem = new CS::CSMemory();
-        DLKR::DLAllocator*& sysalloc = *reinterpret_cast<DLKR::DLAllocator**>(
-            liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
-        if (!sysalloc)
-            std::construct_at(
-                reinterpret_cast<from::allocator<void>*>(&sysalloc));
+        {
+            WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
+            std::scoped_lock lock{ mutex };
+            CS::CSMemory*& pcsmem = *reinterpret_cast<CS::CSMemory**>(
+                liber::symbol<"CS::CSMemory::instance">::get());
+            if (!pcsmem) pcsmem = new CS::CSMemory();
+            DLKR::DLAllocator*& sysalloc =
+                *reinterpret_cast<DLKR::DLAllocator**>(
+                    liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
+            if (!sysalloc)
+                std::construct_at(
+                    reinterpret_cast<from::allocator<void>*>(&sysalloc));
+        }
+        {
+            std::scoped_lock lock{ this->allocators };
+            this->allocators->push_back(this);
+        }
     }
 
-    virtual ~liber_internal_allocator() = default;
+    virtual ~liber_internal_allocator() {
+        std::scoped_lock lock{ this->allocators };
+        std::erase(this->allocators.get(), this);
+    }
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
     int _allocator_id() override {
@@ -70,15 +85,22 @@ public:
 
     size_t msize(void* p) override {
         if (!p) return 0;
-        size_t maybe_align = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        auto maybe_alloc =
+            reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
+        auto maybe_align = static_cast<unsigned char>(data);
         if (maybe_align < 64) {
-            liber_internal_allocator* owner = _block_owner(p);
-            if (owner == this) [[likely]] {
+            if (maybe_alloc == this) [[likely]] {
                 size_t offset = 1ull << maybe_align;
                 void* base = _block_base(p, offset);
                 return mi_usable_size(base) - offset;
+            } else {
+                std::shared_lock lock{ this->allocators };
+                auto& allocators = this->allocators.get();
+                auto iter = std::find(
+                    allocators.begin(), allocators.end(), maybe_alloc);
+                if (iter != allocators.end()) return (*iter)->msize(p);
             }
-            return owner->msize(p);
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
@@ -91,38 +113,51 @@ public:
     }
 
     void* allocate(size_t cb) override {
-        return this->allocate_aligned(cb, 16);
+        return this->allocate_aligned(cb, 8);
     }
 
     void* allocate_aligned(size_t cb, size_t alignment) override {
         _adjust_alignment(alignment);
         _adjust_size(cb, alignment);
-        void* alloc = mi_zalloc_aligned(cb, alignment);
+        void* alloc = mi_malloc_aligned(cb, alignment);
         if (alloc) _adjust_block_and_encode(alloc, alignment);
         return alloc;
     }
 
     void* reallocate(void* p, size_t cb) override {
-        return this->reallocate_aligned(p, cb, 16);
+        return this->reallocate_aligned(p, cb, 8);
     }
 
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
         void* alloc = cb ? this->allocate_aligned(cb, alignment) : nullptr;
-        if (alloc) std::memcpy(alloc, p, this->msize(p));
-        this->deallocate(p);
+        if (p) {
+            if (alloc) std::memcpy(alloc, p, this->msize(p));
+            this->deallocate(p);
+        }
         return alloc;
     }
 
     void deallocate(void* p) override {
         if (!p) return;
-        size_t maybe_align = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        auto maybe_alloc =
+            reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
+        auto maybe_align = static_cast<unsigned char>(data);
         if (maybe_align < 64) {
-            liber_internal_allocator* owner = _block_owner(p);
-            if (owner == this) [[likely]] {
+            if (maybe_alloc == this) [[likely]] {
                 void* base = _block_base(p, 1ull << maybe_align);
                 mi_free(base);
-            } else owner->deallocate(p);
-            return;
+                return;
+            } else {
+                std::shared_lock lock{ this->allocators };
+                auto& allocators = this->allocators.get();
+                auto iter = std::find(
+                    allocators.begin(), allocators.end(), maybe_alloc);
+                if (iter != allocators.end()) {
+                    (*iter)->deallocate(p);
+                    return;
+                }
+            }
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
@@ -169,8 +204,13 @@ public:
     }
 
 private:
+    using res_type =
+        WinTypes::NamedResource<std::vector<liber_internal_allocator*>>;
+
+    res_type allocators{ LIBER_MY_ALLOCATORS_RESOURCE };
+
     static void _adjust_alignment(size_t& alignment) {
-        alignment = alignment > 16 ? alignment : 16;
+        alignment = alignment > 8 ? alignment : 8;
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
@@ -180,12 +220,8 @@ private:
     void _adjust_block_and_encode(void*& p, size_t alignment) {
         size_t alignment_minus_one = alignment - 1;
         p = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(p) + alignment);
-        _block_owner(p) = reinterpret_cast<liber_internal_allocator*>(this);
-        _block_data(p) = LIBER_ALLOC_MAGIC | std::countr_zero(alignment);
-    }
-
-    static liber_internal_allocator*& _block_owner(void* p) {
-        return reinterpret_cast<liber_internal_allocator**>(p)[-2];
+        _block_data(p) = reinterpret_cast<uintptr_t>(this) ^ LIBER_ALLOC_MAGIC |
+            std::countr_zero(alignment);
     }
 
     static uintptr_t& _block_data(void* p) {
@@ -201,6 +237,8 @@ private:
             reinterpret_cast<uintptr_t>(p) - alignment);
     }
 } default_allocator;
+
+static_assert(alignof(liber_internal_allocator) == (1 << CHAR_BIT));
 
 allocator_base<from::default_allocator_tag>::allocator_base() noexcept
     : allocator(&default_allocator) {}
