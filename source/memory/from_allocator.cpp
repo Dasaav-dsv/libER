@@ -154,7 +154,7 @@ public:
                 auto iter = std::find(
                     allocators.begin(), allocators.end(), maybe_alloc);
                 if (iter != allocators.end()) {
-                    (*iter)->deallocate(p);
+                    (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
                     return;
                 }
             }
@@ -208,6 +208,11 @@ private:
         WinTypes::NamedResource<std::vector<liber_internal_allocator*>>;
 
     res_type allocators{ LIBER_MY_ALLOCATORS_RESOURCE };
+
+    virtual void _deallocate_unchecked(void* p, size_t alignment) {
+        void* base = _block_base(p, alignment);
+        mi_free(base);
+    }
 
     static void _adjust_alignment(size_t& alignment) {
         alignment = alignment > 8 ? alignment : 8;
