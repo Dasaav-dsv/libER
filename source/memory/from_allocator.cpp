@@ -76,8 +76,8 @@ public:
         return 0;
     }
 
-    void* _get_free_bin() override {
-        return nullptr;
+    size_t backing_heap_capacity() override {
+        return std::numeric_limits<size_t>::max();
     }
 
     size_t heap_allocation_count() override {
@@ -90,15 +90,11 @@ public:
         auto maybe_alloc =
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
         auto maybe_align = static_cast<unsigned char>(data);
-        if (maybe_align < 64) {
-            if (maybe_alloc == this) [[likely]] {
-                size_t offset = 1ull << maybe_align;
-                void* base = _block_base(p, offset);
-                return mi_usable_size(base) - offset;
-            } else if (maybe_alloc = this->main_allocator) {
-                return this->main_allocator->_msize_unchecked(
-                    p, 1ull << maybe_align);
-            }
+        if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
+            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
+            size_t nalign = ~0ull << maybe_align;
+            if (maybe_align >= 64 || nalign < nsize) std::terminate();
+            return nalign - static_cast<ptrdiff_t>(nsize);
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
@@ -113,7 +109,11 @@ public:
             auto iter = std::find(
                 other_allocators.begin(), other_allocators.end(), maybe_alloc);
             if (iter != other_allocators.end()) {
-                return (*iter)->_msize_unchecked(p, 1ull << maybe_align);
+                size_t nsize =
+                    (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
+                size_t nalign = ~0ull << maybe_align;
+                if (maybe_align >= 64 || nalign < nsize) std::terminate();
+                return nalign - static_cast<ptrdiff_t>(nsize);
             }
         }
         return HeapSize(default_heap, 0, _block_pointer(p));
@@ -127,7 +127,7 @@ public:
         _adjust_alignment(alignment);
         _adjust_size(cb, alignment);
         void* alloc = mi_malloc_aligned(cb, alignment);
-        if (alloc) _adjust_block_and_encode(alloc, alignment);
+        if (alloc) _adjust_block_and_encode(alloc, cb, alignment);
         return alloc;
     }
 
@@ -150,12 +150,15 @@ public:
         auto maybe_alloc =
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
         auto maybe_align = static_cast<unsigned char>(data);
-        if (maybe_align < 64) {
-            if (maybe_alloc == this) [[likely]] {
+        if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
+            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
+            size_t nalign = ~0ull << maybe_align;
+            if (maybe_align >= 64 || nalign < nsize) std::terminate();
+            if (maybe_alloc == this) {
                 void* base = _block_base(p, 1ull << maybe_align);
                 mi_free(base);
                 return;
-            } else if (maybe_alloc == this->main_allocator) {
+            } else {
                 this->main_allocator->_deallocate_unchecked(
                     p, 1ull << maybe_align);
                 return;
@@ -175,6 +178,10 @@ public:
             auto iter = std::find(
                 other_allocators.begin(), other_allocators.end(), maybe_alloc);
             if (iter != other_allocators.end()) {
+                size_t nsize =
+                    (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
+                size_t nalign = ~0ull << maybe_align;
+                if (maybe_align >= 64 || nalign < nsize) std::terminate();
                 (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
                 return;
             }
@@ -227,28 +234,27 @@ private:
         mi_free(base);
     }
 
-    virtual size_t _msize_unchecked(void* p, size_t alignment) {
-        void* base = _block_base(p, alignment);
-        return mi_usable_size(base) - alignment;
-    }
-
     static void _adjust_alignment(size_t& alignment) {
-        alignment = alignment > 8 ? alignment : 8;
+        alignment = alignment > 16 ? alignment : 16;
     }
 
     static void _adjust_size(size_t& size, size_t alignment) {
         size = (size + alignment * 2 - 1) & -static_cast<ptrdiff_t>(alignment);
     }
 
-    void _adjust_block_and_encode(void*& p, size_t alignment) {
-        size_t alignment_minus_one = alignment - 1;
+    void _adjust_block_and_encode(void*& p, size_t size, size_t alignment) {
         p = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(p) + alignment);
-        _block_data(p) = reinterpret_cast<uintptr_t>(this) ^ LIBER_ALLOC_MAGIC |
-            std::countr_zero(alignment);
+        size_t encoded = LIBER_ALLOC_MAGIC | std::countr_zero(alignment);
+        _block_data(p) = reinterpret_cast<uintptr_t>(this) ^ encoded;
+        _block_size(p) = -static_cast<ptrdiff_t>(size) ^ encoded;
     }
 
     static uintptr_t& _block_data(void* p) {
         return reinterpret_cast<uintptr_t*>(p)[-1];
+    }
+
+    static size_t& _block_size(void* p) {
+        return reinterpret_cast<size_t*>(p)[-2];
     }
 
     static void*& _block_pointer(void* p) {
