@@ -57,8 +57,8 @@ public:
     // How many bytes out of the total capacity are allocated
     virtual size_t heap_size() = 0;
 
-    // Internal method, returns a free allocation bin hint
-    virtual void* _get_free_bin() = 0;
+    // The total capacity of the backing heap
+    virtual size_t backing_heap_capacity() = 0;
 
     // How many objects are allocated
     virtual size_t heap_allocation_count() = 0;
