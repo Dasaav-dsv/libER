@@ -58,4 +58,8 @@
 #define LIBER_VERSION_FILEIO_MUTEX L"LIBER_VERSION_FILEIO_MUTEX"
 #define LIBER_SINGLETON_OVERRIDE_MUTEX L"LIBER_SINGLETON_OVERRIDE_MUTEX"
 
+// Resource names used by program-wide resources,
+// based on named shared memory mapping backed by Windows
+#define LIBER_MY_ALLOCATORS_RESOURCE L"LIBER_MY_ALLOCATORS_RESOURCE"
+
 // clang-format on
