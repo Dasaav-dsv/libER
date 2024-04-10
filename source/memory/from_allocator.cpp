@@ -25,9 +25,10 @@ using namespace from;
 static HANDLE default_heap = GetProcessHeap();
 
 // Default internal libER allocator based on mimalloc
-// Implements all necessary methods
-// Uses C allocation functions (needs _msize)
-// Models DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
+// Implements all necessary DLAllocator methods,
+// overrides the default allocators used by ELDEN RING
+// Tries to be universal with respect to allocation
+// strategies left after
 static class alignas(1 << CHAR_BIT) liber_internal_allocator
     : public DLKR::DLAllocator {
 public:
@@ -37,17 +38,27 @@ public:
         {
             WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
             std::scoped_lock lock{ mutex };
-            CS::CSMemory*& pcsmem = *reinterpret_cast<CS::CSMemory**>(
+            // Replace the CSMemory singleton responsible
+            // for setting up allocators
+            // Check fd4/detail/fd4_memory and
+            // coresystem/memory
+            CS::CSMemory*& csmem = *reinterpret_cast<CS::CSMemory**>(
                 liber::symbol<"CS::CSMemory::instance">::get());
-            if (!pcsmem) pcsmem = new CS::CSMemory();
+            if (!csmem) csmem = new CS::CSMemory();
             liber_internal_allocator** sysalloc =
                 reinterpret_cast<liber_internal_allocator**>(
                     liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
+            // Replace the system allocator
+            // If we got here first, this is now the
+            // "main" allocator, otherwise whatever is
+            // already there is "main"
             if (InterlockedCompareExchangePointer(
                     (void**)sysalloc, (void*)this, nullptr))
                 this->main_allocator = *sysalloc;
         }
         if (this->main_allocator != this) {
+            // Keep a list of libER allocator instances
+            // that did not replace the "main" allocator
             std::scoped_lock lock{ this->other_allocators };
             this->other_allocators->push_back(this);
         }
@@ -84,6 +95,8 @@ public:
         return 0;
     }
 
+    // Extract block size from the metadata
+    // or call msize of other allocators
     size_t msize(void* p) override {
         if (!p) return 0;
         size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
@@ -91,6 +104,7 @@ public:
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
         auto maybe_align = static_cast<unsigned char>(data);
         if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
+            // Undo the encoding and confirm integrity
             size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
             size_t nalign = ~0ull << maybe_align;
             if (maybe_align >= 64 || nalign < nsize) std::terminate();
@@ -99,8 +113,10 @@ public:
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
                 DLKR::DLAllocator*>::call());
+        // Check if memory is in the allocated range
         if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p &&
             reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
+            // Reach into the actual allocator instance and msize
             return dl_back_allocator[4].msize(p);
         }
         if (maybe_align < 64) {
@@ -116,6 +132,7 @@ public:
                 return nalign - static_cast<ptrdiff_t>(nsize);
             }
         }
+        // All previous checks failed, try WINAPI HeapSize
         return HeapSize(default_heap, 0, _block_pointer(p));
     }
 
@@ -127,6 +144,8 @@ public:
         _adjust_alignment(alignment);
         _adjust_size(cb, alignment);
         void* alloc = mi_malloc_aligned(cb, alignment);
+        // Encode alignment and size into the leading
+        // 16 bytes and adjust the pointer
         if (alloc) _adjust_block_and_encode(alloc, cb, alignment);
         return alloc;
     }
@@ -144,6 +163,10 @@ public:
         return alloc;
     }
 
+    // Free memory allocated by any libER allocator,
+    // DLKR::DLBackAllocator or some _malloc_base implementation
+    // Since libER replaces ELDEN RING allocators globally,
+    // any of the above may be passed to its deallocate method
     void deallocate(void* p) override {
         if (!p) return;
         size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
@@ -151,14 +174,20 @@ public:
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
         auto maybe_align = static_cast<unsigned char>(data);
         if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
+            // Undo the encoding and confirm integrity
             size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
             size_t nalign = ~0ull << maybe_align;
+            // Alignment can't be greater than 64
+            // Size is a multiple of the alignment
+            // In an unsigned comparison, -alignment >= -nsize ~ 1
             if (maybe_align >= 64 || nalign < nsize) std::terminate();
             if (maybe_alloc == this) {
                 void* base = _block_base(p, 1ull << maybe_align);
                 mi_free(base);
                 return;
             } else {
+                // We know this memory belongs to another libER
+                // allocator, other checks are not necessary
                 this->main_allocator->_deallocate_unchecked(
                     p, 1ull << maybe_align);
                 return;
@@ -167,8 +196,10 @@ public:
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
                 DLKR::DLAllocator*>::call());
+        // Check if memory is in the allocated range
         if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p &&
             reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
+            // Reach into the actual allocator instance and msize
             dl_back_allocator[4].deallocate(p);
             return;
         }
@@ -181,11 +212,13 @@ public:
                 size_t nsize =
                     (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
                 size_t nalign = ~0ull << maybe_align;
+                // See checks above
                 if (maybe_align >= 64 || nalign < nsize) std::terminate();
                 (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
                 return;
             }
         }
+        // All previous checks failed, try WINAPI HeapFree
         HeapFree(default_heap, 0, _block_pointer(p));
     }
 
@@ -243,7 +276,11 @@ private:
     }
 
     void _adjust_block_and_encode(void*& p, size_t size, size_t alignment) {
+        // Move the pointer forward to get space for metadata
         p = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(p) + alignment);
+        // XOR both the pointer and size with a magic number
+        // OR log2 of the alignment. Used for integrity checks
+        // and as a means of storing metadata
         size_t encoded = LIBER_ALLOC_MAGIC | std::countr_zero(alignment);
         _block_data(p) = reinterpret_cast<uintptr_t>(this) ^ encoded;
         _block_size(p) = -static_cast<ptrdiff_t>(size) ^ encoded;
