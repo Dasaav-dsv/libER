@@ -90,6 +90,11 @@ private:
     mutable hash_type string_hash;
 };
 
+// Common Dantelion string type.
+// The purpose of the bool is unknown,
+// may be related to weak referencing
+using DLString = std::pair<from::string, bool>;
+
 LIBER_ASSERTS_BEGIN(FD4BasicHashString);
 LIBER_ASSERT_SIZE(0x40);
 LIBER_ASSERTS_END;
