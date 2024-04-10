@@ -5,6 +5,9 @@ project(libER VERSION 0.1.0.0 LANGUAGES C CXX)
 add_library("objlibER" OBJECT)
 target_compile_features("objlibER" PRIVATE cxx_std_20)
 
+# Set iterator debug level to 0 for ELDEN RING ABI compatibility
+add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
+
 # Dependency: WinTypes
 target_link_libraries("objlibER" PUBLIC "wintypes")
 add_subdirectory("dependencies/wintypes" "wintypes")
@@ -42,7 +45,7 @@ add_subdirectory("dependencies/thirdparty/mimalloc")
 target_include_directories("objlibER" SYSTEM PRIVATE "dependencies/cppsv/include")
 
 # Compile definitions:
-target_compile_definitions("objlibER" PUBLIC _ITERATOR_DEBUG_LEVEL=0 LIBERAPI_EXPORT)
+target_compile_definitions("objlibER" PUBLIC LIBERAPI_EXPORT)
 
 # Include directories:
 target_include_directories("objlibER"
@@ -101,9 +104,7 @@ target_sources("objlibER" PUBLIC
 
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mimalloc-obj>)
-# target_link_libraries("libER" PRIVATE mimalloc-static)
 # Target libER_static[d].lib
 add_library("libER_static" STATIC $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mimalloc-obj>)
-# target_link_libraries("libER_static" PRIVATE mimalloc-static)
 # Debug build "d" postfix in libERd.*
 set_target_properties("libER" "libER_static" PROPERTIES DEBUG_POSTFIX d)
