@@ -1,19 +1,51 @@
 ---
 BasedOnStyle: LLVM
 Language: Cpp
+Standard: c++20
 IndentWidth: 4
 AccessModifierOffset: -4
+ContinuationIndentWidth: 4 # 0?
 AlignAfterOpenBracket: DontAlign
-AlignOperands: DontAlign
+AlignEscapedNewlines: Left
+AlignOperands: AlignAfterOperator
 DerivePointerAlignment: false
 PointerAlignment: Left
 ReferenceAlignment: Left
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortBlocksOnASingleLine: Empty
 AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Empty
-AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortLoopsOnASingleLine: true
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: false
+  IndentBraces: false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 AlwaysBreakTemplateDeclarations: true
 Cpp11BracedListStyle: false
+EmptyLineBeforeAccessModifier: Always
+FixNamespaceComments: true
+IndentPPDirectives: None
+InsertNewlineAtEOF: true

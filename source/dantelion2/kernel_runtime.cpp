@@ -32,7 +32,8 @@ DLPlainMutex::DLPlainMutex() noexcept
     : mutex_handle(CreateMutexW(NULL, 0, NULL)) {}
 
 DLPlainMutex::~DLPlainMutex() noexcept {
-    if (this->mutex_handle) CloseHandle(this->mutex_handle);
+    if (this->mutex_handle)
+        CloseHandle(this->mutex_handle);
 }
 
 void DLPlainMutex::lock() noexcept {

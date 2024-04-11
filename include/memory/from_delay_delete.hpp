@@ -29,8 +29,8 @@ public:
                 DLKR::DLAllocator* allocator =
                     DLKR::DLAllocator::get_allocator_of(p);
                 base_type proxy{ allocator };
-                std::allocator_traits<base_type>::destroy(
-                    proxy, reinterpret_cast<T*>(p));
+                std::allocator_traits<base_type>::destroy(proxy,
+                    reinterpret_cast<T*>(p));
                 proxy.deallocate(reinterpret_cast<T*>(p), 1);
             },
             p);

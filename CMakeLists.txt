@@ -38,14 +38,18 @@ option(MI_SKIP_COLLECT_ON_EXIT "Skip collecting memory on program exit" OFF) # O
 option(MI_NO_PADDING        "Force no use of padding even in DEBUG mode etc." OFF)
 option(MI_INSTALL_TOPLEVEL  "Install directly into $CMAKE_INSTALL_PREFIX instead of PREFIX/lib/mimalloc-version" OFF)
 option(MI_NO_THP            "Disable transparent huge pages support on Linux/Android for the mimalloc process only" OFF)
-target_include_directories("objlibER" SYSTEM PUBLIC "dependencies/thirdparty/mimalloc/include")
-add_subdirectory("dependencies/thirdparty/mimalloc")
+target_include_directories("objlibER" SYSTEM PRIVATE "dependencies/thirdparty/mimalloc/include")
+add_subdirectory("dependencies/mimalloc" SYSTEM)
 
 # Dependency: cppsv
 target_include_directories("objlibER" SYSTEM PRIVATE "dependencies/cppsv/include")
 
 # Compile definitions:
 target_compile_definitions("objlibER" PUBLIC LIBERAPI_EXPORT)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options("objlibER" PUBLIC "-Wno-unused")
+endif()
 
 # Include directories:
 target_include_directories("objlibER"

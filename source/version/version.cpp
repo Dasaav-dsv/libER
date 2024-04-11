@@ -17,7 +17,8 @@ static std::string cached_ver_str;
 static std::atomic_flag contended;
 
 uversion liber::get_version() noexcept {
-    if (cached_ver) return cached_ver;
+    if (cached_ver)
+        return cached_ver;
     else if (contended.test_and_set()) {
         // Another thread is already retrieving the version
         contended.wait(true);
@@ -28,24 +29,28 @@ uversion liber::get_version() noexcept {
         // Resource: VS_VERSION, resource type: RT_VERSION
         HRSRC resource_handle =
             FindResourceW(NULL, MAKEINTRESOURCEW(1), MAKEINTRESOURCEW(16));
-        if (!resource_handle) return LIBER_INVALID_VERSION;
+        if (!resource_handle)
+            return LIBER_INVALID_VERSION;
         HGLOBAL global_handle = LoadResource(NULL, resource_handle);
-        if (!global_handle) return LIBER_INVALID_VERSION;
+        if (!global_handle)
+            return LIBER_INVALID_VERSION;
         DWORD* resource_start =
             reinterpret_cast<DWORD*>(LockResource(global_handle));
-        if (!resource_start) return LIBER_INVALID_VERSION;
+        if (!resource_start)
+            return LIBER_INVALID_VERSION;
         // The first field of the resource is its length in bytes
         DWORD* resource_end = reinterpret_cast<DWORD*>(
             reinterpret_cast<uintptr_t>(resource_start) + *resource_start);
         // Look for the resource signature, which indicates the begining of the
         // resource data
         while (*(resource_start++) != VS_SIGNATURE)
-            if (resource_start >= resource_end) return LIBER_INVALID_VERSION;
+            if (resource_start >= resource_end)
+                return LIBER_INVALID_VERSION;
         VS_FIXEDFILEINFO* fixed_file_info =
             reinterpret_cast<VS_FIXEDFILEINFO*>(resource_start);
         long long version_result =
-            (static_cast<long long>(fixed_file_info->dwFileVersionLS) << 32) |
-            fixed_file_info->dwFileVersionMS;
+            (static_cast<long long>(fixed_file_info->dwFileVersionLS) << 32)
+            | fixed_file_info->dwFileVersionMS;
         return version_result ? version_result : LIBER_INVALID_VERSION;
     }();
     cached_ver = version;
@@ -68,9 +73,11 @@ bool liber::match_version() noexcept {
 
 std::string liber::load_versioned_csv() noexcept {
     auto version = get_version();
-    if (version == LIBER_INVALID_VERSION) return "";
+    if (version == LIBER_INVALID_VERSION)
+        return "";
     std::string from_disk = load_versioned_csv_from_disk();
-    if (!from_disk.empty()) return from_disk;
+    if (!from_disk.empty())
+        return from_disk;
     std::string from_repo = load_versioned_csv_from_repo();
     return from_repo;
 }

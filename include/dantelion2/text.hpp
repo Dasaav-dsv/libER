@@ -22,7 +22,8 @@ struct string_hash {
     }
 
     int get_hash() noexcept {
-        if (this->needs_hashing) this->hash_string(*this->str);
+        if (this->needs_hashing)
+            this->hash_string(*this->str);
         return this->hash_value;
     }
 
@@ -30,9 +31,11 @@ struct string_hash {
         int result = 0;
         for (int chr : str) {
             // To lowercase (approximate)
-            if (chr <= 'Z') chr += 0x20;
+            if (chr <= 'Z')
+                chr += 0x20;
             // Treat backslashes identically
-            else if (chr == '\\') chr = '/';
+            else if (chr == '\\')
+                chr = '/';
             result *= 137;
             result += chr;
         }
