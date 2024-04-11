@@ -226,13 +226,13 @@ public:
      * game.
      *
      */
-    const from::vector<cstg_control> task_groups;
+    const from::vector<cstg_control> task_groups{};
 
     /**
      * @brief The total count of all task groups.
      *
      */
-    const cstgi task_group_count;
+    const cstgi task_group_count{};
 };
 
 /**
