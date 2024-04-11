@@ -1,3 +1,10 @@
+/**
+ * @file fd4_memory.hpp
+ * @brief Namespace FD4 memory management
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <dantelion2/text.hpp>
@@ -5,6 +12,11 @@
 
 namespace from {
 namespace FD4 {
+/**
+ * @brief Base of CS::CSMemory, a singleton responsible for managing memory
+ * allocation.
+ *
+ */
 class FD4MemoryManager {
 public:
     LIBER_CLASS(FD4MemoryManager);
@@ -12,11 +24,12 @@ public:
     FD4MemoryManager() = default;
 
     virtual ~FD4MemoryManager() = default;
+
+private:
     virtual void init_allocators();
     virtual void free_allocators() LIBER_INTERFACE;
     virtual void memdump(void*, wchar_t*) LIBER_INTERFACE;
 
-private:
     void* liber_unknown = nullptr;
     void* liber_unknown = nullptr;
     void* liber_unknown[6]{};

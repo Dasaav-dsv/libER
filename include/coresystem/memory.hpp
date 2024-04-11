@@ -1,3 +1,10 @@
+/**
+ * @file memory.hpp
+ * @brief Namespace CS memory management
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <detail/preprocessor.hpp>
@@ -5,17 +12,25 @@
 
 namespace from {
 namespace CS {
+/**
+ * @brief Singleton responsible for managing memory allocation.
+ *
+ * This singleton is overriden by libER to implement custom
+ * mimalloc memory allocation in ELDEN RING.
+ * See source/memory/from_allocator.cpp for the implementation.
+ *
+ */
 class CSMemory : public FD4::FD4MemoryManager {
 public:
     LIBER_CLASS(CSMemory);
 
-    virtual ~CSMemory() = default;
-    virtual void liber_unknown() {}
-    virtual void liber_unknown() {}
-
     CSMemory() = default;
+    virtual ~CSMemory() = default;
 
 private:
+    virtual void liber_unknown() {}
+    virtual void liber_unknown() {}
+
     bool liber_unknown = false;
 };
 

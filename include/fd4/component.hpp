@@ -1,3 +1,10 @@
+/**
+ * @file component.hpp
+ * @brief FD4ComponentBase implementation
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <dantelion2/reflection.hpp>
@@ -16,11 +23,22 @@
 
 namespace from {
 namespace FD4 {
-// A class that automatically instantiates reflective
-// DLRF::DLRuntimeClass instances for classes that derive from it.
-// Commonly used in the ELDEN RING codebase
+/**
+ * @brief Reflection implementation for a given class.
+ *
+ * A class that automatically instantiates reflective DLRF::DLRuntimeClass
+ * instances for classes that derive from it. Commonly used in the ELDEN RING
+ * codebase.
+ *
+ */
 struct FD4ComponentBase {
+    /**
+     * @brief Get the runtime class object
+     *
+     * @return DLRF::DLRuntimeClass* pointer to the runtime class
+     */
     LIBERAPI virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept;
+
     virtual ~FD4ComponentBase() = default;
 };
 } // namespace FD4

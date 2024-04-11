@@ -1,3 +1,10 @@
+/**
+ * @file from_deque.hpp
+ * @brief from::deque based on std::deque
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #if defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL > 0
@@ -8,6 +15,10 @@
 #include <memory/from_allocator.hpp>
 
 namespace from {
+/**
+ * @brief std::deque with from::allocator.
+ *
+ */
 template <typename T, typename AllocatorTag = from::default_allocator_tag>
 using deque = std::deque<T, from::allocator<T, AllocatorTag>>;
-}
+} // namespace from

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13.0)
+cmake_minimum_required(VERSION 3.15.0)
 project(libER VERSION 0.1.0.0 LANGUAGES C CXX)
 
 # Object library for libER[d].dll and libER_static[d].lib
@@ -7,6 +7,9 @@ target_compile_features("objlibER" PRIVATE cxx_std_20)
 
 # Set iterator debug level to 0 for ELDEN RING ABI compatibility
 add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
+
+# Documentation:
+include("doc/CMakeLists.txt" EXCLUDE_FROM_ALL)
 
 # Dependency: WinTypes
 target_link_libraries("objlibER" PUBLIC "wintypes")
