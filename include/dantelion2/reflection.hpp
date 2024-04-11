@@ -1,3 +1,10 @@
+/**
+ * @file reflection.hpp
+ * @brief Dantelion2 type reflection
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <detail/literal_string.hpp>
@@ -22,42 +29,97 @@ struct DLMethodInvokeContext {};
 struct DLFunctionInvokeContext {};
 struct DLRuntimeConstructionContext {};
 
-// DLRF runtime method invocation interface
+/**
+ * @brief Layout of a Dantelion2 method invoker interface.
+ *
+ */
 template <typename Ctx = DLMethodInvokeContext>
 class DLMethodInvokerImpl {
-public:
     virtual int invoke(Ctx* context) LIBER_INTERFACE_ONLY;
+
+public:
     virtual ~DLMethodInvokerImpl() LIBER_INTERFACE_ONLY;
+
+private:
     virtual int arg_count() LIBER_INTERFACE_ONLY;
     virtual void zero_context1(Ctx* context) LIBER_INTERFACE_ONLY;
     virtual void zero_context2(Ctx* context) LIBER_INTERFACE_ONLY;
     virtual char* ref_byte() LIBER_INTERFACE_ONLY;
 };
 
-// Default template
+/**
+ * @brief Default Dantelion2 method invoker interface.
+ *
+ */
 using DLMethodInvoker = DLMethodInvokerImpl<DLMethodInvokeContext>;
 
-// Concrete method invoker class
-// Is not implemented in libER, exposition only
+/**
+ * @brief Concrete method invoker, exposition only.
+ *
+ */
 struct LIBER_DUMMY DLConcreteMethodInvoker : public DLMethodInvoker {
+    /**
+     * @brief The bound method.
+     *
+     */
     void* method;
 };
 
 // Forward declaration
 class DLRuntimeClass;
 
-// A wrapper that represents a method
-// with a vector of invoker objects
+/**
+ * @brief A wrapper that represents a method with a vector of invoker objects.
+ *
+ */
 struct DLRuntimeMethod {
     LIBER_CLASS(DLRuntimeMethod);
 
-    DLRuntimeMethod() noexcept
-        : owner(nullptr), method_name(nullptr), method_name_w(nullptr) {}
+    // DLRuntimeMethod() noexcept
+    //     : owner(nullptr), method_name(nullptr), method_name_w(nullptr) {}
 
+    /**
+     * @brief Construct a new DLRuntimeMethod object
+     *
+     * @param owner The owning reflection object.
+     * @param method_name The name of the method.
+     * @param method_name_w The name (wide) of the method.
+     */
     DLRuntimeMethod(DLRuntimeClass* owner, const char* method_name,
         const wchar_t* method_name_w) noexcept
         : owner(owner), method_name(method_name), method_name_w(method_name_w) {
     }
+
+    /**
+     * @brief Get the method name
+     *
+     * @return const char* name
+     */
+    const char* get_method_name() const noexcept {
+        return this->method_name;
+    }
+
+    /**
+     * @brief Get the method name (wide)
+     *
+     * @return const wchar_t* name
+     */
+    const wchar_t* get_method_name_w() const noexcept {
+        return this->method_name_w;
+    }
+
+    /**
+     * @brief Get all the invokers bound to this method.
+     *
+     * @return const from::vector<DLMethodInvoker*>& const reference to a vector
+     * of invokers.
+     */
+    const from::vector<DLMethodInvoker*>& get_invokers() const noexcept {
+        return this->invokers;
+    }
+
+private:
+    friend class DLRuntimeClass;
 
     DLRuntimeClass* owner;
     const char* method_name;
@@ -68,31 +130,72 @@ struct DLRuntimeMethod {
     DLKR::DLPlainMutex mutex;
 };
 
-// A wrapper for the DLRuntimeMethod wrapper
-struct DLRuntimeMethodHolder {
-    LIBER_CLASS(DLRuntimeMethodHolder);
+/**
+ * @brief A holder for a DLRF::DLRuntime object.
+ *
+ * May hold a DLRuntimeClass or a DLRuntimeMethod.
+ *
+ */
+template <typename T>
+struct DLRuntimeObjectHolder {
+    LIBER_CLASS(DLRuntimeObjectHolder);
 
-    DLRuntimeMethodHolder() noexcept
-        : method_name(nullptr), method_name_w(nullptr), length(0) {}
+    /**
+     * @brief Construct a new DLRuntimeObjectHolder object
+     *
+     * @param method A rvalue reference to a unique ptr to the object.
+     * @param name The name of the object.
+     * @param name_w The name of the object (wide).
+     */
+    DLRuntimeObjectHolder(from::unique_ptr<T>&& method, const char* name,
+        const wchar_t* name_w) noexcept
+        : object(std::move(method)), name(name), name_w(name_w),
+          length(std::strlen(name)) {}
 
-    DLRuntimeMethodHolder(from::unique_ptr<DLRuntimeMethod>&& method,
-        const char* method_name, const wchar_t* method_name_w,
-        size_t length) noexcept
-        : method(std::move(method)), method_name(method_name),
-          method_name_w(method_name_w), length(length) {}
+    /**
+     * @brief Get a pointer to the held method instance.
+     *
+     * @return const DLRuntimeMethod* pointer to the instance.
+     */
+    const DLRuntimeMethod* get() const noexcept {
+        return this->object.get();
+    }
 
-    from::unique_ptr<DLRuntimeMethod> method;
-    const char* method_name;
-    const wchar_t* method_name_w;
+private:
+    friend class DLRuntimeClass;
+
+    from::unique_ptr<T> object;
+    const char* name;
+    const wchar_t* name_w;
     size_t length;
 };
 
-// Ref byte/runtime class pair
+/**
+ * @brief A holder for a DLRF::DLRuntimeMethod object.
+ *
+ */
+using DLRuntimeMethodHolder = DLRuntimeObjectHolder<DLRuntimeMethod>;
+
+/**
+ * @brief A holder for a DLRF::DLRuntimeClass object.
+ *
+ */
+using DLRuntimeClassHolder = DLRuntimeObjectHolder<DLRuntimeClass>;
+
+/**
+ * @brief A pair of a char and a DLRuntimeClass pointers.
+ *
+ */
 using DLRuntimeClassPair = std::pair<char*, DLRuntimeClass*>;
 
-// (Typically statically allocated) reflection based
-// object for an implementing class. Allows for runtime
-// type introspection and for binding method invokers.
+/**
+ * @brief Type reflection object for an implementing class.
+ *
+ * Allows for runtime type introspection and for binding method invokers.
+ *
+ * Typically statically allocated, widely used in ELDEN RING.
+ *
+ */
 class DLRuntimeClass {
 public:
     LIBER_CLASS(DLRuntimeClass);
@@ -101,9 +204,18 @@ public:
 
     virtual ~DLRuntimeClass() = default;
 
-    // Class name
+    /**
+     * @brief Get the name of the type.
+     *
+     * @return const char* name of the type.
+     */
     virtual const char* class_name() const noexcept = 0;
-    // Class name (wide)
+
+    /**
+     * @brief Get the name of the type (wide).
+     *
+     * @return const wchar_t* name of the type.
+     */
     virtual const wchar_t* class_name_w() const noexcept = 0;
 
 private:
@@ -124,26 +236,57 @@ private:
         DLKR::DLAllocator* allocator) = 0;
 
 public:
-    // The size of the runtime class
+    /**
+     * @brief Size of the type.
+     *
+     * @return size_t size.
+     */
     virtual size_t class_size() const noexcept = 0;
 
-    // Add an invoker to a vector of invokers for the class's constructor
+    /**
+     * @brief Add an invoker to a vector of invokers for the class's
+     * constructor.
+     *
+     * @param invoker The invoker for the method.
+     * @param method_name The name of the method.
+     * @param method_name_w The name of the method (wide).
+     */
     LIBERAPI virtual void add_constructor_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
 
-    // Add an invoker to a vector of invokers for a given method
+    /**
+     * @brief Add an invoker to a vector of invokers for a given method.
+     *
+     * @param invoker The invoker for the method.
+     * @param method_name The name of the method.
+     * @param method_name_w The name of the method (wide).
+     */
     LIBERAPI virtual void add_method_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
 
-    // Get class's base, nullptr if it's not derived
+    /**
+     * @brief Get a derived class's base class.
+     *
+     * @return DLRuntimeClass* (may be null if not derived)
+     */
     DLRuntimeClass* get_base() noexcept {
         return this->base_class;
     }
+
+    /**
+     * @brief Get a derived class's base class.
+     *
+     * @return const DLRuntimeClass* (may be null if not derived)
+     */
     const DLRuntimeClass* get_base() const noexcept {
         return this->base_class;
     }
 
-    // Get the constructor method (may be null)
+    /**
+     * @brief Get the constructor method (if bound)
+     *
+     * @return liber::optref<DLRuntimeMethod> (may be std::nullopt)
+     */
     liber::optref<DLRuntimeMethod> get_constructor() noexcept {
         DLRuntimeMethod* method_ptr = this->runtime_constructor.get();
         if (!method_ptr)
@@ -151,21 +294,50 @@ public:
         return *method_ptr;
     }
 
-    // Get a vector of all methods
+    /**
+     * @brief Get every bound method.
+     *
+     * @return from::vector<DLRuntimeMethodHolder>& vector of bound methods
+     */
     from::vector<DLRuntimeMethodHolder>& get_methods() noexcept {
         return this->runtime_methods;
     }
 
-    // Get a method by name if it exists
-    LIBERAPI DLRuntimeMethod* find_method(
+    /**
+     * @brief Find a bound method by name (if it exists).
+     *
+     * @param method_name The name of the method.
+     * @return liber::optref<DLRuntimeMethod> (may be std::nullopt)
+     */
+    LIBERAPI liber::optref<DLRuntimeMethod> find_method(
         const std::string_view& method_name) noexcept;
 
-    // Get a vector of all globally registered DLRuntimeClasses
-    LIBERAPI static from::vector<DLRuntimeMethodHolder>&
+    /**
+     * @brief Get a vector of all globally registered DLRuntimeClasses.
+     *
+     * The returned vector contains every DLRuntimeClass that has been
+     * registered so far by ELDEN RING. Be aware that classes are registered
+     * during the static initialization phase, so this vector will not be
+     * initialized before that point.
+     *
+     * @return from::vector<DLRuntimeClassHolder>& vector of
+     * DLRuntimeClassHolder objects
+     */
+    LIBERAPI static const from::vector<DLRuntimeClassHolder>&
     get_registered_classes() noexcept;
 
-    // Get a vector of all globally registered DLRuntimeClass pairs
-    LIBERAPI static from::vector<DLRuntimeClassPair>&
+    /**
+     * @brief Get a vector of all globally registered DLRuntimeClass pairs.
+     *
+     * The returned vector contains every DLRuntimeClass pair that has been
+     * registered so far by ELDEN RING. Be aware that classes are registered
+     * during the static initialization phase, so this vector will not be
+     * initialized before that point.
+     *
+     * @return from::vector<DLRuntimeClassPair>& vector of DLRuntimeClassPair
+     * objects
+     */
+    LIBERAPI static const from::vector<DLRuntimeClassPair>&
     get_runtime_pairs() noexcept;
 
 private:
@@ -177,8 +349,11 @@ private:
     from::vector<DLRuntimeMethodHolder> runtime_methods;
 };
 
-// Concrete DLRuntimeClass for class Impl
-// Additionally stores the class name
+/**
+ * @brief Concrete DLRuntimeClass reflection for class Impl.
+ *
+ * @tparam The class to reflect.
+ */
 template <class Impl>
 class DLRuntimeClassImpl : public DLRuntimeClass {
 public:
@@ -186,6 +361,12 @@ public:
 
     virtual ~DLRuntimeClassImpl() = default;
 
+    /**
+     * @brief Construct a new DLRuntimeClassImpl object.
+     *
+     * @param class_name Name of the class.
+     * @param class_name_w Name of the class (wide).
+     */
     DLRuntimeClassImpl(const char* class_name,
         const wchar_t* class_name_w) noexcept
         : DLRuntimeClass(), _class_name(class_name),
@@ -218,12 +399,24 @@ private:
     const wchar_t* _class_name_w;
 };
 
-// DLRuntimeClass reflection implentation in libER
+/**
+ * @brief The libER reflection implementation of DLRuntimeClass.
+ *
+ * @tparam Impl The class to reflect.
+ * @tparam ImplName The name of the class to reflect.
+ */
 template <class Impl, liber::literal_string ImplName>
-struct DLRuntimeClassTemplate {
+class DLRuntimeClassTemplate {
     static constexpr auto dl_runtime_class_name = ImplName.trunc();
     static constexpr auto dl_runtime_class_name_w = ImplName.widen();
 
+public:
+    /**
+     * @brief The actual DLRuntimeClassImpl instance to return to the game, if
+     * requested.
+     *
+     * See component.hpp for the implementation.
+     */
     inline static DLRF::DLRuntimeClassImpl<Impl> dl_runtime_class{
         DLRuntimeClassTemplate::dl_runtime_class_name.string,
         DLRuntimeClassTemplate::dl_runtime_class_name_w.string
@@ -236,7 +429,7 @@ LIBER_ASSERT_OFFS(0x18, invokers);
 LIBER_ASSERT_OFFS(0x60, mutex);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(DLRuntimeMethodHolder);
+LIBER_ASSERTS_TEMPLATE_BEGIN(DLRuntimeObjectHolder, DLRuntimeMethod);
 LIBER_ASSERT_SIZE(0x20);
 LIBER_ASSERTS_END;
 
