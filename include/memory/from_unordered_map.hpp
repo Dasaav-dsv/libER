@@ -1,3 +1,10 @@
+/**
+ * @file from_unordered_map.hpp
+ * @brief from::unordered_map based on std::unordered_map
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #if defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL > 0
@@ -8,9 +15,13 @@
 #include <unordered_map>
 
 namespace from {
+/**
+ * @brief std::unordered_map with from::allocator.
+ *
+ */
 template <typename K, typename V, typename Hash = std::hash<K>,
     typename Eq = std::equal_to<K>,
     typename AllocatorTag = from::default_allocator_tag>
 using unordered_map = std::unordered_map<K, V, Hash, Eq,
     from::allocator<std::pair<const K, V>, AllocatorTag>>;
-}
+} // namespace from

@@ -1,3 +1,11 @@
+/**
+ * @file singleton.hpp
+ * @brief FD4_SINGLETON_CLASS implementation
+ * 
+ * Copyright (c) libER ELDEN RING API library 2024
+ * 
+ */
+
 #pragma once
 
 #include <detail/optref.hpp>

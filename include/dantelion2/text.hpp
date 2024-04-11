@@ -1,6 +1,6 @@
 /**
  * @file text.hpp
- * @brief Dantelion2 strings.
+ * @brief Dantelion2 strings
  *
  * Copyright (c) libER ELDEN RING API library 2024
  *
@@ -24,14 +24,14 @@ namespace DLTX {
  * The string is rehashed after the string could have changed (non-const
  * access). The hash is 32 bits in size.
  *
- * @tparam T Type of the string.
+ * @tparam T type of the string
  */
 template <typename T>
 struct string_hash {
     /**
      * @brief Construct a new string hash object.
      *
-     * @param str The string.
+     * @param str the string
      */
     string_hash(const T& str) : str(&str), hash_value(0), needs_hashing(true) {}
 
@@ -57,8 +57,8 @@ struct string_hash {
     /**
      * @brief Hash the string and get the hash.
      *
-     * Differs from \ref get_hash in that it always rehashes the string, while
-     * \ref get_hash may return a cached result if the string has not changed.
+     * Differs from @ref get_hash in that it always rehashes the string, while
+     * @ref get_hash may return a cached result if the string has not changed.
      *
      * The implementation mirrors ELDEN RING's string hashing and produces
      * equivalent hashes for the same strings.
@@ -109,7 +109,7 @@ public:
      * @brief Construct a new FD4BasicHashString object with from::wstring
      * constructor arguments.
      *
-     * @param args The arguments to pass to the string constructor.
+     * @param args the arguments to pass to the string constructor
      */
     template <typename... Args>
     FD4BasicHashString(Args&&... args)
@@ -118,7 +118,7 @@ public:
     /**
      * @brief Access the string with an implicit conversion.
      *
-     * @return string_type& string.
+     * @return string_type& string
      */
     operator string_type&() noexcept {
         this->string_hash.may_change();
@@ -128,7 +128,7 @@ public:
     /**
      * @brief Access the string with an implicit conversion.
      *
-     * @return const string_type& string.
+     * @return const string_type& string
      */
     operator const string_type&() const noexcept {
         return this->get_string();
@@ -137,7 +137,7 @@ public:
     /**
      * @brief Access the string.
      *
-     * @return string_type& string.
+     * @return string_type& string
      */
     string_type& get_string() noexcept {
         this->string_hash.may_change();
@@ -147,7 +147,7 @@ public:
     /**
      * @brief Access the string.
      *
-     * @return const string_type& string.
+     * @return const string_type& string
      */
     const string_type& get_string() const noexcept {
         return this->string;
@@ -158,7 +158,7 @@ public:
      *
      * @see string_hash.
      *
-     * @return int hash.
+     * @return int hash
      */
     int get_hash() const noexcept {
         return string_hash.get_hash();

@@ -81,9 +81,9 @@ struct DLRuntimeMethod {
     /**
      * @brief Construct a new DLRuntimeMethod object
      *
-     * @param owner The owning reflection object.
-     * @param method_name The name of the method.
-     * @param method_name_w The name (wide) of the method.
+     * @param owner the owning reflection object
+     * @param method_name the name of the method
+     * @param method_name_w the name (wide) of the method
      */
     DLRuntimeMethod(DLRuntimeClass* owner, const char* method_name,
         const wchar_t* method_name_w) noexcept
@@ -112,7 +112,7 @@ struct DLRuntimeMethod {
      * @brief Get all the invokers bound to this method.
      *
      * @return const from::vector<DLMethodInvoker*>& const reference to a vector
-     * of invokers.
+     * of invokers
      */
     const from::vector<DLMethodInvoker*>& get_invokers() const noexcept {
         return this->invokers;
@@ -143,9 +143,9 @@ struct DLRuntimeObjectHolder {
     /**
      * @brief Construct a new DLRuntimeObjectHolder object
      *
-     * @param method A rvalue reference to a unique ptr to the object.
-     * @param name The name of the object.
-     * @param name_w The name of the object (wide).
+     * @param method a rvalue reference to a unique ptr to the object
+     * @param name the name of the object
+     * @param name_w the name of the object (wide)
      */
     DLRuntimeObjectHolder(from::unique_ptr<T>&& method, const char* name,
         const wchar_t* name_w) noexcept
@@ -155,7 +155,7 @@ struct DLRuntimeObjectHolder {
     /**
      * @brief Get a pointer to the held method instance.
      *
-     * @return const DLRuntimeMethod* pointer to the instance.
+     * @return const DLRuntimeMethod* pointer to the instance
      */
     const DLRuntimeMethod* get() const noexcept {
         return this->object.get();
@@ -207,14 +207,14 @@ public:
     /**
      * @brief Get the name of the type.
      *
-     * @return const char* name of the type.
+     * @return const char* name of the type
      */
     virtual const char* class_name() const noexcept = 0;
 
     /**
      * @brief Get the name of the type (wide).
      *
-     * @return const wchar_t* name of the type.
+     * @return const wchar_t* name of the type
      */
     virtual const wchar_t* class_name_w() const noexcept = 0;
 
@@ -239,7 +239,7 @@ public:
     /**
      * @brief Size of the type.
      *
-     * @return size_t size.
+     * @return size_t size
      */
     virtual size_t class_size() const noexcept = 0;
 
@@ -247,9 +247,9 @@ public:
      * @brief Add an invoker to a vector of invokers for the class's
      * constructor.
      *
-     * @param invoker The invoker for the method.
-     * @param method_name The name of the method.
-     * @param method_name_w The name of the method (wide).
+     * @param invoker the invoker for the method
+     * @param method_name the name of the method
+     * @param method_name_w the name of the method (wide)
      */
     LIBERAPI virtual void add_constructor_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
@@ -257,9 +257,9 @@ public:
     /**
      * @brief Add an invoker to a vector of invokers for a given method.
      *
-     * @param invoker The invoker for the method.
-     * @param method_name The name of the method.
-     * @param method_name_w The name of the method (wide).
+     * @param invoker the invoker for the method
+     * @param method_name the name of the method
+     * @param method_name_w the name of the method (wide)
      */
     LIBERAPI virtual void add_method_invoker(DLMethodInvoker* invoker,
         const char* method_name, const wchar_t* method_name_w);
@@ -306,7 +306,7 @@ public:
     /**
      * @brief Find a bound method by name (if it exists).
      *
-     * @param method_name The name of the method.
+     * @param method_name the name of the method
      * @return liber::optref<DLRuntimeMethod> (may be std::nullopt)
      */
     LIBERAPI liber::optref<DLRuntimeMethod> find_method(
@@ -352,7 +352,7 @@ private:
 /**
  * @brief Concrete DLRuntimeClass reflection for class Impl.
  *
- * @tparam The class to reflect.
+ * @tparam Impl the class to reflect
  */
 template <class Impl>
 class DLRuntimeClassImpl : public DLRuntimeClass {
@@ -364,8 +364,8 @@ public:
     /**
      * @brief Construct a new DLRuntimeClassImpl object.
      *
-     * @param class_name Name of the class.
-     * @param class_name_w Name of the class (wide).
+     * @param class_name name of the class
+     * @param class_name_w name of the class (wide)
      */
     DLRuntimeClassImpl(const char* class_name,
         const wchar_t* class_name_w) noexcept
@@ -402,8 +402,8 @@ private:
 /**
  * @brief The libER reflection implementation of DLRuntimeClass.
  *
- * @tparam Impl The class to reflect.
- * @tparam ImplName The name of the class to reflect.
+ * @tparam Impl the class to reflect
+ * @tparam ImplName liber::literal_string the name of the class to reflect
  */
 template <class Impl, liber::literal_string ImplName>
 class DLRuntimeClassTemplate {

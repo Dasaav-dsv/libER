@@ -1,3 +1,10 @@
+/**
+ * @file resource.hpp
+ * @brief TODO
+ * 
+ * Copyright (c) libER ELDEN RING API library 2024
+ * 
+ */
 #pragma once
 
 #include <dantelion2/text.hpp>
@@ -5,7 +12,8 @@
 #include <fd4/component.hpp>
 #include <memory/from_allocator.hpp>
 
-// TODO: anchor vtables
+// TODO: anchor vtables, doxygen documentation
+/// @cond DOXYGEN_SKIP
 
 namespace from {
 namespace FD4 {
@@ -131,5 +139,6 @@ LIBER_ASSERTS_END;
 LIBER_ASSERTS_BEGIN(FD4ResManagerImp);
 LIBER_ASSERT_SIZE(0x158);
 LIBER_ASSERTS_END;
+/// @endcond
 } // namespace FD4
 } // namespace from

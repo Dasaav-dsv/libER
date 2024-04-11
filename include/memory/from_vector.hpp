@@ -1,3 +1,10 @@
+/**
+ * @file from_vector.hpp
+ * @brief from::vector based on std::vector
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #if defined(_ITERATOR_DEBUG_LEVEL) && _ITERATOR_DEBUG_LEVEL > 0
@@ -8,6 +15,10 @@
 #include <vector>
 
 namespace from {
+/**
+ * @brief std::vector with from::allocator.
+ *
+ */
 template <typename T, typename AllocatorTag = from::default_allocator_tag>
 using vector = std::vector<T, from::allocator<T, AllocatorTag>>;
-}
+} // namespace from

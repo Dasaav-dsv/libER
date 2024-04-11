@@ -1,3 +1,11 @@
+/**
+ * @file from_delay_delete.hpp
+ * @brief Delay deleter implementation.
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
+
 #pragma once
 
 #include <concepts>
@@ -5,9 +13,26 @@
 #include <memory>
 
 namespace from {
+/**
+ * @brief Signature of the function called when an object is to be deleted.
+ *
+ */
 using delay_deleter = void (*)(void*);
+
+/**
+ * @brief Request deletion of an object.
+ * 
+ * @param deleter function to call on object deletion
+ * @param p the object to delete
+ */
 LIBERAPI void request_delete(delay_deleter deleter, void* p);
 
+/**
+ * @brief Delay deleter that models std::default_delete.
+ *
+ * @tparam T type of the target object
+ * @tparam AllocatorTag allocator to use with the object
+ */
 template <typename T, typename AllocatorTag>
 class delay_delete : private from::allocator<T, AllocatorTag> {
     using base_type = from::allocator<T, AllocatorTag>;
@@ -19,10 +44,23 @@ class delay_delete : private from::allocator<T, AllocatorTag> {
 public:
     delay_delete() noexcept : base_type() {}
 
+    /**
+     * @brief Copy constructor.
+     *
+     * @tparam U type of another target object convertible to T by pointer
+     */
     template <typename U>
         requires std::convertible_to<U*, T*>
     delay_delete(const delay_delete<U, AllocatorTag>&) noexcept : base_type() {}
 
+    /**
+     * @brief Request object deletion.
+     *
+     * Called by std::unique_ptr and other STL implementations of
+     * std::default_delete.
+     *
+     * @param p pointer to object to delete
+     */
     void operator()(T* p) const noexcept {
         request_delete(
             [](void* p) {
@@ -37,8 +75,11 @@ public:
     }
 };
 
-// Not implemented due to incompatibility
-// with ELDEN RING's allocation strategy
+// TODO: implement
+/**
+ * @brief Not implemented.
+ *
+ */
 template <typename T, typename AllocatorTag>
 class delay_delete<T[], AllocatorTag> {};
 } // namespace from

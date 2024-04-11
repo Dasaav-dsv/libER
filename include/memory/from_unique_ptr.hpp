@@ -1,3 +1,10 @@
+/**
+ * @file from_unique_ptr.hpp
+ * @brief from::unique_ptr based on std::unique_ptr
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <concepts>
@@ -6,14 +13,28 @@
 #include <memory>
 
 namespace from {
+/**
+ * @brief std::unique_ptr with from::allocator and from::delay_delete.
+ *
+ */
 template <typename T,
     typename AllocatorTag = from::default_empty_base_allocator_tag>
 using unique_ptr = std::unique_ptr<T, from::delay_delete<T, AllocatorTag>>;
 
+/**
+ * @brief from::unique_ptr make_unique implementation
+ *
+ * Uses a delay deleter from::delay_delete.
+ *
+ * @tparam T type to point to
+ * @tparam AllocatorTag allocator type
+ * @param args type constructor arguments
+ * @return from::unique_ptr<T, AllocatorTag> resulting pointer
+ */
 template <typename T,
     typename AllocatorTag = from::default_empty_base_allocator_tag,
     typename... Args>
-from::unique_ptr<T, AllocatorTag> make_unique(Args&&... args) {
+[[nodiscard]] from::unique_ptr<T, AllocatorTag> make_unique(Args&&... args) {
     using allocator_type = from::allocator<T, AllocatorTag>;
     allocator_type allocator;
     T* p = allocator.allocate(1);

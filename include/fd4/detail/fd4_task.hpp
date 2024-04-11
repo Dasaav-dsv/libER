@@ -1,3 +1,10 @@
+/**
+ * @file fd4_task.hpp
+ * @brief Namespace FD4 task interface
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
 #pragma once
 
 #include <dantelion2/kernel_runtime.hpp>
@@ -14,10 +21,14 @@
 
 #include <utility>
 
-// The indices used for task groups contain additional
-// bit flags. Some functions may expect the flags to be on.
-// This macro converts a raw index into a task group id,
-// or a task group id into an index.
+/**
+ * @brief Convert a task group id into a task group index, or back.
+ *
+ * The indices used for task groups contain additional bit flags. Some functions
+ * may expect the flags to be on. This macro converts a raw index into a task
+ * group id, or a task group id into an index.
+ *
+ */
 #define CS_TASK_GROUP_ID(INDEX) \
     (INDEX ^ LIBER_BIT_FLAG(28) ^ LIBER_BIT_FLAG(31))
 
@@ -31,15 +42,41 @@ using cstgi = unsigned int;
 } // namespace CS
 
 namespace FD4 {
+/**
+ * @brief The data passed to tasks on execution.
+ *
+ * Contains delta/frametime,
+ * the task group id and the taskrunner number (seed).
+ *
+ */
 struct FD4TaskData {
+    /**
+     * @brief Get the delta time.
+     *
+     * @return float
+     */
     float get_dt() const noexcept {
         return this->delta_time.time;
     }
 
+    /**
+     * @brief Get the task group index.
+     *
+     * @return int
+     */
     int get_task_group() const noexcept {
         return CS_TASK_GROUP_ID(this->task_group_id);
     }
 
+    /**
+     * @brief Get the seed.
+     *
+     * The seed is the same as the index of the task runner thread that executed
+     * it. As of ER 1.10.1, there are 6 task runners, so the value is between 0
+     * and 5.
+     *
+     * @return int
+     */
     int get_seed() const noexcept {
         return this->seed;
     }
@@ -50,19 +87,32 @@ private:
     int seed;
 };
 
-// The base task interface.
-// Minimal implementation needed for any task,
-// new tasks must always derive from this class
+/**
+ * @brief The base task interface.
+ *
+ * Minimal implementation needed for any task.
+ * New tasks should derive from CS::CSEzTask instead,
+ * as it implements the necessary task registration methods.
+ *
+ */
 class FD4TaskBase : public FD4::FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4TaskBase);
 
     LIBERAPI virtual ~FD4TaskBase();
+
+    /**
+     * @brief Virtual method that is called when the task is executed.
+     *
+     * @param data FD4::FD4TaskData
+     */
     virtual void execute(FD4TaskData* data) = 0;
 
 private:
     void* liber_unknown = nullptr;
 };
+
+/// @cond DOXYGEN_SKIP
 
 // The base step interface.
 // Only its FD4TaskBase instantiation is implemented
@@ -159,8 +209,13 @@ struct task_entry_group {
     void* liber_unknown;
 };
 
-// Singleton responsible for managing all tasks
+/// @endcond
+
 // TODO: expose more functionality
+/**
+ * @brief Singleton responsible for managing all tasks
+ *
+ */
 class FD4TaskManager {
 public:
     FD4_SINGLETON_CLASS(FD4TaskManager);

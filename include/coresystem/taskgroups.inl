@@ -1,3 +1,15 @@
+/**
+ * @file taskgroups.inl
+ * @brief All CS::CSTask taskgroups in order
+ *
+ * Copyright (c) libER ELDEN RING API library 2024
+ *
+ */
+
+/**
+ * @brief Enum of all tasks, in order of their execution.
+ * 
+ */
 enum class CSTaskGroup : int {
     INVALID = -1,
     FrameBegin = 0,
