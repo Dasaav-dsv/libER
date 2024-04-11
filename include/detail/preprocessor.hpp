@@ -42,49 +42,49 @@
 
 #define LIBER_INTERFACE_ONLY = 0
 
-#define LIBER_INTERFACE                                                        \
-    LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from        \
+#define LIBER_INTERFACE                                                 \
+    LIBER_BAD_CALL(ELDEN RING interface functions cannot be called from \
             explicitly constructed objects:)
 
-#define LIBER_INTERFACE_OVERRIDE                                               \
-    override LIBER_BAD_CALL(ELDEN RING interface functions cannot be called    \
+#define LIBER_INTERFACE_OVERRIDE                                            \
+    override LIBER_BAD_CALL(ELDEN RING interface functions cannot be called \
             from explicitly constructed objects:)
 
-#define LIBER_BAD_CALL(REASON)                                                 \
-    {                                                                          \
-        void* caller = _ReturnAddress();                                       \
-        std::stringstream err;                                                 \
-        err << std::source_location::current().file_name() << ':';             \
-        err << std::source_location::current().line() << ':';                  \
-        err << std::source_location::current().column() << ':';                \
-        err << " libER: " << LIBER_STRINGIFY(REASON) << " \"";                 \
-        err << std::source_location::current().function_name() << '"';         \
-        liber::append_module_name_and_base(err, caller);                       \
-        liber::bad_call_terminate(err, caller);                                \
+#define LIBER_BAD_CALL(REASON)                                         \
+    {                                                                  \
+        void* caller = _ReturnAddress();                               \
+        std::stringstream err;                                         \
+        err << std::source_location::current().file_name() << ':';     \
+        err << std::source_location::current().line() << ':';          \
+        err << std::source_location::current().column() << ':';        \
+        err << " libER: " << LIBER_STRINGIFY(REASON) << " \"";         \
+        err << std::source_location::current().function_name() << '"'; \
+        liber::append_module_name_and_base(err, caller);               \
+        liber::bad_call_terminate(err, caller);                        \
     }
 
-#define LIBER_CLASS(CLASSNAME)                                                 \
-    using self = CLASSNAME;                                                    \
+#define LIBER_CLASS(CLASSNAME) \
+    using self = CLASSNAME;    \
     friend class _liber_asserts_##CLASSNAME
 
-#define LIBER_INTERFACE_CLASS(CLASSNAME)                                       \
-    LIBER_CLASS(CLASSNAME);                                                    \
-    CLASSNAME() = delete;                                                      \
-    CLASSNAME(const CLASSNAME&) = delete;                                      \
-    CLASSNAME(CLASSNAME&&) noexcept = delete;                                  \
-    CLASSNAME& operator=(const CLASSNAME&) = delete;                           \
+#define LIBER_INTERFACE_CLASS(CLASSNAME)             \
+    LIBER_CLASS(CLASSNAME);                          \
+    CLASSNAME() = delete;                            \
+    CLASSNAME(const CLASSNAME&) = delete;            \
+    CLASSNAME(CLASSNAME&&) noexcept = delete;        \
+    CLASSNAME& operator=(const CLASSNAME&) = delete; \
     CLASSNAME& operator=(CLASSNAME&&) noexcept = delete
 
-#define LIBER_ASSERTS_BEGIN(CLASSNAME)                                         \
-    class _liber_asserts_##CLASSNAME {                                         \
+#define LIBER_ASSERTS_BEGIN(CLASSNAME) \
+    class _liber_asserts_##CLASSNAME { \
         using _liber_asserts_type = CLASSNAME
 
-#define LIBER_ASSERTS_TEMPLATE_BEGIN(CLASSNAME, ...)                           \
-    class _liber_asserts_##CLASSNAME {                                         \
+#define LIBER_ASSERTS_TEMPLATE_BEGIN(CLASSNAME, ...) \
+    class _liber_asserts_##CLASSNAME {               \
         using _liber_asserts_type = CLASSNAME<__VA_ARGS__>
 
-#define LIBER_ASSERT_SIZE(SIZE)                                                \
-    static_assert(sizeof(_liber_asserts_type) == (SIZE),                       \
+#define LIBER_ASSERT_SIZE(SIZE)                          \
+    static_assert(sizeof(_liber_asserts_type) == (SIZE), \
         LIBER_STRINGIFY(size of type is not SIZE))
 
 #define LIBER_ASSERT_OFFS(OFFSET, MEMBER)                                      \
@@ -112,7 +112,7 @@ public:
 
 // Terminate an invalid function call.
 // Runs into its own noexcept from the lambda (no warning)
-[[noreturn]] [[maybe_unused]] inline void bad_call_terminate(
+[[noreturn]] inline void bad_call_terminate(
     std::stringstream& err, void* caller) noexcept {
     [&] { throw liber::bad_call(err.str()); }();
     std::terminate();
@@ -121,9 +121,9 @@ public:
 // Empty dummy object
 struct dummy {};
 
-LIBERAPI void append_module_name_and_base(
-    std::ostream& out, void* caller) noexcept;
+LIBERAPI void append_module_name_and_base(std::ostream& out,
+    void* caller) noexcept;
 
-[[noreturn]] [[maybe_unused]] static void
+[[noreturn]] static void
 _unimplemented_return() LIBER_UNIMPLEMENTED
 }

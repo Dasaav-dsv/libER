@@ -18,7 +18,7 @@
 // bit flags. Some functions may expect the flags to be on.
 // This macro converts a raw index into a task group id,
 // or a task group id into an index.
-#define CS_TASK_GROUP_ID(INDEX)                                                \
+#define CS_TASK_GROUP_ID(INDEX) \
     (INDEX ^ LIBER_BIT_FLAG(28) ^ LIBER_BIT_FLAG(31))
 
 namespace from {

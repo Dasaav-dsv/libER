@@ -17,11 +17,11 @@ namespace liber {
 template <literal_string Name>
 struct symbol;
 
-#define LIBER_ADD_SYMBOL(NAME)                                                 \
-    template <>                                                                \
-    struct symbol<#NAME> {                                                     \
-        static int value;                                                      \
-        static void* get() noexcept;                                           \
+#define LIBER_ADD_SYMBOL(NAME)       \
+    template <>                      \
+    struct symbol<#NAME> {           \
+        static int value;            \
+        static void* get() noexcept; \
     };
 
 // clang-format off

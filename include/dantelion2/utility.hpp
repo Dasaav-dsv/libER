@@ -55,8 +55,10 @@ private:
     // be more ref() calls than unref() calls
     void unref() {
         int value = this->counter.fetch_add(-1, std::memory_order_seq_cst);
-        if (value == 1) this->deleter();
-        else if (value < 1) throw std::runtime_error("bad unref() call");
+        if (value == 1)
+            this->deleter();
+        else if (value < 1)
+            throw std::runtime_error("bad unref() call");
     }
 
     std::atomic_int counter;
@@ -77,7 +79,8 @@ public:
     template <class U>
         requires std::convertible_to<U*, T*>
     explicit DLReferenceCountPtr(U* raw) noexcept : raw(raw) {
-        if (this->get()) this->counter().ref();
+        if (this->get())
+            this->counter().ref();
     }
 
     DLReferenceCountPtr(const DLReferenceCountPtr& other) noexcept
@@ -99,22 +102,26 @@ public:
     }
 
     ~DLReferenceCountPtr() {
-        if (this->get()) this->counter().unref();
+        if (this->get())
+            this->counter().unref();
     }
 
     template <class U>
         requires std::convertible_to<U*, T*>
     DLReferenceCountPtr& operator=(const DLReferenceCountPtr<U>& other) {
-        if (this->get()) this->counter().unref();
+        if (this->get())
+            this->counter().unref();
         this->raw = other->get();
-        if (this->get()) this->counter().ref();
+        if (this->get())
+            this->counter().ref();
         return *this;
     }
 
     template <class U>
         requires std::convertible_to<U*, T*>
     DLReferenceCountPtr& operator=(DLReferenceCountPtr<U>&& other) {
-        if (this->get()) this->counter().unref();
+        if (this->get())
+            this->counter().unref();
         this->raw = std::exchange(other.raw, nullptr);
         return *this;
     }
@@ -129,7 +136,8 @@ public:
     void reset(U* raw) {
         this->counter().unref();
         this->raw = raw;
-        if (raw) this->counter().ref();
+        if (raw)
+            this->counter().ref();
     }
 
     void swap(DLReferenceCountPtr& other) {
@@ -162,14 +170,14 @@ private:
 
 // Pointer comparison operators:
 template <typename T, typename U>
-inline bool operator==(
-    const DLReferenceCountPtr<T>& lhs, const DLReferenceCountPtr<U>& rhs) {
+inline bool operator==(const DLReferenceCountPtr<T>& lhs,
+    const DLReferenceCountPtr<U>& rhs) {
     return lhs.get() == rhs.get();
 }
 
 template <typename T, typename U>
-inline std::strong_ordering operator<=>(
-    const DLReferenceCountPtr<T>& lhs, const DLReferenceCountPtr<U>& rhs) {
+inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
+    const DLReferenceCountPtr<U>& rhs) {
     return lhs.get() <=> rhs.get();
 }
 
@@ -179,8 +187,8 @@ inline bool operator==(const DLReferenceCountPtr<U>& lhs, std::nullptr_t) {
 }
 
 template <typename T, typename U>
-inline std::strong_ordering operator<=>(
-    const DLReferenceCountPtr<T>& lhs, std::nullptr_t) {
+inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
+    std::nullptr_t) {
     return lhs.get() <=> nullptr;
 }
 
@@ -204,8 +212,8 @@ template <typename T, typename U, typename... Args>
     allocator_rebind_type allocator_rebind{ allocator };
     T* raw = std::allocator_traits<allocator_rebind_type>::allocate(
         allocator_rebind, 1);
-    std::allocator_traits<allocator_rebind_type>::construct(
-        allocator_rebind, raw, std::forward<Args>(args)...);
+    std::allocator_traits<allocator_rebind_type>::construct(allocator_rebind,
+        raw, std::forward<Args>(args)...);
     return DLUT::DLReferenceCountPtr<T>(raw);
 }
 
@@ -217,8 +225,8 @@ template <typename T, typename... Args>
     from::allocator<T> proxy_allocator{ allocator };
     T* raw =
         std::allocator_traits<from::allocator<T>>::allocate(proxy_allocator, 1);
-    std::allocator_traits<from::allocator<T>>::construct(
-        proxy_allocator, raw, std::forward<Args>(args)...);
+    std::allocator_traits<from::allocator<T>>::construct(proxy_allocator, raw,
+        std::forward<Args>(args)...);
     return DLUT::DLReferenceCountPtr<T>(raw);
 }
 
@@ -227,7 +235,7 @@ template <typename T, typename... Args>
     requires std::derived_from<T, DLUT::DLReferenceCountObject>
 [[nodiscard]] inline DLUT::DLReferenceCountPtr<T> make_refcounted(
     Args&&... args) {
-    return allocate_refcounted(
-        from::allocator<T>{}, std::forward<Args>(args)...);
+    return allocate_refcounted(from::allocator<T>{},
+        std::forward<Args>(args)...);
 }
 } // namespace from

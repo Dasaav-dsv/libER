@@ -101,8 +101,8 @@ public:
 
     // Reallocate memory with alignment, only valid for trivial types
     // Use the second allocator if it is bound, first if not
-    virtual void* reallocate_second_aligned(
-        void* p, size_t cb, size_t alignment) = 0;
+    virtual void* reallocate_second_aligned(void* p, size_t cb,
+        size_t alignment) = 0;
 
     // Free memory
     // Use the second allocator if it is bound, first if not
@@ -229,8 +229,8 @@ public:
     }
 
     template <typename T1, typename T2>
-    friend bool operator==(
-        const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept;
+    friend bool operator==(const allocator<T1>& lhs,
+        const allocator<T2>& rhs) noexcept;
 };
 
 template <typename T1, typename T2>
@@ -266,16 +266,16 @@ struct allocator_base<default_empty_base_allocator_tag> {
     LIBERAPI DLKR::DLAllocator& get_allocator_of(void* p) const;
 };
 
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                  \
-    template <>                                                                \
-    struct allocator_base<NAME> {                                              \
-        LIBERAPI DLKR::DLAllocator& get_allocator() const;                     \
-                                                                               \
-        DLKR::DLAllocator& get_allocator_of(void* p) const {                   \
-            return this->get_allocator();                                      \
-        }                                                                      \
-                                                                               \
-        allocator_base(DLKR::DLAllocator*) noexcept {}                         \
+#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                \
+    template <>                                              \
+    struct allocator_base<NAME> {                            \
+        LIBERAPI DLKR::DLAllocator& get_allocator() const;   \
+                                                             \
+        DLKR::DLAllocator& get_allocator_of(void* p) const { \
+            return this->get_allocator();                    \
+        }                                                    \
+                                                             \
+        allocator_base(DLKR::DLAllocator*) noexcept {}       \
     };
 
 #include "from_allocator.inl"

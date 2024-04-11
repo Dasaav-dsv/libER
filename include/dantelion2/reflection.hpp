@@ -120,8 +120,8 @@ private:
 
     // Potentially a method that frees a base class of
     // a DLRuntimeClass, or a DLRuntimeClass from a similar structure
-    virtual void free_base(
-        DLRuntimeClass** base_of, DLKR::DLAllocator* allocator) = 0;
+    virtual void free_base(DLRuntimeClass** base_of,
+        DLKR::DLAllocator* allocator) = 0;
 
 public:
     // The size of the runtime class
@@ -146,7 +146,8 @@ public:
     // Get the constructor method (may be null)
     liber::optref<DLRuntimeMethod> get_constructor() noexcept {
         DLRuntimeMethod* method_ptr = this->runtime_constructor.get();
-        if (!method_ptr) return std::nullopt;
+        if (!method_ptr)
+            return std::nullopt;
         return *method_ptr;
     }
 
@@ -156,14 +157,16 @@ public:
     }
 
     // Get a method by name if it exists
-    LIBERAPI DLRuntimeMethod* find_method(const std::string_view& method_name) noexcept;
+    LIBERAPI DLRuntimeMethod* find_method(
+        const std::string_view& method_name) noexcept;
 
     // Get a vector of all globally registered DLRuntimeClasses
     LIBERAPI static from::vector<DLRuntimeMethodHolder>&
     get_registered_classes() noexcept;
 
     // Get a vector of all globally registered DLRuntimeClass pairs
-    LIBERAPI static from::vector<DLRuntimeClassPair>& get_runtime_pairs() noexcept;
+    LIBERAPI static from::vector<DLRuntimeClassPair>&
+    get_runtime_pairs() noexcept;
 
 private:
     // A pointer to the base class, if the class is derived
@@ -183,8 +186,8 @@ public:
 
     virtual ~DLRuntimeClassImpl() = default;
 
-    DLRuntimeClassImpl(
-        const char* class_name, const wchar_t* class_name_w) noexcept
+    DLRuntimeClassImpl(const char* class_name,
+        const wchar_t* class_name_w) noexcept
         : DLRuntimeClass(), _class_name(class_name),
           _class_name_w(class_name_w) {}
 
@@ -202,8 +205,8 @@ private:
     char* ref_byte4() LIBER_INTERFACE_OVERRIDE;
 
     bool unk_always_false() LIBER_INTERFACE_OVERRIDE;
-    void free_base(
-        DLRuntimeClass**, DLKR::DLAllocator*) LIBER_INTERFACE_OVERRIDE;
+    void free_base(DLRuntimeClass**,
+        DLKR::DLAllocator*) LIBER_INTERFACE_OVERRIDE;
 
 public:
     size_t class_size() const noexcept override {

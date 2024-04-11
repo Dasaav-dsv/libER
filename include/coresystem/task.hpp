@@ -86,7 +86,8 @@ public:
 
     // Get the associated CSTask instance (may be null)
     liber::optref<CSTask> get() noexcept {
-        if (!this->inst) return std::nullopt;
+        if (!this->inst)
+            return std::nullopt;
         return *this->inst;
     }
 
@@ -119,8 +120,8 @@ public:
     virtual ~CSTask() LIBER_INTERFACE_ONLY;
     virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
     virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY;
-    virtual bool set_task_group_state(
-        cstgi id, bool state) LIBER_INTERFACE_ONLY;
+    virtual bool set_task_group_state(cstgi id,
+        bool state) LIBER_INTERFACE_ONLY;
     virtual void debug_print() LIBER_INTERFACE_ONLY;
     virtual void queue_tasks(void* unk1, void* unk2) LIBER_INTERFACE_ONLY;
 

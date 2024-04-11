@@ -95,7 +95,7 @@ public:
     DLPlainAdaptiveMutex(DLPlainAdaptiveMutex&&) noexcept = delete;
 
 private:
-    [[maybe_unused]] int spin_count;
+    int spin_count;
 };
 
 LIBER_ASSERTS_BEGIN(DLPlainAdaptiveMutex);

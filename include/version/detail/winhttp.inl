@@ -37,14 +37,16 @@ public:
     decltype(&::WinHttpReadData) WinHttpReadData = _placeholder;
 
     winhttp_exports() noexcept {
-#define LIBER_GET_SET_PROC(NAME)                                               \
-    {                                                                          \
-        FARPROC proc = GetProcAddress(handle, #NAME);                          \
-        if (proc) this->NAME = reinterpret_cast<decltype(this->NAME)>(proc);   \
+#define LIBER_GET_SET_PROC(NAME)                                       \
+    {                                                                  \
+        FARPROC proc = GetProcAddress(handle, #NAME);                  \
+        if (proc)                                                      \
+            this->NAME = reinterpret_cast<decltype(this->NAME)>(proc); \
     }
         // Anti-FreeLibrary guarantee:
         HMODULE handle = LoadLibraryW(L"winhttp.dll");
-        if (!handle) return;
+        if (!handle)
+            return;
         LIBER_GET_SET_PROC(WinHttpOpen)
         LIBER_GET_SET_PROC(WinHttpCloseHandle)
         LIBER_GET_SET_PROC(WinHttpConnect)
@@ -66,7 +68,8 @@ public:
     winhttp_handle() = default;
 
     virtual ~winhttp_handle() noexcept {
-        if (this->handle) winhttp.WinHttpCloseHandle(this->handle);
+        if (this->handle)
+            winhttp.WinHttpCloseHandle(this->handle);
     }
 
     winhttp_handle(const winhttp_handle&) = delete;
@@ -116,7 +119,8 @@ public:
     template <std::contiguous_iterator Iter>
     bool read_available(Iter first, Iter last, DWORD& count) noexcept {
         auto d = static_cast<size_t>(last - first);
-        if (d > std::numeric_limits<DWORD>::max()) return false;
+        if (d > std::numeric_limits<DWORD>::max())
+            return false;
         return winhttp.WinHttpReadData(this->native_handle(),
             (LPVOID)(std::addressof(*first)), static_cast<DWORD>(d), &count);
     }
@@ -127,8 +131,8 @@ private:
     winhttp_request(const std::shared_ptr<winhttp_handle>& connection,
         const wchar_t* verb, const std::wstring& obj)
         : winhttp_handle(winhttp.WinHttpOpenRequest(connection->native_handle(),
-              verb, obj.c_str(), NULL, WINHTTP_NO_REFERER,
-              WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE)),
+            verb, obj.c_str(), NULL, WINHTTP_NO_REFERER,
+            WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE)),
           connection(std::move(connection)) {}
 
     std::shared_ptr<winhttp_handle> connection;
@@ -150,10 +154,10 @@ public:
 private:
     friend class winhttp_session;
 
-    winhttp_connection(
-        std::shared_ptr<winhttp_handle> session, const wchar_t* server)
+    winhttp_connection(std::shared_ptr<winhttp_handle> session,
+        const wchar_t* server)
         : winhttp_handle(winhttp.WinHttpConnect(session->native_handle(),
-              server, INTERNET_DEFAULT_HTTPS_PORT, 0)),
+            server, INTERNET_DEFAULT_HTTPS_PORT, 0)),
           session(std::move(session)) {}
 
     std::shared_ptr<winhttp_handle> session;
@@ -165,8 +169,8 @@ class winhttp_session : public winhttp_handle {
     using winhttp_handle::winhttp_handle;
     winhttp_session()
         : winhttp_handle(winhttp.WinHttpOpen(L"UserAgent/1.0",
-              WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME,
-              WINHTTP_NO_PROXY_BYPASS, NULL)) {}
+            WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME,
+            WINHTTP_NO_PROXY_BYPASS, NULL)) {}
 
 public:
     // Create a winhttp session
@@ -191,20 +195,24 @@ public:
     // Try to create and send the request and receive back the file bytes
     winhttp_request request =
         winhttp_connection::request(connection, L"GET", name);
-    if (!request || !request.send() || !request.receive()) return "";
+    if (!request || !request.send() || !request.receive())
+        return "";
     std::string out;
     // Read bytes until running out,
     // or a winhttp error occurs
     while (true) {
         DWORD cb_read = 0;
         DWORD cb_available = 0;
-        if (!request.count_available(cb_available)) return "";
-        if (!cb_available) break;
-        out.append(cb_available, '\0');
-        if (!request.read_available(
-                out.end() - cb_available, out.end(), cb_read))
+        if (!request.count_available(cb_available))
             return "";
-        if (!cb_read) break;
+        if (!cb_available)
+            break;
+        out.append(cb_available, '\0');
+        if (!request.read_available(out.end() - cb_available, out.end(),
+                cb_read))
+            return "";
+        if (!cb_read)
+            break;
     }
     return out;
 }

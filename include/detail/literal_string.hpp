@@ -22,16 +22,16 @@ struct literal_string {
     // Widen CharT to wchar_t over the array
     consteval literal_string<wchar_t, N> widen() const {
         wchar_t out[N]{};
-        std::copy(
-            std::begin(this->string), std::end(this->string), std::begin(out));
+        std::copy(std::begin(this->string), std::end(this->string),
+            std::begin(out));
         return out;
     }
 
     // Truncate CharT to char over the array
     consteval literal_string<char, N> trunc() const {
         char out[N]{};
-        std::copy(
-            std::begin(this->string), std::end(this->string), std::begin(out));
+        std::copy(std::begin(this->string), std::end(this->string),
+            std::begin(out));
         return out;
     }
 

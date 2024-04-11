@@ -44,7 +44,8 @@ public:
             // coresystem/memory
             CS::CSMemory*& csmem = *reinterpret_cast<CS::CSMemory**>(
                 liber::symbol<"CS::CSMemory::instance">::get());
-            if (!csmem) csmem = new CS::CSMemory();
+            if (!csmem)
+                csmem = new CS::CSMemory();
             liber_internal_allocator** sysalloc =
                 reinterpret_cast<liber_internal_allocator**>(
                     liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
@@ -52,8 +53,8 @@ public:
             // If we got here first, this is now the
             // "main" allocator, otherwise whatever is
             // already there is "main"
-            if (InterlockedCompareExchangePointer(
-                    (void**)sysalloc, (void*)this, nullptr))
+            if (InterlockedCompareExchangePointer((void**)sysalloc, (void*)this,
+                    nullptr))
                 this->main_allocator = *sysalloc;
         }
         if (this->main_allocator != this) {
@@ -98,7 +99,8 @@ public:
     // Extract block size from the metadata
     // or call msize of other allocators
     size_t msize(void* p) override {
-        if (!p) return 0;
+        if (!p)
+            return 0;
         size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
         auto maybe_alloc =
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
@@ -107,28 +109,30 @@ public:
             // Undo the encoding and confirm integrity
             size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
             size_t nalign = ~0ull << maybe_align;
-            if (maybe_align >= 64 || nalign < nsize) std::terminate();
+            if (maybe_align >= 64 || nalign < nsize)
+                std::terminate();
             return nalign - static_cast<ptrdiff_t>(nsize);
         }
         auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
             liber::function<"DLKR::DLBackAllocator::get",
                 DLKR::DLAllocator*>::call());
         // Check if memory is in the allocated range
-        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p &&
-            reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
+        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p
+            && reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
             // Reach into the actual allocator instance and msize
             return dl_back_allocator[4].msize(p);
         }
         if (maybe_align < 64) {
             std::shared_lock lock{ this->other_allocators };
             auto& other_allocators = this->other_allocators.get();
-            auto iter = std::find(
-                other_allocators.begin(), other_allocators.end(), maybe_alloc);
+            auto iter = std::find(other_allocators.begin(),
+                other_allocators.end(), maybe_alloc);
             if (iter != other_allocators.end()) {
                 size_t nsize =
                     (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
                 size_t nalign = ~0ull << maybe_align;
-                if (maybe_align >= 64 || nalign < nsize) std::terminate();
+                if (maybe_align >= 64 || nalign < nsize)
+                    std::terminate();
                 return nalign - static_cast<ptrdiff_t>(nsize);
             }
         }
@@ -146,7 +150,8 @@ public:
         void* alloc = mi_malloc_aligned(cb, alignment);
         // Encode alignment and size into the leading
         // 16 bytes and adjust the pointer
-        if (alloc) _adjust_block_and_encode(alloc, cb, alignment);
+        if (alloc)
+            _adjust_block_and_encode(alloc, cb, alignment);
         return alloc;
     }
 
@@ -157,7 +162,8 @@ public:
     void* reallocate_aligned(void* p, size_t cb, size_t alignment) override {
         void* alloc = cb ? this->allocate_aligned(cb, alignment) : nullptr;
         if (p) {
-            if (alloc) std::memcpy(alloc, p, this->msize(p));
+            if (alloc)
+                std::memcpy(alloc, p, this->msize(p));
             this->deallocate(p);
         }
         return alloc;
@@ -168,7 +174,8 @@ public:
     // Since libER replaces ELDEN RING allocators globally,
     // any of the above may be passed to its deallocate method
     void deallocate(void* p) override {
-        if (!p) return;
+        if (!p)
+            return;
         size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
         auto maybe_alloc =
             reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
@@ -180,16 +187,18 @@ public:
             // Alignment can't be greater than 64
             // Size is a multiple of the alignment
             // In an unsigned comparison, -alignment >= -nsize ~ 1
-            if (maybe_align >= 64 || nalign < nsize) std::terminate();
+            if (maybe_align >= 64 || nalign < nsize)
+                std::terminate();
             if (maybe_alloc == this) {
                 void* base = _block_base(p, 1ull << maybe_align);
                 mi_free(base);
                 return;
-            } else {
+            }
+            else {
                 // We know this memory belongs to another libER
                 // allocator, other checks are not necessary
-                this->main_allocator->_deallocate_unchecked(
-                    p, 1ull << maybe_align);
+                this->main_allocator->_deallocate_unchecked(p,
+                    1ull << maybe_align);
                 return;
             }
         }
@@ -197,8 +206,8 @@ public:
             liber::function<"DLKR::DLBackAllocator::get",
                 DLKR::DLAllocator*>::call());
         // Check if memory is in the allocated range
-        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p &&
-            reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
+        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p
+            && reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
             // Reach into the actual allocator instance and msize
             dl_back_allocator[4].deallocate(p);
             return;
@@ -206,14 +215,15 @@ public:
         if (maybe_align < 64) {
             std::shared_lock lock{ this->other_allocators };
             auto& other_allocators = this->other_allocators.get();
-            auto iter = std::find(
-                other_allocators.begin(), other_allocators.end(), maybe_alloc);
+            auto iter = std::find(other_allocators.begin(),
+                other_allocators.end(), maybe_alloc);
             if (iter != other_allocators.end()) {
                 size_t nsize =
                     (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
                 size_t nalign = ~0ull << maybe_align;
                 // See checks above
-                if (maybe_align >= 64 || nalign < nsize) std::terminate();
+                if (maybe_align >= 64 || nalign < nsize)
+                    std::terminate();
                 (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
                 return;
             }
@@ -234,8 +244,8 @@ public:
         return this->reallocate(p, cb);
     }
 
-    void* reallocate_second_aligned(
-        void* p, size_t cb, size_t alignment) override {
+    void* reallocate_second_aligned(void* p, size_t cb,
+        size_t alignment) override {
         return this->reallocate_aligned(p, cb, alignment);
     }
 
@@ -329,7 +339,8 @@ DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
     DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {           \
         DLKR::DLAllocator* allocator = *reinterpret_cast<DLKR::DLAllocator**>( \
             liber::symbol<#NAME>::get());                                      \
-        if (!allocator) std::terminate();                                      \
+        if (!allocator)                                                        \
+            std::terminate();                                                  \
         return *allocator;                                                     \
     }
 

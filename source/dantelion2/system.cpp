@@ -13,10 +13,12 @@ bool DLSY::wait_for_system(int timeout) noexcept {
     if (timeout >= 0) {
         unsigned long long wait = GetTickCount64() + timeout;
         while (*counter == 0) {
-            if (GetTickCount64() > wait) return false;
+            if (GetTickCount64() > wait)
+                return false;
             YieldProcessor();
         }
-    } else {
+    }
+    else {
         while (*counter == 0) YieldProcessor();
     }
     return true;
