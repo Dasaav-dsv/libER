@@ -39,6 +39,9 @@ class CSTask;
 
 // CSTaskGroupId
 using cstgi = unsigned int;
+
+// All task groups:
+#include "taskgroups.inl"
 } // namespace CS
 
 namespace FD4 {
@@ -60,12 +63,12 @@ struct FD4TaskData {
     }
 
     /**
-     * @brief Get the task group index.
+     * @brief Get the task group.
      *
-     * @return int
+     * @return CS::CSTaskGroup
      */
-    int get_task_group() const noexcept {
-        return CS_TASK_GROUP_ID(this->task_group_id);
+    CS::CSTaskGroup get_task_group() const noexcept {
+        return static_cast<CS::CSTaskGroup>(CS_TASK_GROUP_ID(this->task_group_id));
     }
 
     /**
