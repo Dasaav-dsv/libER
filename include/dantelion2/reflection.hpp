@@ -157,7 +157,7 @@ struct DLRuntimeObjectHolder {
      *
      * @return const DLRuntimeMethod* pointer to the instance
      */
-    const DLRuntimeMethod* get() const noexcept {
+    const T* get() const noexcept {
         return this->object.get();
     }
 
@@ -267,15 +267,6 @@ public:
     /**
      * @brief Get a derived class's base class.
      *
-     * @return DLRuntimeClass* (may be null if not derived)
-     */
-    DLRuntimeClass* get_base() noexcept {
-        return this->base_class;
-    }
-
-    /**
-     * @brief Get a derived class's base class.
-     *
      * @return const DLRuntimeClass* (may be null if not derived)
      */
     const DLRuntimeClass* get_base() const noexcept {
@@ -285,9 +276,9 @@ public:
     /**
      * @brief Get the constructor method (if bound)
      *
-     * @return liber::optref<DLRuntimeMethod> (may be std::nullopt)
+     * @return liber::optref<const DLRuntimeMethod> (may be std::nullopt)
      */
-    liber::optref<DLRuntimeMethod> get_constructor() noexcept {
+    liber::optref<const DLRuntimeMethod> get_constructor() const noexcept {
         DLRuntimeMethod* method_ptr = this->runtime_constructor.get();
         if (!method_ptr)
             return std::nullopt;
@@ -297,9 +288,10 @@ public:
     /**
      * @brief Get every bound method.
      *
-     * @return from::vector<DLRuntimeMethodHolder>& vector of bound methods
+     * @return const from::vector<DLRuntimeMethodHolder>& vector of bound
+     * methods
      */
-    from::vector<DLRuntimeMethodHolder>& get_methods() noexcept {
+    const from::vector<DLRuntimeMethodHolder>& get_methods() const noexcept {
         return this->runtime_methods;
     }
 

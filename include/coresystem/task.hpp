@@ -21,14 +21,12 @@
 
 namespace from {
 namespace CS {
-// All task groups:
-#include "taskgroups.inl"
-
 /**
- * @brief Typedef of a special unsigned integer type that may represent a task id.
- * 
+ * @brief Typedef of a special unsigned integer type that may represent a task
+ * id.
+ *
  * See the CS_TASK_GROUP_ID macro in fd4.task.hpp
- * 
+ *
  */
 using cstgi = unsigned int;
 
@@ -44,10 +42,10 @@ class CSEzTaskProxy;
  * is strict with regard to other task groups, but individual task execution
  * order *inside a task group* is unspecified.
  *
- * @warning Disclaimer: a task instance must not go out of scope as long as it is
- * registered and executing. Use from::unique_ptr from from_unique_ptr.hpp
- * to correctly manage its lifetime. Destroying it before it has executed
- * on this pass will leave a dangling pointer in the task queue.
+ * @warning Disclaimer: a task instance must not go out of scope as long as it
+ * is registered and executing. Use from::unique_ptr from from_unique_ptr.hpp to
+ * correctly manage its lifetime. Destroying it before it has executed on this
+ * pass will leave a dangling pointer in the task queue.
  *
  */
 class CSEzTask : public FD4::FD4TaskBase {
@@ -115,7 +113,7 @@ public:
      *
      * @return a value from the CS::CSTaskGroup enum
      */
-    CSTaskGroup get_task_group() const noexcept;
+    LIBERAPI CSTaskGroup get_task_group() const noexcept;
 
 private:
     /**
@@ -226,18 +224,18 @@ public:
      * game.
      *
      */
-    const from::vector<cstg_control> task_groups{};
+    from::vector<cstg_control> task_groups;
 
     /**
      * @brief The total count of all task groups.
      *
      */
-    const cstgi task_group_count{};
+    cstgi task_group_count;
 };
 
 /**
  * @brief The main namespace CS task interface.
- * 
+ *
  * @see FD4::FD4TaskManager.
  *
  */
@@ -246,6 +244,15 @@ public:
     LIBER_INTERFACE_CLASS(CSTask);
 
     virtual ~CSTask() LIBER_INTERFACE_ONLY;
+
+    /**
+     * @brief Get every task group
+     *
+     * @return const from::vector<cstg_control>& vector of task group controls
+     */
+    const auto& get_task_groups() const noexcept {
+        return this->task_groups;
+    }
 
 private:
     virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
