@@ -113,7 +113,7 @@ public:
      *
      * @return a value from the CS::CSTaskGroup enum
      */
-    CSTaskGroup get_task_group() const noexcept;
+    LIBERAPI CSTaskGroup get_task_group() const noexcept;
 
 private:
     /**
