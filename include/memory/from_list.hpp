@@ -2,7 +2,7 @@
  * @file from_list.hpp
  * @brief from::list based on std::list
  *
- * Copyright (c) libER ELDEN RING API library 2024
+ * Copyright 2024 libER ELDEN RING API library
  *
  */
 #pragma once

@@ -2,7 +2,7 @@
  * @file from_unordered_set.hpp
  * @brief from::unordered_set based on std::unordered_set
  *
- * Copyright (c) libER ELDEN RING API library 2024
+ * Copyright 2024 libER ELDEN RING API library
  *
  */
 #pragma once

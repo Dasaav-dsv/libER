@@ -2,7 +2,7 @@
  * @file from_string.hpp
  * @brief from::basic_string based on std::basic_string
  * 
- * Copyright (c) libER ELDEN RING API library 2024
+ * Copyright 2024 libER ELDEN RING API library
  * 
  */
 #pragma once
