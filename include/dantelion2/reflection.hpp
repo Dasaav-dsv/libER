@@ -157,7 +157,7 @@ struct DLRuntimeObjectHolder {
      *
      * @return const DLRuntimeMethod* pointer to the instance
      */
-    const DLRuntimeMethod* get() const noexcept {
+    const T* get() const noexcept {
         return this->object.get();
     }
 
