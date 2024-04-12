@@ -41,7 +41,7 @@ class CSTask;
 using cstgi = unsigned int;
 
 // All task groups:
-#include "taskgroups.inl"
+#include <coresystem/taskgroups.inl>
 } // namespace CS
 
 namespace FD4 {
