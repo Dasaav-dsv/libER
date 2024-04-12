@@ -1,0 +1,74 @@
+/**
+ * @mainpage libER reference
+ *
+ * @section about_section About
+ *
+ * **libER** is an **ELDEN RING** Application Programming Interface (API)
+ * library that aims to provide a safe C++ interface for the game.
+ *
+ * Consult the <b><a href="https://github.com/Dasaav-dsv/libER/">GitHub
+ * page</a></b> for the build and installation instructions and the license.
+ *
+ * You can find the **libER** changelog on the @link changelog_page changelog page@endlink.
+ * 
+ * @see https://github.com/Dasaav-dsv/libER/
+ * @see @ref changelog_page
+ * 
+ * @section explore_section Explore
+ *
+ * - @link task.hpp Tasks @endlink: asynchronous dispatch system used by ELDEN
+ * RING. Custom tasks may be created and bound to specific @link taskgroups.inl
+ * taskgroups@endlink, which impose a strict ordering on task execution. ELDEN
+ * RING uses this system for step-by-step execution, making sure data has been
+ * properly handled at each step and that it is ready for the next one.
+ * @see task.hpp
+ * @see fd4_task.hpp
+ * @see taskgroups.inl
+ *
+ * - @link from_allocator.hpp Memory Allocation@endlink: **libER** documents the
+ * **ELDEN RING** allocation implementation, and replaces it with a modern <a
+ * href="https://github.com/microsoft/mimalloc/">mimalloc</a> implementation
+ * that improves performance and RAM consumption by over 1GB. An important
+ * advantage of the new allocation system is not being dependent on the game's
+ * CRT startup.
+ * @see from_allocator.hpp
+ * @see https://github.com/microsoft/mimalloc/
+ *
+ * - @link from_unique_ptr.hpp Object Lifetime Management@endlink: custom
+ * std::unique_ptr specialization that synchronizes object destruction with
+ * **ELDEN RING**'s **delay delete** @link taskgroups.inl task step@endlink,
+ * ensuring resources are not freed while they may still be used by the game.
+ * @see from_unique_ptr.hpp
+ * @see from_delay_delete.hpp
+ * @see taskgroups.inl
+ *
+ * - @link reflection.hpp **ELDEN RING** Type Reflection@endlink: the runtime
+ * type reflection used by **ELDEN RING**. All reflected classes are accessible
+ * through from::DLRF::DLRuntimeClass methods.
+ * @see reflection.hpp
+ * @see @link from::DLRF::DLRuntimeClass DLRF::DLRuntimeClass@endlink
+ *
+ * - @link system.hpp Game System Management@endlink: **ELDEN RING** as it is
+ * managed at runtime. @link from::DLSY::wait_for_system Wait for system initialization function@endlink.
+ * @see system.hpp
+ * @see @link from::DLSY::wait_for_system DLSY::wait_for_system@endlink
+ * 
+ * @section namespace_section Namespaces
+ *
+ * **libER** uses two main namespaces:
+ *   1. namespace **from** describes **ELDEN RING**
+ *   2. namespace **liber** contains **libER** implementation details
+ *
+ * Namespace **from** child namespaces:
+ *   - @link include/coresystem CS@endlink - Core System
+ *   - @link include/dantelion2 DL*@endlink - Dantelion2 engine:
+ *     - @link kernel_runtime.hpp DLKR@endlink - kernel objects, synchronization
+ *     - @link reflection.hpp DLRF@endlink - runtime type reflection
+ *     - @link system.hpp DLSY@endlink - system properties
+ *     - @link text.hpp DLTX@endlink - strings
+ *     - @link utility.hpp DLUT@endlink - utility
+ *   - @link include/fd4 FD4@endlink - internal **ELDEN RING** implementation
+ * details
+ *   - @link include/memory from::* containers and memory@endlink
+ *
+ */
