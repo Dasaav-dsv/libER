@@ -2,7 +2,7 @@
  * @file kernel_runtime.hpp
  * @brief Dantelion2 kernel object management and synchronization
  *
- * Copyright (c) libER ELDEN RING API library 2024
+ * Copyright 2024 libER ELDEN RING API library
  *
  */
 #pragma once

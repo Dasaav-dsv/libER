@@ -2,7 +2,7 @@
  * @file from_deque.hpp
  * @brief from::deque based on std::deque
  *
- * Copyright (c) libER ELDEN RING API library 2024
+ * Copyright 2024 libER ELDEN RING API library
  *
  */
 #pragma once
