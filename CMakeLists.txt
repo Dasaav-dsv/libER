@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15.0)
-project(libER VERSION 0.1.0.0 LANGUAGES C CXX)
+project(libER VERSION 0.1.1.0 LANGUAGES C CXX)
 
 # Must build with C++20 or newer
 set(CMAKE_CXX_STANDARD 20)
@@ -11,7 +11,7 @@ add_library("objlibER" OBJECT)
 add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
 
 # Documentation:
-include("doc/CMakeLists.txt" EXCLUDE_FROM_ALL)
+include("docs/CMakeLists.txt" EXCLUDE_FROM_ALL)
 
 # Dependency: WinTypes
 target_link_libraries("objlibER" PUBLIC "wintypes")
