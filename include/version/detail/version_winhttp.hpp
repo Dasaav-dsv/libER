@@ -11,5 +11,5 @@ namespace liber {
 // Try to download symbol .csv files online,
 // and cache them. The lookup variables (domain etc.)
 // can be found in detail/defines.hpp
-std::string load_versioned_csv_from_repo() noexcept;
+bool download_versioned_csv(const std::wstring& version) noexcept;
 } // namespace liber

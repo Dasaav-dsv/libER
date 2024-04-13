@@ -1,6 +1,5 @@
 #include <detail/defines.hpp>
 #include <version/detail/version_fileio.hpp>
-#include <version/detail/version_winhttp.hpp>
 #include <version/version.hpp>
 
 #include <atomic>
@@ -75,9 +74,13 @@ std::string liber::load_versioned_csv() noexcept {
     auto version = get_version();
     if (version == LIBER_INVALID_VERSION)
         return "";
-    std::string from_disk = load_versioned_csv_from_disk();
-    if (!from_disk.empty())
-        return from_disk;
-    std::string from_repo = load_versioned_csv_from_repo();
-    return from_repo;
+    auto version_wstring = std::to_wstring(version);
+    std::string from_disk = load_versioned_csv_from_disk(version_wstring);
+    if (from_disk.empty()) {
+        // NOTE: libER_updater must be in ELDEN RING/Game or in PATH
+        std::string use_updater = "libER_updater " + get_version_string();
+        if (!system(use_updater.c_str()))
+            from_disk = load_versioned_csv_from_disk(version_wstring);
+    }
+    return from_disk;
 }

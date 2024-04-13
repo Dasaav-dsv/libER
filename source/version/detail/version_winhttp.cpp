@@ -4,47 +4,40 @@
 #include <detail/preprocessor.hpp>
 #include <version/detail/winhttp.inl>
 
-#include <mutex>
 #include <sstream>
 #include <string>
 #include <utility>
 
 namespace liber {
-static std::mutex load_store_mutex;
-
-std::string load_versioned_csv_from_repo() noexcept {
-    std::scoped_lock lock{ load_store_mutex };
+bool download_versioned_csv(const std::wstring& version) noexcept {
+    // clang-format off
+    std::wstring base_path = LIBER_WSTRINGIFY(LIBER_REPO_OWNER/libER/LIBER_DIR_BRANCH/LIBER_SYMBOL_DIR/) + version;
+    // clang-format on
     auto session = winhttp_session::create();
     if (!session->has_value())
-        return "";
+        return false;
     auto connection =
         winhttp_session::connect(session, LIBER_WSTRINGIFY(LIBER_CSV_SERVER));
     if (!connection->has_value())
-        return "";
+        return false;
     std::string file_list = get_file(connection,
         // clang-format off
-        LIBER_WSTRINGIFY(LIBER_REPO_OWNER/libER/LIBER_DIR_BRANCH/LIBER_SYMBOL_DIR/LIBER_FILE_LIST));
+        base_path + LIBER_WSTRINGIFY(/LIBER_FILE_LIST));
     // clang-format on
     if (file_list.empty())
-        return "";
-    save_file_to_disk(LIBER_STRINGIFY(LIBER_FILE_LIST), file_list);
+        return false;
+    save_file_to_disk(LIBER_STRINGIFY(LIBER_FILE_LIST), file_list, version);
     std::stringstream files{ std::move(file_list) };
-    std::string line, out;
+    std::string line;
     while (std::getline(files, line)) {
         auto [filename, wfilename] = filename_from_line(line);
         if (filename.empty())
             continue;
-        std::string file = get_file(connection,
-            // clang-format off
-            LIBER_WSTRINGIFY(LIBER_REPO_OWNER/libER/LIBER_DIR_BRANCH/LIBER_SYMBOL_DIR/) +
-                // clang-format on
-                wfilename);
+        std::string file = get_file(connection, base_path + L'/' + wfilename);
         if (file.empty())
             continue;
-        out.append(file);
-        out.push_back('\n');
-        save_file_to_disk(filename, file);
+        save_file_to_disk(filename, file, version);
     }
-    return out;
+    return true;
 }
 } // namespace liber

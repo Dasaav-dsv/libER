@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.15.0)
 project(libER VERSION 0.1.0.0 LANGUAGES C CXX)
 
+# Must build with C++20 or newer
+set(CMAKE_CXX_STANDARD 20)
+
 # Object library for libER[d].dll and libER_static[d].lib
 add_library("objlibER" OBJECT)
-target_compile_features("objlibER" PRIVATE cxx_std_20)
 
 # Set iterator debug level to 0 for ELDEN RING ABI compatibility
 add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
@@ -79,7 +81,6 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/version/version.cpp"
     "source/version/detail/version_fileio.cpp"
-    "source/version/detail/version_winhttp.cpp"
 )
 
 # Memory source files
@@ -117,8 +118,19 @@ add_library("libER_static" STATIC $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mi
 target_include_directories("libER_static" PUBLIC "include")
 # Debug build "d" postfix in libERd.*
 set_target_properties("libER" "libER_static" PROPERTIES DEBUG_POSTFIX d)
+# Target libER_updater
+add_executable("libER_updater"
+    "source/version/version.cpp"
+    "source/version/updater/version_updater.cpp"
+    "source/version/detail/version_fileio.cpp"
+    "source/version/detail/version_winhttp.cpp"
+)
+target_link_libraries("libER_updater" PRIVATE "winhttp")
+target_include_directories("libER_updater" PRIVATE "include")
+
 # No unused warnings with clang-cl
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options("libER" PUBLIC "-Wno-unused")
     target_compile_options("libER_static" PUBLIC "-Wno-unused")
+    target_compile_options("libER_updater" PUBLIC "-Wno-unused")
 endif()

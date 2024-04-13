@@ -1,6 +1,5 @@
 /*
  * Inline winhttp implementation header with a RAII interface.
- * ELDEN RING is already dynamically linked against winhttp.dll.
  */
 
 #include <detail/windows.inl>
@@ -15,50 +14,6 @@
 #include <utility>
 
 namespace liber {
-// Retrieves and binds needed winhttp exports.
-// Failing to bind an export leaves a placeholder,
-// which returns a default value HINSTANCE() aka nullptr
-// or BOOL() aka 0/false for graceful error handling.
-static class winhttp_exports {
-    template <typename T>
-    static inline T _placeholder(auto...) noexcept {
-        return T{};
-    }
-
-public:
-    decltype(&::WinHttpOpen) WinHttpOpen = _placeholder;
-    decltype(&::WinHttpCloseHandle) WinHttpCloseHandle = _placeholder;
-    decltype(&::WinHttpConnect) WinHttpConnect = _placeholder;
-    decltype(&::WinHttpOpenRequest) WinHttpOpenRequest = _placeholder;
-    decltype(&::WinHttpSendRequest) WinHttpSendRequest = _placeholder;
-    decltype(&::WinHttpReceiveResponse) WinHttpReceiveResponse = _placeholder;
-    decltype(&::WinHttpQueryDataAvailable) WinHttpQueryDataAvailable =
-        _placeholder;
-    decltype(&::WinHttpReadData) WinHttpReadData = _placeholder;
-
-    winhttp_exports() noexcept {
-#define LIBER_GET_SET_PROC(NAME)                                       \
-    {                                                                  \
-        FARPROC proc = GetProcAddress(handle, #NAME);                  \
-        if (proc)                                                      \
-            this->NAME = reinterpret_cast<decltype(this->NAME)>(proc); \
-    }
-        // Anti-FreeLibrary guarantee:
-        HMODULE handle = LoadLibraryW(L"winhttp.dll");
-        if (!handle)
-            return;
-        LIBER_GET_SET_PROC(WinHttpOpen)
-        LIBER_GET_SET_PROC(WinHttpCloseHandle)
-        LIBER_GET_SET_PROC(WinHttpConnect)
-        LIBER_GET_SET_PROC(WinHttpOpenRequest)
-        LIBER_GET_SET_PROC(WinHttpSendRequest)
-        LIBER_GET_SET_PROC(WinHttpReceiveResponse)
-        LIBER_GET_SET_PROC(WinHttpQueryDataAvailable)
-        LIBER_GET_SET_PROC(WinHttpReadData)
-#undef LIBER_GET_SET_PROC
-    }
-} winhttp;
-
 // RAII base class representing a handle to a winhttp object
 // Non-copyable, non-assignable, movable
 class winhttp_handle {
@@ -69,7 +24,7 @@ public:
 
     virtual ~winhttp_handle() noexcept {
         if (this->handle)
-            winhttp.WinHttpCloseHandle(this->handle);
+            WinHttpCloseHandle(this->handle);
     }
 
     winhttp_handle(const winhttp_handle&) = delete;
@@ -103,16 +58,16 @@ public:
     using winhttp_handle::winhttp_handle;
 
     bool send() noexcept {
-        return winhttp.WinHttpSendRequest(this->native_handle(),
+        return WinHttpSendRequest(this->native_handle(),
             WINHTTP_NO_ADDITIONAL_HEADERS, 0, WINHTTP_NO_REQUEST_DATA, 0, 0, 0);
     }
 
     bool receive() noexcept {
-        return winhttp.WinHttpReceiveResponse(this->native_handle(), NULL);
+        return WinHttpReceiveResponse(this->native_handle(), NULL);
     }
 
     bool count_available(DWORD& count) noexcept {
-        return winhttp.WinHttpQueryDataAvailable(this->native_handle(), &count);
+        return WinHttpQueryDataAvailable(this->native_handle(), &count);
     }
 
     // Constraint: contigious memory iterators
@@ -121,7 +76,7 @@ public:
         auto d = static_cast<size_t>(last - first);
         if (d > std::numeric_limits<DWORD>::max())
             return false;
-        return winhttp.WinHttpReadData(this->native_handle(),
+        return WinHttpReadData(this->native_handle(),
             (LPVOID)(std::addressof(*first)), static_cast<DWORD>(d), &count);
     }
 
@@ -130,9 +85,9 @@ private:
 
     winhttp_request(const std::shared_ptr<winhttp_handle>& connection,
         const wchar_t* verb, const std::wstring& obj)
-        : winhttp_handle(winhttp.WinHttpOpenRequest(connection->native_handle(),
-            verb, obj.c_str(), NULL, WINHTTP_NO_REFERER,
-            WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE)),
+        : winhttp_handle(WinHttpOpenRequest(connection->native_handle(), verb,
+            obj.c_str(), NULL, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES,
+            WINHTTP_FLAG_SECURE)),
           connection(std::move(connection)) {}
 
     std::shared_ptr<winhttp_handle> connection;
@@ -156,8 +111,8 @@ private:
 
     winhttp_connection(std::shared_ptr<winhttp_handle> session,
         const wchar_t* server)
-        : winhttp_handle(winhttp.WinHttpConnect(session->native_handle(),
-            server, INTERNET_DEFAULT_HTTPS_PORT, 0)),
+        : winhttp_handle(WinHttpConnect(session->native_handle(), server,
+            INTERNET_DEFAULT_HTTPS_PORT, 0)),
           session(std::move(session)) {}
 
     std::shared_ptr<winhttp_handle> session;
@@ -168,9 +123,9 @@ private:
 class winhttp_session : public winhttp_handle {
     using winhttp_handle::winhttp_handle;
     winhttp_session()
-        : winhttp_handle(winhttp.WinHttpOpen(L"UserAgent/1.0",
-            WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME,
-            WINHTTP_NO_PROXY_BYPASS, NULL)) {}
+        : winhttp_handle(
+            WinHttpOpen(L"UserAgent/1.0", WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY,
+                WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, NULL)) {}
 
 public:
     // Create a winhttp session
@@ -214,6 +169,9 @@ public:
         if (!cb_read)
             break;
     }
+    // File does not exist on raw.githubusercontent.com
+    if (out.starts_with("404: Not Found"))
+        out = "";
     return out;
 }
 } // namespace liber

@@ -16,6 +16,8 @@ Being able to use the STL provides the safety and guarantees of the standard lib
 - No pattern matching or other fallible runtime analysis
 - Symbol definition files, separated by game version
 - Possibility to pull symbol definitions from GitHub on a game version mismatch
+  
+  **_NOTE:_** **libER_updater.exe** must be in **"ELDEN RING/Game"** or in **PATH**
 - Familiar stl-like naming, or the original ELDEN RING naming where it is known
 - Doxygen documentation and widespread use of comments in the codebase
 - Introspection of the ELDEN RING engine, tasks, memory allocation, file loading...
@@ -42,9 +44,10 @@ add_subdirectory("[libER INSTALL DIR]" "libER")
 add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
 target_compile_features("[YOUR TARGET]" PRIVATE cxx_std_20)
 ```
+Examples can be built much like base libER.
 
 # Usage
-libER is meant to be a base for mods and other libraries for ELDEN RING. It wraps the ELDEN RING functionality in a safe interface that can be further abstracted.
+libER is meant to be a base for mods and other libraries for ELDEN RING. It wraps the ELDEN RING functionality in a safe interface that can be further abstracted. If libER is dynamically linked against, **libER.dll** must be in **"ELDEN RING/Game"** or in **PATH**. If you wish for automatic symbol updates to work, **libER_updater.exe** must be likewise findable.
 
 Currently, **"./examples"** has examples of using ELDEN RING tasks and type reflection, with more to come in the future.
 
