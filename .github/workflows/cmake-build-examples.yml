@@ -1,4 +1,4 @@
-name: CMake Multi-target Build
+name: CMake Multi-target Build Examples
 
 on:
   push:
