@@ -77,9 +77,10 @@ std::string liber::load_versioned_csv() noexcept {
     auto version_wstring = std::to_wstring(version);
     std::string from_disk = load_versioned_csv_from_disk(version_wstring);
     if (from_disk.empty()) {
+        // NOTE: libER_updater must be in ELDEN RING/Game or in PATH
         std::string use_updater = "libER_updater " + get_version_string();
-        system(use_updater.c_str());
-        from_disk = load_versioned_csv_from_disk(version_wstring);
+        if (!system(use_updater.c_str()))
+            from_disk = load_versioned_csv_from_disk(version_wstring);
     }
     return from_disk;
 }
