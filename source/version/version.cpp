@@ -1,6 +1,5 @@
 #include <detail/defines.hpp>
 #include <version/detail/version_fileio.hpp>
-#include <version/detail/version_winhttp.hpp>
 #include <version/version.hpp>
 
 #include <atomic>
@@ -75,9 +74,12 @@ std::string liber::load_versioned_csv() noexcept {
     auto version = get_version();
     if (version == LIBER_INVALID_VERSION)
         return "";
-    std::string from_disk = load_versioned_csv_from_disk();
-    if (!from_disk.empty())
-        return from_disk;
-    std::string from_repo = load_versioned_csv_from_repo();
-    return from_repo;
+    auto version_wstring = std::to_wstring(version);
+    std::string from_disk = load_versioned_csv_from_disk(version_wstring);
+    if (from_disk.empty()) {
+        std::string command = "libER_symbol_downloader " + get_version_string();
+        system(command.c_str());
+        from_disk = load_versioned_csv_from_disk(version_wstring);
+    }
+    return from_disk;
 }
