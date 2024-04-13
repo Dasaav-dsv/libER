@@ -117,3 +117,8 @@ add_library("libER_static" STATIC $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mi
 target_include_directories("libER_static" PUBLIC "include")
 # Debug build "d" postfix in libERd.*
 set_target_properties("libER" "libER_static" PROPERTIES DEBUG_POSTFIX d)
+# No unused warnings with clang-cl
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options("libER" PUBLIC "-Wno-unused")
+    target_compile_options("libER_static" PUBLIC "-Wno-unused")
+endif()
