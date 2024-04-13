@@ -85,9 +85,9 @@ private:
 
     winhttp_request(const std::shared_ptr<winhttp_handle>& connection,
         const wchar_t* verb, const std::wstring& obj)
-        : winhttp_handle(WinHttpOpenRequest(connection->native_handle(),
-            verb, obj.c_str(), NULL, WINHTTP_NO_REFERER,
-            WINHTTP_DEFAULT_ACCEPT_TYPES, WINHTTP_FLAG_SECURE)),
+        : winhttp_handle(WinHttpOpenRequest(connection->native_handle(), verb,
+            obj.c_str(), NULL, WINHTTP_NO_REFERER, WINHTTP_DEFAULT_ACCEPT_TYPES,
+            WINHTTP_FLAG_SECURE)),
           connection(std::move(connection)) {}
 
     std::shared_ptr<winhttp_handle> connection;
@@ -111,8 +111,8 @@ private:
 
     winhttp_connection(std::shared_ptr<winhttp_handle> session,
         const wchar_t* server)
-        : winhttp_handle(WinHttpConnect(session->native_handle(),
-            server, INTERNET_DEFAULT_HTTPS_PORT, 0)),
+        : winhttp_handle(WinHttpConnect(session->native_handle(), server,
+            INTERNET_DEFAULT_HTTPS_PORT, 0)),
           session(std::move(session)) {}
 
     std::shared_ptr<winhttp_handle> session;
@@ -123,9 +123,9 @@ private:
 class winhttp_session : public winhttp_handle {
     using winhttp_handle::winhttp_handle;
     winhttp_session()
-        : winhttp_handle(WinHttpOpen(L"UserAgent/1.0",
-            WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY, WINHTTP_NO_PROXY_NAME,
-            WINHTTP_NO_PROXY_BYPASS, NULL)) {}
+        : winhttp_handle(
+            WinHttpOpen(L"UserAgent/1.0", WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY,
+                WINHTTP_NO_PROXY_NAME, WINHTTP_NO_PROXY_BYPASS, NULL)) {}
 
 public:
     // Create a winhttp session
@@ -169,6 +169,9 @@ public:
         if (!cb_read)
             break;
     }
+    // File does not exist on raw.githubusercontent.com
+    if (out.starts_with("404: Not Found"))
+        out = "";
     return out;
 }
 } // namespace liber
