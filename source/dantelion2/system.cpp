@@ -23,3 +23,9 @@ bool DLSY::wait_for_system(int timeout) noexcept {
     }
     return true;
 }
+
+bool DLSY::is_system_initialized() noexcept {
+    auto counter = reinterpret_cast<int*>(
+        liber::symbol<"GLOBAL_init_flip_counter">::get());
+    return *counter;
+}
