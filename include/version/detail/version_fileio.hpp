@@ -9,11 +9,11 @@
 
 namespace liber {
 // Load a symbol csv from %APPDATA%/EldenRing/libER/*LIBER_TARGET_VERSION*
-std::string load_versioned_csv_from_disk() noexcept;
+std::string load_versioned_csv_from_disk(const std::wstring& version) noexcept;
 
 // Save a file to %APPDATA%/EldenRing/libER/*LIBER_TARGET_VERSION*
 void save_file_to_disk(const std::string& filename,
-    const std::string& data) noexcept;
+    const std::string& data, const std::wstring& version) noexcept;
 
 // Resolve an include statement to its filename (char and wchar_t)
 std::pair<std::string, std::wstring> filename_from_line(
