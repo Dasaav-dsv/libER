@@ -31,4 +31,4 @@ jobs:
         -B ${{ github.workspace }}/examples/build
 
     - name: Build
-      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
+      run: cmake --build ${{ github.workspace }}/examples/build --config ${{ matrix.build_type }}
