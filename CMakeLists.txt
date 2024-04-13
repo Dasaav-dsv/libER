@@ -10,9 +10,6 @@ add_library("objlibER" OBJECT)
 # Set iterator debug level to 0 for ELDEN RING ABI compatibility
 add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
 
-# Documentation:
-include("docs/CMakeLists.txt" EXCLUDE_FROM_ALL)
-
 # Dependency: WinTypes
 target_link_libraries("objlibER" PUBLIC "wintypes")
 add_subdirectory("dependencies/wintypes" "wintypes")
