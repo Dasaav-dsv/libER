@@ -1,0 +1,34 @@
+name: CMake Multi-target Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        build_type: [Release, Debug]
+        cl_toolset: [ {name: Visual Studio, id: v143}, {name: clang-cl, id: ClangCL} ]
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Configure CMake
+      run: >
+        cmake
+        -G "Visual Studio 17 2022"
+        -A x64
+        -T ${{ matrix.cl_toolset.id }}
+        -S ${{ github.workspace }}/examples
+        -B ${{ github.workspace }}/examples/build
+
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/build --config ${{ matrix.build_type }}
