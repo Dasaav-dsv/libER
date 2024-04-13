@@ -12,7 +12,7 @@ Being able to use the STL provides the safety and guarantees of the standard lib
 - Byte perfect documentation of ELDEN RING type layouts
 - Type safety while exposing ELDEN RING's own functionality
 - Thread safety where it is expected, asynchronous execution with native ELDEN RING tasks
-- Non-invasive modifications to ELDEN RING, custom allocator replacement without a single hook or code patch (!)
+- Non-invasive modifications to ELDEN RING, custom allocator replacement without hooks or code patches (!)
 - No pattern matching or other fallible runtime analysis
 - Symbol definition files, separated by game version
 - Possibility to pull symbol definitions from GitHub on a game version mismatch
