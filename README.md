@@ -30,6 +30,7 @@ libER is an ELDEN RING API, not a mod by itself. You can include libER in your p
 git clone --recurse-submodules https://github.com/Dasaav-dsv/libER.git
 cd libER
 mkdir build
+cd build
 cmake ..
 cmake --build . --config Release
 ```
