@@ -21,7 +21,7 @@ using delay_deleter = void (*)(void*);
 
 /**
  * @brief Request deletion of an object.
- * 
+ *
  * @param deleter function to call on object deletion
  * @param p the object to delete
  */
@@ -64,12 +64,10 @@ public:
     void operator()(T* p) const noexcept {
         request_delete(
             [](void* p) {
-                DLKR::DLAllocator* allocator =
-                    DLKR::DLAllocator::get_allocator_of(p);
-                base_type proxy{ allocator };
-                std::allocator_traits<base_type>::destroy(proxy,
+                base_type proxy_allocator;
+                std::allocator_traits<base_type>::destroy(proxy_allocator,
                     reinterpret_cast<T*>(p));
-                proxy.deallocate(reinterpret_cast<T*>(p), 1);
+                proxy_allocator.deallocate(reinterpret_cast<T*>(p), 1);
             },
             p);
     }
