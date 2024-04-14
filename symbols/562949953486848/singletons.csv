@@ -3,4 +3,5 @@ CS::CSTaskImp::instance,0x4502A08
 FD4::FD4TaskManager::instance,0x45B42A0
 DLSY::DLRuntimeImpl::instance,0x4599F28
 CS::CSMemory::instance,0x3CFE408
+DLIO::DLFileDeviceManager,0x459D5D8
 ),"cppsv-fmt"
