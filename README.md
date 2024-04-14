@@ -51,7 +51,7 @@ libER is meant to be a base for mods and other libraries for ELDEN RING. It wrap
 
 Currently, **"./examples"** has examples of using ELDEN RING tasks and type reflection, with more to come in the future.
 
-The libER documentation is currently hosted at https://dasaav-dsv.github.io/libER-dox/html/
+The libER documentation is currently hosted at https://dasaav-dsv.github.io/libER/
 
 libER replaces the standard allocators used by ELDEN RING. This both improves performance and more importantly allows for memory allocation before game initialization in a way that is compatible with the game.
 
