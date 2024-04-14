@@ -1,4 +1,5 @@
 #include <coresystem/memory.hpp>
+#include <dantelion2/system.hpp>
 #include <memory/from_allocator.hpp>
 
 #include <detail/defines.hpp>
@@ -13,15 +14,38 @@
 
 #include <bit>
 #include <cstring>
+#include <immintrin.h>
 #include <memory>
 #include <mutex>
 #include <shared_mutex>
+#include <utility>
 #include <vector>
 
 #define LIBER_ALLOC_MAGIC 0x43'4F'4C'4C'41'52'45'40 // @ERALLOC
 
 using namespace from;
 
+// Part of the layout for a DLBackAllocator wrapper
+// Not fully documented in libER, it is a structure
+// that holds both a concrete DLAllocator
+// and a DLBackAllocator back to back
+class DLBackAllocatorHolder {
+    std::pair<void*, void*> main_heap;
+    std::pair<void*, void*> second_heap;
+    uintptr_t vtable[2];
+
+public:
+    bool is_on_heap(void* p) {
+        return main_heap.first <= p && main_heap.second > p;
+    }
+
+    DLKR::DLAllocator* get_allocator() {
+        return reinterpret_cast<DLKR::DLAllocator*>(vtable);
+    }
+};
+
+// The default heap used by ELDEN RING for
+// _malloc_base and _free_base
 static HANDLE default_heap = GetProcessHeap();
 
 // Default internal libER allocator based on mimalloc
@@ -32,42 +56,35 @@ static HANDLE default_heap = GetProcessHeap();
 static class alignas(1 << CHAR_BIT) liber_internal_allocator
     : public DLKR::DLAllocator {
 public:
-    liber_internal_allocator()
-        : main_allocator(this), other_allocators(LIBER_MY_ALLOCATORS_RESOURCE) {
+    liber_internal_allocator() : all_allocators(LIBER_MY_ALLOCATORS_RESOURCE) {
         mi_option_set(mi_option_purge_delay, 0);
         {
             WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
             std::scoped_lock lock{ mutex };
             // Replace the CSMemory singleton responsible
             // for setting up allocators
-            // Check fd4/detail/fd4_memory and
-            // coresystem/memory
+            // Check fd4/detail/fd4_memory and coresystem/memory
             CS::CSMemory*& csmem = *reinterpret_cast<CS::CSMemory**>(
                 liber::symbol<"CS::CSMemory::instance">::get());
+            MemoryBarrier();
             if (!csmem)
                 csmem = new CS::CSMemory();
-            liber_internal_allocator** sysalloc =
-                reinterpret_cast<liber_internal_allocator**>(
+            liber_internal_allocator*& sysalloc =
+                *reinterpret_cast<liber_internal_allocator**>(
                     liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
-            // Replace the system allocator
-            // If we got here first, this is now the
-            // "main" allocator, otherwise whatever is
-            // already there is "main"
-            if (InterlockedCompareExchangePointer((void**)sysalloc, (void*)this,
-                    nullptr))
-                this->main_allocator = *sysalloc;
+            // Transition: ALWAYS replace the system allocator,
+            // even if it had been replaced previously
+            MemoryBarrier();
+            sysalloc = this;
         }
-        if (this->main_allocator != this) {
-            // Keep a list of libER allocator instances
-            // that did not replace the "main" allocator
-            std::scoped_lock lock{ this->other_allocators };
-            this->other_allocators->push_back(this);
-        }
+        // Keep a list of all libER allocator instances
+        std::scoped_lock lock{ this->all_allocators };
+        this->all_allocators->push_back(this);
     }
 
     virtual ~liber_internal_allocator() {
-        std::scoped_lock lock{ this->other_allocators };
-        std::erase(this->other_allocators.get(), this);
+        std::scoped_lock lock{ this->all_allocators };
+        std::erase(this->all_allocators.get(), this);
     }
 
     // Same as DLKRD::HeapAllocator<DLKR::Win32RuntimeHeapImpl>
@@ -99,45 +116,23 @@ public:
     // Extract block size from the metadata
     // or call msize of other allocators
     size_t msize(void* p) override {
-        if (!p)
-            return 0;
-        size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
-        auto maybe_alloc =
-            reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
-        auto maybe_align = static_cast<unsigned char>(data);
-        if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
+        DLKR::DLAllocator* allocator = this->get_allocator_of(p);
+        if (allocator == this) {
+            // We have the right libER allocator
+            size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+            size_t lg2align = static_cast<unsigned char>(data);
             // Undo the encoding and confirm integrity
-            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
-            size_t nalign = ~0ull << maybe_align;
-            if (maybe_align >= 64 || nalign < nsize)
+            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - lg2align;
+            size_t nalign = ~0ull << lg2align;
+            if (lg2align >= 64 || nalign < nsize)
                 std::terminate();
             return nalign - static_cast<ptrdiff_t>(nsize);
         }
-        auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
-            liber::function<"DLKR::DLBackAllocator::get",
-                DLKR::DLAllocator*>::call());
-        // Check if memory is in the allocated range
-        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p
-            && reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
-            // Reach into the actual allocator instance and msize
-            return dl_back_allocator[4].msize(p);
+        else if (!allocator) {
+            // Try WINAPI HeapSize
+            return p ? HeapSize(default_heap, 0, _block_pointer(p)) : 0;
         }
-        if (maybe_align < 64) {
-            std::shared_lock lock{ this->other_allocators };
-            auto& other_allocators = this->other_allocators.get();
-            auto iter = std::find(other_allocators.begin(),
-                other_allocators.end(), maybe_alloc);
-            if (iter != other_allocators.end()) {
-                size_t nsize =
-                    (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
-                size_t nalign = ~0ull << maybe_align;
-                if (maybe_align >= 64 || nalign < nsize)
-                    std::terminate();
-                return nalign - static_cast<ptrdiff_t>(nsize);
-            }
-        }
-        // All previous checks failed, try WINAPI HeapSize
-        return HeapSize(default_heap, 0, _block_pointer(p));
+        return allocator->msize(p);
     }
 
     void* allocate(size_t cb) override {
@@ -174,62 +169,28 @@ public:
     // Since libER replaces ELDEN RING allocators globally,
     // any of the above may be passed to its deallocate method
     void deallocate(void* p) override {
-        if (!p)
-            return;
-        size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
-        auto maybe_alloc =
-            reinterpret_cast<liber_internal_allocator*>(data & ~0xFF);
-        auto maybe_align = static_cast<unsigned char>(data);
-        if (maybe_alloc == this || maybe_alloc == this->main_allocator) {
-            // Undo the encoding and confirm integrity
-            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
-            size_t nalign = ~0ull << maybe_align;
-            // Alignment can't be greater than 64
-            // Size is a multiple of the alignment
-            // In an unsigned comparison, -alignment >= -nsize ~ 1
-            if (maybe_align >= 64 || nalign < nsize)
+        DLKR::DLAllocator* allocator = this->get_allocator_of(p);
+        if (allocator == this) {
+            // We have the right libER allocator
+            size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+            size_t lg2align = static_cast<unsigned char>(data);
+            size_t alignment = 1ull << lg2align;
+            // Confirm block integrity
+            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - lg2align;
+            if (~alignment < nsize)
                 std::terminate();
-            if (maybe_alloc == this) {
-                void* base = _block_base(p, 1ull << maybe_align);
-                mi_free(base);
-                return;
-            }
-            else {
-                // We know this memory belongs to another libER
-                // allocator, other checks are not necessary
-                this->main_allocator->_deallocate_unchecked(p,
-                    1ull << maybe_align);
-                return;
-            }
-        }
-        auto dl_back_allocator = reinterpret_cast<DLKR::DLAllocator*>(
-            liber::function<"DLKR::DLBackAllocator::get",
-                DLKR::DLAllocator*>::call());
-        // Check if memory is in the allocated range
-        if (reinterpret_cast<void**>(dl_back_allocator)[0] <= p
-            && reinterpret_cast<void**>(dl_back_allocator)[1] > p) {
-            // Reach into the actual allocator instance and msize
-            dl_back_allocator[4].deallocate(p);
+            void* base = _block_base(p, alignment);
+            _zero_block_data(p);
+            mi_free(base);
             return;
         }
-        if (maybe_align < 64) {
-            std::shared_lock lock{ this->other_allocators };
-            auto& other_allocators = this->other_allocators.get();
-            auto iter = std::find(other_allocators.begin(),
-                other_allocators.end(), maybe_alloc);
-            if (iter != other_allocators.end()) {
-                size_t nsize =
-                    (_block_size(p) ^ LIBER_ALLOC_MAGIC) - maybe_align;
-                size_t nalign = ~0ull << maybe_align;
-                // See checks above
-                if (maybe_align >= 64 || nalign < nsize)
-                    std::terminate();
-                (*iter)->_deallocate_unchecked(p, 1ull << maybe_align);
-                return;
-            }
+        else if (!allocator) {
+            // Try WINAPI HeapFree
+            if (p)
+                HeapFree(default_heap, 0, _block_pointer(p));
+            return;
         }
-        // All previous checks failed, try WINAPI HeapFree
-        HeapFree(default_heap, 0, _block_pointer(p));
+        allocator->deallocate(p);
     }
 
     void* allocate_second(size_t cb) override {
@@ -265,17 +226,50 @@ public:
         return nullptr;
     }
 
+    DLKR::DLAllocator* get_allocator_of(void* p) {
+        if (!p)
+            return nullptr;
+        size_t data = _block_data(p) ^ LIBER_ALLOC_MAGIC;
+        auto maybe_align = static_cast<unsigned char>(data);
+        // Check if memory was allocated by libER
+        // Log2 of alignment can't be greater than 64
+        if (maybe_align < 64) {
+            auto maybe_alloc =
+                reinterpret_cast<liber_internal_allocator*>(data - maybe_align);
+            if (maybe_alloc == this)
+                return maybe_alloc;
+            std::shared_lock lock{ this->all_allocators };
+            auto& all_allocators = this->all_allocators.get();
+            auto iter = std::find(all_allocators.begin(), all_allocators.end(),
+                maybe_alloc);
+            if (iter != all_allocators.end())
+                return maybe_alloc;
+        }
+        // Check if memory was allocated by DLBackAllocator
+        auto back_allocator = liber::function<"DLKR::DLBackAllocator::get",
+            DLBackAllocatorHolder*>::call();
+        if (back_allocator->is_on_heap(p))
+            return back_allocator->get_allocator();
+        // Check if memory could've been allocated by another allocator
+        if (!DLSY::is_system_initialized())
+            return nullptr;
+        auto allocator = liber::function<"DLKR::DLAllocator::get_allocator_of",
+            DLKR::DLAllocator*>::call(p);
+        // Could still have been allocated by a replaced system allocator
+        std::shared_lock lock{ this->all_allocators };
+        auto& all_allocators = this->all_allocators.get();
+        auto iter = std::find(all_allocators.begin(), all_allocators.end(),
+            allocator);
+        if (iter == all_allocators.end())
+            return allocator;
+        return nullptr;
+    }
+
 private:
     using allocators_resource_type =
         WinTypes::NamedResource<std::vector<liber_internal_allocator*>>;
 
-    liber_internal_allocator* main_allocator;
-    allocators_resource_type other_allocators;
-
-    virtual void _deallocate_unchecked(void* p, size_t alignment) {
-        void* base = _block_base(p, alignment);
-        mi_free(base);
-    }
+    allocators_resource_type all_allocators;
 
     static void _adjust_alignment(size_t& alignment) {
         alignment = alignment > 16 ? alignment : 16;
@@ -312,6 +306,12 @@ private:
         return reinterpret_cast<void*>(
             reinterpret_cast<uintptr_t>(p) - alignment);
     }
+
+    static void _zero_block_data(void* p) {
+        // Memory should be already 16 byte aligned
+        // as per ELDEN RING's memory alignment requirements.
+        _mm_store_si128(reinterpret_cast<__m128i*>(p) - 1, _mm_setzero_si128());
+    }
 } default_allocator;
 
 static_assert(alignof(liber_internal_allocator) == (1 << CHAR_BIT));
@@ -324,26 +324,3 @@ allocator_base<from::default_empty_base_allocator_tag>::get_allocator()
     const noexcept {
     return default_allocator;
 }
-
-DLKR::DLAllocator&
-allocator_base<from::default_empty_base_allocator_tag>::get_allocator_of(
-    void* p) const {
-    return *DLKR::DLAllocator::get_allocator_of(p);
-}
-
-DLKR::DLAllocator* DLKR::DLAllocator::get_allocator_of(void* p) {
-    return &default_allocator;
-}
-
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                                  \
-    DLKR::DLAllocator& allocator_base<NAME>::get_allocator() const {           \
-        DLKR::DLAllocator* allocator = *reinterpret_cast<DLKR::DLAllocator**>( \
-            liber::symbol<#NAME>::get());                                      \
-        if (!allocator)                                                        \
-            std::terminate();                                                  \
-        return *allocator;                                                     \
-    }
-
-#include <memory/from_allocator.inl>
-
-#undef LIBER_SPECIALIZE_ALLOCATOR_BASE

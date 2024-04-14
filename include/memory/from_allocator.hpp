@@ -272,41 +272,10 @@ public:
      * @return void* pointer to the memory block base
      */
     virtual void* get_memory_block(void* p) = 0;
-
-    /**
-     * @brief Find the allocator used to allocate this memory.
-     *
-     * The returned allocator can be used to free the memory.
-     *
-     * @param p pointer to the memory block
-     * @return DLAllocator* pointer to the allocator instance
-     */
-    LIBERAPI static DLAllocator* get_allocator_of(void* p);
-
-    // ER allocator tags
-    struct MAIN {};
-    struct GFX {};
-    struct GFXTEMP {};
-    struct INGAME {};
-    struct TEMP {};
-    struct CORERES {};
-    struct MO_WWISE_ISORATION {};
-    struct LUA {};
-    struct HAVOK {};
-    struct MENU {};
-    struct DEBUG {};
-    struct GFX_SystemShared {};
-    struct GFX_GraphicsPrivate {};
-    struct SYSTEM {};
 };
 
 struct DLBackAllocator : public DLAllocator {};
 } // namespace DLKR
-
-namespace CS {
-struct CSMoWwiseAllocator : public DLKR::DLAllocator {};
-struct CSNetworkAllocator : public DLKR::DLAllocator {};
-} // namespace CS
 
 /**
  * @brief Default libER allocator that gets embedded
@@ -318,14 +287,14 @@ struct default_allocator_tag {};
 /**
  * @brief Default libER allocator with an empty base.
  *
- * ELDEN RING may use it instead of explicitly specifying the allocator for an
- * object.
+ * ELDEN RING may use it instead of explicitly specifying
+ * the allocator for an object.
  *
  */
 struct default_empty_base_allocator_tag {};
 
 template <typename AllocatorTag>
-struct allocator_base;
+class allocator_base;
 
 /**
  * @brief The main libER stand-in for ER allocator proxies.
@@ -428,20 +397,7 @@ public:
      * @param n is ignored by DLKR::DLAllocator and can be zero
      */
     void deallocate(T* p, size_type n = 0) {
-        this->base().get_allocator_of((void*)p).deallocate((void*)p);
-    }
-
-    /**
-     * @brief Find the allocator used to allocate this memory.
-     *
-     * Wrap the found DLKR::DLAllocator in a from::allocator proxy.
-     * It can be used to deallocate the memory.
-     *
-     * @param p pointer to the memory block
-     * @return allocator<T, default_allocator_tag> allocator for this memory
-     */
-    static allocator<T, default_allocator_tag> get_allocator_of(T* p) {
-        return DLKR::DLAllocator::get_allocator_of(p);
+        this->proxy().deallocate((void*)p);
     }
 
     /**
@@ -465,15 +421,17 @@ bool operator==(const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept {
 /**
  * @brief Internal allocator base class.
  *
- * Used for empty base class optimization depending on the allocator tag.
+ * Used for empty base class optimization based on the allocator tag.
  *
- * @tparam
+ * Pointer to allocator implementation.
+ * 
  */
-/// @cond DOXYGEN_SKIP
 template <>
-struct allocator_base<default_allocator_tag> {
+class allocator_base<default_allocator_tag> {
     DLKR::DLAllocator* allocator;
 
+public:
+/// @cond DOXYGEN_SKIP
     LIBERAPI allocator_base() noexcept;
 
     allocator_base(DLKR::DLAllocator* dl_allocator) noexcept
@@ -482,35 +440,27 @@ struct allocator_base<default_allocator_tag> {
     DLKR::DLAllocator& get_allocator() const noexcept {
         return *this->allocator;
     }
-
-    DLKR::DLAllocator& get_allocator_of(void* p) const noexcept {
-        return this->get_allocator();
-    }
+/// @endcond
 };
 
+/**
+ * @brief Internal allocator base class.
+ *
+ * Used for empty base class optimization based on the allocator tag.
+ *
+ * Zero size (empty base) implementation.
+ * 
+ */
 template <>
-struct allocator_base<default_empty_base_allocator_tag> {
-    allocator_base() noexcept {};
+class allocator_base<default_empty_base_allocator_tag> {
+public:
+/// @cond DOXYGEN_SKIP
+    allocator_base() noexcept = default;
 
     allocator_base(DLKR::DLAllocator* dl_allocator) noexcept {}
 
     LIBERAPI DLKR::DLAllocator& get_allocator() const noexcept;
-    LIBERAPI DLKR::DLAllocator& get_allocator_of(void* p) const;
+/// @endcond
 };
-#define LIBER_SPECIALIZE_ALLOCATOR_BASE(NAME)                \
-    template <>                                              \
-    struct allocator_base<NAME> {                            \
-        LIBERAPI DLKR::DLAllocator& get_allocator() const;   \
-                                                             \
-        DLKR::DLAllocator& get_allocator_of(void* p) const { \
-            return this->get_allocator();                    \
-        }                                                    \
-                                                             \
-        allocator_base(DLKR::DLAllocator*) noexcept {}       \
-    };
-
-#include "from_allocator.inl"
-
-#undef LIBER_SPECIALIZE_ALLOCATOR_BASE
 /// @endcond
 } // namespace from

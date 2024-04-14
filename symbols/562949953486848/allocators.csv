@@ -1,20 +1,6 @@
 "\"" R","cppsv-fmt(cppsv"
 DLKR::DLAllocator::MAIN,0x3CFDF40
 DLKR::DLBackAllocator,0x3CFDF48
-DLKR::DLAllocator::GFX,0x3CFDF50
-DLKR::DLAllocator::GFXTEMP,0x3CFDF58
-DLKR::DLAllocator::INGAME,0x3CFDF68
-DLKR::DLAllocator::TEMP,0x3CFDF70
-DLKR::DLAllocator::CORERES,0x3CFDF78
-CS::CSMoWwiseAllocator,0x3CFDF88
-DLKR::DLAllocator::MO_WWISE_ISORATION,0x3CFDF90
-DLKR::DLAllocator::LUA,0x3CFDF98
-DLKR::DLAllocator::HAVOK,0x3CFDFA0
-DLKR::DLAllocator::MENU,0x3CFDFA8
-CS::CSNetworkAllocator,0x3CFDFB0
-DLKR::DLAllocator::DEBUG,0x3CFDFB8
-DLKR::DLAllocator::GFX_SystemShared,0x3CFDFC0
-DLKR::DLAllocator::GFX_GraphicsPrivate,0x3CFDFD8
 DLKR::DLAllocator::SYSTEM,0x459B1E8
 DLKR::DLAllocator::get_allocator_of,0x1E810D0
 FD4::FD4MemoryManager::GLOBAL_allocator_table,0x3CFDF40
