@@ -294,7 +294,7 @@ struct default_allocator_tag {};
 struct default_empty_base_allocator_tag {};
 
 template <typename AllocatorTag>
-struct allocator_base;
+class allocator_base;
 
 /**
  * @brief The main libER stand-in for ER allocator proxies.
