@@ -11,6 +11,7 @@
 #include <dantelion2/kernel_runtime.hpp>
 #include <dantelion2/text.hpp>
 #include <detail/preprocessor.hpp>
+#include <fd4/detail/singleton.hpp>
 #include <memory/from_vector.hpp>
 
 namespace from {
@@ -53,27 +54,32 @@ private:
     mutable DLKR::DLPlainLightMutex mutex;
 };
 
-class DLFileOperator {};
+class DLFileOperator {
+public:
+    LIBER_CLASS(DLFileOperator);
 
-class DLBinder3FileEnumerator : public DLFileOperator {};
-class DLBinder4FileEnumerator : public DLFileOperator {};
+    virtual ~DLFileOperator() = default;
+
+private:
+    from::allocator<void> allocator;
+    int liber_unknown;
+    void* liber_unknown; // Stack address?
+    int liber_unknown;
+    DLFileDevice* owner;
+    DLTX::DLString file;
+};
+
+class DLBinder4FileEnumerator : public DLFileEnumeratorSPI {};
 
 class DLFileEnumeratorSPI {};
 
-class DLBinder3FileOperatorSPI : public DLFileEnumeratorSPI {};
-class DLBinder4FileOperatorSPI : public DLFileEnumeratorSPI {};
+class DLBinder4FileOperator : public DLFileOperator {
+
+};
 
 class DLFileDeviceImageSPI {
 public:
     virtual ~DLFileDeviceImageSPI() = default;
-};
-
-class DLBinder3FileDeviceImageSPI : public DLFileDeviceImageSPI {
-    virtual ~DLBinder3FileDeviceImageSPI() = default;
-
-private:
-    DLTX::DLString liber_unknown;
-    void* liber_unknown;
 };
 
 class DLBinder4FileDeviceImageSPI : public DLFileDeviceImageSPI {
@@ -87,6 +93,7 @@ private:
 
 class DLFileDeviceManager {
 public:
+    FD4_SINGLETON_CLASS(DLFileDeviceManager);
 
 private:
     struct bnd_file_entry {
@@ -101,13 +108,26 @@ private:
     from::vector<DLTX::DLString> virual_directories;
     from::vector<bnd_file_entry> bnd3_files;
     from::vector<bnd_file_entry> bnd4_files;
-    DLBinder3FileDeviceImageSPI* bnd3_service_provider;
+    FileDeviceImageSPI* bnd3_service_provider;
     DLBinder4FileDeviceImageSPI* bnd4_service_provider;
     mutable DLKR::DLPlainLightMutex mutex;
 };
 
 LIBER_ASSERTS_BEGIN(DLFileDevice);
 LIBER_ASSERT_SIZE(0x40);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(DLFileOperator);
+LIBER_ASSERT_SIZE(0x60);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(DLBinder4FileOperator);
+LIBER_ASSERT_SIZE(0x60);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(DLFileDeviceManager);
+LIBER_ASSERT_SIZE(0xE8);
+LIBER_ASSERT_OFFS(0xB8, mutex);
 LIBER_ASSERTS_END;
 
 } // namespace DLIO
