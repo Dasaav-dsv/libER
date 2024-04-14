@@ -92,6 +92,7 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/reflection.cpp"
     "source/dantelion2/system.cpp"
     "source/dantelion2/utility.cpp"
+    "source/dantelion2/fileio.cpp"
 )
 
 # Namespace FD4 source files
