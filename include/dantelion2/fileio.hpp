@@ -29,6 +29,32 @@ namespace DLIO {
 class DLFileOperator;
 class DLFileEnumeratorSPI;
 
+namespace DLFileConstants {
+enum file_openmode : int {
+    READ = 1,
+    WRITE = 2,
+    READWRITE = READ | WRITE,
+    APPEND = 4,
+    ASYNC = 16,
+    EXCLUSIVE = 64
+};
+
+enum file_result : int {
+    DIR_NOT_EMPTY = -17,
+    OUT_OF_MEMORY = -13,
+    DISK_FULL = -12,
+    NOT_STREAMED = -9,
+    ALREADY_OPEN = -6,
+    IS_NOT_OPEN = -5,
+    NOT_FOUND = -4,
+    ACCESS_DENIED = -3,
+    OPERATION_UNSUPPORTED = -2,
+    INVALID = -1,
+    SUCCESS = 0,
+    NO_MORE_FILES = 1
+};
+} // namespace DLFileConstants
+
 class DLFileDevice {
 public:
     LIBER_CLASS(DLFileDevice);
@@ -64,9 +90,9 @@ public:
 
 private:
     from::allocator<void> allocator;
-    int liber_unknown;
+    DLFileConstants::file_result result;
     void* liber_unknown; // Stack address?
-    // | 0x1 |  0x2 | 0x4 |
+    // | 0x1 |  0x2 | 0x4 | // 0x1 might be "open"
     // | EOF | fail | bad |
     int iostate;
     DLFileDevice* owner;
@@ -132,8 +158,14 @@ namespace msvc90_windows {
 class MicrosoftDiskFileDevice : public DLIO::DLFileDevice {};
 
 class MicrosoftDiskFileOperator : public DLIO::DLFileOperator {
+
 public:
     LIBER_CLASS(MicrosoftDiskFileOperator)
+
+    using filesys_time = std::pair<FILETIME, FD4::FD4PackedSystemTime>;
+    using read_size_type = uint32_t;
+    using file_size_type = uint64_t;
+    using file_difference_type = int64_t;
 
     virtual ~MicrosoftDiskFileOperator() = default;
     bool liber_unknown(MicrosoftDiskFileOperator* other) LIBER_INTERFACE;
@@ -146,21 +178,50 @@ public:
     void* liber_unknown(void*) LIBER_INTERFACE; // void* is some string
     bool populate_file_info_check() LIBER_INTERFACE;
     bool populate_file_info() LIBER_INTERFACE;
-    
-    std::pair<FILETIME, FD4::FD4PackedSystemTime>
-    get_last_write_time() LIBER_INTERFACE;
+    filesys_time get_last_access_time() LIBER_INTERFACE;
+    filesys_time get_last_write_time() LIBER_INTERFACE;
+    file_size_type get_file_size() LIBER_INTERFACE;
+    file_difference_type get_remaining_size() LIBER_INTERFACE;
+    int max_non_streamed_size() LIBER_INTERFACE;
+    void truncate_file() LIBER_INTERFACE;
+    bool has_file_control_0x4() LIBER_INTERFACE;
+    bool is_directory() LIBER_INTERFACE;
+    bool is_open() LIBER_INTERFACE;
+    bool open_file(int dlfile_openmode) LIBER_INTERFACE;
+    bool close_file() LIBER_INTERFACE;
+    bool set_control_unk(bool unk) LIBER_INTERFACE;
+    bool seek(bool is_stream, file_difference_type pos,
+        int move_method) LIBER_INTERFACE;
+    file_size_type get_cursor_pos() LIBER_INTERFACE;
+    read_size_type read_file(void* out, read_size_type cb) LIBER_INTERFACE;
+    read_size_type write_file(void* in, read_size_type cb) LIBER_INTERFACE;
+    read_size_type get_sector_size() LIBER_INTERFACE;
+    read_size_type get_virtual_sector_size() LIBER_INTERFACE;
+    read_size_type stream_read_file(void* out,
+        read_size_type cb) LIBER_INTERFACE;
+    read_size_type stream_write_file(void* in,
+        read_size_type cb) LIBER_INTERFACE;
+    bool stream_complete_operation(HANDLE* event_handle_out,
+        read_size_type* cb_out) LIBER_INTERFACE;
+    int get_file_creation_flags() LIBER_INTERFACE;
+    bool delete_file() LIBER_INTERFACE;
+    bool liber_unknown() LIBER_INTERFACE;
+    bool populate_file_info_again() LIBER_INTERFACE;
+    bool liber_unknown() LIBER_INTERFACE;
+    bool move_file_w(const wchar_t* new_path) LIBER_INTERFACE;
+    bool move_file(const char* new_path) LIBER_INTERFACE;
+    bool create_directory() LIBER_INTERFACE;
+    bool liber_unknown(MicrosoftDiskFileOperator*) LIBER_INTERFACE;
 
 private:
     HANDLE file_handle;
-    // | 0x1       |  0x2       |
-    // | file_info |  file_info |
+    // | 0x1 |  0x2      | 0x4  | 0x8      | 0x10        |
+    // | unk |  has_info | EOF? | is_async | is_streamed |
     char file_control;
     BY_HANDLE_FILE_INFORMATION file_info;
-    void* liber_unknown;
-    void* liber_unknown;
-    void* liber_unknown;
-    void* liber_unknown;
-    int liber_unknown;
+    file_size_type cursor_pos;
+    OVERLAPPED overlapped;
+    int file_creation_flags;
 };
 
 LIBER_ASSERTS_BEGIN(MicrosoftDiskFileOperator);
