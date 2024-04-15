@@ -93,8 +93,8 @@ public:
     using file_size_type = uint64_t;
     using file_difference_type = int64_t;
 
-    virtual ~MicrosoftDiskFileOperator() = default;
-    virtual bool copy_base(DLIO::DLFileOperator* other) = 0;
+    virtual ~DLFileOperator() = default;
+    virtual bool copy_base(DLFileOperator* other) = 0;
     virtual bool set_path(DLTX::DLString* new_path, bool iostate_0x2) = 0;
 
 private:
@@ -105,7 +105,7 @@ private:
 
 public:
     virtual bool close_file() = 0;
-    virtual from::unique_ptr<DLIO::DLFileOperator>
+    virtual from::unique_ptr<DLFileOperator>
     get_virtual_disk_operator() = 0;
 
 private:
@@ -145,7 +145,7 @@ public:
     virtual bool move_file_w(const wchar_t* new_path) = 0;
     virtual bool move_file(const char* new_path) = 0;
     virtual bool create_directory() = 0;
-    virtual bool copy_operator(MicrosoftDiskFileOperator* other) = 0;
+    virtual bool copy_operator(DLFileOperator* other) = 0;
 
 private:
     from::allocator<void> allocator;
