@@ -112,7 +112,7 @@ private:
     virtual void* liber_unknown(void*) = 0; // void* is some string
 
 public:
-    virtual bool populate_file_info_check() = 0;
+    virtual bool populate_dir_info() = 0;
     virtual bool populate_file_info() = 0;
     virtual filesys_time get_last_access_time() = 0;
     virtual filesys_time get_last_write_time() = 0;
