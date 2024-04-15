@@ -14,6 +14,7 @@
 #include <detail/windows.inl>
 #include <fd4/detail/singleton.hpp>
 #include <fd4/time.hpp>
+#include <memory/from_unique_ptr.hpp>
 #include <memory/from_vector.hpp>
 
 namespace from {
@@ -61,11 +62,12 @@ public:
 
     virtual ~DLFileDevice() = default;
 
-    virtual DLFileOperator* load_file(DLTX::DLString* path_dlstr,
-        const wchar_t* path_lpcwstr, void* liber_unknown,
-        from::allocator<void> allocator, bool liber_unknown) LIBER_INTERFACE;
+    virtual from::unique_ptr<DLFileOperator> load_file(
+        DLTX::DLString* path_dlstr, const wchar_t* path_lpcwstr,
+        void* liber_unknown, from::allocator<void> allocator,
+        bool liber_unknown) = 0;
 
-    virtual DLFileEnumeratorSPI* get_file_enumerator() LIBER_INTERFACE;
+    virtual from::unique_ptr<DLFileEnumeratorSPI> get_file_enumerator() = 0;
 
     // Default = 2, CD-ROM = 1, unknown = 0
     virtual int drive_type(const wchar_t* path) {
@@ -103,8 +105,13 @@ private:
 
 public:
     virtual bool close_file() = 0;
-    virtual DLIO::DLFileOperator* get_virtual_disk_operator() = 0;
+    virtual from::unique_ptr<DLIO::DLFileOperator>
+    get_virtual_disk_operator() = 0;
+
+private:
     virtual void* liber_unknown(void*) = 0; // void* is some string
+
+public:
     virtual bool populate_file_info_check() = 0;
     virtual bool populate_file_info() = 0;
     virtual filesys_time get_last_access_time() = 0;
@@ -117,7 +124,7 @@ public:
     virtual bool is_directory() = 0;
     virtual bool is_open() = 0;
     virtual bool open_file(int dlfile_openmode) = 0;
-    virtual bool close_file() = 0;
+    virtual bool try_close_file() = 0;
     virtual bool set_control_unk(bool unk) = 0;
     virtual bool seek(bool is_stream, file_difference_type pos,
         int move_method) = 0;
@@ -126,10 +133,8 @@ public:
     virtual read_size_type write_file(void* in, read_size_type cb) = 0;
     virtual read_size_type get_sector_size() = 0;
     virtual read_size_type get_virtual_sector_size() = 0;
-    virtual read_size_type stream_read_file(void* out,
-        read_size_type cb) = 0;
-    virtual read_size_type stream_write_file(void* in,
-        read_size_type cb) = 0;
+    virtual read_size_type stream_read_file(void* out, read_size_type cb) = 0;
+    virtual read_size_type stream_write_file(void* in, read_size_type cb) = 0;
     virtual bool stream_complete_operation(HANDLE* event_handle_out,
         read_size_type* cb_out) = 0;
     virtual int get_file_creation_flags() = 0;
