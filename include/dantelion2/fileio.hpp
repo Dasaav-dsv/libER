@@ -86,14 +86,67 @@ class DLFileOperator {
 public:
     LIBER_CLASS(DLFileOperator);
 
-    virtual ~DLFileOperator() = default;
+    using filesys_time = std::pair<FILETIME, FD4::FD4PackedSystemTime>;
+    using read_size_type = uint32_t;
+    using file_size_type = uint64_t;
+    using file_difference_type = int64_t;
+
+    virtual ~MicrosoftDiskFileOperator() = default;
+    virtual bool copy_base(DLIO::DLFileOperator* other) = 0;
+    virtual bool set_path(DLTX::DLString* new_path, bool iostate_0x2) = 0;
+
+private:
+    // set_path duplicates, potentially for other string types
+    virtual bool liber_unknown(DLTX::DLString* new_path, bool iostate_0x2) = 0;
+    virtual bool liber_unknown(DLTX::DLString* new_path, bool iostate_0x2) = 0;
+    virtual bool liber_unknown(DLTX::DLString* new_path, bool iostate_0x2) = 0;
+
+public:
+    virtual bool close_file() = 0;
+    virtual DLIO::DLFileOperator* get_virtual_disk_operator() = 0;
+    virtual void* liber_unknown(void*) = 0; // void* is some string
+    virtual bool populate_file_info_check() = 0;
+    virtual bool populate_file_info() = 0;
+    virtual filesys_time get_last_access_time() = 0;
+    virtual filesys_time get_last_write_time() = 0;
+    virtual file_size_type get_file_size() = 0;
+    virtual file_difference_type get_remaining_size() = 0;
+    virtual int max_non_streamed_size() = 0;
+    virtual void truncate_file() = 0;
+    virtual bool has_file_control_0x4() = 0;
+    virtual bool is_directory() = 0;
+    virtual bool is_open() = 0;
+    virtual bool open_file(int dlfile_openmode) = 0;
+    virtual bool close_file() = 0;
+    virtual bool set_control_unk(bool unk) = 0;
+    virtual bool seek(bool is_stream, file_difference_type pos,
+        int move_method) = 0;
+    virtual file_size_type get_cursor_pos() = 0;
+    virtual read_size_type read_file(void* out, read_size_type cb) = 0;
+    virtual read_size_type write_file(void* in, read_size_type cb) = 0;
+    virtual read_size_type get_sector_size() = 0;
+    virtual read_size_type get_virtual_sector_size() = 0;
+    virtual read_size_type stream_read_file(void* out,
+        read_size_type cb) = 0;
+    virtual read_size_type stream_write_file(void* in,
+        read_size_type cb) = 0;
+    virtual bool stream_complete_operation(HANDLE* event_handle_out,
+        read_size_type* cb_out) = 0;
+    virtual int get_file_creation_flags() = 0;
+    virtual bool delete_file() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool populate_file_info_again() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool move_file_w(const wchar_t* new_path) = 0;
+    virtual bool move_file(const char* new_path) = 0;
+    virtual bool create_directory() = 0;
+    virtual bool copy_operator(MicrosoftDiskFileOperator* other) = 0;
 
 private:
     from::allocator<void> allocator;
     DLFileConstants::file_result result;
-    void* liber_unknown; // Stack address?
-    // | 0x1 |  0x2 | 0x4 | // 0x1 might be "open"
-    // | EOF | fail | bad |
+    void* liber_unknown;
+    // 0x1 might be "open"
     int iostate;
     DLFileDevice* owner;
     DLTX::DLString file;
@@ -158,60 +211,8 @@ namespace msvc90_windows {
 class MicrosoftDiskFileDevice : public DLIO::DLFileDevice {};
 
 class MicrosoftDiskFileOperator : public DLIO::DLFileOperator {
-
 public:
     LIBER_CLASS(MicrosoftDiskFileOperator)
-
-    using filesys_time = std::pair<FILETIME, FD4::FD4PackedSystemTime>;
-    using read_size_type = uint32_t;
-    using file_size_type = uint64_t;
-    using file_difference_type = int64_t;
-
-    virtual ~MicrosoftDiskFileOperator() = default;
-    bool liber_unknown(MicrosoftDiskFileOperator* other) LIBER_INTERFACE;
-    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
-    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
-    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
-    bool liber_unknown(char) LIBER_INTERFACE;
-    bool liber_unknown() LIBER_INTERFACE;
-    void liber_unknown() LIBER_INTERFACE;
-    void* liber_unknown(void*) LIBER_INTERFACE; // void* is some string
-    bool populate_file_info_check() LIBER_INTERFACE;
-    bool populate_file_info() LIBER_INTERFACE;
-    filesys_time get_last_access_time() LIBER_INTERFACE;
-    filesys_time get_last_write_time() LIBER_INTERFACE;
-    file_size_type get_file_size() LIBER_INTERFACE;
-    file_difference_type get_remaining_size() LIBER_INTERFACE;
-    int max_non_streamed_size() LIBER_INTERFACE;
-    void truncate_file() LIBER_INTERFACE;
-    bool has_file_control_0x4() LIBER_INTERFACE;
-    bool is_directory() LIBER_INTERFACE;
-    bool is_open() LIBER_INTERFACE;
-    bool open_file(int dlfile_openmode) LIBER_INTERFACE;
-    bool close_file() LIBER_INTERFACE;
-    bool set_control_unk(bool unk) LIBER_INTERFACE;
-    bool seek(bool is_stream, file_difference_type pos,
-        int move_method) LIBER_INTERFACE;
-    file_size_type get_cursor_pos() LIBER_INTERFACE;
-    read_size_type read_file(void* out, read_size_type cb) LIBER_INTERFACE;
-    read_size_type write_file(void* in, read_size_type cb) LIBER_INTERFACE;
-    read_size_type get_sector_size() LIBER_INTERFACE;
-    read_size_type get_virtual_sector_size() LIBER_INTERFACE;
-    read_size_type stream_read_file(void* out,
-        read_size_type cb) LIBER_INTERFACE;
-    read_size_type stream_write_file(void* in,
-        read_size_type cb) LIBER_INTERFACE;
-    bool stream_complete_operation(HANDLE* event_handle_out,
-        read_size_type* cb_out) LIBER_INTERFACE;
-    int get_file_creation_flags() LIBER_INTERFACE;
-    bool delete_file() LIBER_INTERFACE;
-    bool liber_unknown() LIBER_INTERFACE;
-    bool populate_file_info_again() LIBER_INTERFACE;
-    bool liber_unknown() LIBER_INTERFACE;
-    bool move_file_w(const wchar_t* new_path) LIBER_INTERFACE;
-    bool move_file(const char* new_path) LIBER_INTERFACE;
-    bool create_directory() LIBER_INTERFACE;
-    bool liber_unknown(MicrosoftDiskFileOperator*) LIBER_INTERFACE;
 
 private:
     HANDLE file_handle;
