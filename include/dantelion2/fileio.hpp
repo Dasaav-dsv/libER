@@ -105,13 +105,8 @@ private:
 
 public:
     virtual bool close_file() = 0;
-    virtual from::unique_ptr<DLFileOperator>
-    get_virtual_disk_operator() = 0;
-
-private:
-    virtual void* liber_unknown(void*) = 0; // void* is some string
-
-public:
+    virtual from::unique_ptr<DLFileOperator> get_virtual_disk_operator() = 0;
+    virtual DLFileDeviceImageSPI* bind_device_image(DLFileDeviceImageSPI*) = 0;
     virtual bool populate_dir_info() = 0;
     virtual bool populate_file_info() = 0;
     virtual filesys_time get_last_access_time() = 0;
@@ -145,7 +140,6 @@ public:
     virtual bool move_file_w(const wchar_t* new_path) = 0;
     virtual bool move_file(const char* new_path) = 0;
     virtual bool create_directory() = 0;
-    virtual bool copy_operator(DLFileOperator* other) = 0;
 
 private:
     from::allocator<void> allocator;
@@ -169,8 +163,8 @@ public:
     virtual ~DLBinder4FileDeviceImageSPI() = default;
 
 private:
-    DLTX::DLString liber_unknown;
-    void* liber_unknown;
+    DLTX::DLString path;
+    DLFileOperator* operator;
 };
 
 class DLFileDeviceManager {
