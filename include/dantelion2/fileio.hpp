@@ -11,7 +11,9 @@
 #include <dantelion2/kernel_runtime.hpp>
 #include <dantelion2/text.hpp>
 #include <detail/preprocessor.hpp>
+#include <detail/windows.inl>
 #include <fd4/detail/singleton.hpp>
+#include <fd4/time.hpp>
 #include <memory/from_vector.hpp>
 
 namespace from {
@@ -64,18 +66,14 @@ private:
     from::allocator<void> allocator;
     int liber_unknown;
     void* liber_unknown; // Stack address?
-    int liber_unknown;
+    // | 0x1 |  0x2 | 0x4 |
+    // | EOF | fail | bad |
+    int iostate;
     DLFileDevice* owner;
     DLTX::DLString file;
 };
 
-class DLBinder4FileEnumerator : public DLFileEnumeratorSPI {};
-
 class DLFileEnumeratorSPI {};
-
-class DLBinder4FileOperator : public DLFileOperator {
-
-};
 
 class DLFileDeviceImageSPI {
 public:
@@ -108,7 +106,7 @@ private:
     from::vector<DLTX::DLString> virual_directories;
     from::vector<bnd_file_entry> bnd3_files;
     from::vector<bnd_file_entry> bnd4_files;
-    FileDeviceImageSPI* bnd3_service_provider;
+    DLFileDeviceImageSPI* bnd3_service_provider;
     DLBinder4FileDeviceImageSPI* bnd4_service_provider;
     mutable DLKR::DLPlainLightMutex mutex;
 };
@@ -121,10 +119,6 @@ LIBER_ASSERTS_BEGIN(DLFileOperator);
 LIBER_ASSERT_SIZE(0x60);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(DLBinder4FileOperator);
-LIBER_ASSERT_SIZE(0x60);
-LIBER_ASSERTS_END;
-
 LIBER_ASSERTS_BEGIN(DLFileDeviceManager);
 LIBER_ASSERT_SIZE(0xE8);
 LIBER_ASSERT_OFFS(0xB8, mutex);
@@ -134,7 +128,44 @@ LIBER_ASSERTS_END;
 // Dantelion input/output devices (older namespace, has D postfix)
 namespace DLIOD {
 namespace msvc90_windows {
+
 class MicrosoftDiskFileDevice : public DLIO::DLFileDevice {};
+
+class MicrosoftDiskFileOperator : public DLIO::DLFileOperator {
+public:
+    LIBER_CLASS(MicrosoftDiskFileOperator)
+
+    virtual ~MicrosoftDiskFileOperator() = default;
+    bool liber_unknown(MicrosoftDiskFileOperator* other) LIBER_INTERFACE;
+    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
+    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
+    bool liber_unknown(DLTX::DLString*, char) LIBER_INTERFACE;
+    bool liber_unknown(char) LIBER_INTERFACE;
+    bool liber_unknown() LIBER_INTERFACE;
+    void liber_unknown() LIBER_INTERFACE;
+    void* liber_unknown(void*) LIBER_INTERFACE; // void* is some string
+    bool populate_file_info_check() LIBER_INTERFACE;
+    bool populate_file_info() LIBER_INTERFACE;
+    
+    std::pair<FILETIME, FD4::FD4PackedSystemTime>
+    get_last_write_time() LIBER_INTERFACE;
+
+private:
+    HANDLE file_handle;
+    // | 0x1       |  0x2       |
+    // | file_info |  file_info |
+    char file_control;
+    BY_HANDLE_FILE_INFORMATION file_info;
+    void* liber_unknown;
+    void* liber_unknown;
+    void* liber_unknown;
+    void* liber_unknown;
+    int liber_unknown;
+};
+
+LIBER_ASSERTS_BEGIN(MicrosoftDiskFileOperator);
+LIBER_ASSERT_SIZE(0xD8);
+LIBER_ASSERTS_END;
 } // namespace msvc90_windows
 } // namespace DLIOD
 } // namespace from
