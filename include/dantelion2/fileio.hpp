@@ -84,6 +84,13 @@ private:
     mutable DLKR::DLPlainLightMutex mutex;
 };
 
+class DLFileEnumeratorSPI {};
+
+class DLFileDeviceImageSPI {
+public:
+    virtual ~DLFileDeviceImageSPI() = default;
+};
+
 class DLFileOperator {
 public:
     LIBER_CLASS(DLFileOperator);
@@ -151,20 +158,13 @@ private:
     DLTX::DLString file;
 };
 
-class DLFileEnumeratorSPI {};
-
-class DLFileDeviceImageSPI {
-public:
-    virtual ~DLFileDeviceImageSPI() = default;
-};
-
 class DLBinder4FileDeviceImageSPI : public DLFileDeviceImageSPI {
 public:
     virtual ~DLBinder4FileDeviceImageSPI() = default;
 
 private:
     DLTX::DLString path;
-    DLFileOperator* operator;
+    DLFileOperator* file_operator;
 };
 
 class DLFileDeviceManager {
@@ -211,7 +211,9 @@ class MicrosoftDiskFileDevice : public DLIO::DLFileDevice {};
 
 class MicrosoftDiskFileOperator : public DLIO::DLFileOperator {
 public:
-    LIBER_CLASS(MicrosoftDiskFileOperator)
+    LIBER_CLASS(MicrosoftDiskFileOperator);
+
+    virtual ~MicrosoftDiskFileOperator() = default;
 
 private:
     HANDLE file_handle;
@@ -225,7 +227,9 @@ private:
 };
 
 LIBER_ASSERTS_BEGIN(MicrosoftDiskFileOperator);
-LIBER_ASSERT_SIZE(0xD8);
+LIBER_ASSERT_SIZE(0xD0);
+LIBER_ASSERT_OFFS(0x6C, file_info);
+LIBER_ASSERT_OFFS(0xA0, cursor_pos);
 LIBER_ASSERTS_END;
 } // namespace msvc90_windows
 } // namespace DLIOD
