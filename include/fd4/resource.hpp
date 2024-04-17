@@ -96,24 +96,24 @@ private:
     short liber_unknown;
 };
 
-class FD4ResRepository : public FD4ResCap {
+class FD4ResRep : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ResRepository);
 
-    virtual ~FD4ResRepository() = default;
+    virtual ~FD4ResRep() = default;
 
 private:
     FD4ResCapHolder res_holder;
 };
 
-class FD4RepositoryRepository : public FD4ResRepository {
+class FD4RepositoryRepository : public FD4ResRep {
 public:
     FD4_RUNTIME_CLASS(FD4RepositoryRepository);
 
     virtual ~FD4RepositoryRepository() = default;
 };
 
-class FD4ResPathRepository : public FD4ResRepository {
+class FD4ResPathRepository : public FD4ResRep {
 public:
     FD4_RUNTIME_CLASS(FD4ResPathRepository);
 
