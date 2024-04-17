@@ -84,6 +84,18 @@ private:
     FD4ResCapHolderItem (*items)[];
 };
 
+class FD4FileCap : public FD4ResCap {
+public:
+    FD4_RUNTIME_CLASS(FD4FileCap);
+
+private:
+    void* liber_unknown; // FD4FileLoadProcess
+    void* liber_unknown;
+    char liber_unknown;
+    char liber_unknown;
+    short liber_unknown;
+};
+
 class FD4ResRepository : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ResRepository);
