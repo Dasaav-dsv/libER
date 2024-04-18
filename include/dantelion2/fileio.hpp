@@ -223,11 +223,12 @@ private:
     BY_HANDLE_FILE_INFORMATION file_info;
     file_size_type cursor_pos;
     OVERLAPPED overlapped;
-    int file_creation_flags;
+    void* liber_unknown;
+    int liber_unknown;
 };
 
 LIBER_ASSERTS_BEGIN(MicrosoftDiskFileOperator);
-LIBER_ASSERT_SIZE(0xD0);
+LIBER_ASSERT_SIZE(0xD8);
 LIBER_ASSERT_OFFS(0x6C, file_info);
 LIBER_ASSERT_OFFS(0xA0, cursor_pos);
 LIBER_ASSERTS_END;
