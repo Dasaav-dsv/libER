@@ -1,13 +1,14 @@
 /**
  * @file resource.hpp
  * @brief TODO
- * 
+ *
  * Copyright 2024 libER ELDEN RING API library
- * 
+ *
  */
 #pragma once
 
 #include <dantelion2/text.hpp>
+#include <dantelion2/utility.hpp>
 #include <detail/preprocessor.hpp>
 #include <fd4/component.hpp>
 #include <memory/from_allocator.hpp>
@@ -17,8 +18,21 @@
 
 namespace from {
 namespace FD4 {
-// Forward declaration
+
+// Forward declarations
+class FD4FileCap;
 class FD4ResRepository;
+
+class FD4FileLoadProcess {
+public:
+    virtual ~FD4FileLoadProcess() = default;
+
+private:
+    FD4FileCap* file_cap;
+    from::allocator<void> allocator;
+    void* resource_load_queue;
+    DLUT::DLReferenceCountPtr<DLUT::dummy_rfco> liber_unknown;
+};
 
 class FD4ResCapHolderItem : public FD4ComponentBase {
 public:
@@ -40,11 +54,11 @@ public:
 
     ~FD4ResCap() = default;
 
-    virtual void enable_debug(bool) LIBER_INTERFACE;
-    virtual void unk_dummy() LIBER_INTERFACE;
+    virtual void set_debug(bool value) LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
 
 private:
-    bool liber_unknown;
+    bool debug;
     bool liber_unknown;    // FD4BndMountDeviceCapSeed + 0x10
     void* debug_menu_item; // FD4::FD4DebugMenuItem
     bool liber_unknown;
@@ -88,8 +102,26 @@ class FD4FileCap : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4FileCap);
 
+    virtual ~FD4FileCap() = default;
+
 private:
-    void* liber_unknown; // FD4FileLoadProcess
+    virtual void liber_unknown() = 0;
+    virtual void liber_unknown(DLTX::DLString*) = 0;
+    virtual void* liber_unknown() = 0;
+    virtual void* liber_unknown() = 0;
+    virtual void* liber_unknown() = 0;
+
+public:
+    virtual void request_file_load(FD4FileLoadProcess* load_process) = 0;
+    virtual void force_file_load() = 0;
+
+private:
+    virtual void request_header_load() = 0;
+    virtual void liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+
+    FD4FileLoadProcess* liber_unknown;
     void* liber_unknown;
     char liber_unknown;
     char liber_unknown;
