@@ -33,6 +33,16 @@ namespace DLSY {
  */
 LIBERAPI bool wait_for_system(int timeout) noexcept;
 
+/**
+ * @brief Check if ELDEN RING system resources are initialized.
+ * 
+ * Does not lock (except for symbol retrieval), safe to call from any context.
+ * 
+ * @return true initialized
+ * @return false not initialized
+ */
+LIBERAPI bool is_system_initialized() noexcept;
+
 // A singleton that deals with locale
 // and stdio. Seldom used.
 // class DLRuntimeImpl {
