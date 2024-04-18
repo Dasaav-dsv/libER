@@ -212,7 +212,7 @@ private:
  * The purpose of the bool is unknown,
  * may be related to weak referencing.
  */
-using DLString = std::pair<from::string, bool>;
+using DLString = std::pair<from::wstring, bool>;
 
 LIBER_ASSERTS_BEGIN(FD4BasicHashString);
 LIBER_ASSERT_SIZE(0x40);
