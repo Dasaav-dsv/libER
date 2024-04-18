@@ -61,14 +61,14 @@ public:
         {
             WinTypes::NamedMutex mutex{ LIBER_SINGLETON_OVERRIDE_MUTEX };
             std::scoped_lock lock{ mutex };
-            // Replace the CSMemory singleton responsible
+            // Replace the CSMemoryImp singleton responsible
             // for setting up allocators
             // Check fd4/detail/fd4_memory and coresystem/memory
-            CS::CSMemory*& csmem = *reinterpret_cast<CS::CSMemory**>(
-                liber::symbol<"CS::CSMemory::instance">::get());
+            CS::CSMemoryImp*& csmem = *reinterpret_cast<CS::CSMemoryImp**>(
+                liber::symbol<"CS::CSMemoryImp::instance">::get());
             MemoryBarrier();
             if (!csmem)
-                csmem = new CS::CSMemory();
+                csmem = new CS::CSMemoryImp();
             liber_internal_allocator*& sysalloc =
                 *reinterpret_cast<liber_internal_allocator**>(
                     liber::symbol<"DLKR::DLAllocator::SYSTEM">::get());
