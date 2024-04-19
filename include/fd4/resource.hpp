@@ -100,11 +100,27 @@ private:
     FD4ResCapHolderItem (*items)[];
 };
 
+enum class FD4FileCapState : char {
+    INITIAL = 0,
+    QUEUED = 1,
+    PROCESSING = 2,
+    UNKNOWN = 3,
+    READY = 4
+};
+
 class FD4FileCap : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4FileCap);
 
     virtual ~FD4FileCap() = default;
+
+    FileState get_state() const noexcept {
+        return this->state;
+    }
+
+    bool ready() const noexcept {
+        return this->state == FD4FileCapState::READY;
+    }
 
 private:
     virtual void liber_unknown() = 0;
@@ -125,7 +141,7 @@ private:
 
     FD4FileLoadProcess* liber_unknown;
     void* liber_unknown;
-    char liber_unknown;
+    FD4FileCapState state;
     char liber_unknown;
     short liber_unknown;
 };
@@ -172,6 +188,10 @@ LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(FD4ResCap);
 LIBER_ASSERT_SIZE(0x78);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(FD4FileCap);
+LIBER_ASSERT_SIZE(0x90);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(FD4ResCapHolder);
