@@ -21,7 +21,7 @@ namespace FD4 {
 
 // Forward declarations
 class FD4FileCap;
-class FD4ResRepository;
+class FD4ResRepository; // TODO
 
 class FD4FileLoadProcess {
 public:
@@ -90,6 +90,8 @@ public:
         return this->owning_repository;
     }
 
+    LIBERAPI FD4ResCap* get_res_cap(DLTX::string_hash* res_name);
+
 private:
     from::allocator<void> allocator;
     FD4ResRepository* owning_repository;
@@ -130,7 +132,7 @@ private:
 
 class FD4ResRep : public FD4ResCap {
 public:
-    FD4_RUNTIME_CLASS(FD4ResRepository);
+    FD4_RUNTIME_CLASS(FD4ResRep);
 
     virtual ~FD4ResRep() = default;
 
@@ -176,7 +178,7 @@ LIBER_ASSERTS_BEGIN(FD4ResCapHolder);
 LIBER_ASSERT_SIZE(0x28);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(FD4ResRepository);
+LIBER_ASSERTS_BEGIN(FD4ResRep);
 LIBER_ASSERT_SIZE(0xA0);
 LIBER_ASSERTS_END;
 
