@@ -28,7 +28,8 @@ class CSFileImp {
 public:
     FD4_SINGLETON_CLASS(CSFileImp);
 
-    LIBERAPI void load_resource_file(const std::filesystem::path& file);
+    [[nodiscard]] LIBERAPI from::unique_ptr<FD4::FD4FileCap> load_resource_file(
+        const std::filesystem::path& file);
 
     LIBERAPI liber::optref<FD4::FD4ResCap> get_resource(
         CSResourceRepository repository, const std::wstring& resource,

@@ -32,13 +32,14 @@ const auto& get_extension_map() {
 
 #undef LIBER_RESOURCE_EXTENSION
 
-void CS::CSFileImp::load_resource_file(const fs::path& file) {
+from::unique_ptr<FD4::FD4FileCap> CS::CSFileImp::load_resource_file(
+    const fs::path& file) {
     const auto& extension_map = get_extension_map();
     auto iter = extension_map.find(file.extension());
     if (iter == extension_map.end())
-        return;
-    FD4::FD4FileCap* file_cap =
-        iter->second(this, file.wstring().c_str(), 0, 0, 0, 0);
+        return nullptr;
+    return from::unique_ptr<FD4::FD4FileCap>{ iter->second(this,
+        file.wstring().c_str(), 0, 0, 0, 0) };
     // Don't actually force the file loading!
     // It may interrupt the load process of more complex resources.
     // file_cap->force_file_load();
