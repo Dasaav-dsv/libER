@@ -186,7 +186,10 @@ void from::resource_request::resource_request_task::eztask_execute(
     FD4::FD4ResCapHolder* res_cap_holder =
         reinterpret_cast<FD4::FD4ResCapHolder*>(res_repository + holder_offset);
     auto hash = DLTX::string_hash{ request.resource.c_str() };
-    request.res_cap = res_cap_holder->get_res_cap(&hash);
+    FD4::FD4ResCap* res_cap = res_cap_holder->get_res_cap(&hash);
+    if (res_cap)
+        res_cap->ref_count() = 0x4000'0000;
+    request.res_cap = res_cap;
     request.is_ready.test_and_set();
     request.is_ready.notify_all();
     request.task.reset();
