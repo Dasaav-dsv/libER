@@ -17,6 +17,8 @@
 #include <memory/from_unique_ptr.hpp>
 #include <memory/from_vector.hpp>
 
+#include <filesystem>
+
 namespace from {
 // Forward declaration
 namespace DLIOD {
@@ -171,6 +173,8 @@ class DLFileDeviceManager {
 public:
     FD4_SINGLETON_CLASS(DLFileDeviceManager);
 
+    LIBERAPI bool is_virtual_path(const std::filesystem::path& path);
+
 private:
     struct bnd_file_entry {
         DLTX::DLString name;
@@ -181,7 +185,7 @@ private:
     from::vector<DLFileDevice*> devices;
     from::vector<DLFileDeviceImageSPI*> service_providers;
     DLIOD::msvc90_windows::MicrosoftDiskFileDevice* msvc_file_device;
-    from::vector<DLTX::DLString> virual_directories;
+    from::vector<DLTX::DLString> virtual_directories;
     from::vector<bnd_file_entry> bnd3_files;
     from::vector<bnd_file_entry> bnd4_files;
     DLFileDeviceImageSPI* bnd3_service_provider;
