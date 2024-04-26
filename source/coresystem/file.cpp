@@ -169,6 +169,8 @@ void file_request::file_request_task::eztask_execute(FD4::FD4TaskData*) {
 void from::resource_request::resource_request_task::eztask_execute(
     FD4::FD4TaskData*) {
     resource_request& request = this->request;
+    if (request.file && !request.file->ready())
+        return;
     uintptr_t res_repository = 0;
     switch (request.repository) {
 #include <coresystem/file/resource_repositories.inl>
