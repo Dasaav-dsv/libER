@@ -21,7 +21,7 @@ template <typename T>
 using shared_ptr = std::shared_ptr<T>;
 
 /**
- * @brief from::shared_ptr make_shared implementation
+ * @brief from::shared_ptr make_shared implementation.
  *
  * Uses a delay deleter from::delay_delete.
  *
