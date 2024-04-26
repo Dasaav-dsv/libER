@@ -1,5 +1,8 @@
 "\"" R","cppsv-fmt(cppsv"
+CS::CSFD4MoWwisebankRepositoryImp::load_soundbank,0xD91500
+DLMOW::FilePackageLowLevelIOBlocking::load_file,0x21DDF30
 FD4::FD4ResCapHolder::get_res_cap,0x260BB90
+CS::CSFile::unload_file_cap,0x260C550
 CS::CSFile::make_nva_file_cap,0x1F3680
 CS::CSFile::make_gparam_file_cap,0x1F20B0
 CS::CSFile::make_onav_file_cap,0x1F39F0
