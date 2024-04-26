@@ -123,10 +123,11 @@ public:
             size_t lg2align = static_cast<unsigned char>(data);
             // Undo the encoding and confirm integrity
             size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - lg2align;
-            size_t nalign = ~0ull << lg2align;
-            if (lg2align >= 64 || nalign < nsize)
+            size_t size = lg2align - (_block_size(p) ^ LIBER_ALLOC_MAGIC);
+            size_t alignment = 1ull << lg2align;
+            if (lg2align >= 64 || alignment > size)
                 std::terminate();
-            return nalign - static_cast<ptrdiff_t>(nsize);
+            return size - alignment;
         }
         else if (!allocator) {
             // Try WINAPI HeapSize
@@ -176,8 +177,8 @@ public:
             size_t lg2align = static_cast<unsigned char>(data);
             size_t alignment = 1ull << lg2align;
             // Confirm block integrity
-            size_t nsize = (_block_size(p) ^ LIBER_ALLOC_MAGIC) - lg2align;
-            if (~alignment < nsize)
+            size_t size = lg2align - (_block_size(p) ^ LIBER_ALLOC_MAGIC);
+            if (alignment > size)
                 std::terminate();
             void* base = _block_base(p, alignment);
             _zero_block_data(p);
@@ -258,8 +259,8 @@ public:
         // Could still have been allocated by a replaced system allocator
         std::shared_lock lock{ this->all_allocators };
         auto& all_allocators = this->all_allocators.get();
-        auto iter = std::find(all_allocators.begin(), all_allocators.end(),
-            allocator);
+        auto iter =
+            std::find(all_allocators.begin(), all_allocators.end(), allocator);
         if (iter == all_allocators.end())
             return allocator;
         return nullptr;
