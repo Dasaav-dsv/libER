@@ -4,9 +4,10 @@
 using namespace from;
 
 FD4::FD4ResCap* FD4::FD4ResCapHolder::get_res_cap(
-    DLTX::string_hash* res_name) const {
+    const std::wstring& name) const {
+    DLTX::string_hash hash{ path.c_str() };
     return liber::function<"FD4::FD4ResCapHolder::get_res_cap",
-        FD4::FD4ResCap*>::call(this, res_name);
+        FD4::FD4ResCap*>::call(this, &hash);
 }
 
 bool match_filename(const DLTX::FD4BasicHashString& hashstr,
