@@ -1,9 +1,9 @@
 /**
  * @file optref.hpp
  * @brief Optional references based on std::optional
- * 
+ *
  * Copyright 2024 libER ELDEN RING API library
- * 
+ *
  */
 #pragma once
 
@@ -80,8 +80,11 @@ struct optref {
     template <typename U>
         requires std::convertible_to<U, T>
     constexpr optref(const optref<U>& other) noexcept
-        : opt(other.has_value() ? static_cast<reference_type>(other.reference())
-                                : std::nullopt) {}
+        : optref([&]() -> optref {
+              if (!other.has_reference())
+                  return std::nullopt;
+              return static_cast<reference_type>(other.reference());
+          }()) {}
 
     /**
      * @brief Construct an optref from reference.
@@ -145,8 +148,8 @@ struct optref {
 
     /**
      * @brief Swap implementation.
-     * 
-     * @param other 
+     *
+     * @param other
      */
     void swap(optref& other) noexcept {
         this->opt.swap(other.opt);
@@ -154,7 +157,7 @@ struct optref {
 
     /**
      * @brief Reset (cannot assign after).
-     * 
+     *
      */
     void reset() noexcept {
         this->opt.reset();
