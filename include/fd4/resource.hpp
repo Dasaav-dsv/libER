@@ -13,6 +13,8 @@
 #include <fd4/component.hpp>
 #include <memory/from_allocator.hpp>
 
+#include <filesystem>
+
 // TODO: anchor vtables, doxygen documentation
 /// @cond DOXYGEN_SKIP
 
@@ -21,7 +23,7 @@ namespace FD4 {
 
 // Forward declarations
 class FD4FileCap;
-class FD4ResRepository; // TODO
+class FD4ResRep;
 
 class FD4FileLoadProcess {
 public:
@@ -40,11 +42,35 @@ public:
 
     ~FD4ResCapHolderItem() = default;
 
+    DLTX::FD4BasicHashString& name() {
+        return this->res_name;
+    }
+
+    const DLTX::FD4BasicHashString& name() const {
+        return this->res_name;
+    }
+
+    FD4ResCapHolderItem* next() {
+        return this->next_item;
+    }
+
+    const FD4ResCapHolderItem* next() const {
+        return this->next_item;
+    }
+
+    size_t& ref_count() {
+        return this->rcount;
+    }
+
+    const size_t& ref_count() const {
+        return this->rcount;
+    }
+
 private:
     DLTX::FD4BasicHashString res_name;
-    FD4ResRepository* owning_repository; // ResRepository
-    void* next_item;                     // Refcounted object
-    long long ref_count;                 // Ref count TODO
+    FD4ResRep* owning_repository;
+    FD4ResCapHolderItem* next_item;
+    size_t rcount;
 };
 
 // Resource capsule base
@@ -82,22 +108,31 @@ public:
         return this->allocator;
     }
 
-    virtual FD4ResRepository* get_owner() noexcept {
+    virtual FD4ResRep* get_owner() noexcept {
         return this->owning_repository;
     }
 
-    virtual FD4ResRepository* get_owner() const noexcept {
+    virtual FD4ResRep* get_owner() const noexcept {
         return this->owning_repository;
     }
 
-    LIBERAPI FD4ResCap* get_res_cap(DLTX::string_hash* res_name);
+    LIBERAPI FD4ResCap* get_res_cap(DLTX::string_hash* res_name) const;
 
 private:
+    friend class FD4FileCapHolder;
+
     from::allocator<void> allocator;
-    FD4ResRepository* owning_repository;
+    FD4ResRep* owning_repository;
     int liber_unknown;
     int capacity;
-    FD4ResCapHolderItem (*items)[];
+    FD4ResCapHolderItem** items;
+};
+
+class FD4FileCapHolder : public FD4ResCapHolder {
+public:
+    FD4_RUNTIME_CLASS(FD4FileCapHolder);
+
+    LIBERAPI FD4FileCap* get_file_cap(const std::filesystem::path& path) const;
 };
 
 enum class FD4FileCapState : char {
@@ -114,9 +149,13 @@ public:
 
     virtual ~FD4FileCap() = default;
 
-    FileState get_state() const noexcept {
+    FD4FileCapState get_state() const noexcept {
         return this->state;
     }
+
+    void* get_load_task() const noexcept {
+        return this->load_task;
+    };
 
     bool ready() const noexcept {
         return this->state == FD4FileCapState::READY;
@@ -139,8 +178,8 @@ private:
     virtual bool liber_unknown() = 0;
     virtual bool liber_unknown() = 0;
 
-    FD4FileLoadProcess* liber_unknown;
-    void* liber_unknown;
+    FD4FileLoadProcess* load_process;
+    void* load_task;
     FD4FileCapState state;
     char liber_unknown;
     short liber_unknown;
@@ -152,8 +191,16 @@ public:
 
     virtual ~FD4ResRep() = default;
 
+    FD4FileCapHolder& get_file_holder() noexcept {
+        return this->file_holder;
+    }
+
+    const FD4FileCapHolder& get_file_holder() const noexcept {
+        return this->file_holder;
+    }
+
 private:
-    FD4ResCapHolder res_holder;
+    FD4FileCapHolder file_holder;
 };
 
 class FD4RepositoryRepository : public FD4ResRep {
