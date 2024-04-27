@@ -5,7 +5,7 @@ using namespace from;
 
 FD4::FD4ResCap* FD4::FD4ResCapHolder::get_res_cap(
     const std::wstring& name) const {
-    DLTX::string_hash hash{ path.c_str() };
+    DLTX::string_hash hash{ name.c_str() };
     return liber::function<"FD4::FD4ResCapHolder::get_res_cap",
         FD4::FD4ResCap*>::call(this, &hash);
 }
