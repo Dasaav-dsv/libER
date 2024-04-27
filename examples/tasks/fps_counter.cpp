@@ -82,6 +82,7 @@ void example_base() {
     // with a timeout of 5000ms to ensure ELDEN RING has initialized it
     if (!from::DLSY::wait_for_system(5'000)) {
         std::cout << "wait_for_system timed out!" << std::endl;
+        return;
     }
     // Register the two tasks, which starts their execution
     // count_task is set to execute on FrameBegin, the first task group

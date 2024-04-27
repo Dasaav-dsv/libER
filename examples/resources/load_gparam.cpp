@@ -56,11 +56,12 @@ void load_gparam_resource() {
 
 // Will be called from DllMain
 void example_base() {
-    // Allocate console, enable manual flushing
+    // Allocate console, don't enable manual flushing
     con_allocate(false);
     // It's necessary to wait for the game systems to be initialized.
     if (!from::DLSY::wait_for_system(5'000)) {
-        std::cout << "wait_for_system timed out!" << std::endl;
+        std::cout << "wait_for_system timed out!\n";
+        return;
     }
     // Wait a bit longer, since the game doesn't
     // expect to be loading gparams right on boot.
