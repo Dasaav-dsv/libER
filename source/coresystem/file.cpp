@@ -127,7 +127,8 @@ void file_request::file_request_task::eztask_execute(FD4::FD4TaskData*) {
     auto file_rep_opt = get_file_repository(load_bnk);
     if (!file_rep_opt.has_reference())
         return;
-    FD4::FD4FileCapHolder& holder = file_rep_opt.reference().get_file_holder();
+    FD4::FD4FileCapHolder& holder = reinterpret_cast<FD4::FD4FileCapHolder&>(
+        file_rep_opt.reference().get_res_holder());
     FD4::FD4FileCap* existing = nullptr;
     if (load_bnk)
         existing = holder.get_file_cap(request.path.stem());
@@ -185,8 +186,7 @@ void from::resource_request::resource_request_task::eztask_execute(
     }
     FD4::FD4ResCapHolder* res_cap_holder =
         reinterpret_cast<FD4::FD4ResCapHolder*>(res_repository + holder_offset);
-    auto hash = DLTX::string_hash{ request.resource.c_str() };
-    FD4::FD4ResCap* res_cap = res_cap_holder->get_res_cap(&hash);
+    FD4::FD4ResCap* res_cap = res_cap_holder->get_res_cap(request.resource);
     if (res_cap)
         res_cap->ref_count() = 0x4000'0000;
     request.res_cap = res_cap;

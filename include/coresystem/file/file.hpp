@@ -30,7 +30,9 @@ namespace CS {
  */
 enum class CSResourceRepository {
 #define LIBER_RESOURCE_REPOSITORY(NAME) NAME,
+/// @cond DOXYGEN_SKIP
 #include <coresystem/file/resource_repositories.inl>
+/// @endcond
 #undef LIBER_RESOURCE_REPOSITORY
 };
 
@@ -236,7 +238,7 @@ private:
     mutable std::atomic_flag is_ready = ATOMIC_FLAG_INIT;
     struct file_request_task : public CS::CSEzTask {
         file_request_task(file_request& request) : request(request) {}
-        void eztask_execute(FD4::FD4TaskData*) override;
+        LIBERAPI void eztask_execute(FD4::FD4TaskData*) override;
         file_request& request;
     };
     from::unique_ptr<file_request_task> task =
@@ -357,7 +359,7 @@ private:
     mutable std::atomic_flag is_ready = ATOMIC_FLAG_INIT;
     struct resource_request_task : public CS::CSEzTask {
         resource_request_task(resource_request& request) : request(request) {}
-        void eztask_execute(FD4::FD4TaskData*) override;
+        LIBERAPI void eztask_execute(FD4::FD4TaskData*) override;
         resource_request& request;
     };
     from::unique_ptr<resource_request_task> task =

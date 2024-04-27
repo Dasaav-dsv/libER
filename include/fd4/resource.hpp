@@ -214,7 +214,7 @@ public:
     /**
      * @brief Get the file capsule with the given filename.
      * 
-     * @param name path
+     * @param path the file path
      * @return FD4FileCap* pointer to the capsule (may be null) 
      */
     LIBERAPI FD4FileCap* get_file_cap(const std::filesystem::path& path) const;
@@ -306,49 +306,39 @@ private:
     short liber_unknown;
 };
 
-// TODO: FD4FileRep for files
+/**
+ * @brief Abstract resource repository class.
+ * 
+ * A resource repository houses an FD4::FD4ResCapHolder instance,
+ * which holds the repository's resources.
+ * 
+ */
 class FD4ResRep : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ResRep);
 
     virtual ~FD4ResRep() = default;
 
-    FD4FileCapHolder& get_file_holder() noexcept {
-        return this->file_holder;
+    /**
+     * @brief Get the resource capsule holder.
+     * 
+     * @return FD4ResCapHolder& the resource holder
+     */
+    FD4ResCapHolder& get_res_holder() noexcept {
+        return this->res_holder;
     }
 
-    const FD4FileCapHolder& get_file_holder() const noexcept {
-        return this->file_holder;
+    /**
+     * @brief Get the resource capsule holder (const).
+     * 
+     * @return FD4ResCapHolder& the resource holder
+     */
+    const FD4ResCapHolder& get_res_holder() const noexcept {
+        return this->res_holder;
     }
 
 private:
-    FD4FileCapHolder file_holder;
-};
-
-class FD4RepositoryRepository : public FD4ResRep {
-public:
-    FD4_RUNTIME_CLASS(FD4RepositoryRepository);
-
-    virtual ~FD4RepositoryRepository() = default;
-};
-
-class FD4ResPathRepository : public FD4ResRep {
-public:
-    FD4_RUNTIME_CLASS(FD4ResPathRepository);
-
-    virtual ~FD4ResPathRepository() = default;
-};
-
-class FD4ResManagerImp : public FD4ComponentBase {
-    FD4_RUNTIME_CLASS(FD4ResManagerImp);
-
-    virtual ~FD4ResManagerImp() = default;
-
-private:
-    FD4RepositoryRepository repository_repository;
-    from::allocator<void> repository_repository_allocator;
-    FD4ResPathRepository path_repository;
-    from::allocator<void> path_repository_allocator;
+    FD4ResCapHolder res_holder;
 };
 
 LIBER_ASSERTS_BEGIN(FD4ResCapHolderItem);
@@ -369,10 +359,6 @@ LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(FD4ResRep);
 LIBER_ASSERT_SIZE(0xA0);
-LIBER_ASSERTS_END;
-
-LIBER_ASSERTS_BEGIN(FD4ResManagerImp);
-LIBER_ASSERT_SIZE(0x158);
 LIBER_ASSERTS_END;
 } // namespace FD4
 } // namespace from

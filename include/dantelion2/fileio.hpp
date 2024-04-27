@@ -19,6 +19,9 @@
 
 #include <filesystem>
 
+// TODO
+/// @cond DOXYGEN_SKIP
+
 namespace from {
 // Forward declaration
 namespace DLIOD {
@@ -239,3 +242,4 @@ LIBER_ASSERTS_END;
 } // namespace msvc90_windows
 } // namespace DLIOD
 } // namespace from
+/// @endcond
