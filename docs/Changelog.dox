@@ -8,4 +8,16 @@
  *   - Streamline allocation interface
  *   - Remove exposed get_allocator_of methods
  *   - Now, from::allocator<T> can deallocate anything natively
+ * 
+ * ## Version 0.1.2.0:
+ *   - Add functionality to load files from disk or the game's vfs asynchronously
+ *   - Add 2 new examples: getting a gparam resource (after loading the file it is in),
+ *     loading and playing back a sound from a wwise soundbank
+ *   - Initial sound engine implementation, 2D wwise sound playback
+ *   - Update resource types and layouts, document file/resource capsules
+ *   - from::shared_ptr with a delay deleter
+ *   - Fix allocator heuristic error
+ *   - Increase documentation coverage
+ *   - Update liber::optref pointer and reference constructors
+ *   - Start laying out namespace DLIO and DLIOD types for native file I/O
  */

@@ -47,11 +47,70 @@ public:
     /**
      * @brief Copy constructor.
      *
+     */
+    delay_delete(const delay_delete&) noexcept : base_type() {}
+
+    /**
+     * @brief Move constructor.
+     *
+     */
+    delay_delete(delay_delete&&) noexcept : base_type() {}
+
+    /**
+     * @brief Copy template constructor.
+     *
      * @tparam U type of another target object convertible to T by pointer
      */
     template <typename U>
         requires std::convertible_to<U*, T*>
     delay_delete(const delay_delete<U, AllocatorTag>&) noexcept : base_type() {}
+
+    /**
+     * @brief Move template constructor.
+     *
+     * @tparam U type of another target object convertible to T by pointer
+     */
+    template <typename U>
+        requires std::convertible_to<U*, T*>
+    delay_delete(delay_delete<U, AllocatorTag>&&) noexcept : base_type() {}
+
+    /**
+     * @brief Copy assignment operator.
+     *
+     */
+    delay_delete& operator=(const delay_delete&) noexcept {
+        return *this;
+    }
+
+    /**
+     * @brief Copy template assignment operator.
+     *
+     * @tparam U type of another target object convertible to T by pointer
+     */
+    template <typename U>
+        requires std::convertible_to<U*, T*>
+    delay_delete& operator=(const delay_delete<U, AllocatorTag>&) noexcept {
+        return *this;
+    }
+
+    /**
+     * @brief Move assignment operator.
+     *
+     */
+    delay_delete& operator=(delay_delete&&) noexcept {
+        return *this;
+    }
+
+    /**
+     * @brief Move template assignment operator.
+     *
+     * @tparam U type of another target object convertible to T by pointer
+     */
+    template <typename U>
+        requires std::convertible_to<U*, T*>
+    delay_delete& operator=(delay_delete<U, AllocatorTag>&&) noexcept {
+        return *this;
+    }
 
     /**
      * @brief Request object deletion.

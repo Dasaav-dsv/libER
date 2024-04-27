@@ -1,5 +1,9 @@
 "\"" R","cppsv-fmt(cppsv"
 DLSY::DLRuntimeImpl::instance,0x4599F28
+DLIO::DLFileDeviceManager::instance,0x459D5D8
+DLMOW::FilePackageLowLevelIOBlocking::instance,0x45A7880
+AK::BankManager::instance,0x45A7508
+CS::CSFileImp::instance,0x3CD1F48
 CS::AnimThreadManImp::instance,0x3CD1BA8
 CS::CSNetManImp::instance,0x3CD1CA0
 CS::FaceGenManImp::instance,0x3CD1E28

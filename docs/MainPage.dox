@@ -25,6 +25,13 @@
  * @see fd4_task.hpp
  * @see taskgroups.inl
  *
+ * - @link file.hpp File & Resources @endlink: asynchronously loading files
+ * and resources to be used by **ELDEN RING** from disk or from the game's virtual
+ * directories (.bdt archives). Files can be loaded, reloaded and unloaded on demand,
+ * with an std::future-like interface. Resources can be obtained from their corresponding
+ * resource repositories.
+ * @see file.hpp
+ * 
  * - @link from_allocator.hpp Memory Allocation@endlink: **libER** documents the
  * **ELDEN RING** allocation implementation, and replaces it with a modern <a
  * href="https://github.com/microsoft/mimalloc/">mimalloc</a> implementation
@@ -67,6 +74,7 @@
  *     - @link system.hpp DLSY@endlink - system properties
  *     - @link text.hpp DLTX@endlink - strings
  *     - @link utility.hpp DLUT@endlink - utility
+ *     - @link fileio.hpp DLIO@endlink - file
  *   - @link include/fd4 FD4@endlink - internal **ELDEN RING** implementation
  * details
  *   - @link include/memory from::* containers and memory@endlink

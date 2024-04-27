@@ -16,8 +16,7 @@ liber::optref<DLRuntimeMethod> DLRuntimeClass::find_method(
             });
     if (iter != this->runtime_methods.end())
         return *iter->object.get();
-    else
-        return std::nullopt;
+    return std::nullopt;
 }
 
 void DLRuntimeClass::add_constructor_invoker(DLMethodInvoker* invoker,
@@ -53,9 +52,8 @@ void DLRuntimeClass::add_method_invoker(DLMethodInvoker* invoker,
 
 const from::vector<DLRuntimeClassHolder>&
 DLRuntimeClass::get_registered_classes() noexcept {
-    return *reinterpret_cast<from::vector<DLRuntimeClassHolder>*>(
-        liber::symbol<
-            "DLRF::DLRuntimeClass::GLOBAL_registered_classes">::get());
+    return *reinterpret_cast<from::vector<DLRuntimeClassHolder>*>(liber::symbol<
+        "DLRF::DLRuntimeClass::GLOBAL_registered_classes">::get());
 }
 
 const from::vector<DLRuntimeClassPair>&

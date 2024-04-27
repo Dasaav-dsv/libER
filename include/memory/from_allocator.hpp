@@ -462,5 +462,4 @@ public:
     LIBERAPI DLKR::DLAllocator& get_allocator() const noexcept;
 /// @endcond
 };
-/// @endcond
 } // namespace from
