@@ -18,3 +18,6 @@ target_link_libraries("libER_task_group_example" PUBLIC "libER")
 
 add_library("libER_gparam_resource_example" SHARED "resources/load_gparam.cpp")
 target_link_libraries("libER_gparam_resource_example" PUBLIC "libER")
+
+add_library("libER_play_bank_sound_example" SHARED "resources/play_bank_sound.cpp")
+target_link_libraries("libER_play_bank_sound_example" PUBLIC "libER")
