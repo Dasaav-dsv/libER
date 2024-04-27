@@ -108,6 +108,7 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/coresystem/task.cpp"
     "source/coresystem/file.cpp"
+    "source/coresystem/sound.cpp"
 )
 
 # Target libER[d].dll
