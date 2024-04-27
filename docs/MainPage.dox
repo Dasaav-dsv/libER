@@ -74,7 +74,7 @@
  *     - @link system.hpp DLSY@endlink - system properties
  *     - @link text.hpp DLTX@endlink - strings
  *     - @link utility.hpp DLUT@endlink - utility
- *     - @link fileio.hpp DLIO@endlink - file
+ *     - @link fileio.hpp DLIO@endlink - file I/O
  *   - @link include/fd4 FD4@endlink - internal **ELDEN RING** implementation
  * details
  *   - @link include/memory from::* containers and memory@endlink
