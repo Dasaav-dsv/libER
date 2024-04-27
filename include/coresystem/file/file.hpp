@@ -350,9 +350,9 @@ public:
     }
 
 private:
-    std::unique_ptr<file_request> file;
     CS::CSResourceRepository repository;
     std::wstring resource;
+    std::unique_ptr<file_request> file;
     FD4::FD4ResCap* res_cap = nullptr;
     mutable std::atomic_flag is_ready = ATOMIC_FLAG_INIT;
     struct resource_request_task : public CS::CSEzTask {

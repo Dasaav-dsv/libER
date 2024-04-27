@@ -16,9 +16,9 @@ namespace fs = std::filesystem;
 LIBER_SINGLETON_INSTANCE(CS::CSFileImp);
 LIBER_SINGLETON_INSTANCE(CS::CSFD4MoWwisebankRepositoryImp);
 
-#define LIBER_RESOURCE_EXTENSION(EXT)    \
-    { fs::path(LIBER_STRINGIFY(.##EXT)), \
-        liber::symbol<LIBER_STRINGIFY(   \
+#define LIBER_RESOURCE_EXTENSION(EXT)     \
+    { fs::path("." LIBER_STRINGIFY(EXT)), \
+        liber::symbol<LIBER_STRINGIFY(    \
             CS::CSFile::make_##EXT##_file_cap)>::get() },
 
 const auto& get_extension_map() {
@@ -147,8 +147,8 @@ void file_request::file_request_task::eztask_execute(FD4::FD4TaskData*) {
             load_file_cap(request.path, request.loader, load_bnk);
             return;
         }
-        if (!load_bnk && !existing->ready()
-            || load_bnk && !is_bank_ready(existing))
+        if ((!load_bnk && !existing->ready())
+            || (load_bnk && !is_bank_ready(existing)))
             return;
         break;
     case file_request::UNLOAD:
@@ -161,10 +161,11 @@ void file_request::file_request_task::eztask_execute(FD4::FD4TaskData*) {
     request.task.reset();
 };
 
-#define LIBER_RESOURCE_REPOSITORY(NAME)                                        \
-    case CS::CSResourceRepository::NAME:                                       \
-        res_repository = *reinterpret_cast<uintptr_t*>(                        \
-            liber::symbol<LIBER_STRINGIFY(CS::##NAME##Imp::instance)>::get()); \
+#define LIBER_RESOURCE_REPOSITORY(NAME)                 \
+    case CS::CSResourceRepository::NAME:                \
+        res_repository = *reinterpret_cast<uintptr_t*>( \
+            liber::symbol<"CS::" LIBER_STRINGIFY(       \
+                NAME) "Imp::instance">::get());         \
         break;
 
 void from::resource_request::resource_request_task::eztask_execute(
@@ -182,6 +183,8 @@ void from::resource_request::resource_request_task::eztask_execute(
     switch (request.repository) {
     case CS::CSResourceRepository::CSGparamRepository:
         holder_offset += 0x18;
+        break;
+    default:
         break;
     }
     FD4::FD4ResCapHolder* res_cap_holder =

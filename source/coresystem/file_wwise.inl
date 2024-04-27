@@ -109,8 +109,8 @@ void override_wwise_loader_once() {
             MemoryBarrier();
             void** overwritten_vtable = old_vtable;
             std::copy_n(old_vtable, 7, new_vtable);
-            new_vtable[1] = load_wem_override;
-            new_vtable[2] = load_bnk_override;
+            new_vtable[1] = (void*)&load_wem_override;
+            new_vtable[2] = (void*)&load_bnk_override;
             success = overwritten_vtable
                    == InterlockedCompareExchangePointer(
                        reinterpret_cast<void**>(&old_vtable), new_vtable,
