@@ -11,7 +11,5 @@
     liber::optref<CLASSNAME> CLASSNAME::instance() noexcept {            \
         CLASSNAME* singleton = *reinterpret_cast<CLASSNAME**>(           \
             liber::symbol<LIBER_STRINGIFY(CLASSNAME::instance)>::get()); \
-        if (!singleton)                                                  \
-            return std::nullopt;                                         \
-        return *singleton;                                               \
+        return singleton;                                                \
     }

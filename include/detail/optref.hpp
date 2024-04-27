@@ -101,6 +101,17 @@ struct optref {
         : opt(wrapper) {}
 
     /**
+     * @brief Construct an optref from a pointer.
+     *
+     */
+    constexpr optref(T* pointer) noexcept
+        : optref([&]() -> optref {
+              if (!pointer)
+                  return std::nullopt;
+              return *pointer;
+          }()) {}
+
+    /**
      * @brief Does it contain a reference?
      *
      * @return true

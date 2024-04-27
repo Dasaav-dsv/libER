@@ -209,9 +209,7 @@ public:
      * @return liber::optref<FD4::FD4FileCap>
      */
     liber::optref<FD4::FD4FileCap> check() const noexcept {
-        if (!this->file_cap)
-            return std::nullopt;
-        return *this->file_cap;
+        return this->file_cap;
     }
 
     /**
