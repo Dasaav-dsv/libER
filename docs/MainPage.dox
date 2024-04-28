@@ -1,6 +1,6 @@
 /**
  * @mainpage libER reference
- *
+ * 
  * @section about_section About
  *
  * **libER** is an **ELDEN RING** Application Programming Interface (API)
@@ -21,6 +21,7 @@
  * taskgroups@endlink, which impose a strict ordering on task execution. ELDEN
  * RING uses this system for step-by-step execution, making sure data has been
  * properly handled at each step and that it is ready for the next one.
+ * @see **EXAMPLES**: @ref example_tasks_page
  * @see task.hpp
  * @see fd4_task.hpp
  * @see taskgroups.inl
@@ -30,6 +31,7 @@
  * directories (.bdt archives). Files can be loaded, reloaded and unloaded on demand,
  * with an std::future-like interface. Resources can be obtained from their corresponding
  * resource repositories.
+ * @see **EXAMPLES**: @ref example_resources_page
  * @see file.hpp
  * 
  * - @link from_allocator.hpp Memory Allocation@endlink: **libER** documents the
@@ -52,6 +54,7 @@
  * - @link reflection.hpp **ELDEN RING** Type Reflection@endlink: the runtime
  * type reflection used by **ELDEN RING**. All reflected classes are accessible
  * through from::DLRF::DLRuntimeClass methods.
+ * @see **EXAMPLES**: @ref example_reflection_page
  * @see reflection.hpp
  * @see @link from::DLRF::DLRuntimeClass DLRF::DLRuntimeClass@endlink
  *
