@@ -1,0 +1,12 @@
+/**
+ * @page example_resources_page Files & Resources Examples
+ * 
+ * ## Loading and processing a .gparam file:
+ * 
+ * @include load_gparam.cpp
+ * 
+ * ## Loading a Wwise bank and playing a sound:
+ * 
+ * @include play_bank_sound.cpp
+ * 
+ */

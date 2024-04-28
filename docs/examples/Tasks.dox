@@ -1,0 +1,12 @@
+/**
+ * @page example_tasks_page Tasks Examples
+ * 
+ * ## FPS counter (in console output):
+ * 
+ * @include fps_counter.cpp
+ * 
+ * ## Task group demo:
+ * 
+ * @include task_groups.cpp
+ * 
+ */
