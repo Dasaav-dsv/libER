@@ -20,4 +20,8 @@
  *   - Increase documentation coverage
  *   - Update liber::optref pointer and reference constructors
  *   - Start laying out namespace DLIO and DLIOD types for native file I/O
+ * 
+ * ## Version 0.1.2.1:
+ *   - Add @link from::CS::CSWindowImp CSWindowImp @endlink documentation by <a href="https://github.com/ThomasJClark">ThomasJClark</a>
+ * 
  */
