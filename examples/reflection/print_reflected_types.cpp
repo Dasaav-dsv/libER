@@ -15,7 +15,8 @@ void example_base() {
     // We can use wait_for_system with a timeout of 5000ms to ensure ELDEN RING
     // has initialized it
     if (!from::DLSY::wait_for_system(5'000)) {
-        std::cout << "wait_for_system timed out!" << std::endl;
+        std::cout << "wait_for_system timed out!\n";
+        return;
     }
     // Get a vector of all DLRuntimeClasses that have been
     // registered so far by ELDEN RING

@@ -1,0 +1,8 @@
+/**
+ * @page example_reflection_page Reflection Examples
+ * 
+ * ## Print all the types with type reflection in ELDEN RING:
+ * 
+ * @include print_reflected_types.cpp
+ * 
+ */

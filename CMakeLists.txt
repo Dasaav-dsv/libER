@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15.0)
-project(libER VERSION 0.1.1.0 LANGUAGES C CXX)
+project(libER VERSION 0.1.2.0 LANGUAGES C CXX)
 
 # Must build with C++20 or newer
 set(CMAKE_CXX_STANDARD 20)
@@ -92,12 +92,14 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/reflection.cpp"
     "source/dantelion2/system.cpp"
     "source/dantelion2/utility.cpp"
+    "source/dantelion2/fileio.cpp"
 )
 
 # Namespace FD4 source files
 target_sources("objlibER" PUBLIC
     "source/fd4/time.cpp"
     "source/fd4/component.cpp"
+    "source/fd4/resource.cpp"
     "source/fd4/detail/fd4_memory.cpp"
     "source/fd4/detail/fd4_task.cpp"
 )
@@ -106,6 +108,8 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/coresystem/task.cpp"
     "source/coresystem/window.cpp"
+    "source/coresystem/file.cpp"
+    "source/coresystem/sound.cpp"
 )
 
 # Target libER[d].dll

@@ -24,16 +24,21 @@ namespace DLTX {
  * The string is rehashed after the string could have changed (non-const
  * access). The hash is 32 bits in size.
  *
- * @tparam T type of the string
  */
-template <typename T>
 struct string_hash {
     /**
      * @brief Construct a new string hash object.
      *
+     */
+    string_hash() : str(nullptr), hash_value(0), needs_hashing(true) {}
+
+    /**
+     * @brief Construct a new string hash object.
+     * 
      * @param str the string
      */
-    string_hash(const T& str) : str(&str), hash_value(0), needs_hashing(true) {}
+    explicit string_hash(const wchar_t* str)
+        : str(str), hash_value(0), needs_hashing(true) {}
 
     /**
      * @brief Request a lazy rehash if the string may change.
@@ -47,10 +52,13 @@ struct string_hash {
      * @brief Get the hash of the string.
      *
      * @return int hash of the string
+     *
+     * @tparam T type of the string
      */
-    int get_hash() noexcept {
+    template <typename T>
+    int get_hash(const T& str) noexcept {
         if (this->needs_hashing)
-            this->hash_string();
+            this->hash_string(str);
         return this->hash_value;
     }
 
@@ -64,11 +72,13 @@ struct string_hash {
      * equivalent hashes for the same strings.
      *
      * @return int hash of the string
+     *
+     * @tparam T type of the string
      */
-    int hash_string() noexcept {
+    template <typename T>
+    int hash_string(const T& str) noexcept {
         int result = 0;
-        if (!this->str) return 0;
-        for (int chr : *this->str) {
+        for (int chr : str) {
             // To lowercase (approximate)
             if (chr <= 'Z')
                 chr += 0x20;
@@ -83,8 +93,17 @@ struct string_hash {
         return result;
     }
 
+    /**
+     * @brief Set the underlying string pointer of the hash.
+     *
+     * @param new_ptr new pointer to use
+     */
+    void set_string_ptr(const wchar_t* new_ptr) {
+        this->str = new_ptr;
+    }
+
 private:
-    const T* str;
+    const wchar_t* str;
     int hash_value;
     bool needs_hashing;
 };
@@ -98,7 +117,6 @@ private:
  */
 class FD4BasicHashString {
     using string_type = from::wstring;
-    using hash_type = string_hash<from::wstring>;
 
 public:
     LIBER_CLASS(FD4BasicHashString);
@@ -112,8 +130,7 @@ public:
      * @param args the arguments to pass to the string constructor
      */
     template <typename... Args>
-    FD4BasicHashString(Args&&... args)
-        : string(std::forward<Args>(args)...), string_hash(this->string) {}
+    FD4BasicHashString(Args&&... args) : string(std::forward<Args>(args)...) {}
 
     /**
      * @brief Access the string with an implicit conversion.
@@ -161,12 +178,12 @@ public:
      * @return int hash
      */
     int get_hash() const noexcept {
-        return string_hash.get_hash();
+        return string_hash.get_hash(*this);
     }
 
     /**
      * @brief Iterator begin.
-     * 
+     *
      * @return string begin iterator.
      */
     auto begin() noexcept {
@@ -175,7 +192,7 @@ public:
 
     /**
      * @brief Iterator const begin.
-     * 
+     *
      * @return const string begin iterator.
      */
     auto begin() const noexcept {
@@ -184,7 +201,7 @@ public:
 
     /**
      * @brief Iterator end.
-     * 
+     *
      * @return string end iterator.
      */
     auto end() noexcept {
@@ -193,7 +210,7 @@ public:
 
     /**
      * @brief Iterator end.
-     * 
+     *
      * @return const string end iterator.
      */
     auto end() const noexcept {
@@ -203,7 +220,7 @@ public:
 private:
     string_type string;
     // May be rehashed
-    mutable hash_type string_hash;
+    mutable string_hash string_hash;
 };
 
 /**
@@ -212,7 +229,7 @@ private:
  * The purpose of the bool is unknown,
  * may be related to weak referencing.
  */
-using DLString = std::pair<from::string, bool>;
+using DLString = std::pair<from::wstring, bool>;
 
 LIBER_ASSERTS_BEGIN(FD4BasicHashString);
 LIBER_ASSERT_SIZE(0x40);
