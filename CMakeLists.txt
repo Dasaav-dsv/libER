@@ -107,6 +107,7 @@ target_sources("objlibER" PUBLIC
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
     "source/coresystem/task.cpp"
+    "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
     "source/coresystem/sound.cpp"
 )
