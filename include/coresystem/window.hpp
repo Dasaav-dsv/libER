@@ -7,7 +7,6 @@
 #pragma once
 
 #include <detail/preprocessor.hpp>
-#include <detail/windows.inl>
 #include <fd4/component.hpp>
 #include <fd4/detail/singleton.hpp>
 #include <memory/from_string.hpp>
@@ -19,7 +18,8 @@ class CSWindowImp;
 class CSScreenModeCtrl;
 
 /**
- * @brief The interface to access and modify graphics settings
+ * @brief The singleton responsible for managing the game window
+ * and graphics settings.
  */
 class CSWindowImp : public FD4::FD4ComponentBase {
 public:
@@ -27,16 +27,26 @@ public:
 
     virtual ~CSWindowImp() LIBER_INTERFACE_ONLY;
 
-    using window_handle_type = HWND;
+    /// @cond DOXYGEN_SKIP
+    using window_handle_type = void*;
     using window_position_type = std::pair<int, int>;
     using window_size_type = std::pair<int, int>;
+    /// @endcond
 
+    /**
+     * @brief The window screen mode.
+     * 
+     */
     enum class screen_mode : int {
         window = 0,
         fullscreen = 1,
         borderless_window = 2,
     };
 
+    /**
+     * @brief The quality of a @ref graphics_settings entry.
+     * 
+     */
     enum class quality_level : int {
         off = 0,
         low = 1,
@@ -46,6 +56,7 @@ public:
     };
 
     struct graphics_settings {
+        /// @cond DOXYGEN_SKIP
         screen_mode screen_mode;
         bool auto_detect_best_rendering_settings;
         quality_level graphics_quality;
@@ -64,6 +75,7 @@ public:
         quality_level ray_tracing_quality;
         quality_level global_illumination_quality;
         quality_level grass_quality;
+        /// @endcond
     };
 
     /**
@@ -133,7 +145,7 @@ public:
         this->graphics_settings = graphics_settings;
     }
 
-public:
+private:
     window_handle_type window_handle;
     int liber_unknown[4];
     window_position_type window_position;
