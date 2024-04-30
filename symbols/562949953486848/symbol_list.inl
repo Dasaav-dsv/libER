@@ -14,6 +14,7 @@ LIBER_ADD_SYMBOL(GLOBAL_init_flip_counter)
 LIBER_ADD_SYMBOL(CS::CSEzTask::register_task)
 LIBER_ADD_SYMBOL(CS::CSEzTaskProxy::free_task)
 LIBER_ADD_SYMBOL(CS::CSSoundImp::make_system_sound)
+LIBER_ADD_SYMBOL(CS::SoloParamRepositoryImp::get_param_res_cap_address)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)
 LIBER_ADD_SYMBOL(DLIO::DLFileDeviceManager::instance)
