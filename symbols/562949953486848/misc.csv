@@ -2,6 +2,6 @@
 GLOBAL_init_flip_counter,0x3CFC2CC
 CS::CSEzTask::register_task,0xE71C70
 CS::CSEzTaskProxy::free_task,0xE71D60
-CS::CSSoundImp::play_system_sound,0xD73640
+CS::CSSoundImp::make_system_sound,0xD73640
 CS::CSSoundImp::play_character_sound,0x4AA020
 ),"cppsv-fmt"

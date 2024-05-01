@@ -13,7 +13,7 @@ LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
 LIBER_ADD_SYMBOL(GLOBAL_init_flip_counter)
 LIBER_ADD_SYMBOL(CS::CSEzTask::register_task)
 LIBER_ADD_SYMBOL(CS::CSEzTaskProxy::free_task)
-LIBER_ADD_SYMBOL(CS::CSSoundImp::play_system_sound)
+LIBER_ADD_SYMBOL(CS::CSSoundImp::make_system_sound)
 LIBER_ADD_SYMBOL(CS::CSSoundImp::play_character_sound)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)
