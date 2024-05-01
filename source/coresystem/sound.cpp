@@ -5,7 +5,6 @@
 #include <stdexcept>
 #include <utility>
 
-
 using namespace from;
 
 LIBER_SINGLETON_INSTANCE(CS::CSSoundImp);
@@ -28,12 +27,34 @@ int sound_type_to_int(char sound_type) {
     return sound_type_lut[to_base];
 }
 
-liber::optref<CS::CSFD4SoundIns> CS::CSSoundImp::make_system_sound(
-    char sound_type, int sound_id, void* wwise_obj) {
+DLUT::DLReferenceCountPtr<CS::CSFD4SoundIns> CS::CSSoundImp::play_system_sound(
+    char sound_type, int sound_id) {
     int sound_type_integer = sound_type_to_int(sound_type);
     if (sound_type_integer < 0)
-        return std::nullopt;
-    auto sound = std::make_pair(sound_type_integer, sound_id);
-    return liber::function<"CS::CSSoundImp::make_system_sound",
-        CS::CSFD4SoundIns*>::call(this, &sound, wwise_obj);
+        return nullptr;
+    auto cssound = CS::CSSoundImp::instance();
+    if (!cssound)
+        return nullptr;
+    auto sound_typeid = std::make_pair(sound_type_integer, sound_id);
+    auto sound = liber::function<"CS::CSSoundImp::make_system_sound",
+        CS::CSFD4SoundIns*>::call(&cssound.reference(), &sound_typeid, nullptr);
+    if (!sound)
+        return nullptr;
+    sound->play_sound = 1;
+    return DLUT::DLReferenceCountPtr<CS::CSFD4SoundIns>{ sound };
+}
+
+DLUT::DLReferenceCountPtr<CS::CSFD4SoundIns>
+CS::CSSoundImp::play_character_sound(char sound_type, int sound_id, ChrIns& chr,
+    int dummypoly, bool follows_origin) {
+    int sound_type_integer = sound_type_to_int(sound_type);
+    if (sound_type_integer < 0)
+        return nullptr;
+    auto cssound = CS::CSSoundImp::instance();
+    if (!cssound)
+        return nullptr;
+    auto sound_typeid = std::make_pair(sound_type_integer, sound_id);
+    return liber::function<"CS::CSSoundImp::play_character_sound",
+        DLUT::DLReferenceCountPtr<CS::CSFD4SoundIns>>::call(&chr, &sound_typeid,
+        &dummypoly, follows_origin);
 }
