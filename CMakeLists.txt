@@ -112,6 +112,11 @@ target_sources("objlibER" PUBLIC
     "source/coresystem/sound.cpp"
 )
 
+# Namespace GX source files
+target_sources("objlibER" PUBLIC
+    "source/graphics/draw.cpp"
+)
+
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mimalloc-obj>)
 target_include_directories("libER" PUBLIC "include")
