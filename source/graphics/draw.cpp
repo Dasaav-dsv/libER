@@ -37,7 +37,7 @@ struct d3d12_env {
     DLKR::DLPlainLightMutex* mutexes[2];
 };
 
-struct CGTargetView {
+struct CGView {
     void* liber_unknown; // vtable
     void* liber_unknown; // DLCG3::CGTexture2D
     HANDLE handle;
@@ -45,7 +45,7 @@ struct CGTargetView {
 
 struct GXBuffer {
     void* liber_unknown[15];
-    CGTargetView** cg_view;
+    CGView** cg_view;
 };
 
 struct GXSwapChain {
@@ -76,9 +76,9 @@ struct GXSwapChain {
     int target_framerate;
     int liber_unknown[19];
     void* main_texture;                    // DLCG3::CGTexture2D
-    CGTargetView* main_render_target_view; // DLCG3::CGRenderTargetView
+    CGView* main_render_target_view; // DLCG3::CGRenderTargetView
     void* textures[3];                     // DLCG3::CGTexture2D
-    CGTargetView* render_target_views[3];  // DLCG3::CGRenderTargetView
+    CGView* render_target_views[3];  // DLCG3::CGRenderTargetView
     GXBuffer* render_targets[3];           // GXBS::GXRenderTarget2D
     void* liber_unknown[3];
     int target_count; // 3
@@ -102,14 +102,14 @@ bool liber_draw_callback(uintptr_t device_context, GXDrawTask* task) {
     task->root_signature = *reinterpret_cast<ID3D12RootSignature**>(
         liber::symbol<"GLOBAL_ID3D12RootSignature">::get());
     task->command_queue = environment->command_queue;
-    CGTargetView* rtv = [&]() {
+    CGView* rtv = [&]() {
         if (task->get_scene() == GXDrawTask::UI_SCENE)
             return sc->main_render_target_view;
         return *sc->render_post->cg_view;
     }();
     task->render_target_view =
         reinterpret_cast<D3D12_CPU_DESCRIPTOR_HANDLE*>(&rtv->handle);
-    CGTargetView* dsv = *sc->depth_stencil_buffer->cg_view;
+    CGView* dsv = *sc->depth_stencil_buffer->cg_view;
     task->depth_stencil_view =
         reinterpret_cast<D3D12_CPU_DESCRIPTOR_HANDLE*>(&dsv->handle);
     task->viewport = reinterpret_cast<D3D12_VIEWPORT*>(
