@@ -133,7 +133,7 @@ void GXDrawTask::eztask_execute(FD4::FD4TaskData* data) {
     if (draw_queue_selector > 1)
         return;
     void* draw_queue = draw_queue_array[draw_queue_selector];
-    int priority = this->draw_scene == GAME_SCENE ? -1 : -2;
+    int priority = this->draw_scene == HDR_SCENE ? -1 : -2;
     liber::function<"GXBS::GXDrawQueue::queue_callback", void>::call(draw_queue,
         &liber_draw_callback, this, this, priority);
 }

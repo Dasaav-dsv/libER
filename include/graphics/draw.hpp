@@ -45,15 +45,15 @@ public:
     /**
      * @brief Whether the task should draw on top of the UI.
      *
-     * GAME_SCENE: (also called HDRScene by the game) draw before
+     * HDR_SCENE (called HDRScene by the game): draw before
      * the UI is composited onto the final render target.
      *
-     * UI_SCENE: (UIScene) draw on top of the composited UI,
+     * UI_SCENE (called UIScene by the game): draw on top of the composited UI,
      * but below any 3rd party overlays.
      *
      */
     enum scene {
-        GAME_SCENE,
+        HDR_SCENE,
         UI_SCENE
     };
 
@@ -169,7 +169,7 @@ public:
 
     /**
      * @brief Get the delta time of this frame.
-     * 
+     *
      * @return float delta time in seconds
      */
     float get_delta_time() noexcept {
@@ -178,7 +178,7 @@ public:
 
     /**
      * @brief Get how many times this draw task has been called.
-     * 
+     *
      * @return int times called
      */
     int get_times_called() noexcept {
@@ -197,7 +197,7 @@ private:
     D3D12_CPU_DESCRIPTOR_HANDLE* depth_stencil_view = nullptr;
     D3D12_VIEWPORT* viewport = nullptr;
     D3D12_RECT* scissor_rect = nullptr;
-    scene draw_scene = GAME_SCENE;
+    scene draw_scene = HDR_SCENE;
     float delta_time = 0.0f;
     int times_called = 0;
 };
