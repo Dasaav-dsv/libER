@@ -30,9 +30,9 @@ namespace GXBS {
  * @brief Abstract graphics draw task base.
  *
  * Based on @link from::CS::CSEzTask CS::CSEzTask @endlink,
- * this task executes during the @link from::CS::CSTaskGroup::GraphicsStep
- * GraphicsStep @endlink once registered. Concrete classes that derive from it
- * must implement the @link from::GXBS::GXDrawTask::draw draw @endlink method,
+ * this task executes during the CS::CSTaskGroup::GraphicsStep
+ * once registered. Concrete classes that derive from it must implement the
+ * @link from::GXBS::GXDrawTask::draw draw @endlink method,
  * and may access DirectX 12 resources through other methods of this class.
  *
  * Two layer options are provided by default, which determine if the D3D12
