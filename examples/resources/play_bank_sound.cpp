@@ -27,17 +27,6 @@ void example_base() {
         std::cout << "Failed to load sd:/vc201.bnk!\n";
         return;
     }
-    auto cssound = from::CS::CSSoundImp::instance();
-    if (!cssound) {
-        std::cout << "CSSoundImp not initialized!\n";
-        return;
-    }
-    // Load v020240300 (from vc201.bnk we loaded earlier) 
-    auto sound = cssound.reference().make_system_sound('v', 20240300);
-    if (!sound) {
-        std::cout << "make_system_sound failed!\n";
-        return;
-    }
-    // Start sound playback (Play_v020240300 will be called)
-    sound.reference().start_playback();
+    // Play v020240300 (from vc201.bnk we loaded earlier) 
+    (void)from::CS::CSSoundImp::play_system_sound('v', 20240300);
 }

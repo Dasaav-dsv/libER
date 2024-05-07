@@ -14,6 +14,9 @@
 
 namespace from {
 namespace CS {
+// Forward declaration for character sound playback
+class ChrIns;
+
 /**
  * @brief A single playable sound instance in the sound engine.
  *
@@ -30,14 +33,6 @@ public:
         STOP = 2,
         DIAL = 3
     };
-
-    /**
-     * @brief Start sound playback.
-     *
-     */
-    void start_playback() noexcept {
-        this->play_sound = 1;
-    }
 
     /**
      * @brief Stop sound playback.
@@ -67,6 +62,8 @@ public:
     }
 
 private:
+    friend class CSSoundImp;
+
     std::pair<int, int> sound;
     void* wwise_obj;
     void* liber_unknown[5];
@@ -94,18 +91,34 @@ public:
     FD4_SINGLETON_CLASS(CSSoundImp);
 
     /**
-     * @brief Make a wwise system sound wrapper.
+     * @brief Play a 2d system wwise sound.
+     *
+     * @param sound_type the single letter prefix of a sound name,
+     * possible values: 'a', 'c', 'f', 'o', 'p', 's', 'm', 'v', 'x', 'b', 'i',
+     * 'y', 'z', 'e', 'g', 'd'
+     * @param sound_id the nine digit decimal sound id
+     * @return DLUT::DLReferenceCountPtr<CSFD4SoundIns> a pointer to a reference
+     * counted sound object
+     */
+    [[nodiscard]] LIBERAPI static DLUT::DLReferenceCountPtr<CSFD4SoundIns> play_system_sound(
+        char sound_type, int sound_id);
+
+    /**
+     * @brief Play a wwise sound from a character.
      *
      * @param sound_type The single letter prefix of a sound name,
      * possible values: 'a', 'c', 'f', 'o', 'p', 's', 'm', 'v', 'x', 'b', 'i',
      * 'y', 'z', 'e', 'g', 'd'
-     * @param sound_id The nine digit decimal sound id
-     * @param wwise_object wrapped wwise game object
-     * @return liber::optref<CSFD4SoundIns> an optional reference to a new sound
-     * instance
+     * @param sound_id the nine digit decimal sound id
+     * @param chr the character that will emit the sound
+     * @param dummypoly the dummypoly id to emit the sound from
+     * @param follows_origin whether the sound will follow the emitter
+     * @return DLUT::DLReferenceCountPtr<CSFD4SoundIns> a pointer to a reference
+     * counted sound object
      */
-    LIBERAPI liber::optref<CSFD4SoundIns> make_system_sound(char sound_type,
-        int sound_id, void* wwise_object = nullptr);
+    [[nodiscard]] LIBERAPI static DLUT::DLReferenceCountPtr<CSFD4SoundIns>
+    play_character_sound(char sound_type, int sound_id, ChrIns& chr,
+        int dummypoly = -1, bool follows_origin = true);
 };
 } // namespace CS
 } // namespace from
