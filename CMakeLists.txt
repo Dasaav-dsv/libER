@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15.0)
-project(libER VERSION 0.1.2.1 LANGUAGES C CXX)
+project(libER VERSION 0.1.3.0 LANGUAGES C CXX)
 
 # Must build with C++20 or newer
 set(CMAKE_CXX_STANDARD 20)
@@ -110,6 +110,11 @@ target_sources("objlibER" PUBLIC
     "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
     "source/coresystem/sound.cpp"
+)
+
+# Namespace GX source files
+target_sources("objlibER" PUBLIC
+    "source/graphics/draw.cpp"
 )
 
 # Target libER[d].dll

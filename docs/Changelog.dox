@@ -24,4 +24,11 @@
  * ## Version 0.1.2.1:
  *   - Add @link from::CS::CSWindowImp CSWindowImp @endlink documentation by <a href="https://github.com/ThomasJClark">ThomasJClark</a>
  * 
+ * ## Version 0.1.3.0:
+ *   - Add graphics directory for GX* namespaces
+ *   - Add graphics/draw with a DirectX 12 drawing helper task abstract class
+ *   - Add a sample D3D12 triangle example under examples/d3d12/sample_triangle.cpp
+ *   - play_system_sound and play_character_sound, restructure sound playback
+ *   - Simplify sound playback example
+ * 
  */

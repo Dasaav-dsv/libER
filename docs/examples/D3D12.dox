@@ -1,0 +1,8 @@
+/**
+ * @page example_d3d12_page D3D12 Examples
+ * 
+ * ## Draw a sample triangle over the UI of ELDEN RING:
+ * 
+ * @include sample_triangle.cpp
+ * 
+ */

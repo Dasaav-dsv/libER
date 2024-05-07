@@ -21,3 +21,6 @@ target_link_libraries("libER_gparam_resource_example" PUBLIC "libER")
 
 add_library("libER_play_bank_sound_example" SHARED "resources/play_bank_sound.cpp")
 target_link_libraries("libER_play_bank_sound_example" PUBLIC "libER")
+
+add_library("libER_d3d12_triangle_example" SHARED "d3d12/sample_triangle.cpp")
+target_link_libraries("libER_d3d12_triangle_example" PUBLIC "libER" "dxgi.lib" "d3dcompiler.lib" "d3d12.lib")
