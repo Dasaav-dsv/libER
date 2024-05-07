@@ -19,8 +19,10 @@ struct D3D12_CPU_DESCRIPTOR_HANDLE;
 
 struct tagRECT;
 
+/// @cond DOXYGEN_SKIP
 using D3D12_RECT = tagRECT;
 using HANDLE = void*;
+/// @endcond
 
 namespace from {
 namespace GXBS {
