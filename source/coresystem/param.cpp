@@ -2,41 +2,33 @@
 #include <detail/functions.hpp>
 #include <detail/singleton.hpp>
 #include <detail/windows.inl>
-#include <iostream>
 
 using namespace from;
 
 LIBER_SINGLETON_INSTANCE(CS::SoloParamRepositoryImp);
 
-static constexpr size_t param_res_count = 186;
-
 bool CS::SoloParamRepositoryImp::wait_for_params(int timeout) {
-    auto are_params_ready = []() {
+    auto are_params_ready = [](int& num_loaded) {
         auto param_repository_ref = instance();
-        if (!param_repository_ref) {
+        if (!param_repository_ref)
             return false;
-        }
-
         auto& param_repository = param_repository_ref.reference();
-        for (int pos = 0; pos < param_res_count; pos++) {
-            if (!param_repository.get_param_res_cap<void>(pos)) {
+        for (int pos = num_loaded; pos < LIBER_PARAM_COUNT; ++pos, ++num_loaded)
+            if (!param_repository.get_param_res_cap<void>(pos))
                 return false;
-            }
-        }
-
         return true;
     };
-
+    int num_loaded = 0;
     if (timeout >= 0) {
         unsigned long long wait = GetTickCount64() + timeout;
-        while (!are_params_ready()) {
+        while (!are_params_ready(num_loaded)) {
             if (GetTickCount64() > wait)
                 return false;
             YieldProcessor();
         }
     }
     else {
-        while (!are_params_ready()) YieldProcessor();
+        while (!are_params_ready(num_loaded)) YieldProcessor();
     }
     return true;
 }

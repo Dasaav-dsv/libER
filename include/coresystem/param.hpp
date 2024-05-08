@@ -7,49 +7,31 @@
  */
 #pragma once
 
+#include <detail/optref.hpp>
 #include <detail/param_row_container.hpp>
 #include <detail/preprocessor.hpp>
+#include <fd4/detail/fd4_param.hpp>
 #include <fd4/detail/singleton.hpp>
 #include <fd4/resource.hpp>
+#include <memory/from_allocator.hpp>
+#include <memory/from_set.hpp>
 #include <memory/from_string.hpp>
+#include <memory/from_vector.hpp>
 #include <paramdefs/paramdefs.hpp>
+
 
 #include <algorithm>
 
+#define LIBER_PARAM_COUNT 186
+
 namespace from {
 namespace CS {
-
-class SoloParamRepositoryImp;
-
-template <typename T>
-class ParamResCap;
-
 /**
  * @brief The container for a single param table, consisting of a sequence of
  * IDs and data
  */
 template <typename T>
 class ParamResCap : public FD4::FD4ResCap {
-private:
-    struct row_info_list {
-        long long liber_unknown;
-        short liber_unknown;
-        liber::param_row_count num_rows;
-        int liber_unknown;
-        long long liber_unknown;
-        long long liber_unknown;
-        long long liber_unknown;
-        long long liber_unknown;
-        long long liber_unknown;
-        long long liber_unknown;
-        liber::param_row_info rows[0];
-    };
-
-    struct row_table {
-        unsigned char liber_unknown[128];
-        row_info_list* info_list;
-    };
-
 public:
     using row_data_type = T;
     using row_container_type = liber::param_row_container<row_data_type>;
@@ -62,31 +44,29 @@ public:
      * @return A sequence of all rows in this param
      */
     row_container_type get_rows() {
-        auto info_list = this->table->info_list;
+        FD4::param_file* info_list = this->underlying->get_param_file();
         return row_container_type(
             reinterpret_cast<row_container_type::base_address_type>(info_list),
-            info_list->rows, info_list->num_rows);
+            info_list->row_info_arr, info_list->row_count);
     }
 
     /**
      * @return A row in this param with the given ID, if at least one exists
      */
-    row_data_type* get_row_by_id(unsigned long long id) {
+    liber::optref<row_data_type> get_row_by_id(unsigned long long id) {
         auto rows = get_rows();
         auto result =
             std::lower_bound<row_container_type::iterator, unsigned long long>(
                 rows.begin(), rows.end(), id,
                 [](auto& a, auto b) { return a.first < b; });
-
         if (result == rows.end())
-            return nullptr;
-
-        return &(*result).second;
+            return std::nullopt;
+        return result->second;
     }
 
 private:
     long long liber_unknown;
-    row_table* table;
+    FD4::FD4ParamResCap* underlying;
 };
 
 /**
@@ -1221,8 +1201,26 @@ private:
 
     void* get_param_res_cap_address(size_t pos);
 
-    unsigned char liber_unknown[0x34e0];
+    void* liber_unknown;
+    struct {
+        void* liber_unknown;
+        int res_cap_count;
+        ParamResCap* res_cap[7];
+    } param_entries[LIBER_PARAM_COUNT];
+    struct CSWepReinforceTree {
+        virtual ~CSWepReinforceTree() = default;
+        from::allocator<void*> allocator;
+        void* liber_unknown;
+    } wep_reinforce_tree;
+    from::vector<std::pair<int, int>> liber_unknown;
+    from::vector<std::pair<int, int>> liber_unknown;
+    from::set<int> liber_unknown;
+    from::set<int> liber_unknown;
 };
+
+LIBER_ASSERTS_BEGIN(SoloParamRepositoryImp);
+LIBER_ASSERT_SIZE(0x3558);
+LIBER_ASSERTS_END;
 
 }; // namespace CS
 }; // namespace from
