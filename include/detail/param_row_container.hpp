@@ -1,19 +1,11 @@
 #pragma once
 
+#include <fd4/detail/fd4_param.hpp>
+
 #include <iterator>
 #include <utility>
 
 namespace liber {
-
-using param_row_id = unsigned long long;
-using param_row_count = unsigned short;
-
-struct param_row_info {
-    param_row_id id;
-    ptrdiff_t data_begin_offset;
-    ptrdiff_t data_end_offset;
-};
-
 template <typename Data>
 class param_row_container {
 public:
