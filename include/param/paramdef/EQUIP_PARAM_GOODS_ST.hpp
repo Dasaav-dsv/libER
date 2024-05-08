@@ -1,0 +1,131 @@
+/* This file was automatically generated from XML paramdefs. */
+#pragma once
+
+namespace from {
+namespace paramdefs {
+
+struct EQUIP_PARAM_GOODS_ST {
+    bool disableParam_NT : 1 { false };
+    unsigned char disableParamReserve1 : 7;
+    unsigned char disableParamReserve2[3];
+    int refId_default{ -1 };
+    int sfxVariationId{ -1 };
+    float weight{ 1 };
+    int basicPrice{ 0 };
+    int sellValue{ 0 };
+    int behaviorId{ 0 };
+    int replaceItemId{ -1 };
+    int sortId{ 0 };
+    int appearanceReplaceItemId{ -1 };
+    int yesNoDialogMessageId{ -1 };
+    unsigned short useEnableSpEffectType{ 0 };
+    signed char potGroupId{ -1 };
+    unsigned char pad[1];
+    unsigned short iconId{ 0 };
+    unsigned short modelId{ 0 };
+    short shopLv{ 0 };
+    short compTrophySedId{ -1 };
+    short trophySeqId{ -1 };
+    short maxNum{ 0 };
+    unsigned char consumeHeroPoint{ 0 };
+    unsigned char overDexterity{ 0 };
+    unsigned char goodsType{ 0 };
+    unsigned char refCategory{ 0 };
+    unsigned char spEffectCategory{ 0 };
+    unsigned char pad3[1];
+    unsigned char goodsUseAnim{ 0 };
+    unsigned char opmeMenuType{ 0 };
+    unsigned char useLimitCategory{ 0 };
+    unsigned char replaceCategory{ 0 };
+    unsigned char reserve4[2];
+    bool enable_live : 1 { false };
+    bool enable_gray : 1 { false };
+    bool enable_white : 1 { false };
+    bool enable_black : 1 { false };
+    bool enable_multi : 1 { false };
+    bool disable_offline : 1 { false };
+    bool isEquip : 1 { false };
+    bool isConsume : 1 { false };
+    bool isAutoEquip : 1 { false };
+    bool isEstablishment : 1 { false };
+    bool isOnlyOne : 1 { false };
+    bool isDiscard : 1 { false };
+    bool isDeposit : 1 { false };
+    bool isDisableHand : 1 { false };
+    bool isRemoveItem_forGameClear : 1 { false };
+    bool isSuppleItem : 1 { false };
+    bool isFullSuppleItem : 1 { false };
+    bool isEnhance : 1 { false };
+    bool isFixItem : 1 { false };
+    bool disableMultiDropShare : 1 { false };
+    bool disableUseAtColiseum : 1 { false };
+    bool disableUseAtOutOfColiseum : 1 { false };
+    bool isEnableFastUseItem : 1 { false };
+    bool isApplySpecialEffect : 1 { false };
+    unsigned char syncNumVaryId{ 0 };
+    int refId_1{ -1 };
+    int refVirtualWepId{ -1 };
+    int vagrantItemLotId{ 0 };
+    int vagrantBonusEneDropItemLotId{ 0 };
+    int vagrantItemEneDropItemLotId{ 0 };
+    int castSfxId{ -1 };
+    int fireSfxId{ -1 };
+    int effectSfxId{ -1 };
+    bool enable_ActiveBigRune : 1 { false };
+    bool isBonfireWarpItem : 1 { false };
+    bool enable_Ladder : 1 { false };
+    bool isUseMultiPlayPreparation : 1 { false };
+    bool canMultiUse : 1 { false };
+    bool isShieldEnchant : 1 { false };
+    bool isWarpProhibited : 1 { false };
+    bool isUseMultiPenaltyOnly : 1 { false };
+    unsigned char suppleType{ 0 };
+    unsigned char autoReplenishType{ 0 };
+    bool isDrop : 1 { false };
+    bool showLogCondType : 1 { true };
+    bool isSummonHorse : 1 { false };
+    unsigned char showDialogCondType : 2 { 2 };
+    bool isSleepCollectionItem : 1 { false };
+    bool enableRiding : 1 { false };
+    bool disableRiding : 1 { false };
+    short maxRepositoryNum{ 0 };
+    unsigned char sortGroupId{ 255 };
+    bool isUseNoAttackRegion : 1 { true };
+    unsigned char pad1 : 7;
+    int saleValue{ -1 };
+    unsigned char rarity{ 0 };
+    unsigned char useLimitSummonBuddy{ 0 };
+    unsigned short useLimitSpEffectType{ 0 };
+    int aiUseJudgeId{ -1 };
+    short consumeMP{ 0 };
+    short consumeHP{ -1 };
+    int reinforceGoodsId{ -1 };
+    int reinforceMaterialId{ -1 };
+    int reinforcePrice{ 0 };
+    signed char useLevel_vowType0{ 0 };
+    signed char useLevel_vowType1{ 0 };
+    signed char useLevel_vowType2{ 0 };
+    signed char useLevel_vowType3{ 0 };
+    signed char useLevel_vowType4{ 0 };
+    signed char useLevel_vowType5{ 0 };
+    signed char useLevel_vowType6{ 0 };
+    signed char useLevel_vowType7{ 0 };
+    signed char useLevel_vowType8{ 0 };
+    signed char useLevel_vowType9{ 0 };
+    signed char useLevel_vowType10{ 0 };
+    signed char useLevel_vowType11{ 0 };
+    signed char useLevel_vowType12{ 0 };
+    signed char useLevel_vowType13{ 0 };
+    signed char useLevel_vowType14{ 0 };
+    signed char useLevel_vowType15{ 0 };
+    unsigned short useLevel{ 0 };
+    unsigned char reserve5[2];
+    unsigned int itemGetTutorialFlagId{ 0 };
+    unsigned char reserve3[8];
+};
+
+}; // namespace paramdefs
+}; // namespace from
+
+static_assert(sizeof(from::paramdefs::EQUIP_PARAM_GOODS_ST) == 176,
+    "EQUIP_PARAM_GOODS_ST paramdef size does not match detected size");

@@ -1,0 +1,133 @@
+/* This file was automatically generated from XML paramdefs. */
+#pragma once
+
+namespace from {
+namespace paramdefs {
+
+struct BULLET_PARAM_ST {
+    int atkId_Bullet{ -1 };
+    int sfxId_Bullet{ -1 };
+    int sfxId_Hit{ -1 };
+    int sfxId_Flick{ -1 };
+    float life{ -1 };
+    float dist{ 0 };
+    float shootInterval{ 0 };
+    float gravityInRange{ 0 };
+    float gravityOutRange{ 0 };
+    float hormingStopRange{ 0 };
+    float initVellocity{ 0 };
+    float accelInRange{ 0 };
+    float accelOutRange{ 0 };
+    float maxVellocity{ 0 };
+    float minVellocity{ 0 };
+    float accelTime{ 0 };
+    float homingBeginDist{ 0 };
+    float hitRadius{ -1 };
+    float hitRadiusMax{ -1 };
+    float spreadTime{ 0 };
+    float expDelay{ 0 };
+    float hormingOffsetRange{ 0 };
+    float dmgHitRecordLifeTime{ 0 };
+    float externalForce{ 0 };
+    int spEffectIDForShooter{ -1 };
+    int autoSearchNPCThinkID{ 0 };
+    int HitBulletID{ -1 };
+    int spEffectId0{ -1 };
+    int spEffectId1{ -1 };
+    int spEffectId2{ -1 };
+    int spEffectId3{ -1 };
+    int spEffectId4{ -1 };
+    unsigned short numShoot{ 0 };
+    short homingAngle{ 0 };
+    short shootAngle{ 0 };
+    short shootAngleInterval{ 0 };
+    short shootAngleXInterval{ 0 };
+    signed char damageDamp{ 0 };
+    signed char spelDamageDamp{ 0 };
+    signed char fireDamageDamp{ 0 };
+    signed char thunderDamageDamp{ 0 };
+    signed char staminaDamp{ 0 };
+    signed char knockbackDamp{ 0 };
+    signed char shootAngleXZ{ 0 };
+    unsigned char lockShootLimitAng{ 0 };
+    unsigned char pad2[1];
+    unsigned char prevVelocityDirRate{ 0 };
+    unsigned char atkAttribute{ 254 };
+    unsigned char spAttribute{ 254 };
+    unsigned char Material_AttackType{ 254 };
+    unsigned char Material_AttackMaterial{ 254 };
+    bool isPenetrateChr : 1 { false };
+    bool isPenetrateObj : 1 { false };
+    unsigned char pad : 6;
+    unsigned char launchConditionType{ 0 };
+    unsigned char FollowType : 3 { 0 };
+    unsigned char EmittePosType : 3 { 0 };
+    bool isAttackSFX : 1 { false };
+    bool isEndlessHit : 1 { false };
+    bool isPenetrateMap : 1 { false };
+    bool isHitBothTeam : 1 { false };
+    bool isUseSharedHitList : 1 { false };
+    bool isUseMultiDmyPolyIfPlace : 1 { false };
+    bool isHitOtherBulletForceEraseA : 1 { false };
+    bool isHitOtherBulletForceEraseB : 1 { false };
+    bool isHitForceMagic : 1 { false };
+    bool isIgnoreSfxIfHitWater : 1 { false };
+    bool isIgnoreMoveStateIfHitWater : 1 { false };
+    bool isHitDarkForceMagic : 1 { false };
+    unsigned char dmgCalcSide : 2 { 0 };
+    bool isEnableAutoHoming : 1 { false };
+    bool isSyncBulletCulcDumypolyPos : 1 { false };
+    bool isOwnerOverrideInitAngle : 1 { false };
+    bool isInheritSfxToChild : 1 { false };
+    signed char darkDamageDamp{ 0 };
+    signed char bulletSfxDeleteType_byHit{ 0 };
+    signed char bulletSfxDeleteType_byLifeDead{ 0 };
+    float targetYOffsetRange{ 0 };
+    float shootAngleYMaxRandom{ 0 };
+    float shootAngleXMaxRandom{ 0 };
+    int intervalCreateBulletId{ -1 };
+    float intervalCreateTimeMin{ 0 };
+    float intervalCreateTimeMax{ 0 };
+    float predictionShootObserveTime{ 0 };
+    float intervalCreateWaitTime{ 0 };
+    unsigned char sfxPostureType{ 0 };
+    unsigned char createLimitGroupId{ 0 };
+    unsigned char pad5[1];
+    bool isInheritSpeedToChild : 1 { false };
+    bool isDisableHitSfx_byChrAndObj : 1 { false };
+    bool isCheckWall_byCenterRay : 1 { false };
+    bool isHitFlare : 1 { false };
+    bool isUseBulletWallFilter : 1 { false };
+    unsigned char pad1 : 1;
+    bool isNonDependenceMagicForFunnleNum : 1 { false };
+    bool isAiInterruptShootNoDamageBullet : 1 { false };
+    float randomCreateRadius{ 0 };
+    float followOffset_BaseHeight{ 0 };
+    int assetNo_Hit{ -1 };
+    float lifeRandomRange{ 0 };
+    short homingAngleX{ -1 };
+    unsigned char ballisticCalcType{ 0 };
+    unsigned char attachEffectType{ 0 };
+    int seId_Bullet1{ -1 };
+    int seId_Bullet2{ -1 };
+    int seId_Hit{ -1 };
+    int seId_Flick{ -1 };
+    short howitzerShootAngleXMin{ 0 };
+    short howitzerShootAngleXMax{ 0 };
+    float howitzerInitMinVelocity{ 0 };
+    float howitzerInitMaxVelocity{ 0 };
+    int sfxId_ForceErase{ -1 };
+    signed char bulletSfxDeleteType_byForceErase{ 0 };
+    unsigned char pad3[1];
+    short followDmypoly_forSfxPose{ -1 };
+    float followOffset_Radius{ 0 };
+    float spBulletDistUpRate{ 1 };
+    float nolockTargetDist{ 0 };
+    unsigned char pad4[8];
+};
+
+}; // namespace paramdefs
+}; // namespace from
+
+static_assert(sizeof(from::paramdefs::BULLET_PARAM_ST) == 272,
+    "BULLET_PARAM_ST paramdef size does not match detected size");

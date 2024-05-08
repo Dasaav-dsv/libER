@@ -1,0 +1,137 @@
+/* This file was automatically generated from XML paramdefs. */
+#pragma once
+
+namespace from {
+namespace paramdefs {
+
+struct ASSET_GEOMETORY_PARAM_ST {
+    int soundBankId{ -1 };
+    int soundBreakSEId{ -1 };
+    int refDrawParamId{ -1 };
+    signed char hitCreateType{ 0 };
+    unsigned char behaviorType{ 1 };
+    unsigned char collisionType{ 0 };
+    unsigned char rainBlockingType{ 0 };
+    short hp{ -1 };
+    unsigned short defense{ 0 };
+    float breakStopTime{ 30 };
+    int breakSfxId{ -1 };
+    int breakSfxCpId{ -1 };
+    int breakLandingSfxId{ -1 };
+    int breakBulletBehaviorId{ -1 };
+    int breakBulletCpId{ -1 };
+    float FragmentInvisibleWaitTime{ 0 };
+    float FragmentInvisibleTime{ 0 };
+    int BreakAiSoundID{ 0 };
+    signed char breakItemLotType{ 0 };
+    unsigned char animBreakIdMax{ 0 };
+    signed char breakBulletAttributeDamageType{ 0 };
+    bool isBreakByPlayerCollide : 1 { false };
+    bool isBreakByEnemyCollide : 1 { false };
+    bool isBreak_ByChrRide : 1 { false };
+    bool isDisableBreakForFirstAppear : 1 { false };
+    bool isAnimBreak : 1 { false };
+    bool isDamageCover : 1 { false };
+    bool isAttackBacklash : 1 { true };
+    unsigned char Reserve_2 : 1;
+    bool isLadder : 1 { false };
+    bool isMoveObj : 1 { false };
+    bool isSkydomeFlag : 1 { false };
+    bool isAnimPauseOnRemoPlay : 1 { false };
+    bool isBurn : 1 { false };
+    bool isEnableRepick : 1 { false };
+    bool isBreakOnPickUp : 1 { false };
+    bool isBreakByHugeenemyCollide : 1 { false };
+    unsigned char navimeshFlag{ 0 };
+    unsigned short burnBulletInterval{ 30 };
+    float clothUpdateDist{ 30 };
+    float lifeTime_forRuntimeCreate{ 0 };
+    int contactSeId{ -1 };
+    int repickAnimIdOffset{ 0 };
+    float windEffectRate_0{ 0.5 };
+    float windEffectRate_1{ 0.5 };
+    unsigned char windEffectType_0{ 0 };
+    unsigned char windEffectType_1{ 0 };
+    short overrideMaterialId{ -1 };
+    float autoCreateOffsetHeight{ 0.1 };
+    float burnTime{ 0 };
+    float burnBraekRate{ 0.5 };
+    int burnSfxId{ -1 };
+    int burnSfxId_1{ -1 };
+    int burnSfxId_2{ -1 };
+    int burnSfxId_3{ -1 };
+    float burnSfxDelayTimeMin{ 0 };
+    float burnSfxDelayTimeMin_1{ 0 };
+    float burnSfxDelayTimeMin_2{ 0 };
+    float burnSfxDelayTimeMin_3{ 0 };
+    float burnSfxDelayTimeMax{ 0 };
+    float burnSfxDelayTimeMax_1{ 0 };
+    float burnSfxDelayTimeMax_2{ 0 };
+    float burnSfxDelayTimeMax_3{ 0 };
+    int burnBulletBehaviorId{ -1 };
+    int burnBulletBehaviorId_1{ -1 };
+    int burnBulletBehaviorId_2{ -1 };
+    int burnBulletBehaviorId_3{ -1 };
+    float burnBulletDelayTime{ 0 };
+    unsigned short paintDecalTargetTextureSize{ 0 };
+    unsigned char navimeshFlag_after{ 0 };
+    signed char camNearBehaviorType{ 0 };
+    int breakItemLotParamId{ -1 };
+    int pickUpActionButtonParamId{ -1 };
+    int pickUpItemLotParamId{ -1 };
+    unsigned char autoDrawGroupBackFaceCheck{ 0 };
+    unsigned char autoDrawGroupDepthWrite{ 0 };
+    unsigned char autoDrawGroupShadowTest{ 0 };
+    bool debug_isHeightCheckEnable{ false };
+    unsigned char hitCarverCancelAreaFlag{ 0 };
+    unsigned char assetNavimeshNoCombine{ 0 };
+    unsigned char navimeshFlagApply{ 0 };
+    unsigned char navimeshFlagApply_after{ 0 };
+    float autoDrawGroupPassPixelNum{ -1 };
+    unsigned int pickUpReplacementEventFlag{ 0 };
+    int pickUpReplacementAnimIdOffset{ 0 };
+    int pickUpReplacementActionButtonParamId{ -1 };
+    int pickUpReplacementItemLotParamId{ -1 };
+    unsigned char slidingBulletHitType{ 0 };
+    bool isBushesForDamage{ false };
+    unsigned char penetrationBulletType{ 0 };
+    unsigned char unkR3{ 0 };
+    float unkR4{ 0 };
+    int soundBreakSECpId{ -1 };
+    float debug_HeightCheckCapacityMin{ -99 };
+    float debug_HeightCheckCapacityMax{ 99 };
+    int repickActionButtonParamId{ -1 };
+    int repickItemLotParamId{ -1 };
+    int repickReplacementAnimIdOffset{ 0 };
+    int repickReplacementActionButtonParamId{ -1 };
+    int repickReplacementItemLotParamId{ -1 };
+    bool noGenerateCarver{ false };
+    bool noHitHugeAfterBreak{ false };
+    bool isEnabledBreakSync : 1 { true };
+    bool isHiddenOnRepick : 1 { false };
+    bool isCreateMultiPlayOnly : 1 { false };
+    bool isDisableBulletHitSfx : 1 { false };
+    bool isEnableSignPreBreak : 1 { true };
+    bool isEnableSignPostBreak : 1 { true };
+    unsigned char unkR1 : 2 { 0 };
+    unsigned char generateMultiForbiddenRegion{ 0 };
+    int residentSeId0{ -1 };
+    int residentSeId1{ -1 };
+    int residentSeId2{ -1 };
+    int residentSeId3{ -1 };
+    short residentSeDmypolyId0{ -1 };
+    short residentSeDmypolyId1{ -1 };
+    short residentSeDmypolyId2{ -1 };
+    short residentSeDmypolyId3{ -1 };
+    unsigned char excludeActivateRatio_Xboxone_Grid{ 0 };
+    unsigned char excludeActivateRatio_Xboxone_Legacy{ 0 };
+    unsigned char excludeActivateRatio_PS4_Grid{ 0 };
+    unsigned char excludeActivateRatio_PS4_Legacy{ 0 };
+    unsigned char Reserve_0[32];
+};
+
+}; // namespace paramdefs
+}; // namespace from
+
+static_assert(sizeof(from::paramdefs::ASSET_GEOMETORY_PARAM_ST) == 320,
+    "ASSET_GEOMETORY_PARAM_ST paramdef size does not match detected size");
