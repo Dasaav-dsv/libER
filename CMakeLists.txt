@@ -118,6 +118,11 @@ target_sources("objlibER" PUBLIC
     "source/graphics/draw.cpp"
 )
 
+# Param manipulation source files
+target_sources("objlibER" PUBLIC
+    "source/param/param.cpp"
+)
+
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mimalloc-obj>)
 target_include_directories("libER" PUBLIC "include")
