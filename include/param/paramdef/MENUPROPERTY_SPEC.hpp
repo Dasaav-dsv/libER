@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENUPROPERTY_SPEC {
     int CaptionTextID{ 0 };
@@ -14,8 +14,8 @@ struct MENUPROPERTY_SPEC {
     unsigned char pad[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENUPROPERTY_SPEC) == 32,
+static_assert(sizeof(from::paramdef::MENUPROPERTY_SPEC) == 32,
     "MENUPROPERTY_SPEC paramdef size does not match detected size");

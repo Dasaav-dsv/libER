@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SHOP_LINEUP_PARAM {
     int equipId{ 0 };
@@ -25,8 +25,8 @@ struct SHOP_LINEUP_PARAM {
     unsigned char pad2[2];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SHOP_LINEUP_PARAM) == 52,
+static_assert(sizeof(from::paramdef::SHOP_LINEUP_PARAM) == 52,
     "SHOP_LINEUP_PARAM paramdef size does not match detected size");

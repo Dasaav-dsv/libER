@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CACL_CORRECT_GRAPH_ST {
     float stageMaxVal0{ 0 };
@@ -27,8 +27,8 @@ struct CACL_CORRECT_GRAPH_ST {
     unsigned char pad[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CACL_CORRECT_GRAPH_ST) == 80,
+static_assert(sizeof(from::paramdef::CACL_CORRECT_GRAPH_ST) == 80,
     "CACL_CORRECT_GRAPH_ST paramdef size does not match detected size");

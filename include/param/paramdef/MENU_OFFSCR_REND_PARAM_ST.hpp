@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENU_OFFSCR_REND_PARAM_ST {
     float camAtPosX{ 0 };
@@ -23,8 +23,8 @@ struct MENU_OFFSCR_REND_PARAM_ST {
     unsigned char pad[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENU_OFFSCR_REND_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::MENU_OFFSCR_REND_PARAM_ST) == 64,
     "MENU_OFFSCR_REND_PARAM_ST paramdef size does not match detected size");

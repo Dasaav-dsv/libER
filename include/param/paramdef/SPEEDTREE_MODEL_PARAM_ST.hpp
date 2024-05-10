@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SPEEDTREE_MODEL_PARAM_ST {
     float MinFadeLeaf{ 0 };
@@ -17,8 +17,8 @@ struct SPEEDTREE_MODEL_PARAM_ST {
     float BillboardBackSpecularWeakenParam{ 1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SPEEDTREE_MODEL_PARAM_ST) == 40,
+static_assert(sizeof(from::paramdef::SPEEDTREE_MODEL_PARAM_ST) == 40,
     "SPEEDTREE_MODEL_PARAM_ST paramdef size does not match detected size");

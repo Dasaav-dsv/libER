@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ROLLING_OBJ_LOT_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -27,8 +27,8 @@ struct ROLLING_OBJ_LOT_PARAM_ST {
     unsigned char Reserve_0[20];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ROLLING_OBJ_LOT_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::ROLLING_OBJ_LOT_PARAM_ST) == 64,
     "ROLLING_OBJ_LOT_PARAM_ST paramdef size does not match detected size");

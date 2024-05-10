@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WEATHER_PARAM_ST {
     int SfxId{ -1 };
@@ -24,8 +24,8 @@ struct WEATHER_PARAM_ST {
     float DistViewWeatherGparamOverrideWeight{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WEATHER_PARAM_ST) == 68,
+static_assert(sizeof(from::paramdef::WEATHER_PARAM_ST) == 68,
     "WEATHER_PARAM_ST paramdef size does not match detected size");

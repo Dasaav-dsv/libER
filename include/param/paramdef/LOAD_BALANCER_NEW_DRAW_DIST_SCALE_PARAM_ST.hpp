@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST {
     unsigned char DrawDist_LvBegin{ 21 };
@@ -18,10 +18,10 @@ struct LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST {
     unsigned char reserve2[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
 static_assert(
-    sizeof(from::paramdefs::LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST) == 48,
+    sizeof(from::paramdef::LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST) == 48,
     "LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST paramdef size does not match "
     "detected size");

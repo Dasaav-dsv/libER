@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CUTSCENE_GPARAM_TIME_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -20,8 +20,8 @@ struct CUTSCENE_GPARAM_TIME_PARAM_ST {
     float PostPlayIngameTime{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CUTSCENE_GPARAM_TIME_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::CUTSCENE_GPARAM_TIME_PARAM_ST) == 16,
     "CUTSCENE_GPARAM_TIME_PARAM_ST paramdef size does not match detected size");

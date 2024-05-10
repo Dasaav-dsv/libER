@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WET_ASPECT_PARAM_ST {
     unsigned char baseColorR{ 0 };
@@ -20,8 +20,8 @@ struct WET_ASPECT_PARAM_ST {
     unsigned char reserve_4[11];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WET_ASPECT_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::WET_ASPECT_PARAM_ST) == 32,
     "WET_ASPECT_PARAM_ST paramdef size does not match detected size");

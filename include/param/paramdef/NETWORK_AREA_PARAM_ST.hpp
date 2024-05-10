@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NETWORK_AREA_PARAM_ST {
     float cellSizeX{ 30 };
@@ -20,8 +20,8 @@ struct NETWORK_AREA_PARAM_ST {
     unsigned char dummy[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NETWORK_AREA_PARAM_ST) == 28,
+static_assert(sizeof(from::paramdef::NETWORK_AREA_PARAM_ST) == 28,
     "NETWORK_AREA_PARAM_ST paramdef size does not match detected size");

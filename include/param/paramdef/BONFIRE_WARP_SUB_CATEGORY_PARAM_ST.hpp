@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BONFIRE_WARP_SUB_CATEGORY_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -14,9 +14,9 @@ struct BONFIRE_WARP_SUB_CATEGORY_PARAM_ST {
     unsigned char pad[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BONFIRE_WARP_SUB_CATEGORY_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::BONFIRE_WARP_SUB_CATEGORY_PARAM_ST) == 16,
     "BONFIRE_WARP_SUB_CATEGORY_PARAM_ST paramdef size does not match detected "
     "size");

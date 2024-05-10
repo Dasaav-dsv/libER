@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct PERFORMANCE_CHECK_PARAM {
     unsigned char workTag{ 0 };
@@ -14,5 +14,5 @@ struct PERFORMANCE_CHECK_PARAM {
     wchar_t userTag[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

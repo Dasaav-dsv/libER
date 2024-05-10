@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_AA_QUALITY_DETAIL {
     bool enabled{ false };
@@ -10,5 +10,5 @@ struct CS_AA_QUALITY_DETAIL {
     unsigned char dmy[2];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

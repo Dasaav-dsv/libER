@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct HIT_MTRL_PARAM_ST {
     float aiVolumeRate{ 1 };
@@ -38,8 +38,8 @@ struct HIT_MTRL_PARAM_ST {
     int spEffectId_forWet04{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::HIT_MTRL_PARAM_ST) == 100,
+static_assert(sizeof(from::paramdef::HIT_MTRL_PARAM_ST) == 100,
     "HIT_MTRL_PARAM_ST paramdef size does not match detected size");

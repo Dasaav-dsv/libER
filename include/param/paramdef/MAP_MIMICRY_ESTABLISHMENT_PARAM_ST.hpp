@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MAP_MIMICRY_ESTABLISHMENT_PARAM_ST {
     float mimicryEstablishment0{ -1 };
@@ -20,9 +20,9 @@ struct MAP_MIMICRY_ESTABLISHMENT_PARAM_ST {
     unsigned char pad1[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MAP_MIMICRY_ESTABLISHMENT_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::MAP_MIMICRY_ESTABLISHMENT_PARAM_ST) == 64,
     "MAP_MIMICRY_ESTABLISHMENT_PARAM_ST paramdef size does not match detected "
     "size");

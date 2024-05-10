@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct OBJ_ACT_PARAM_ST {
     int actionEnableMsgId{ -1 };
@@ -30,8 +30,8 @@ struct OBJ_ACT_PARAM_ST {
     unsigned char pad2[40];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::OBJ_ACT_PARAM_ST) == 96,
+static_assert(sizeof(from::paramdef::OBJ_ACT_PARAM_ST) == 96,
     "OBJ_ACT_PARAM_ST paramdef size does not match detected size");

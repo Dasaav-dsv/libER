@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_LIGHTING_QUALITY_DETAIL {
     float localLightDistFactor{ 0.75 };
@@ -12,5 +12,5 @@ struct CS_LIGHTING_QUALITY_DETAIL {
     unsigned char dmy[1];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NPC_AI_ACTION_PARAM_ST {
     unsigned char moveDir{ 0 };
@@ -18,8 +18,8 @@ struct NPC_AI_ACTION_PARAM_ST {
     unsigned char pad1[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NPC_AI_ACTION_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::NPC_AI_ACTION_PARAM_ST) == 16,
     "NPC_AI_ACTION_PARAM_ST paramdef size does not match detected size");

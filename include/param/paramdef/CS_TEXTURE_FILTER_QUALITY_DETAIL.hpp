@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_TEXTURE_FILTER_QUALITY_DETAIL {
     unsigned char filter{ 3 };
@@ -10,5 +10,5 @@ struct CS_TEXTURE_FILTER_QUALITY_DETAIL {
     unsigned int maxAnisoLevel{ 4 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

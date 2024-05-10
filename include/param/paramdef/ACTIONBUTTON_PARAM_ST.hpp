@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ACTIONBUTTON_PARAM_ST {
     unsigned char regionType{ 0 };
@@ -36,8 +36,8 @@ struct ACTIONBUTTON_PARAM_ST {
     unsigned char padding6[28];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ACTIONBUTTON_PARAM_ST) == 100,
+static_assert(sizeof(from::paramdef::ACTIONBUTTON_PARAM_ST) == 100,
     "ACTIONBUTTON_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct REINFORCE_PARAM_PROTECTOR_ST {
     float physicsDefRate{ 1 };
@@ -26,8 +26,8 @@ struct REINFORCE_PARAM_PROTECTOR_ST {
     float resistMadnessRate{ 1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::REINFORCE_PARAM_PROTECTOR_ST) == 64,
+static_assert(sizeof(from::paramdef::REINFORCE_PARAM_PROTECTOR_ST) == 64,
     "REINFORCE_PARAM_PROTECTOR_ST paramdef size does not match detected size");

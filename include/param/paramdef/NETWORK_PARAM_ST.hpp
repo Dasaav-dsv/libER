@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NETWORK_PARAM_ST {
     float signVerticalOffset{ 0 };
@@ -162,8 +162,8 @@ struct NETWORK_PARAM_ST {
     unsigned char pad14_1[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NETWORK_PARAM_ST) == 632,
+static_assert(sizeof(from::paramdef::NETWORK_PARAM_ST) == 632,
     "NETWORK_PARAM_ST paramdef size does not match detected size");

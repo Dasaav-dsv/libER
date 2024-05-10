@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct LOAD_BALANCER_PARAM_ST {
     float lowerFpsThreshold{ 23 };
@@ -40,8 +40,8 @@ struct LOAD_BALANCER_PARAM_ST {
     unsigned char reserve1[30];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::LOAD_BALANCER_PARAM_ST) == 80,
+static_assert(sizeof(from::paramdef::LOAD_BALANCER_PARAM_ST) == 80,
     "LOAD_BALANCER_PARAM_ST paramdef size does not match detected size");

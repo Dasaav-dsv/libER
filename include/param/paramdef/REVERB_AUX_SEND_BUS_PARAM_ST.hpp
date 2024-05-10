@@ -2,11 +2,11 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct REVERB_AUX_SEND_BUS_PARAM_ST {
     char ReverbAuxSendBusName[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

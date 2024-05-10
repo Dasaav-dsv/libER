@@ -2,12 +2,12 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct COMMON_SYSTEM_PARAM_ST {
     unsigned int mapSaveMapNameIdOnGameStart{ 0 };
     unsigned char reserve0[60];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

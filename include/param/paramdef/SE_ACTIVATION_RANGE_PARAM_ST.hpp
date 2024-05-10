@@ -2,14 +2,14 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SE_ACTIVATION_RANGE_PARAM_ST {
     float activateRange{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SE_ACTIVATION_RANGE_PARAM_ST) == 4,
+static_assert(sizeof(from::paramdef::SE_ACTIVATION_RANGE_PARAM_ST) == 4,
     "SE_ACTIVATION_RANGE_PARAM_ST paramdef size does not match detected size");

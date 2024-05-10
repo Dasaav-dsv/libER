@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BEHAVIOR_PARAM_ST {
     int variationId{ 0 };
@@ -19,8 +19,8 @@ struct BEHAVIOR_PARAM_ST {
     unsigned char pad1[2];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BEHAVIOR_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::BEHAVIOR_PARAM_ST) == 32,
     "BEHAVIOR_PARAM_ST paramdef size does not match detected size");

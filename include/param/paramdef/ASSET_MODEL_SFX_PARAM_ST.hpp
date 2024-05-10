@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ASSET_MODEL_SFX_PARAM_ST {
     int sfxId_0{ -1 };
@@ -32,8 +32,8 @@ struct ASSET_MODEL_SFX_PARAM_ST {
     unsigned char reserve_7[7];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ASSET_MODEL_SFX_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::ASSET_MODEL_SFX_PARAM_ST) == 128,
     "ASSET_MODEL_SFX_PARAM_ST paramdef size does not match detected size");

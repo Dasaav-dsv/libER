@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct TOUGHNESS_PARAM_ST {
     float correctionRate{ 1 };
@@ -16,8 +16,8 @@ struct TOUGHNESS_PARAM_ST {
     unsigned char pad1[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::TOUGHNESS_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::TOUGHNESS_PARAM_ST) == 32,
     "TOUGHNESS_PARAM_ST paramdef size does not match detected size");

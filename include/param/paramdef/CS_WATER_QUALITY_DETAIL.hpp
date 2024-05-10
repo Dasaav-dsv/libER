@@ -2,12 +2,12 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_WATER_QUALITY_DETAIL {
     bool interactionEnabled{ true };
     unsigned char dmy[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

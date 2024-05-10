@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct POSTURE_CONTROL_PARAM_WEP_LEFT_ST {
     short a000_leftArmFB{ 0 };
@@ -17,9 +17,9 @@ struct POSTURE_CONTROL_PARAM_WEP_LEFT_ST {
     unsigned char pad[14];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::POSTURE_CONTROL_PARAM_WEP_LEFT_ST) == 32,
+static_assert(sizeof(from::paramdef::POSTURE_CONTROL_PARAM_WEP_LEFT_ST) == 32,
     "POSTURE_CONTROL_PARAM_WEP_LEFT_ST paramdef size does not match detected "
     "size");

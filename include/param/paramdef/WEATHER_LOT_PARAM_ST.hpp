@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WEATHER_LOT_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -48,8 +48,8 @@ struct WEATHER_LOT_PARAM_ST {
     unsigned char reserve[9];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WEATHER_LOT_PARAM_ST) == 82,
+static_assert(sizeof(from::paramdef::WEATHER_LOT_PARAM_ST) == 82,
     "WEATHER_LOT_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ATTACK_ELEMENT_CORRECT_PARAM_ST {
     bool isStrengthCorrect_byPhysics : 1 { false };
@@ -84,9 +84,9 @@ struct ATTACK_ELEMENT_CORRECT_PARAM_ST {
     unsigned char pad2[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ATTACK_ELEMENT_CORRECT_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::ATTACK_ELEMENT_CORRECT_PARAM_ST) == 128,
     "ATTACK_ELEMENT_CORRECT_PARAM_ST paramdef size does not match detected "
     "size");

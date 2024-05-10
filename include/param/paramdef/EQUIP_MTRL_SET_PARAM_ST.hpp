@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct EQUIP_MTRL_SET_PARAM_ST {
     int materialId01{ -1 };
@@ -35,8 +35,8 @@ struct EQUIP_MTRL_SET_PARAM_ST {
     unsigned char pad[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::EQUIP_MTRL_SET_PARAM_ST) == 52,
+static_assert(sizeof(from::paramdef::EQUIP_MTRL_SET_PARAM_ST) == 52,
     "EQUIP_MTRL_SET_PARAM_ST paramdef size does not match detected size");

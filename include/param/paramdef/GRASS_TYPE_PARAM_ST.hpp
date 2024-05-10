@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GRASS_TYPE_PARAM_ST {
     unsigned short lodRange{ 0 };
@@ -45,8 +45,8 @@ struct GRASS_TYPE_PARAM_ST {
     wchar_t model1Name[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::GRASS_TYPE_PARAM_ST) == 276,
+static_assert(sizeof(from::paramdef::GRASS_TYPE_PARAM_ST) == 276,
     "GRASS_TYPE_PARAM_ST paramdef size does not match detected size");

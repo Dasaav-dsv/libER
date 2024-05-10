@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NETWORK_MSG_PARAM_ST {
     unsigned short priority{ 0 };
@@ -51,8 +51,8 @@ struct NETWORK_MSG_PARAM_ST {
     unsigned char pad2[28];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NETWORK_MSG_PARAM_ST) == 192,
+static_assert(sizeof(from::paramdef::NETWORK_MSG_PARAM_ST) == 192,
     "NETWORK_MSG_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_REFLECTION_QUALITY_DETAIL {
     bool enabled{ true };
@@ -19,5 +19,5 @@ struct CS_REFLECTION_QUALITY_DETAIL {
     float ssrFresnelRejectBias{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

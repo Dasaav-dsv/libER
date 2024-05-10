@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ATK_PARAM_ST {
     float hit0_Radius{ 0 };
@@ -216,8 +216,8 @@ struct ATK_PARAM_ST {
     unsigned char pad7[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ATK_PARAM_ST) == 456,
+static_assert(sizeof(from::paramdef::ATK_PARAM_ST) == 456,
     "ATK_PARAM_ST paramdef size does not match detected size");

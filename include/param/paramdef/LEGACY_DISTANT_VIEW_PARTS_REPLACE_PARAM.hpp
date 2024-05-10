@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM {
     int TargetMapId{ -1 };
@@ -26,10 +26,10 @@ struct LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM {
     int LimitedMapRegioAssetIdRangeMax{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM)
+static_assert(sizeof(from::paramdef::LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM)
                   == 64,
     "LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM paramdef size does not match "
     "detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct KNOCKBACK_PARAM_ST {
     float damage_Min_ContTime{ 0 };
@@ -38,8 +38,8 @@ struct KNOCKBACK_PARAM_ST {
     unsigned char pad[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::KNOCKBACK_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::KNOCKBACK_PARAM_ST) == 128,
     "KNOCKBACK_PARAM_ST paramdef size does not match detected size");

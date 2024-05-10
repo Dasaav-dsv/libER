@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_EFFECT_QUALITY_DETAIL {
     bool softParticleEnabled{ true };
@@ -19,5 +19,5 @@ struct CS_EFFECT_QUALITY_DETAIL {
     unsigned char dmy[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

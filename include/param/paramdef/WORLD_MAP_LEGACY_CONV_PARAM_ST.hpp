@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WORLD_MAP_LEGACY_CONV_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -27,9 +27,9 @@ struct WORLD_MAP_LEGACY_CONV_PARAM_ST {
     unsigned char pad4[11];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WORLD_MAP_LEGACY_CONV_PARAM_ST) == 48,
+static_assert(sizeof(from::paramdef::WORLD_MAP_LEGACY_CONV_PARAM_ST) == 48,
     "WORLD_MAP_LEGACY_CONV_PARAM_ST paramdef size does not match detected "
     "size");

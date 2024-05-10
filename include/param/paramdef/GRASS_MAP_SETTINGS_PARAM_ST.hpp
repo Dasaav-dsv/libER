@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GRASS_MAP_SETTINGS_PARAM_ST {
     unsigned int grassType0{ 0 };
@@ -10,5 +10,5 @@ struct GRASS_MAP_SETTINGS_PARAM_ST {
     unsigned int grassType2{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

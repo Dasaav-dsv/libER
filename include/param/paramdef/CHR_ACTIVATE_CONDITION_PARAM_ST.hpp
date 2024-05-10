@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CHR_ACTIVATE_CONDITION_PARAM_ST {
     bool weatherSunny : 1 { true };
@@ -27,9 +27,9 @@ struct CHR_ACTIVATE_CONDITION_PARAM_ST {
     unsigned char pad2[2];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CHR_ACTIVATE_CONDITION_PARAM_ST) == 8,
+static_assert(sizeof(from::paramdef::CHR_ACTIVATE_CONDITION_PARAM_ST) == 8,
     "CHR_ACTIVATE_CONDITION_PARAM_ST paramdef size does not match detected "
     "size");

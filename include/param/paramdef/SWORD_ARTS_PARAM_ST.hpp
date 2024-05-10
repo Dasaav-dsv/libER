@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SWORD_ARTS_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -31,8 +31,8 @@ struct SWORD_ARTS_PARAM_ST {
     int aiUsageId{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SWORD_ARTS_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::SWORD_ARTS_PARAM_ST) == 32,
     "SWORD_ARTS_PARAM_ST paramdef size does not match detected size");

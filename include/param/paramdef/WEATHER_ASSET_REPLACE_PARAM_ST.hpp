@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WEATHER_ASSET_REPLACE_PARAM_ST {
     unsigned int mapId{ 0 };
@@ -27,9 +27,9 @@ struct WEATHER_ASSET_REPLACE_PARAM_ST {
     unsigned char reserved1[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WEATHER_ASSET_REPLACE_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::WEATHER_ASSET_REPLACE_PARAM_ST) == 64,
     "WEATHER_ASSET_REPLACE_PARAM_ST paramdef size does not match detected "
     "size");

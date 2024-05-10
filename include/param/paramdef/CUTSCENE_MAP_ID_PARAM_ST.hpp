@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CUTSCENE_MAP_ID_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -21,8 +21,8 @@ struct CUTSCENE_MAP_ID_PARAM_ST {
     int HitParts_1{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CUTSCENE_MAP_ID_PARAM_ST) == 48,
+static_assert(sizeof(from::paramdef::CUTSCENE_MAP_ID_PARAM_ST) == 48,
     "CUTSCENE_MAP_ID_PARAM_ST paramdef size does not match detected size");

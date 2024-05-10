@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct KNOWLEDGE_LOADSCREEN_ITEM_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -13,9 +13,9 @@ struct KNOWLEDGE_LOADSCREEN_ITEM_PARAM_ST {
     int msgId{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::KNOWLEDGE_LOADSCREEN_ITEM_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::KNOWLEDGE_LOADSCREEN_ITEM_PARAM_ST) == 16,
     "KNOWLEDGE_LOADSCREEN_ITEM_PARAM_ST paramdef size does not match detected "
     "size");

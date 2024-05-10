@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BASECHR_SELECT_MENU_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -15,8 +15,8 @@ struct BASECHR_SELECT_MENU_PARAM_ST {
     unsigned char reserve[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BASECHR_SELECT_MENU_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::BASECHR_SELECT_MENU_PARAM_ST) == 32,
     "BASECHR_SELECT_MENU_PARAM_ST paramdef size does not match detected size");

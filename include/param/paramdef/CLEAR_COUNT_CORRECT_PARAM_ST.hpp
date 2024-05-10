@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CLEAR_COUNT_CORRECT_PARAM_ST {
     float MaxHpRate{ 1 };
@@ -39,8 +39,8 @@ struct CLEAR_COUNT_CORRECT_PARAM_ST {
     unsigned char pad1[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CLEAR_COUNT_CORRECT_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::CLEAR_COUNT_CORRECT_PARAM_ST) == 128,
     "CLEAR_COUNT_CORRECT_PARAM_ST paramdef size does not match detected size");

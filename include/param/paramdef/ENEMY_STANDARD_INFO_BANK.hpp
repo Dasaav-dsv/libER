@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ENEMY_STANDARD_INFO_BANK {
     int EnemyBehaviorID{ 0 };
@@ -29,5 +29,5 @@ struct ENEMY_STANDARD_INFO_BANK {
     unsigned char reserve_last2[48];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

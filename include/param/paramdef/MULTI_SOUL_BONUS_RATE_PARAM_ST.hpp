@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MULTI_SOUL_BONUS_RATE_PARAM_ST {
     float host{ 0 };
@@ -24,9 +24,9 @@ struct MULTI_SOUL_BONUS_RATE_PARAM_ST {
     unsigned char pad1[64];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MULTI_SOUL_BONUS_RATE_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::MULTI_SOUL_BONUS_RATE_PARAM_ST) == 128,
     "MULTI_SOUL_BONUS_RATE_PARAM_ST paramdef size does not match detected "
     "size");

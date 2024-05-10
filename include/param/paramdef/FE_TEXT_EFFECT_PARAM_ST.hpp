@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct FE_TEXT_EFFECT_PARAM_ST {
     short resId{ 0 };
@@ -14,8 +14,8 @@ struct FE_TEXT_EFFECT_PARAM_ST {
     unsigned char pad2[19];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::FE_TEXT_EFFECT_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::FE_TEXT_EFFECT_PARAM_ST) == 32,
     "FE_TEXT_EFFECT_PARAM_ST paramdef size does not match detected size");

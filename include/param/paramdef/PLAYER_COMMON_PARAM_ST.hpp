@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct PLAYER_COMMON_PARAM_ST {
     int playerFootEffect_bySFX{ 0 };
@@ -72,8 +72,8 @@ struct PLAYER_COMMON_PARAM_ST {
     unsigned char reserved41[52];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::PLAYER_COMMON_PARAM_ST) == 256,
+static_assert(sizeof(from::paramdef::PLAYER_COMMON_PARAM_ST) == 256,
     "PLAYER_COMMON_PARAM_ST paramdef size does not match detected size");

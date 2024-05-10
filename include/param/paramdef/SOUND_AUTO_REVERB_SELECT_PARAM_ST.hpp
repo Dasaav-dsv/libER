@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
     unsigned int reverbType{ 0 };
@@ -18,9 +18,9 @@ struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
     int NoHitNumMin{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SOUND_AUTO_REVERB_SELECT_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::SOUND_AUTO_REVERB_SELECT_PARAM_ST) == 32,
     "SOUND_AUTO_REVERB_SELECT_PARAM_ST paramdef size does not match detected "
     "size");

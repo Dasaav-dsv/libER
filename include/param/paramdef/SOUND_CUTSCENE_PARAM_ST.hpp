@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_CUTSCENE_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -19,8 +19,8 @@ struct SOUND_CUTSCENE_PARAM_ST {
     unsigned char reserved2[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SOUND_CUTSCENE_PARAM_ST) == 36,
+static_assert(sizeof(from::paramdef::SOUND_CUTSCENE_PARAM_ST) == 36,
     "SOUND_CUTSCENE_PARAM_ST paramdef size does not match detected size");

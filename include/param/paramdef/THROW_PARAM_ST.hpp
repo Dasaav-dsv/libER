@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct THROW_PARAM_ST {
     int AtkChrId{ 0 };
@@ -49,8 +49,8 @@ struct THROW_PARAM_ST {
     unsigned char pad1[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::THROW_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::THROW_PARAM_ST) == 128,
     "THROW_PARAM_ST paramdef size does not match detected size");

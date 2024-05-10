@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MISSILE_PARAM_ST {
     int FFXID{ 0 };
@@ -25,5 +25,5 @@ struct MISSILE_PARAM_ST {
     unsigned char reserve_last[56];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

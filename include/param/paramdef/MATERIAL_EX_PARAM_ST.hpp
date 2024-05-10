@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MATERIAL_EX_PARAM_ST {
     wchar_t paramName[32];
@@ -15,8 +15,8 @@ struct MATERIAL_EX_PARAM_ST {
     unsigned char pad[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MATERIAL_EX_PARAM_ST) == 96,
+static_assert(sizeof(from::paramdef::MATERIAL_EX_PARAM_ST) == 96,
     "MATERIAL_EX_PARAM_ST paramdef size does not match detected size");

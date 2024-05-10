@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
     float RangeMin{ 10 };
@@ -15,9 +15,9 @@ struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
     float LimiteRotateMax{ 180 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::AUTO_CREATE_ENV_SOUND_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::AUTO_CREATE_ENV_SOUND_PARAM_ST) == 32,
     "AUTO_CREATE_ENV_SOUND_PARAM_ST paramdef size does not match detected "
     "size");

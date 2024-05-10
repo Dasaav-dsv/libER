@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_GRAPHICS_CONFIG_PARAM_ST {
     unsigned char m_textureFilterQuality{ 2 };
@@ -21,8 +21,8 @@ struct CS_GRAPHICS_CONFIG_PARAM_ST {
     unsigned char m_dummy[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CS_GRAPHICS_CONFIG_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::CS_GRAPHICS_CONFIG_PARAM_ST) == 16,
     "CS_GRAPHICS_CONFIG_PARAM_ST paramdef size does not match detected size");

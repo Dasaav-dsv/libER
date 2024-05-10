@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct HIT_EFFECT_SFX_PARAM_ST {
     int Slash_Normal{ 0 };
@@ -27,8 +27,8 @@ struct HIT_EFFECT_SFX_PARAM_ST {
     int Neutral_Specific2{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::HIT_EFFECT_SFX_PARAM_ST) == 80,
+static_assert(sizeof(from::paramdef::HIT_EFFECT_SFX_PARAM_ST) == 80,
     "HIT_EFFECT_SFX_PARAM_ST paramdef size does not match detected size");

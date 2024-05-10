@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GRASS_LOD_RANGE_PARAM_ST {
     float LOD0_range{ 0 };
@@ -13,8 +13,8 @@ struct GRASS_LOD_RANGE_PARAM_ST {
     float LOD2_play{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::GRASS_LOD_RANGE_PARAM_ST) == 24,
+static_assert(sizeof(from::paramdef::GRASS_LOD_RANGE_PARAM_ST) == 24,
     "GRASS_LOD_RANGE_PARAM_ST paramdef size does not match detected size");

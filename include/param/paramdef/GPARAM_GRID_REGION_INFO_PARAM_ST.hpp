@@ -2,12 +2,12 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GPARAM_GRID_REGION_INFO_PARAM_ST {
     unsigned int GparamGridRegionId{ 0 };
     unsigned char Reserve[28];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

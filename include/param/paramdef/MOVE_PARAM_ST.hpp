@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MOVE_PARAM_ST {
     int stayId{ -1 };
@@ -46,8 +46,8 @@ struct MOVE_PARAM_ST {
     unsigned char turnWaitNoAnimAngle{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MOVE_PARAM_ST) == 144,
+static_assert(sizeof(from::paramdef::MOVE_PARAM_ST) == 144,
     "MOVE_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct DECAL_PARAM_ST {
     int textureId{ -1 };
@@ -97,8 +97,8 @@ struct DECAL_PARAM_ST {
     unsigned char pad_02[40];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::DECAL_PARAM_ST) == 248,
+static_assert(sizeof(from::paramdef::DECAL_PARAM_ST) == 248,
     "DECAL_PARAM_ST paramdef size does not match detected size");

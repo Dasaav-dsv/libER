@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MAP_NAME_TEX_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -16,8 +16,8 @@ struct MAP_NAME_TEX_PARAM_ST {
     unsigned char pad2[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MAP_NAME_TEX_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::MAP_NAME_TEX_PARAM_ST) == 16,
     "MAP_NAME_TEX_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BUDGET_PARAM_ST {
     float vram_all{ 1 };
@@ -35,8 +35,8 @@ struct BUDGET_PARAM_ST {
     unsigned char reserve_1[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BUDGET_PARAM_ST) == 132,
+static_assert(sizeof(from::paramdef::BUDGET_PARAM_ST) == 132,
     "BUDGET_PARAM_ST paramdef size does not match detected size");

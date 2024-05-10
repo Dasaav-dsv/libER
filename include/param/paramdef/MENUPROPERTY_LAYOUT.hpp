@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENUPROPERTY_LAYOUT {
     char LayoutPath[16];
@@ -12,8 +12,8 @@ struct MENUPROPERTY_LAYOUT {
     unsigned char reserved[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENUPROPERTY_LAYOUT) == 32,
+static_assert(sizeof(from::paramdef::MENUPROPERTY_LAYOUT) == 32,
     "MENUPROPERTY_LAYOUT paramdef size does not match detected size");

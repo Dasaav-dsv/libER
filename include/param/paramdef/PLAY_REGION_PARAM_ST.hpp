@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct PLAY_REGION_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -92,8 +92,8 @@ struct PLAY_REGION_PARAM_ST {
     unsigned char pad5[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::PLAY_REGION_PARAM_ST) == 272,
+static_assert(sizeof(from::paramdef::PLAY_REGION_PARAM_ST) == 272,
     "PLAY_REGION_PARAM_ST paramdef size does not match detected size");

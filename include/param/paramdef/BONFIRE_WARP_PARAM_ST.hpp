@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BONFIRE_WARP_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -84,8 +84,8 @@ struct BONFIRE_WARP_PARAM_ST {
     int unkE8{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BONFIRE_WARP_PARAM_ST) == 236,
+static_assert(sizeof(from::paramdef::BONFIRE_WARP_PARAM_ST) == 236,
     "BONFIRE_WARP_PARAM_ST paramdef size does not match detected size");

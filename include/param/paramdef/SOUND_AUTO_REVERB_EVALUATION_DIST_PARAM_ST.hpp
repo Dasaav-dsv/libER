@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST {
     float NoHitDist{ -1 };
@@ -15,10 +15,10 @@ struct SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST {
     unsigned int ignoreDistNumForMax{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
 static_assert(
-    sizeof(from::paramdefs::SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST) == 20,
+    sizeof(from::paramdef::SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST) == 20,
     "SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST paramdef size does not match "
     "detected size");

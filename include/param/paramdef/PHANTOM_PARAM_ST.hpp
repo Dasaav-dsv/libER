@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct PHANTOM_PARAM_ST {
     float edgeColorA{ 1 };
@@ -36,8 +36,8 @@ struct PHANTOM_PARAM_ST {
     float glowScale{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::PHANTOM_PARAM_ST) == 56,
+static_assert(sizeof(from::paramdef::PHANTOM_PARAM_ST) == 56,
     "PHANTOM_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct HIT_EFFECT_SE_PARAM_ST {
     int Iron_Slash_S{ 0 };
@@ -143,8 +143,8 @@ struct HIT_EFFECT_SE_PARAM_ST {
     unsigned char reserve[100];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::HIT_EFFECT_SE_PARAM_ST) == 640,
+static_assert(sizeof(from::paramdef::HIT_EFFECT_SE_PARAM_ST) == 640,
     "HIT_EFFECT_SE_PARAM_ST paramdef size does not match detected size");

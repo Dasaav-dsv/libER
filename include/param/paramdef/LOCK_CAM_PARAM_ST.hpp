@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct LOCK_CAM_PARAM_ST {
     float camDistTarget{ 4 };
@@ -28,8 +28,8 @@ struct LOCK_CAM_PARAM_ST {
     unsigned char pad[48];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::LOCK_CAM_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::LOCK_CAM_PARAM_ST) == 128,
     "LOCK_CAM_PARAM_ST paramdef size does not match detected size");

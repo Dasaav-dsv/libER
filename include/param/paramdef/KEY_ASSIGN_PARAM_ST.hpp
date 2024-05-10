@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct KEY_ASSIGN_PARAM_ST {
     int padKeyId{ -1 };
@@ -13,8 +13,8 @@ struct KEY_ASSIGN_PARAM_ST {
     unsigned char reserved[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::KEY_ASSIGN_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::KEY_ASSIGN_PARAM_ST) == 32,
     "KEY_ASSIGN_PARAM_ST paramdef size does not match detected size");

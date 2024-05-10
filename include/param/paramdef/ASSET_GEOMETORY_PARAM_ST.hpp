@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ASSET_GEOMETORY_PARAM_ST {
     int soundBankId{ -1 };
@@ -130,8 +130,8 @@ struct ASSET_GEOMETORY_PARAM_ST {
     unsigned char Reserve_0[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ASSET_GEOMETORY_PARAM_ST) == 320,
+static_assert(sizeof(from::paramdef::ASSET_GEOMETORY_PARAM_ST) == 320,
     "ASSET_GEOMETORY_PARAM_ST paramdef size does not match detected size");

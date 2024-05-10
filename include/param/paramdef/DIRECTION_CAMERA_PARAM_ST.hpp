@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct DIRECTION_CAMERA_PARAM_ST {
     bool isUseOption : 1 { false };
@@ -10,8 +10,8 @@ struct DIRECTION_CAMERA_PARAM_ST {
     unsigned char pad1[15];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::DIRECTION_CAMERA_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::DIRECTION_CAMERA_PARAM_ST) == 16,
     "DIRECTION_CAMERA_PARAM_ST paramdef size does not match detected size");

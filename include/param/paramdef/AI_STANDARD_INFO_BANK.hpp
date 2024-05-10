@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AI_STANDARD_INFO_BANK {
     unsigned short RadarRange{ 20 };
@@ -47,5 +47,5 @@ struct AI_STANDARD_INFO_BANK {
     unsigned char reserve_last[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

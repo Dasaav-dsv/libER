@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MAP_GD_REGION_DRAW_PARAM {
     bool disableParam_NT : 1 { false };
@@ -11,8 +11,8 @@ struct MAP_GD_REGION_DRAW_PARAM {
     float overrideIVLocalLightScale{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MAP_GD_REGION_DRAW_PARAM) == 8,
+static_assert(sizeof(from::paramdef::MAP_GD_REGION_DRAW_PARAM) == 8,
     "MAP_GD_REGION_DRAW_PARAM paramdef size does not match detected size");

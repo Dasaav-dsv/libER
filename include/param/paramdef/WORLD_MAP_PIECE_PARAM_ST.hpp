@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WORLD_MAP_PIECE_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -23,8 +23,8 @@ struct WORLD_MAP_PIECE_PARAM_ST {
     unsigned char pad[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WORLD_MAP_PIECE_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::WORLD_MAP_PIECE_PARAM_ST) == 64,
     "WORLD_MAP_PIECE_PARAM_ST paramdef size does not match detected size");

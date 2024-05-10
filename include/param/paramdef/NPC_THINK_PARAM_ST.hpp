@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NPC_THINK_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -111,8 +111,8 @@ struct NPC_THINK_PARAM_ST {
     int surpriseAnimId{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NPC_THINK_PARAM_ST) == 228,
+static_assert(sizeof(from::paramdef::NPC_THINK_PARAM_ST) == 228,
     "NPC_THINK_PARAM_ST paramdef size does not match detected size");

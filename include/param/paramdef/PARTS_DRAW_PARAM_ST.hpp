@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct PARTS_DRAW_PARAM_ST {
     float lv01_BorderDist{ 5 };
@@ -46,8 +46,8 @@ struct PARTS_DRAW_PARAM_ST {
     unsigned char resereve[34];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::PARTS_DRAW_PARAM_ST) == 144,
+static_assert(sizeof(from::paramdef::PARTS_DRAW_PARAM_ST) == 144,
     "PARTS_DRAW_PARAM_ST paramdef size does not match detected size");

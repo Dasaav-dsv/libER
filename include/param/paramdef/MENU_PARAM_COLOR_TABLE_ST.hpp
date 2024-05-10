@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENU_PARAM_COLOR_TABLE_ST {
     unsigned char lerpMode{ 0 };
@@ -17,8 +17,8 @@ struct MENU_PARAM_COLOR_TABLE_ST {
     float v3{ 1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENU_PARAM_COLOR_TABLE_ST) == 32,
+static_assert(sizeof(from::paramdef::MENU_PARAM_COLOR_TABLE_ST) == 32,
     "MENU_PARAM_COLOR_TABLE_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BUDDY_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -52,8 +52,8 @@ struct BUDDY_PARAM_ST {
     unsigned int Unk17{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BUDDY_PARAM_ST) == 160,
+static_assert(sizeof(from::paramdef::BUDDY_PARAM_ST) == 160,
     "BUDDY_PARAM_ST paramdef size does not match detected size");

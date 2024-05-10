@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct THROW_DIRECTION_SFX_PARAM_ST {
     int sfxId_00{ 0 };
@@ -39,8 +39,8 @@ struct THROW_DIRECTION_SFX_PARAM_ST {
     unsigned char pad1[20];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::THROW_DIRECTION_SFX_PARAM_ST) == 144,
+static_assert(sizeof(from::paramdef::THROW_DIRECTION_SFX_PARAM_ST) == 144,
     "THROW_DIRECTION_SFX_PARAM_ST paramdef size does not match detected size");

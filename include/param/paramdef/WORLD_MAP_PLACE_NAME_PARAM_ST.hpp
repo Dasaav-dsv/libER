@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WORLD_MAP_PLACE_NAME_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -20,8 +20,8 @@ struct WORLD_MAP_PLACE_NAME_PARAM_ST {
     float posZ{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WORLD_MAP_PLACE_NAME_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::WORLD_MAP_PLACE_NAME_PARAM_ST) == 32,
     "WORLD_MAP_PLACE_NAME_PARAM_ST paramdef size does not match detected size");

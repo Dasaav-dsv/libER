@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SP_EFFECT_VFX_PARAM_ST {
     int midstSfxId{ -1 };
@@ -72,8 +72,8 @@ struct SP_EFFECT_VFX_PARAM_ST {
     unsigned char pad[14];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SP_EFFECT_VFX_PARAM_ST) == 164,
+static_assert(sizeof(from::paramdef::SP_EFFECT_VFX_PARAM_ST) == 164,
     "SP_EFFECT_VFX_PARAM_ST paramdef size does not match detected size");

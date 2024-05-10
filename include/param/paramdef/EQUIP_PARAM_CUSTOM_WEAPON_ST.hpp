@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct EQUIP_PARAM_CUSTOM_WEAPON_ST {
     int baseWepId{ 0 };
@@ -11,8 +11,8 @@ struct EQUIP_PARAM_CUSTOM_WEAPON_ST {
     unsigned char pad[7];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::EQUIP_PARAM_CUSTOM_WEAPON_ST) == 16,
+static_assert(sizeof(from::paramdef::EQUIP_PARAM_CUSTOM_WEAPON_ST) == 16,
     "EQUIP_PARAM_CUSTOM_WEAPON_ST paramdef size does not match detected size");

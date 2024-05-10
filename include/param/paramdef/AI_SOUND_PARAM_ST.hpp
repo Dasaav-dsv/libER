@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AI_SOUND_PARAM_ST {
     float radius{ 0 };
@@ -22,8 +22,8 @@ struct AI_SOUND_PARAM_ST {
     unsigned char pad1[6];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::AI_SOUND_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::AI_SOUND_PARAM_ST) == 32,
     "AI_SOUND_PARAM_ST paramdef size does not match detected size");

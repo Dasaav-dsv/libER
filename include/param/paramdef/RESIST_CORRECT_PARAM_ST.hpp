@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct RESIST_CORRECT_PARAM_ST {
     float addPoint1{ 0 };
@@ -17,8 +17,8 @@ struct RESIST_CORRECT_PARAM_ST {
     float addRate5{ 1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::RESIST_CORRECT_PARAM_ST) == 40,
+static_assert(sizeof(from::paramdef::RESIST_CORRECT_PARAM_ST) == 40,
     "RESIST_CORRECT_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct FACE_RANGE_PARAM_ST {
     float face_partsId{ 0 };
@@ -213,8 +213,8 @@ struct FACE_RANGE_PARAM_ST {
     float burn_scar{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::FACE_RANGE_PARAM_ST) == 824,
+static_assert(sizeof(from::paramdef::FACE_RANGE_PARAM_ST) == 824,
     "FACE_RANGE_PARAM_ST paramdef size does not match detected size");

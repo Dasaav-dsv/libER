@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
     int SoundNo{ -1 };
@@ -11,10 +11,10 @@ struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
     float FollowRate{ 0.015 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST)
+static_assert(sizeof(from::paramdef::SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST)
                   == 16,
     "SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST paramdef size does not match detected "
     "size");

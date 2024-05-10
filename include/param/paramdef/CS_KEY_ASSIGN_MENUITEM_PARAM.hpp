@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_KEY_ASSIGN_MENUITEM_PARAM {
     int textID{ 0 };
@@ -17,8 +17,8 @@ struct CS_KEY_ASSIGN_MENUITEM_PARAM {
     unsigned char padding[6];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CS_KEY_ASSIGN_MENUITEM_PARAM) == 24,
+static_assert(sizeof(from::paramdef::CS_KEY_ASSIGN_MENUITEM_PARAM) == 24,
     "CS_KEY_ASSIGN_MENUITEM_PARAM paramdef size does not match detected size");

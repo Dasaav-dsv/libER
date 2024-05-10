@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct FACE_PARAM_ST {
     unsigned char face_partsId{ 0 };
@@ -249,8 +249,8 @@ struct FACE_PARAM_ST {
     unsigned char faceGeoAsymData25{ 128 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::FACE_PARAM_ST) == 240,
+static_assert(sizeof(from::paramdef::FACE_PARAM_ST) == 240,
     "FACE_PARAM_ST paramdef size does not match detected size");

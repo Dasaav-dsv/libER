@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ENV_OBJ_LOT_PARAM_ST {
     int AssetId_0{ -1 };
@@ -24,8 +24,8 @@ struct ENV_OBJ_LOT_PARAM_ST {
     unsigned char Reserve_0[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ENV_OBJ_LOT_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::ENV_OBJ_LOT_PARAM_ST) == 64,
     "ENV_OBJ_LOT_PARAM_ST paramdef size does not match detected size");

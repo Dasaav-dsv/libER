@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MULTI_PLAY_CORRECTION_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -15,9 +15,9 @@ struct MULTI_PLAY_CORRECTION_PARAM_ST {
     unsigned char pad3[15];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MULTI_PLAY_CORRECTION_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::MULTI_PLAY_CORRECTION_PARAM_ST) == 32,
     "MULTI_PLAY_CORRECTION_PARAM_ST paramdef size does not match detected "
     "size");

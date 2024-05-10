@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GRAPHICS_COMMON_PARAM_ST {
     float hitBulletDecalOffset_HitIns{ 0.05 };
@@ -11,8 +11,8 @@ struct GRAPHICS_COMMON_PARAM_ST {
     unsigned char reserved04[240];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::GRAPHICS_COMMON_PARAM_ST) == 256,
+static_assert(sizeof(from::paramdef::GRAPHICS_COMMON_PARAM_ST) == 256,
     "GRAPHICS_COMMON_PARAM_ST paramdef size does not match detected size");

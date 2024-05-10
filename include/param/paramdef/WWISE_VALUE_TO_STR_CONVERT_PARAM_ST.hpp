@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WWISE_VALUE_TO_STR_CONVERT_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -11,10 +11,10 @@ struct WWISE_VALUE_TO_STR_CONVERT_PARAM_ST {
     char ParamStr[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WWISE_VALUE_TO_STR_CONVERT_PARAM_ST)
+static_assert(sizeof(from::paramdef::WWISE_VALUE_TO_STR_CONVERT_PARAM_ST)
                   == 36,
     "WWISE_VALUE_TO_STR_CONVERT_PARAM_ST paramdef size does not match detected "
     "size");

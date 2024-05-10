@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct RUNTIME_BONE_CONTROL_PARAM_ST {
     unsigned int chrId{ 0 };
@@ -13,8 +13,8 @@ struct RUNTIME_BONE_CONTROL_PARAM_ST {
     char targetBone2[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::RUNTIME_BONE_CONTROL_PARAM_ST) == 112,
+static_assert(sizeof(from::paramdef::RUNTIME_BONE_CONTROL_PARAM_ST) == 112,
     "RUNTIME_BONE_CONTROL_PARAM_ST paramdef size does not match detected size");

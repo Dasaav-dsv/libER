@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_DOF_QUALITY_DETAIL {
     bool enabled{ true };
@@ -11,5 +11,5 @@ struct CS_DOF_QUALITY_DETAIL {
     int maxBlurLevel{ 1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CUTSCENE_TEXTURE_LOAD_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -27,9 +27,9 @@ struct CUTSCENE_TEXTURE_LOAD_PARAM_ST {
     char texName_15[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CUTSCENE_TEXTURE_LOAD_PARAM_ST) == 260,
+static_assert(sizeof(from::paramdef::CUTSCENE_TEXTURE_LOAD_PARAM_ST) == 260,
     "CUTSCENE_TEXTURE_LOAD_PARAM_ST paramdef size does not match detected "
     "size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct RIDE_PARAM_ST {
     unsigned int atkChrId{ 0 };
@@ -21,8 +21,8 @@ struct RIDE_PARAM_ST {
     unsigned char pad[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::RIDE_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::RIDE_PARAM_ST) == 64,
     "RIDE_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_MOTION_BLUR_QUALITY_DETAIL {
     bool enabled{ true };
@@ -14,5 +14,5 @@ struct CS_MOTION_BLUR_QUALITY_DETAIL {
     float blurMaxLengthScale{ 0.75 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

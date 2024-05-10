@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CAMERA_FADE_PARAM_ST {
     float NearMinDist{ 0 };
@@ -13,5 +13,5 @@ struct CAMERA_FADE_PARAM_ST {
     unsigned char dummy[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

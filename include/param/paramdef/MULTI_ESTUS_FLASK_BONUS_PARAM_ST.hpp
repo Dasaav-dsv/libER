@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MULTI_ESTUS_FLASK_BONUS_PARAM_ST {
     unsigned char host{ 0 };
@@ -24,9 +24,9 @@ struct MULTI_ESTUS_FLASK_BONUS_PARAM_ST {
     unsigned char pad1[48];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MULTI_ESTUS_FLASK_BONUS_PARAM_ST) == 64,
+static_assert(sizeof(from::paramdef::MULTI_ESTUS_FLASK_BONUS_PARAM_ST) == 64,
     "MULTI_ESTUS_FLASK_BONUS_PARAM_ST paramdef size does not match detected "
     "size");

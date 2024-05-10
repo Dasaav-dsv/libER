@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct COOL_TIME_PARAM_ST {
     float limitationTime_0{ 0 };
@@ -15,8 +15,8 @@ struct COOL_TIME_PARAM_ST {
     float observeTime_3{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::COOL_TIME_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::COOL_TIME_PARAM_ST) == 32,
     "COOL_TIME_PARAM_ST paramdef size does not match detected size");

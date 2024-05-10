@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CEREMONY_PARAM_ST {
     int eventLayerId{ 0 };
@@ -13,8 +13,8 @@ struct CEREMONY_PARAM_ST {
     unsigned char pad2[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CEREMONY_PARAM_ST) == 36,
+static_assert(sizeof(from::paramdef::CEREMONY_PARAM_ST) == 36,
     "CEREMONY_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_RAYTRACING_QUALITY_DETAIL {
     unsigned char enableRaytraceAO{ 0 };
@@ -17,5 +17,5 @@ struct CS_RAYTRACING_QUALITY_DETAIL {
     float UnkFloat0x18{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

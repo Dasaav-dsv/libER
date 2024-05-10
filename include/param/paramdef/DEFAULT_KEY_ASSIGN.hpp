@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct DEFAULT_KEY_ASSIGN {
     bool priority0 : 1 { false };
@@ -128,5 +128,5 @@ struct DEFAULT_KEY_ASSIGN {
     float a2dThreshold_7{ 0.5 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

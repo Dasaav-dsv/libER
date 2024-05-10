@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MODEL_SFX_PARAM_ST {
     int sfxId_0{ -1 };
@@ -31,5 +31,5 @@ struct MODEL_SFX_PARAM_ST {
     unsigned char reserve_7[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

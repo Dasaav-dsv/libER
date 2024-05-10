@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AI_ODDS_PARAM {
     unsigned char act0{ 0 };
@@ -108,5 +108,5 @@ struct AI_ODDS_PARAM {
     unsigned char pad0[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

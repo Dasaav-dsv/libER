@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct OBJECT_MATERIAL_SFX_PARAM_ST {
     unsigned int sfxId_00{ 0 };
@@ -39,5 +39,5 @@ struct OBJECT_MATERIAL_SFX_PARAM_ST {
     unsigned int sfxId_31{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

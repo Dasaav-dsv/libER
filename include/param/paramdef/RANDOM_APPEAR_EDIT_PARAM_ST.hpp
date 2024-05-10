@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct RANDOM_APPEAR_EDIT_PARAM_ST {
     unsigned int appearNum{ 0 };
@@ -56,5 +56,5 @@ struct RANDOM_APPEAR_EDIT_PARAM_ST {
     unsigned int rate24{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

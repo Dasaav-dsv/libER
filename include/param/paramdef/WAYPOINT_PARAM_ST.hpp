@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WAYPOINT_PARAM_ST {
     short attribute1{ -1 };
@@ -12,8 +12,8 @@ struct WAYPOINT_PARAM_ST {
     unsigned char padding4[8];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WAYPOINT_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::WAYPOINT_PARAM_ST) == 16,
     "WAYPOINT_PARAM_ST paramdef size does not match detected size");

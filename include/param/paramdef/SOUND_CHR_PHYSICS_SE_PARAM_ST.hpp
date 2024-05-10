@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_CHR_PHYSICS_SE_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -36,8 +36,8 @@ struct SOUND_CHR_PHYSICS_SE_PARAM_ST {
     signed char ContactCheckRigidIdx15{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SOUND_CHR_PHYSICS_SE_PARAM_ST) == 56,
+static_assert(sizeof(from::paramdef::SOUND_CHR_PHYSICS_SE_PARAM_ST) == 56,
     "SOUND_CHR_PHYSICS_SE_PARAM_ST paramdef size does not match detected size");

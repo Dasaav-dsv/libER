@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SP_EFFECT_SET_PARAM_ST {
     int spEffectId1{ -1 };
@@ -11,8 +11,8 @@ struct SP_EFFECT_SET_PARAM_ST {
     int spEffectId4{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SP_EFFECT_SET_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::SP_EFFECT_SET_PARAM_ST) == 16,
     "SP_EFFECT_SET_PARAM_ST paramdef size does not match detected size");

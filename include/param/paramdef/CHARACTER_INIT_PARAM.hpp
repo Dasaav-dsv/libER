@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CHARACTER_INIT_PARAM {
     float baseRec_mp{ 0 };
@@ -121,8 +121,8 @@ struct CHARACTER_INIT_PARAM {
     unsigned char reserve[6];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CHARACTER_INIT_PARAM) == 320,
+static_assert(sizeof(from::paramdef::CHARACTER_INIT_PARAM) == 320,
     "CHARACTER_INIT_PARAM paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GAME_SYSTEM_COMMON_PARAM_ST {
     float baseToughnessRecoverTime{ 0 };
@@ -333,8 +333,8 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     unsigned char reserved_124_2[40];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::GAME_SYSTEM_COMMON_PARAM_ST) == 880,
+static_assert(sizeof(from::paramdef::GAME_SYSTEM_COMMON_PARAM_ST) == 880,
     "GAME_SYSTEM_COMMON_PARAM_ST paramdef size does not match detected size");

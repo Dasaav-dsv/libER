@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ITEMLOT_PARAM_ST {
     int lotItemId01{ 0 };
@@ -80,8 +80,8 @@ struct ITEMLOT_PARAM_ST {
     unsigned short PAD2{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ITEMLOT_PARAM_ST) == 152,
+static_assert(sizeof(from::paramdef::ITEMLOT_PARAM_ST) == 152,
     "ITEMLOT_PARAM_ST paramdef size does not match detected size");

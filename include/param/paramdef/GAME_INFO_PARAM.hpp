@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct GAME_INFO_PARAM {
     int titleMsgId{ 0 };
@@ -13,5 +13,5 @@ struct GAME_INFO_PARAM {
     unsigned char Pad[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST {
     float GridEnableCreateHeightMin{ -99999 };
@@ -10,10 +10,10 @@ struct MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST {
     unsigned char Reserve[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
 static_assert(
-    sizeof(from::paramdefs::MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST) == 32,
+    sizeof(from::paramdef::MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST) == 32,
     "MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST paramdef size does not match "
     "detected size");

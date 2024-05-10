@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AI_ATTACK_PARAM_ST {
     int attackTableId{ 0 };
@@ -54,5 +54,5 @@ struct AI_ATTACK_PARAM_ST {
     float comboExecRange{ 180 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

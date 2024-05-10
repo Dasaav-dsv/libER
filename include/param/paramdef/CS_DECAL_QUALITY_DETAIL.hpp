@@ -2,12 +2,12 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_DECAL_QUALITY_DETAIL {
     bool enabled{ true };
     unsigned char dmy[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

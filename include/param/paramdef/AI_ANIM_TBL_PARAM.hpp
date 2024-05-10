@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct AI_ANIM_TBL_PARAM {
     unsigned short atk0_EzStateId{ 0 };
@@ -128,5 +128,5 @@ struct AI_ANIM_TBL_PARAM {
     unsigned char pad0[13];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

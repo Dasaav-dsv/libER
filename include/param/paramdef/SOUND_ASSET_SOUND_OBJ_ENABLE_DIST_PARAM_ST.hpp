@@ -2,16 +2,16 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST {
     float SoundObjEnableDist{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
 static_assert(
-    sizeof(from::paramdefs::SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST) == 4,
+    sizeof(from::paramdef::SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST) == 4,
     "SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST paramdef size does not match "
     "detected size");

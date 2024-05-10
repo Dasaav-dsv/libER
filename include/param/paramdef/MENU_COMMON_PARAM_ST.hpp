@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENU_COMMON_PARAM_ST {
     float soloPlayDeath_ToFadeOutTime{ 0 };
@@ -67,8 +67,8 @@ struct MENU_COMMON_PARAM_ST {
     unsigned char reserved33[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENU_COMMON_PARAM_ST) == 256,
+static_assert(sizeof(from::paramdef::MENU_COMMON_PARAM_ST) == 256,
     "MENU_COMMON_PARAM_ST paramdef size does not match detected size");

@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_VOLUMETRIC_EFFECT_QUALITY_DETAIL {
     bool fogEnabled{ true };
@@ -24,5 +24,5 @@ struct CS_VOLUMETRIC_EFFECT_QUALITY_DETAIL {
     unsigned char pad2[1];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

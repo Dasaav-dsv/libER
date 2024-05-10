@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct MENU_VALUE_TABLE_SPEC {
     int value{ 0 };
@@ -11,8 +11,8 @@ struct MENU_VALUE_TABLE_SPEC {
     unsigned char padding[3];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::MENU_VALUE_TABLE_SPEC) == 12,
+static_assert(sizeof(from::paramdef::MENU_VALUE_TABLE_SPEC) == 12,
     "MENU_VALUE_TABLE_SPEC paramdef size does not match detected size");

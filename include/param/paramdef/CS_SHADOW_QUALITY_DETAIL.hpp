@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_SHADOW_QUALITY_DETAIL {
     bool enabled{ true };
@@ -15,5 +15,5 @@ struct CS_SHADOW_QUALITY_DETAIL {
     int blurCountBias{ -1 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

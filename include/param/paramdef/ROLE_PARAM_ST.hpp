@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ROLE_PARAM_ST {
     unsigned char teamType{ 0 };
@@ -39,8 +39,8 @@ struct ROLE_PARAM_ST {
     unsigned char pad2[16];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ROLE_PARAM_ST) == 128,
+static_assert(sizeof(from::paramdef::ROLE_PARAM_ST) == 128,
     "ROLE_PARAM_ST paramdef size does not match detected size");

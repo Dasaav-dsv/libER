@@ -2,12 +2,12 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SOUND_COMMON_SYSTEM_PARAM_ST {
     char ParamKeyStr[32];
     char ParamValueStr[32];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

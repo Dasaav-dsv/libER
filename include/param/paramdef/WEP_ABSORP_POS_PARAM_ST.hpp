@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WEP_ABSORP_POS_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -66,8 +66,8 @@ struct WEP_ABSORP_POS_PARAM_ST {
     unsigned char reserve[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WEP_ABSORP_POS_PARAM_ST) == 96,
+static_assert(sizeof(from::paramdef::WEP_ABSORP_POS_PARAM_ST) == 96,
     "WEP_ABSORP_POS_PARAM_ST paramdef size does not match detected size");

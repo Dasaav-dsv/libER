@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST {
     short param000{ 0 };
@@ -207,10 +207,10 @@ struct NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST {
     short param199{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST)
+static_assert(sizeof(from::paramdef::NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST)
                   == 400,
     "NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST paramdef size does not match "
     "detected size");

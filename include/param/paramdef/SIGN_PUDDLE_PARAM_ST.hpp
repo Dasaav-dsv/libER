@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct SIGN_PUDDLE_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -12,8 +12,8 @@ struct SIGN_PUDDLE_PARAM_ST {
     unsigned char pad1[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::SIGN_PUDDLE_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::SIGN_PUDDLE_PARAM_ST) == 32,
     "SIGN_PUDDLE_PARAM_ST paramdef size does not match detected size");

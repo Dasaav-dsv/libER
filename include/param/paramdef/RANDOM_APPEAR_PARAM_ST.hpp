@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct RANDOM_APPEAR_PARAM_ST {
     bool slot0 : 1 { false };
@@ -108,8 +108,8 @@ struct RANDOM_APPEAR_PARAM_ST {
     unsigned char pad : 4;
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::RANDOM_APPEAR_PARAM_ST) == 13,
+static_assert(sizeof(from::paramdef::RANDOM_APPEAR_PARAM_ST) == 13,
     "RANDOM_APPEAR_PARAM_ST paramdef size does not match detected size");

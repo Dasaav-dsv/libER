@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CUTSCENE_GPARAM_WEATHER_PARAM_ST {
     bool disableParam_NT : 1 { false };
@@ -62,9 +62,9 @@ struct CUTSCENE_GPARAM_WEATHER_PARAM_ST {
     unsigned char reserved1[12];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CUTSCENE_GPARAM_WEATHER_PARAM_ST) == 96,
+static_assert(sizeof(from::paramdef::CUTSCENE_GPARAM_WEATHER_PARAM_ST) == 96,
     "CUTSCENE_GPARAM_WEATHER_PARAM_ST paramdef size does not match detected "
     "size");

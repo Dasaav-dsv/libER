@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CHARMAKEMENUTOP_PARAM_ST {
     int commandType{ 0 };
@@ -20,8 +20,8 @@ struct CHARMAKEMENUTOP_PARAM_ST {
     unsigned char reserved[4];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::CHARMAKEMENUTOP_PARAM_ST) == 48,
+static_assert(sizeof(from::paramdef::CHARMAKEMENUTOP_PARAM_ST) == 48,
     "CHARMAKEMENUTOP_PARAM_ST paramdef size does not match detected size");

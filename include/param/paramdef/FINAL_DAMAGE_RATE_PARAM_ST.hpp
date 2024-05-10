@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct FINAL_DAMAGE_RATE_PARAM_ST {
     float physRate{ 0 };
@@ -14,8 +14,8 @@ struct FINAL_DAMAGE_RATE_PARAM_ST {
     float saRate{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::FINAL_DAMAGE_RATE_PARAM_ST) == 28,
+static_assert(sizeof(from::paramdef::FINAL_DAMAGE_RATE_PARAM_ST) == 28,
     "FINAL_DAMAGE_RATE_PARAM_ST paramdef size does not match detected size");

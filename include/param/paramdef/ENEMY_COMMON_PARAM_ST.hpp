@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct ENEMY_COMMON_PARAM_ST {
     unsigned char reserved0[8];
@@ -16,8 +16,8 @@ struct ENEMY_COMMON_PARAM_ST {
     unsigned char reserved18[184];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::ENEMY_COMMON_PARAM_ST) == 256,
+static_assert(sizeof(from::paramdef::ENEMY_COMMON_PARAM_ST) == 256,
     "ENEMY_COMMON_PARAM_ST paramdef size does not match detected size");

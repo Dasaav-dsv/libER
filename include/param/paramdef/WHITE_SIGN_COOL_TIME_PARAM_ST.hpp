@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct WHITE_SIGN_COOL_TIME_PARAM_ST {
     float limitationTime_Normal{ 0 };
@@ -11,8 +11,8 @@ struct WHITE_SIGN_COOL_TIME_PARAM_ST {
     float limitationTime_GuardianDriedFinger{ 0 };
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::WHITE_SIGN_COOL_TIME_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::WHITE_SIGN_COOL_TIME_PARAM_ST) == 16,
     "WHITE_SIGN_COOL_TIME_PARAM_ST paramdef size does not match detected size");

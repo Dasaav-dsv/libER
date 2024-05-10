@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct BULLET_CREATE_LIMIT_PARAM_ST {
     unsigned char limitNum_byGroup{ 0 };
@@ -11,8 +11,8 @@ struct BULLET_CREATE_LIMIT_PARAM_ST {
     unsigned char pad[30];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdefs::BULLET_CREATE_LIMIT_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::BULLET_CREATE_LIMIT_PARAM_ST) == 32,
     "BULLET_CREATE_LIMIT_PARAM_ST paramdef size does not match detected size");

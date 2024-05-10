@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct CS_SHADER_QUALITY_DETAIL {
     bool sssEnabled{ true };
@@ -11,5 +11,5 @@ struct CS_SHADER_QUALITY_DETAIL {
     char dmy[1];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

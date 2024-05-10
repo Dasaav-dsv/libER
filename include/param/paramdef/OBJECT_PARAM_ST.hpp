@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct OBJECT_PARAM_ST {
     short hp{ -1 };
@@ -85,5 +85,5 @@ struct OBJECT_PARAM_ST {
     unsigned char pad_5[40];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from

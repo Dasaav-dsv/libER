@@ -2,7 +2,7 @@
 #pragma once
 
 namespace from {
-namespace paramdefs {
+namespace paramdef {
 
 struct EVENT_FLAG_USAGE_PARAM_ST {
     unsigned char usageType{ 0 };
@@ -12,5 +12,5 @@ struct EVENT_FLAG_USAGE_PARAM_ST {
     unsigned char padding2[24];
 };
 
-}; // namespace paramdefs
+}; // namespace paramdef
 }; // namespace from
