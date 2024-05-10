@@ -13,7 +13,6 @@
 #include <cstdint>
 
 namespace from {
-namespace FD4 {
 using param_row_id = uint64_t;
 using param_row_count = uint16_t;
 
@@ -36,6 +35,7 @@ struct param_file {
     param_row_info row_info_arr[0];
 };
 
+namespace FD4 {
 class FD4ParamResCap : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ParamResCap);

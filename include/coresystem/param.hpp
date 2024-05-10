@@ -17,8 +17,7 @@
 #include <memory/from_set.hpp>
 #include <memory/from_string.hpp>
 #include <memory/from_vector.hpp>
-#include <paramdefs/paramdefs.hpp>
-
+#include <param/paramdef/paramdefs.hpp>
 
 #include <algorithm>
 
@@ -44,7 +43,7 @@ public:
      * @return A sequence of all rows in this param
      */
     row_container_type get_rows() {
-        FD4::param_file* info_list = this->underlying->get_param_file();
+        from::param_file* info_list = this->underlying->get_param_file();
         return row_container_type(
             reinterpret_cast<row_container_type::base_address_type>(info_list),
             info_list->row_info_arr, info_list->row_count);
@@ -1199,13 +1198,12 @@ private:
             get_param_res_cap_address(pos));
     }
 
-    void* get_param_res_cap_address(size_t pos);
+    LIBERAPI void* get_param_res_cap_address(size_t pos);
 
     void* liber_unknown;
     struct {
-        void* liber_unknown;
         int res_cap_count;
-        ParamResCap* res_cap[7];
+        ParamResCap<paramdefs::EQUIP_PARAM_WEAPON_ST>* res_cap[8];
     } param_entries[LIBER_PARAM_COUNT];
     struct CSWepReinforceTree {
         virtual ~CSWepReinforceTree() = default;

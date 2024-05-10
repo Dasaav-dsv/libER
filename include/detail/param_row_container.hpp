@@ -15,14 +15,14 @@ public:
     public:
         using size_type = size_t;
         using difference_type = std::ptrdiff_t;
-        using value_type = std::pair<param_row_id, Data&>;
-        using pointer_type = const std::pair<param_row_id, Data&>*;
-        using reference_type = const std::pair<param_row_id, Data&>&;
+        using value_type = std::pair<from::param_row_id, Data&>;
+        using pointer_type = const std::pair<from::param_row_id, Data&>*;
+        using reference_type = const std::pair<from::param_row_id, Data&>&;
         using iterator_category = std::bidirectional_iterator_tag;
 
         iterator() : base_address(nullptr), row(nullptr) {}
 
-        iterator(base_address_type base_address, param_row_info* row)
+        iterator(base_address_type base_address, from::param_row_info* row)
             : base_address(base_address), row(row) {}
 
         iterator operator+(size_type value) const {
@@ -92,7 +92,7 @@ public:
 
     private:
         base_address_type base_address;
-        param_row_info* row;
+        from::param_row_info* row;
     };
 
     iterator begin() {
@@ -111,7 +111,7 @@ public:
         return num_rows;
     };
 
-    param_row_container(base_address_type base_address, param_row_info* rows,
+    param_row_container(base_address_type base_address, from::param_row_info* rows,
         size_t num_rows)
         : base_address(base_address), rows(rows), num_rows(num_rows) {}
 
@@ -120,7 +120,7 @@ public:
 private:
     base_address_type base_address;
     size_t num_rows;
-    param_row_info* rows;
+    from::param_row_info* rows;
 };
 
 }; // namespace liber
