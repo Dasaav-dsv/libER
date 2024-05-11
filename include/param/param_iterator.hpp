@@ -17,6 +17,7 @@
 #include <cstdint>
 #include <iterator>
 #include <type_traits>
+#include <utility>
 
 namespace from {
 namespace param {
@@ -25,35 +26,27 @@ class param_iterator {
     uintptr_t file_start;
     param_file::param_row_locator* ptr;
 
-    template <typename OtherParamIterator>
-    concept compatible_param_iterator = std::is_same_v<const Def,
-        const typename OtherParamIterator::value_type>;
-
 public:
     using iterator_concept = std::bidirectional_iterator_tag;
     using iterator_category = std::bidirectional_iterator_tag;
-    using value_type = Def;
+    using value_type = std::pair<row_index_type, Def&>;
     using difference_type = ptrdiff_t;
     using pointer = value_type*;
     using reference = value_type&;
 
     param_iterator() noexcept : file_start(0), ptr(nullptr) {}
 
-    param_iterator(const param_file& file) noexcept
+    param_iterator(const param_file& file, difference_type pos) noexcept
         : file_start(file.get_file_start()),
-          ptr(&*file.get_param_row_locators().begin()) {}
+          ptr(&*file.get_param_row_locators().begin() + pos) {}
 
-    param_iterator(const param_iterator<const Def>& other) noexcept
+    param_iterator(const param_iterator& other) noexcept
         : file_start(other.file_start), ptr(other.ptr) {}
 
-    reference operator*() const noexcept {
-        return *reinterpret_cast<pointer>(
-            this->file_start + this->ptr->file_offset);
-    }
-
-    pointer operator->() const noexcept {
-        return reinterpret_cast<pointer>(
-            this->file_start + this->ptr->file_offset);
+    value_type operator*() const noexcept {
+        return { this->ptr->row,
+            *reinterpret_cast<Def*>(
+                this->file_start + this->ptr->file_offset) };
     }
 
     param_iterator& operator++() noexcept {
@@ -100,34 +93,21 @@ public:
         return tmp;
     }
 
-    difference_type operator-(
-        const compatible_param_iterator auto& rhs) const noexcept {
+    difference_type operator-(const param_iterator& rhs) const noexcept {
         return static_cast<difference_type>(this->ptr - rhs.ptr);
     }
 
-    reference operator[](difference_type offset) const noexcept {
-        return this->ptr[offset];
+    value_type operator[](difference_type offset) const noexcept {
+        return *(*this + offset);
     }
 
-    bool operator==(const compatible_param_iterator auto& rhs) const noexcept {
+    bool operator==(const param_iterator& rhs) const noexcept {
         return this->ptr == rhs.ptr;
     }
 
-    std::strong_ordering operator<=>(
-        const compatible_param_iterator auto& rhs) const noexcept {
+    std::strong_ordering operator<=>(const param_iterator& rhs) const noexcept {
         return this->ptr <=> rhs.ptr;
     }
-
-private:
-    template <param_index Index, typename Def>
-    friend class param_table;
-
-    param_iterator(
-        const param_iterator<std::remove_const_t<Def>>& other) noexcept
-        : file_start(other.file_start), ptr(other.ptr) {}
 };
-
-template <typename Def>
-using param_const_iterator = param_iterator<const Def>;
 } // namespace param
 } // namespace from
