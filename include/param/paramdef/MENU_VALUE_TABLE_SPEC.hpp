@@ -5,9 +5,21 @@ namespace from {
 namespace paramdef {
 
 struct MENU_VALUE_TABLE_SPEC {
+    /**
+     * @brief Value to compare
+     */
     int value{ 0 };
+
+    /**
+     * @brief Converted text ID
+     */
     int textId{ 0 };
+
+    /**
+     * @brief Comparison type
+     */
     signed char compareType{ 0 };
+
     unsigned char padding[3];
 };
 

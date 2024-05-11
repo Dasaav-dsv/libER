@@ -5,8 +5,15 @@ namespace from {
 namespace paramdef {
 
 struct DIRECTION_CAMERA_PARAM_ST {
+    /**
+     * @brief Affected by options
+     *
+     * Is it affected by the production camera ON / OFF option?
+     */
     bool isUseOption : 1 { false };
+
     unsigned char pad2 : 3;
+
     unsigned char pad1[15];
 };
 

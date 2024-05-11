@@ -5,18 +5,74 @@ namespace from {
 namespace paramdef {
 
 struct NETWORK_AREA_PARAM_ST {
+    /**
+     * @brief Cell size X
+     */
     float cellSizeX{ 30 };
+
+    /**
+     * @brief Cell size Y
+     */
     float cellSizeY{ 8 };
+
+    /**
+     * @brief Cell size Z
+     */
     float cellSizeZ{ 30 };
+
+    /**
+     * @brief Cell offset X
+     */
     float cellOffsetX{ 0 };
+
+    /**
+     * @brief Cell offset Y
+     */
     float cellOffsetY{ 0 };
+
+    /**
+     * @brief Cell offset Z
+     */
     float cellOffsetZ{ 0 };
+
+    /**
+     * @brief Effective bloodstain / death illusion
+     */
     bool enableBloodstain : 1 { false };
+
+    /**
+     * @brief Blood character valid
+     */
     bool enableBloodMessage : 1 { false };
+
+    /**
+     * @brief Phantom effective
+     */
     bool enableGhost : 1 { false };
+
+    /**
+     * @brief Multiplayer enabled
+     */
     bool enableMultiPlay : 1 { false };
+
+    /**
+     * @brief Ring search enabled
+     *
+     * Is it a search target for ring search? (Area called Kanemori Ash Spirit /
+     * Relief Blue Spirit)
+     */
     bool enableRingSearch : 1 { false };
+
+    /**
+     * @brief Intrusion search enabled
+     *
+     * Is it the target of intrusion search?
+     */
     bool enableBreakInSearch : 1 { false };
+
+    /**
+     * @brief dummy
+     */
     unsigned char dummy[3];
 };
 

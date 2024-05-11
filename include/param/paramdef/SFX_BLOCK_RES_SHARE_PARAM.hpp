@@ -5,6 +5,12 @@ namespace from {
 namespace paramdef {
 
 struct SFX_BLOCK_RES_SHARE_PARAM {
+    /**
+     * @brief Block Sfx resource reference map number
+     *
+     * The map number that references the resource. Set the numerical value of
+     * the map number. (m12_34_56_78 → 12345678)
+     */
     unsigned int shareBlockRsMapUidVal{ 0 };
 };
 

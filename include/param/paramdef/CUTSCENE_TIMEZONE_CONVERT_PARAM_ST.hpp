@@ -5,7 +5,18 @@ namespace from {
 namespace paramdef {
 
 struct CUTSCENE_TIMEZONE_CONVERT_PARAM_ST {
+    /**
+     * @brief Pre-conversion time zone start time [hour]
+     *
+     * Start time of the time zone to be converted to cutscene time [hour]
+     */
     float SrcTimezoneStart{ 0 };
+
+    /**
+     * @brief Cutscene time after conversion [hour]
+     *
+     * Enter the time used during cutscene playback in hours [hour]
+     */
     float DstCutscenTime{ 0 };
 };
 

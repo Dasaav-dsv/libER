@@ -5,7 +5,14 @@ namespace from {
 namespace paramdef {
 
 struct CS_WATER_QUALITY_DETAIL {
+    /**
+     * @brief Interaction enabled
+     */
     bool interactionEnabled{ true };
+
+    /**
+     * @brief dmy
+     */
     unsigned char dmy[3];
 };
 

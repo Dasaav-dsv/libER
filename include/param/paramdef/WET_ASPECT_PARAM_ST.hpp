@@ -5,18 +5,70 @@ namespace from {
 namespace paramdef {
 
 struct WET_ASPECT_PARAM_ST {
+    /**
+     * @brief Base color value R
+     *
+     * Base color color R.
+     */
     unsigned char baseColorR{ 0 };
+
+    /**
+     * @brief Base color value G
+     *
+     * Base color color G.
+     */
     unsigned char baseColorG{ 0 };
+
+    /**
+     * @brief Base color value B
+     *
+     * Base color color B.
+     */
     unsigned char baseColorB{ 0 };
+
     unsigned char reserve_0[1];
+
+    /**
+     * @brief Base color%
+     *
+     * Base color override rate.
+     */
     float baseColorA{ 0 };
+
+    /**
+     * @brief Metallic value
+     *
+     * It's metallic.
+     */
     unsigned char metallic{ 0 };
+
     unsigned char reserve_1[1];
+
     unsigned char reserve_2[1];
+
     unsigned char reserve_3[1];
+
+    /**
+     * @brief Metallic%
+     *
+     * Metallic override rate.
+     */
     float metallicRate{ 0 };
+
+    /**
+     * @brief Shininess%
+     *
+     * Shininess override rate.
+     */
     float shininessRate{ 0 };
+
+    /**
+     * @brief Shininess value
+     *
+     * Shininess.
+     */
     unsigned char shininess{ 0 };
+
     unsigned char reserve_4[11];
 };
 

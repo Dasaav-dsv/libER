@@ -5,15 +5,51 @@ namespace from {
 namespace paramdef {
 
 struct POSTURE_CONTROL_PARAM_WEP_LEFT_ST {
+    /**
+     * @brief Left arm_front and back
+     */
     short a000_leftArmFB{ 0 };
+
+    /**
+     * @brief Left wrist_front and back
+     */
     short a000_leftWristFB{ 0 };
+
+    /**
+     * @brief Left wrist_inside and outside
+     */
     short a000_leftWristIO{ 0 };
+
+    /**
+     * @brief Left arm_front and back
+     */
     short a002_leftArmFB{ 0 };
+
+    /**
+     * @brief Left wrist_front and back
+     */
     short a002_leftWristFB{ 0 };
+
+    /**
+     * @brief Left wrist_inside and outside
+     */
     short a002_leftWristIO{ 0 };
+
+    /**
+     * @brief Left arm_front and back
+     */
     short a003_leftArmFB{ 0 };
+
+    /**
+     * @brief Left wrist_front and back
+     */
     short a003_leftWristFB{ 0 };
+
+    /**
+     * @brief Left wrist_inside and outside
+     */
     short a003_leftWristIO{ 0 };
+
     unsigned char pad[14];
 };
 

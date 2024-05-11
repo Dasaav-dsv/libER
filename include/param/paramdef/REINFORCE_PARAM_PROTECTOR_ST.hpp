@@ -5,24 +5,137 @@ namespace from {
 namespace paramdef {
 
 struct REINFORCE_PARAM_PROTECTOR_ST {
+    /**
+     * @brief Physical defense
+     *
+     * Physical defense correction value
+     */
     float physicsDefRate{ 1 };
+
+    /**
+     * @brief Magic defense
+     *
+     * Magic defense correction value
+     */
     float magicDefRate{ 1 };
+
+    /**
+     * @brief Fire defense
+     *
+     * Fire defense correction value
+     */
     float fireDefRate{ 1 };
+
+    /**
+     * @brief Electric shock defense
+     *
+     * Electric shock defense correction value
+     */
     float thunderDefRate{ 1 };
+
+    /**
+     * @brief Slash defense
+     *
+     * Slash defense correction value
+     */
     float slashDefRate{ 1 };
+
+    /**
+     * @brief Strike defense
+     *
+     * Impact defense correction value
+     */
     float blowDefRate{ 1 };
+
+    /**
+     * @brief Puncture defense
+     *
+     * Correction value of piercing defense power
+     */
     float thrustDefRate{ 1 };
+
+    /**
+     * @brief Poison resistance
+     *
+     * Poison resistance correction value
+     */
     float resistPoisonRate{ 1 };
+
+    /**
+     * @brief Epidemic resistance
+     *
+     * Epidemic resistance correction value
+     */
     float resistDiseaseRate{ 1 };
+
+    /**
+     * @brief Bleeding resistance
+     *
+     * Bleeding resistance correction value
+     */
     float resistBloodRate{ 1 };
+
+    /**
+     * @brief Curse resistance
+     *
+     * Curse resistance correction value
+     */
     float resistCurseRate{ 1 };
+
+    /**
+     * @brief Resident special effect ID1
+     *
+     * Addition correction value for resident special effect ID1
+     */
     unsigned char residentSpEffectId1{ 0 };
+
+    /**
+     * @brief Resident special effect ID2
+     *
+     * Addition correction value for resident special effect ID2
+     */
     unsigned char residentSpEffectId2{ 0 };
+
+    /**
+     * @brief Resident special effect ID3
+     *
+     * Addition correction value for resident special effect ID3
+     */
     unsigned char residentSpEffectId3{ 0 };
+
+    /**
+     * @brief Material ID addition value
+     *
+     * Addition correction value of material parameter ID
+     */
     unsigned char materialSetId{ 0 };
+
+    /**
+     * @brief Dark defense
+     *
+     * Dark defense correction value
+     */
     float darkDefRate{ 1 };
+
+    /**
+     * @brief Cold resistance
+     *
+     * Cold resistance correction value
+     */
     float resistFreezeRate{ 1 };
+
+    /**
+     * @brief Sleep tolerance
+     *
+     * Correction value for sleep tolerance
+     */
     float resistSleepRate{ 1 };
+
+    /**
+     * @brief Madness resistance
+     *
+     * Madness resistance correction value
+     */
     float resistMadnessRate{ 1 };
 };
 

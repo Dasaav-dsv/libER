@@ -5,13 +5,56 @@ namespace from {
 namespace paramdef {
 
 struct MATERIAL_EX_PARAM_ST {
+    /**
+     * @brief Material parameter name
+     *
+     * Set the parameter name of the material. Up to 31 characters
+     */
     wchar_t paramName[32];
+
+    /**
+     * @brief Target material ID
+     *
+     * NPC Para: Resident Material Expansion Para ID setting -1 for all
+     * materials
+     */
     int materialId{ -1 };
+
+    /**
+     * @brief Overwrite value 1 (R)
+     *
+     * NPC Para: Resident Material Extended Para ID Settings
+     */
     float materialParamValue0{ 0 };
+
+    /**
+     * @brief Overwrite value 2 (G)
+     *
+     * NPC Para: Resident Material Expansion Para ID Settings
+     */
     float materialParamValue1{ 0 };
+
+    /**
+     * @brief Overwrite value 3 (B)
+     *
+     * NPC Para: Resident Material Expansion Para ID Settings
+     */
     float materialParamValue2{ 0 };
+
+    /**
+     * @brief Overwrite value 4 (A)
+     *
+     * NPC Para: Resident Material Extended Para ID Settings
+     */
     float materialParamValue3{ 0 };
+
+    /**
+     * @brief Overwrite value 5 (I)
+     *
+     * NPC Para: Resident Material Expansion Para ID Settings
+     */
     float materialParamValue4{ 1 };
+
     unsigned char pad[8];
 };
 

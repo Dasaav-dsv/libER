@@ -5,21 +5,84 @@ namespace from {
 namespace paramdef {
 
 struct MENU_OFFSCR_REND_PARAM_ST {
+    /**
+     * @brief Camera gaze point X
+     */
     float camAtPosX{ 0 };
+
+    /**
+     * @brief Camera gaze point Y
+     */
     float camAtPosY{ 0 };
+
+    /**
+     * @brief Camera gaze point Z
+     */
     float camAtPosZ{ 0 };
+
+    /**
+     * @brief Camera distance
+     */
     float camDist{ 10 };
+
+    /**
+     * @brief Camera oriented X
+     */
     float camRotX{ 0 };
+
+    /**
+     * @brief Suitable for camera Y
+     */
     float camRotY{ 0 };
+
+    /**
+     * @brief Camera angle of view
+     */
     float camFov{ 49 };
+
+    /**
+     * @brief Shortest distance when operating the camera
+     */
     float camDistMin{ 0 };
+
+    /**
+     * @brief Longest distance when operating the camera
+     */
     float camDistMax{ 100 };
+
+    /**
+     * @brief Minimum orientation when operating the camera
+     */
     float camRotXMin{ -89 };
+
+    /**
+     * @brief Maximum orientation when operating the camera
+     */
     float camRotXMax{ 89 };
+
+    /**
+     * @brief GparamID
+     */
     unsigned int GparamID{ 10 };
+
+    /**
+     * @brief Environment map texture ID
+     *
+     * Environment map texture ID. It corresponds to 4 digits of N: \ GR \ data
+     * \ Other \ SysEnvTex \ GILM ???? _rem.dds.
+     */
     unsigned int envTexId{ 10 };
+
+    /**
+     * @brief Gparam ID (for PS4)
+     */
     unsigned int Grapm_ID_forPS4{ 10 };
+
+    /**
+     * @brief Gparam ID (for Xbox One)
+     */
     unsigned int Grapm_ID_forXB1{ 10 };
+
     unsigned char pad[4];
 };
 
