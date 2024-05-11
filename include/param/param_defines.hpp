@@ -27,6 +27,8 @@ enum class param_index : int {
     PARAM_COUNT
 };
 
+inline constexpr size_t param_count = size_t(param_index::PARAM_COUNT);
+
 #undef LIBER_PARAM_ENTRY
 } // namespace param
 } // namespace from
