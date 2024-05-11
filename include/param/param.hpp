@@ -8,11 +8,7 @@
 #pragma once
 
 #include <detail/preprocessor.hpp>
-#include <param/detail/param_defines.hpp>
-#include <param/detail/param_iterator.hpp>
-#include <param/detail/param_table.hpp>
 #include <param/detail/paramdef.hpp>
-
-namespace from {
-namespace param {} // namespace param
-} // namespace from
+#include <param/param_defines.hpp>
+#include <param/param_iterator.hpp>
+#include <param/param_table.hpp>
