@@ -106,7 +106,7 @@ target_sources("objlibER" PUBLIC
 
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
-    "source/coresystem/param.cpp"
+    "source/coresystem/cs_param.cpp"
     "source/coresystem/task.cpp"
     "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
@@ -119,9 +119,9 @@ target_sources("objlibER" PUBLIC
 )
 
 # Param manipulation source files
-target_sources("objlibER" PUBLIC
-    "source/param/param.cpp"
-)
+# target_sources("objlibER" PUBLIC
+#     "source/param/param.cpp"
+# )
 
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER> $<TARGET_OBJECTS:mimalloc-obj>)
