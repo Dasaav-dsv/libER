@@ -8,49 +8,25 @@
 #pragma once
 
 #include <fd4/resource.hpp>
-
-#include <cstddef>
-#include <cstdint>
+#include <param/param_file.hpp>
 
 namespace from {
-using param_row_id = uint64_t;
-using param_row_count = uint16_t;
-
-struct param_row_info {
-    param_row_id id;
-    ptrdiff_t data_begin_offset;
-    ptrdiff_t data_end_offset;
-};
-
-struct param_file {
-    uint32_t string_offset;
-    uint16_t data_offset;
-    uint16_t liber_unknown;
-    uint16_t paramdef_version;
-    uint16_t row_count;
-    uint64_t param_type_offset;
-    uint64_t liber_unknown[3];
-    uint64_t param_data_offset;
-    uint64_t liber_unknown;
-    param_row_info row_info_arr[0];
-};
-
 namespace FD4 {
 class FD4ParamResCap : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ParamResCap);
 
-    param_file* get_param_file() {
+    param::param_file*& get_param_file() noexcept {
         return this->file;
     }
 
-    const param_file* get_param_file() const {
+    const param::param_file* const& get_param_file() const noexcept {
         return this->file;
     }
 
 private:
     long long file_size;
-    param_file* file;
+    param::param_file* file;
 };
 } // namespace FD4
 } // namespace from
