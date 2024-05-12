@@ -11,7 +11,7 @@ struct SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST {
      * Collision points above this distance [m] are judged as No Hit (less than
      * 0: invalid)
      */
-    float NoHitDist{ -1 };
+    float NoHitDist{ -1.f };
 
     /**
      * @brief Do you include NoHit collision points?
@@ -41,7 +41,7 @@ struct SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST {
      * Collision points longer than this life [second] are treated as invalid.
      * Set to be less than or equal to the life of the common setting
      */
-    float enableLifeTime{ -1 };
+    float enableLifeTime{ -1.f };
 
     /**
      * @brief Max Number of collision point records

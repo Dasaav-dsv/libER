@@ -435,7 +435,7 @@ struct MAGIC_PARAM_ST {
      *
      * It is a magnification that corrects the basic value of toughness.
      */
-    float toughnessCorrectRate{ 0 };
+    float toughnessCorrectRate{ 0.f };
 
     /**
      * @brief Replacement status type

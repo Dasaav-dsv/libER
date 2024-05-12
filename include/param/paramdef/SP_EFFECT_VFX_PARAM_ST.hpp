@@ -52,14 +52,14 @@ struct SP_EFFECT_VFX_PARAM_ST {
      *
      * It is the camouflage start distance
      */
-    float camouflageBeginDist{ -1 };
+    float camouflageBeginDist{ -1.f };
 
     /**
      * @brief Hidden end distance [m]
      *
      * It is the camouflage end distance
      */
-    float camouflageEndDist{ -1 };
+    float camouflageEndDist{ -1.f };
 
     /**
      * @brief Makeover Armor ID
@@ -430,7 +430,7 @@ struct SP_EFFECT_VFX_PARAM_ST {
      * is specified by the material parameter ID. If the material parameter ID
      * is -1, do nothing
      */
-    float materialParamInitValue{ 0 };
+    float materialParamInitValue{ 0.f };
 
     /**
      * @brief Material parameter target value
@@ -439,7 +439,7 @@ struct SP_EFFECT_VFX_PARAM_ST {
      * specified by the material parameter ID. If the material parameter ID is
      * -1, do nothing
      */
-    float materialParamTargetValue{ 0 };
+    float materialParamTargetValue{ 0.f };
 
     /**
      * @brief Fade time of material parameter values
@@ -447,7 +447,7 @@ struct SP_EFFECT_VFX_PARAM_ST {
      * Fade time for material parameter values. Gradually reach the target value
      * over this time. If the material parameter ID is -1, do nothing
      */
-    float materialParamFadeTime{ 0 };
+    float materialParamFadeTime{ 0.f };
 
     /**
      * @brief Foot Decal Material Offset Forced Overwrite ID

@@ -10,35 +10,35 @@ struct PHANTOM_PARAM_ST {
      *
      * Edge color A.
      */
-    float edgeColorA{ 1 };
+    float edgeColorA{ 1.f };
 
     /**
      * @brief A
      *
      * The front color is A.
      */
-    float frontColorA{ 0 };
+    float frontColorA{ 0.f };
 
     /**
      * @brief A
      *
      * Diffuse multiplication color A.
      */
-    float diffMulColorA{ 1 };
+    float diffMulColorA{ 1.f };
 
     /**
      * @brief A
      *
      * Specular multiplication color A.
      */
-    float specMulColorA{ 1 };
+    float specMulColorA{ 1.f };
 
     /**
      * @brief A
      *
      * Light color A.
      */
-    float lightColorA{ 0 };
+    float lightColorA{ 0.f };
 
     /**
      * @brief R
@@ -152,14 +152,14 @@ struct PHANTOM_PARAM_ST {
      *
      * The overall transparency.
      */
-    float alpha{ 1 };
+    float alpha{ 1.f };
 
     /**
      * @brief Blend rate
      *
      * The blend ratio.
      */
-    float blendRate{ 1 };
+    float blendRate{ 1.f };
 
     /**
      * @brief α type
@@ -192,12 +192,12 @@ struct PHANTOM_PARAM_ST {
     /**
      * @brief Edge width
      */
-    float edgePower{ 1 };
+    float edgePower{ 1.f };
 
     /**
      * @brief Glow strength
      */
-    float glowScale{ 0 };
+    float glowScale{ 0.f };
 };
 
 }; // namespace paramdef

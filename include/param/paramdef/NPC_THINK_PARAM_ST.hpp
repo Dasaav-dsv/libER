@@ -75,14 +75,14 @@ struct NPC_THINK_PARAM_ST {
      *
      * Search enemy Lv1 Target Time to forget.
      */
-    float searchTargetLv1ForgetTime{ 5 };
+    float searchTargetLv1ForgetTime{ 5.f };
 
     /**
      * @brief Search enemy Lv2 Target Forget time [sec]
      *
      * Search enemy Lv2 time to forget the target.
      */
-    float searchTargetLv2ForgetTime{ 8 };
+    float searchTargetLv2ForgetTime{ 8.f };
 
     /**
      * @brief Back Home time when touching an enemy wall [sec]
@@ -90,14 +90,14 @@ struct NPC_THINK_PARAM_ST {
      * The life of the BackToHome goal when it touches an enemy wall that blocks
      * the block
      */
-    float BackHomeLife_OnHitEneWal{ 5 };
+    float BackHomeLife_OnHitEneWal{ 5.f };
 
     /**
      * @brief Time to forget the visual target [sec]
      *
      * Time to forget the visual target.
      */
-    float SightTargetForgetTime{ 600 };
+    float SightTargetForgetTime{ 600.f };
 
     /**
      * @brief EzState number to do when you get stuck
@@ -112,7 +112,7 @@ struct NPC_THINK_PARAM_ST {
      *
      * Hearing search range ...
      */
-    float ear_dist{ 0 };
+    float ear_dist{ 0.f };
 
     /**
      * @brief Companion call response action anime ID
@@ -203,7 +203,7 @@ struct NPC_THINK_PARAM_ST {
      *
      * Time to forget the sound target.
      */
-    float SoundTargetForgetTime{ 3 };
+    float SoundTargetForgetTime{ 3.f };
 
     /**
      * @brief Battle start distance [m]
@@ -425,12 +425,12 @@ struct NPC_THINK_PARAM_ST {
     /**
      * @brief Platoon reaction delay time [sec]
      */
-    float platoonReplyTime{ 0 };
+    float platoonReplyTime{ 0.f };
 
     /**
      * @brief Platoon reaction additional random time [sec]
      */
-    float platoonReplyAddRandomTime{ 0 };
+    float platoonReplyAddRandomTime{ 0.f };
 
     /**
      * @brief Searching enemy vision_angle (height) [deg]
@@ -564,7 +564,7 @@ struct NPC_THINK_PARAM_ST {
      *
      * Time to forget the memory target.
      */
-    float MemoryTargetForgetTime{ 150 };
+    float MemoryTargetForgetTime{ 150.f };
 
     /**
      * @brief Ranged attack anime ID

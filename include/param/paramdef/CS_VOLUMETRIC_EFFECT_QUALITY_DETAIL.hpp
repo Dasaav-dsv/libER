@@ -29,7 +29,7 @@ struct CS_VOLUMETRIC_EFFECT_QUALITY_DETAIL {
      * @brief Local light calculation distance scale (0 does not calculate local
      * light)
      */
-    float fogLocalLightDistScale{ 0 };
+    float fogLocalLightDistScale{ 0.f };
 
     /**
      * @brief Fog volume size scaler

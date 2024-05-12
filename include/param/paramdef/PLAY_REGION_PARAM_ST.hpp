@@ -40,7 +40,7 @@ struct PLAY_REGION_PARAM_ST {
      * impossible distance" to the "other ghost invasion range upper limit" from
      * the host position.
      */
-    float otherDisableDistance{ 0 };
+    float otherDisableDistance{ 0.f };
 
     /**
      * @brief PC position save limit event flag ID
@@ -283,7 +283,7 @@ struct PLAY_REGION_PARAM_ST {
      * impossible distance" to the "other ghost invasion range upper limit" from
      * the host position.
      */
-    float otherMaxDistance{ 1000 };
+    float otherMaxDistance{ 1000.f };
 
     /**
      * @brief Sign pool release event flag ID
@@ -324,7 +324,7 @@ struct PLAY_REGION_PARAM_ST {
      * X coordinates (relative coordinates from the specified map). Data for
      * specifying the display position in the map menu
      */
-    float posX{ 0 };
+    float posX{ 0.f };
 
     /**
      * @brief _Y coordinates for map display
@@ -333,7 +333,7 @@ struct PLAY_REGION_PARAM_ST {
      * specifying the display position in the map menu. Not actually used, but
      * keep XYZ aligned
      */
-    float posY{ 0 };
+    float posY{ 0.f };
 
     /**
      * @brief _Z coordinates for map display
@@ -341,7 +341,7 @@ struct PLAY_REGION_PARAM_ST {
      * Z coordinates (relative coordinates from the specified map). Data for
      * specifying the display position in the map menu
      */
-    float posZ{ 0 };
+    float posZ{ 0.f };
 
     /**
      * @brief Intrusion restriction event flag ID1

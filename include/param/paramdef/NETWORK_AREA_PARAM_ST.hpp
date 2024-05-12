@@ -8,32 +8,32 @@ struct NETWORK_AREA_PARAM_ST {
     /**
      * @brief Cell size X
      */
-    float cellSizeX{ 30 };
+    float cellSizeX{ 30.f };
 
     /**
      * @brief Cell size Y
      */
-    float cellSizeY{ 8 };
+    float cellSizeY{ 8.f };
 
     /**
      * @brief Cell size Z
      */
-    float cellSizeZ{ 30 };
+    float cellSizeZ{ 30.f };
 
     /**
      * @brief Cell offset X
      */
-    float cellOffsetX{ 0 };
+    float cellOffsetX{ 0.f };
 
     /**
      * @brief Cell offset Y
      */
-    float cellOffsetY{ 0 };
+    float cellOffsetY{ 0.f };
 
     /**
      * @brief Cell offset Z
      */
-    float cellOffsetZ{ 0 };
+    float cellOffsetZ{ 0.f };
 
     /**
      * @brief Effective bloodstain / death illusion

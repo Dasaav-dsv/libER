@@ -47,7 +47,7 @@ struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
      * Condition: For evaluation distance minimum specification A (less than 0:
      * invalid)
      */
-    float DistMinA{ -1 };
+    float DistMinA{ -1.f };
 
     /**
      * @brief Distance MaxA [m]
@@ -55,7 +55,7 @@ struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
      * Condition: For evaluation distance maximum specification A (less than 0:
      * invalid)
      */
-    float DistMaxA{ -1 };
+    float DistMaxA{ -1.f };
 
     /**
      * @brief Distance MinB [m]
@@ -63,7 +63,7 @@ struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
      * Condition: For evaluation distance minimum specification A (less than 0:
      * invalid)
      */
-    float DistMinB{ -1 };
+    float DistMinB{ -1.f };
 
     /**
      * @brief Distance MaxB [m]
@@ -71,7 +71,7 @@ struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
      * Condition: For evaluation distance maximum specification A (less than 0:
      * invalid)
      */
-    float DistMaxB{ -1 };
+    float DistMaxB{ -1.f };
 
     /**
      * @brief Minimum number of collision points No Hits

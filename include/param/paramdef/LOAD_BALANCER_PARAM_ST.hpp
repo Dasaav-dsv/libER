@@ -10,14 +10,14 @@ struct LOAD_BALANCER_PARAM_ST {
      *
      * If it falls below this FPS, increase the load balance level by 1.
      */
-    float lowerFpsThreshold{ 23 };
+    float lowerFpsThreshold{ 23.f };
 
     /**
      * @brief upperFpsThreshold
      *
      * If you exceed this FPS, lower the load balance level by 1.
      */
-    float upperFpsThreshold{ 27 };
+    float upperFpsThreshold{ 27.f };
 
     /**
      * @brief lowerFpsContinousCount

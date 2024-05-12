@@ -83,7 +83,7 @@ struct SHOP_LINEUP_PARAM {
      * Correction (magnification) to the selling price of equipment. Equipment
      * para selling price x magnification + addition
      */
-    float value_Magnification{ 1 };
+    float value_Magnification{ 1.f };
 
     /**
      * @brief Icon ID

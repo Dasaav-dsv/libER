@@ -56,14 +56,14 @@ struct EQUIP_PARAM_PROTECTOR_ST {
      *
      * Super armor endurance
      */
-    float saDurability{ 0 };
+    float saDurability{ 0.f };
 
     /**
      * @brief Toughness correction factor
      *
      * It is a magnification that corrects the basic value of toughness.
      */
-    float toughnessCorrectRate{ 0 };
+    float toughnessCorrectRate{ 0.f };
 
     /**
      * @brief Repair price
@@ -89,7 +89,7 @@ struct EQUIP_PARAM_PROTECTOR_ST {
      *
      * Weight [kg].
      */
-    float weight{ 1 };
+    float weight{ 1.f };
 
     /**
      * @brief Resident special effect ID1
@@ -116,14 +116,14 @@ struct EQUIP_PARAM_PROTECTOR_ST {
     /**
      * @brief Part damage rate
      */
-    float partsDamageRate{ 1 };
+    float partsDamageRate{ 1.f };
 
     /**
      * @brief SA recovery time correction value
      *
      * Super Armor Recovery Time Correction Value
      */
-    float corectSARecover{ 0 };
+    float corectSARecover{ 0.f };
 
     /**
      * @brief Derivation source
@@ -240,42 +240,42 @@ struct EQUIP_PARAM_PROTECTOR_ST {
     /**
      * @brief Man profile enlargement scale
      */
-    float faceScaleM_ScaleX{ 1 };
+    float faceScaleM_ScaleX{ 1.f };
 
     /**
      * @brief Male face enlargement scale
      */
-    float faceScaleM_ScaleZ{ 1 };
+    float faceScaleM_ScaleZ{ 1.f };
 
     /**
      * @brief Maximum magnification for male profile enlargement
      */
-    float faceScaleM_MaxX{ 1 };
+    float faceScaleM_MaxX{ 1.f };
 
     /**
      * @brief Maximum magnification for man's face enlargement
      */
-    float faceScaleM_MaxZ{ 1 };
+    float faceScaleM_MaxZ{ 1.f };
 
     /**
      * @brief Female profile enlargement scale
      */
-    float faceScaleF_ScaleX{ 1 };
+    float faceScaleF_ScaleX{ 1.f };
 
     /**
      * @brief Female face enlargement scale
      */
-    float faceScaleF_ScaleZ{ 1 };
+    float faceScaleF_ScaleZ{ 1.f };
 
     /**
      * @brief Female profile enlargement maximum magnification
      */
-    float faceScaleF_MaxX{ 1 };
+    float faceScaleF_MaxX{ 1.f };
 
     /**
      * @brief Maximum magnification for female face enlargement
      */
-    float faceScaleF_MaxZ{ 1 };
+    float faceScaleF_MaxZ{ 1.f };
 
     /**
      * @brief QWCID
@@ -628,37 +628,37 @@ struct EQUIP_PARAM_PROTECTOR_ST {
     /**
      * @brief Non-attribute damage multiplier
      */
-    float neutralDamageCutRate{ 1 };
+    float neutralDamageCutRate{ 1.f };
 
     /**
      * @brief Slash damage multiplier
      */
-    float slashDamageCutRate{ 1 };
+    float slashDamageCutRate{ 1.f };
 
     /**
      * @brief Batter damage multiplier
      */
-    float blowDamageCutRate{ 1 };
+    float blowDamageCutRate{ 1.f };
 
     /**
      * @brief Puncture damage ratio
      */
-    float thrustDamageCutRate{ 1 };
+    float thrustDamageCutRate{ 1.f };
 
     /**
      * @brief Magic damage multiplier
      */
-    float magicDamageCutRate{ 1 };
+    float magicDamageCutRate{ 1.f };
 
     /**
      * @brief Flame damage multiplier
      */
-    float fireDamageCutRate{ 1 };
+    float fireDamageCutRate{ 1.f };
 
     /**
      * @brief Electric shock damage ratio
      */
-    float thunderDamageCutRate{ 1 };
+    float thunderDamageCutRate{ 1.f };
 
     /**
      * @brief Defensive material 1 [SFX]
@@ -731,19 +731,19 @@ struct EQUIP_PARAM_PROTECTOR_ST {
      *
      * Toughness version cut rate
      */
-    float toughnessDamageCutRate{ 1 };
+    float toughnessDamageCutRate{ 1.f };
 
     /**
      * @brief Toughness recovery time correction value
      *
      * Correction value for toughness recovery time
      */
-    float toughnessRecoverCorrection{ 0 };
+    float toughnessRecoverCorrection{ 0.f };
 
     /**
      * @brief Dark damage multiplier
      */
-    float darkDamageCutRate{ 1 };
+    float darkDamageCutRate{ 1.f };
 
     /**
      * @brief Dark defense

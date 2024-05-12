@@ -42,17 +42,17 @@ struct WORLD_MAP_LEGACY_CONV_PARAM_ST {
     /**
      * @brief Source map reference coordinates X
      */
-    float srcPosX{ 0 };
+    float srcPosX{ 0.f };
 
     /**
      * @brief Source map reference coordinates Y
      */
-    float srcPosY{ 0 };
+    float srcPosY{ 0.f };
 
     /**
      * @brief Source map reference coordinates Z
      */
-    float srcPosZ{ 0 };
+    float srcPosZ{ 0.f };
 
     /**
      * @brief Conversion destination map ID: Area number
@@ -74,17 +74,17 @@ struct WORLD_MAP_LEGACY_CONV_PARAM_ST {
     /**
      * @brief Destination map reference coordinates X
      */
-    float dstPosX{ 0 };
+    float dstPosX{ 0.f };
 
     /**
      * @brief Destination map reference coordinates Y
      */
-    float dstPosY{ 0 };
+    float dstPosY{ 0.f };
 
     /**
      * @brief Destination map reference coordinates Z
      */
-    float dstPosZ{ 0 };
+    float dstPosZ{ 0.f };
 
     /**
      * @brief Is it a reference connection point?

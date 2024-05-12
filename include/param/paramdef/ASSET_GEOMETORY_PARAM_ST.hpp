@@ -78,7 +78,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Time from destruction to forced stop of rigid body (do not force stop at
      * 0)
      */
-    float breakStopTime{ 30 };
+    float breakStopTime{ 30.f };
 
     /**
      * @brief SFX ID at the time of destruction
@@ -125,14 +125,14 @@ struct ASSET_GEOMETORY_PARAM_ST {
      *
      * Hidden debris Waiting time (seconds)
      */
-    float FragmentInvisibleWaitTime{ 0 };
+    float FragmentInvisibleWaitTime{ 0.f };
 
     /**
      * @brief Debris non-display time (seconds)
      *
      * Time to hide debris (seconds)
      */
-    float FragmentInvisibleTime{ 0 };
+    float FragmentInvisibleTime{ 0.f };
 
     /**
      * @brief AI sound ID generated at the time of destruction
@@ -295,7 +295,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      *
      * Distance from the camera to update havokCloth (0: always update)
      */
-    float clothUpdateDist{ 30 };
+    float clothUpdateDist{ 30.f };
 
     /**
      * @brief Lifetime of runtime generated assets (seconds)
@@ -303,7 +303,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Runtime-generated time after creation until disappearance (0: does not
      * disappear)
      */
-    float lifeTime_forRuntimeCreate{ 0 };
+    float lifeTime_forRuntimeCreate{ 0.f };
 
     /**
      * @brief SE ID when contacting a player
@@ -325,12 +325,12 @@ struct ASSET_GEOMETORY_PARAM_ST {
     /**
      * @brief Wind coefficient (before destruction)
      */
-    float windEffectRate_0{ 0.5 };
+    float windEffectRate_0{ 0.5f };
 
     /**
      * @brief Wind coefficient (after destruction)
      */
-    float windEffectRate_1{ 0.5 };
+    float windEffectRate_1{ 0.5f };
 
     /**
      * @brief Wind effect type (before destruction)
@@ -357,21 +357,21 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Height offset of how much it floats from where the raycast hits the map
      * when it is automatically generated [m]
      */
-    float autoCreateOffsetHeight{ 0.1 };
+    float autoCreateOffsetHeight{ 0.1f };
 
     /**
      * @brief Burning time (seconds)
      *
      * Burning time (seconds) (continues to burn at 0)
      */
-    float burnTime{ 0 };
+    float burnTime{ 0.f };
 
     /**
      * @brief Combustion fracture judgment progress
      *
      * Burnup threshold for switching to the ruptured state
      */
-    float burnBraekRate{ 0.5 };
+    float burnBraekRate{ 0.5f };
 
     /**
      * @brief Combustion SFXID: 0
@@ -407,7 +407,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin{ 0 };
+    float burnSfxDelayTimeMin{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 1
@@ -415,7 +415,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_1{ 0 };
+    float burnSfxDelayTimeMin_1{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 2
@@ -423,7 +423,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_2{ 0 };
+    float burnSfxDelayTimeMin_2{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 3
@@ -431,7 +431,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_3{ 0 };
+    float burnSfxDelayTimeMin_3{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 0
@@ -439,7 +439,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax{ 0 };
+    float burnSfxDelayTimeMax{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 1
@@ -447,7 +447,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_1{ 0 };
+    float burnSfxDelayTimeMax_1{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 2
@@ -455,7 +455,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_2{ 0 };
+    float burnSfxDelayTimeMax_2{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 3
@@ -463,7 +463,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_3{ 0 };
+    float burnSfxDelayTimeMax_3{ 0.f };
 
     /**
      * @brief Combustion bullet generation Behavior parameter: 0
@@ -502,7 +502,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      *
      * Time to delay the generation of bullets for fire spread (seconds)
      */
-    float burnBulletDelayTime{ 0 };
+    float burnBulletDelayTime{ 0.f };
 
     /**
      * @brief Paint decal target size
@@ -608,7 +608,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Automatic drawing group_Pass pixel (set to 0.0-1.0 to enlarge at the time
      * of shooting)
      */
-    float autoDrawGroupPassPixelNum{ -1 };
+    float autoDrawGroupPassPixelNum{ -1.f };
 
     /**
      * @brief At the time of collection_replacement flag condition
@@ -685,7 +685,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Debug_Allowable ground height_Minimum [m] See SEQ07876 for details. Must
      * be smaller than maximum
      */
-    float debug_HeightCheckCapacityMin{ -99 };
+    float debug_HeightCheckCapacityMin{ -99.f };
 
     /**
      * @brief Debug_Allowable ground height_Max [m]
@@ -693,7 +693,7 @@ struct ASSET_GEOMETORY_PARAM_ST {
      * Debug_Allowable ground height_Max [m] See SEQ07876 for details. Must be
      * larger than minimum
      */
-    float debug_HeightCheckCapacityMax{ 99 };
+    float debug_HeightCheckCapacityMax{ 99.f };
 
     /**
      * @brief At the time of recollection_action button ID

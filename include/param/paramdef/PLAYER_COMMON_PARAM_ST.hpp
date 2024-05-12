@@ -19,7 +19,7 @@ struct PLAYER_COMMON_PARAM_ST {
      * The fade time when hiding the player during precision shooting. The unit
      * is seconds
      */
-    float snipeModeDrawAlpha_FadeTime{ 0 };
+    float snipeModeDrawAlpha_FadeTime{ 0.f };
 
     /**
      * @brief Player toughness recovery time correction value
@@ -27,7 +27,7 @@ struct PLAYER_COMMON_PARAM_ST {
      * A correction value used to calculate the player's toughness recovery
      * time.
      */
-    float toughnessRecoverCorrection{ 0 };
+    float toughnessRecoverCorrection{ 0.f };
 
     /**
      * @brief Magic memory slot initial value
@@ -51,7 +51,7 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Player resistance value recovery amount_sleep [point / s]
      */
-    float resistRecoverPoint_Sleep_Player{ 0 };
+    float resistRecoverPoint_Sleep_Player{ 0.f };
 
     /**
      * @brief Flare overwrite induction performance [deg / s]
@@ -65,7 +65,7 @@ struct PLAYER_COMMON_PARAM_ST {
      *
      * Flare overwrite guidance stop distance [m] (-1: no overwrite)
      */
-    float flareOverrideHomingStopRange{ -1 };
+    float flareOverrideHomingStopRange{ -1.f };
 
     /**
      * @brief Animation ID when acquiring Nemuri item
@@ -87,12 +87,12 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Insufficient status Basic attack power reduction
      */
-    float lowStatus_AtkPowDown{ 0 };
+    float lowStatus_AtkPowDown{ 0.f };
 
     /**
      * @brief Insufficient status Stamina consumption ratio
      */
-    float lowStatus_ConsumeStaminaRate{ 0 };
+    float lowStatus_ConsumeStaminaRate{ 0.f };
 
     /**
      * @brief Insufficient status Playing attack power
@@ -140,7 +140,7 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Riding precision shooting camera offset height
      */
-    float chrAimCam_rideOffsetHeight{ 0 };
+    float chrAimCam_rideOffsetHeight{ 0.f };
 
     unsigned char reserved23[4];
 
@@ -163,7 +163,7 @@ struct PLAYER_COMMON_PARAM_ST {
      * Multi-time client bottle correction magnification (0.5 specified to halve
      * the number of possessions)
      */
-    float estusFlaskAllocateRate{ 0 };
+    float estusFlaskAllocateRate{ 0.f };
 
     unsigned char reserved38[2];
 
@@ -250,64 +250,64 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Player resistance recovery amount_poison [point / s]
      */
-    float resistRecoverPoint_Poision_Player{ 0 };
+    float resistRecoverPoint_Poision_Player{ 0.f };
 
     /**
      * @brief Player resistance value recovery amount_plague [point / s]
      */
-    float resistRecoverPoint_Desease_Player{ 0 };
+    float resistRecoverPoint_Desease_Player{ 0.f };
 
     /**
      * @brief Player resistance recovery amount_bleeding [point / s]
      */
-    float resistRecoverPoint_Blood_Player{ 0 };
+    float resistRecoverPoint_Blood_Player{ 0.f };
 
     /**
      * @brief Player resistance recovery amount_curse [point / s]
      */
-    float resistRecoverPoint_Curse_Player{ 0 };
+    float resistRecoverPoint_Curse_Player{ 0.f };
 
     /**
      * @brief Player resistance value recovery amount_cold air [point / s]
      */
-    float resistRecoverPoint_Freeze_Player{ 0 };
+    float resistRecoverPoint_Freeze_Player{ 0.f };
 
     /**
      * @brief Enemy resistance recovery amount_poison [point / s]
      */
-    float resistRecoverPoint_Poision_Enemy{ 0 };
+    float resistRecoverPoint_Poision_Enemy{ 0.f };
 
     /**
      * @brief Enemy resistance value recovery amount_plague [point / s]
      */
-    float resistRecoverPoint_Desease_Enemy{ 0 };
+    float resistRecoverPoint_Desease_Enemy{ 0.f };
 
     /**
      * @brief Enemy resistance recovery amount_bleeding [point / s]
      */
-    float resistRecoverPoint_Blood_Enemy{ 0 };
+    float resistRecoverPoint_Blood_Enemy{ 0.f };
 
     /**
      * @brief Enemy resistance recovery amount_curse [point / s]
      */
-    float resistRecoverPoint_Curse_Enemy{ 0 };
+    float resistRecoverPoint_Curse_Enemy{ 0.f };
 
     /**
      * @brief Enemy resistance value recovery amount_cold air [point / s]
      */
-    float resistRecoverPoint_Freeze_Enemy{ 0 };
+    float resistRecoverPoint_Freeze_Enemy{ 0.f };
 
     /**
      * @brief Left hand two-handed request button long press time [s]
      *
      * Button input time when holding both left hand
      */
-    float requestTimeLeftBothHand{ 0 };
+    float requestTimeLeftBothHand{ 0.f };
 
     /**
      * @brief Player resistance value recovery amount_madness [point / s]
      */
-    float resistRecoverPoint_Madness_Player{ 0 };
+    float resistRecoverPoint_Madness_Player{ 0.f };
 
     /**
      * @brief Material Item acquisition animation ID
@@ -319,7 +319,7 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Yellow Cloth HP Est Bottle Correction Magnification
      */
-    float hpEstusFlaskAllocateRateForYellowMonk{ 0 };
+    float hpEstusFlaskAllocateRateForYellowMonk{ 0.f };
 
     /**
      * @brief Yellow Cloth HP Est Bottle Offset
@@ -329,7 +329,7 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Yellow Cloth MP Est Bottle Correction Magnification
      */
-    float mpEstusFlaskAllocateRateForYellowMonk{ 0 };
+    float mpEstusFlaskAllocateRateForYellowMonk{ 0.f };
 
     /**
      * @brief Yellow Cloth MP Est Bottle Offset
@@ -339,12 +339,12 @@ struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Enemy resistance value recovery amount_sleep [point / s]
      */
-    float resistRecoverPoint_Sleep_Enemy{ 0 };
+    float resistRecoverPoint_Sleep_Enemy{ 0.f };
 
     /**
      * @brief Enemy resistance value recovery amount_madness [point / s]
      */
-    float resistRecoverPoint_Madness_Enemy{ 0 };
+    float resistRecoverPoint_Madness_Enemy{ 0.f };
 
     /**
      * @brief Abnormal condition_immediate death_immediate death Item ID

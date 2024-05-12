@@ -20,7 +20,7 @@ struct THROW_PARAM_ST {
      *
      * Do not throw unless the distance is closer than this value [m]
      */
-    float Dist{ 0 };
+    float Dist{ 0.f };
 
     /**
      * @brief Angle difference range between your own direction and the
@@ -29,7 +29,7 @@ struct THROW_PARAM_ST {
      * If the angle difference (Y-axis) between the throwing side and the
      * receiving side is not larger than this angle, it will not be thrown.
      */
-    float DiffAngMin{ 0 };
+    float DiffAngMin{ 0.f };
 
     /**
      * @brief Angle difference range between your own direction and the
@@ -38,7 +38,7 @@ struct THROW_PARAM_ST {
      * If the angle difference (Y-axis) between the throwing side and the
      * receiving side is smaller than this angle, it will not be thrown.
      */
-    float DiffAngMax{ 0 };
+    float DiffAngMax{ 0.f };
 
     /**
      * @brief On the height range [m]
@@ -46,7 +46,7 @@ struct THROW_PARAM_ST {
      * Do not throw unless the relative distance of the Y axis from the throwing
      * side to the receiving side is smaller than this value
      */
-    float upperYRange{ 0.2 };
+    float upperYRange{ 0.2f };
 
     /**
      * @brief Below the height range [m]
@@ -54,7 +54,7 @@ struct THROW_PARAM_ST {
      * Do not throw unless the relative distance of the Y axis from the throwing
      * side to the receiving side is smaller than this value
      */
-    float lowerYRange{ 0.2 };
+    float lowerYRange{ 0.2f };
 
     /**
      * @brief Angle difference between your own direction and the direction from
@@ -64,7 +64,7 @@ struct THROW_PARAM_ST {
      * the direction from you to the other party. If it is larger than this
      * value, it will not be thrown
      */
-    float diffAngMyToDef{ 60 };
+    float diffAngMyToDef{ 60.f };
 
     /**
      * @brief Throw type ID
@@ -222,7 +222,7 @@ struct THROW_PARAM_ST {
      * Only throw at a distance closer than this value [m] Used for throwing at
      * the start of the back stub
      */
-    float Dist_start{ 0 };
+    float Dist_start{ 0.f };
 
     /**
      * @brief Angle difference range between your own direction and the other's
@@ -232,7 +232,7 @@ struct THROW_PARAM_ST {
      * receiving side is not larger than this angle, it will not be thrown. It
      * is used for throwing at the start of the back stub.
      */
-    float DiffAngMin_start{ 0 };
+    float DiffAngMin_start{ 0.f };
 
     /**
      * @brief Angle difference range between your own direction and the
@@ -242,7 +242,7 @@ struct THROW_PARAM_ST {
      * side must be smaller than this angle to throw. Used for throwing at the
      * start of the back stub.
      */
-    float DiffAngMax_start{ 0 };
+    float DiffAngMax_start{ 0.f };
 
     /**
      * @brief On the height range (start throwing) [m]
@@ -251,7 +251,7 @@ struct THROW_PARAM_ST {
      * throwing side to the receiving side is smaller than this value. It is
      * used for throwing at the start of the back stub.
      */
-    float upperYRange_start{ 0 };
+    float upperYRange_start{ 0.f };
 
     /**
      * @brief Below the height range (start throwing) [m]
@@ -260,7 +260,7 @@ struct THROW_PARAM_ST {
      * throwing side to the receiving side is smaller than this value. It is
      * used for throwing at the start of the back stub.
      */
-    float lowerYRange_start{ 0 };
+    float lowerYRange_start{ 0.f };
 
     /**
      * @brief Angle difference between your own direction and the direction from
@@ -271,7 +271,7 @@ struct THROW_PARAM_ST {
      * value, it will not be thrown. It will be used for throwing at the start
      * of the back stub.
      */
-    float diffAngMyToDef_start{ 0 };
+    float diffAngMyToDef_start{ 0.f };
 
     /**
      * @brief Throwing range judgment criteria on the throwing side Damipoli Id
@@ -298,14 +298,14 @@ struct THROW_PARAM_ST {
      * interpolated and playback starts immediately after adsorption with the
      * positional relationship according to the animation data. Will be)
      */
-    float adsrobModelPosInterpolationTime{ 0.5 };
+    float adsrobModelPosInterpolationTime{ 0.5f };
 
     /**
      * @brief Model position interpolation time at the end of tracking [s]
      *
      * Model position interpolation time at the end of tracking
      */
-    float throwFollowingEndEasingTime{ 0.5 };
+    float throwFollowingEndEasingTime{ 0.5f };
 
     unsigned char pad1[24];
 };

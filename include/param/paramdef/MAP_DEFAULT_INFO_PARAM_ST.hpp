@@ -113,14 +113,14 @@ struct MAP_DEFAULT_INFO_PARAM_ST {
      *
      * Map high hit switching judgment AABB_width Depth (XZ) [m] (SEQ16295)
      */
-    float MapLoHiChangeBorderDist_XZ{ 40 };
+    float MapLoHiChangeBorderDist_XZ{ 40.f };
 
     /**
      * @brief Map high hit switching judgment AABB_ height (Y) [m]
      *
      * Map high hit switching judgment AABB_ height (Y) [m] (SEQ16295)
      */
-    float MapLoHiChangeBorderDist_Y{ 40 };
+    float MapLoHiChangeBorderDist_Y{ 40.f };
 
     /**
      * @brief Map high hit switching judgment play distance [m]
@@ -130,7 +130,7 @@ struct MAP_DEFAULT_INFO_PARAM_ST {
      * small, switching will occur frequently. Not expected if larger than AABB
      * size (SEQ 16295)
      */
-    float MapLoHiChangePlayDist{ 5 };
+    float MapLoHiChangePlayDist{ 5.f };
 
     /**
      * @brief Number of pixels to be judged on the back side in automatic
@@ -144,7 +144,7 @@ struct MAP_DEFAULT_INFO_PARAM_ST {
      * Specify the scale to be applied to the PC and PC horse resident light
      * source on this map (SEQ16562).
      */
-    float PlayerLigntScale{ 1 };
+    float PlayerLigntScale{ 1.f };
 
     /**
      * @brief Does the Player light intensity scale change depending on the time

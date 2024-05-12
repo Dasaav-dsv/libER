@@ -10,14 +10,14 @@ struct MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST {
      *
      * Minimum height that can be built in the grid [m]. (LOD 2 units)
      */
-    float GridEnableCreateHeightMin{ -99999 };
+    float GridEnableCreateHeightMin{ -99999.f };
 
     /**
      * @brief Grid can be constructed Height Max [m]
      *
      * Maximum height that can be constructed in the grid [m]. (LOD 2 units)
      */
-    float GridEnableCreateHeightMax{ 99999 };
+    float GridEnableCreateHeightMax{ 99999.f };
 
     unsigned char Reserve[24];
 };

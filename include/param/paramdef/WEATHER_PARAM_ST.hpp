@@ -42,7 +42,7 @@ struct WEATHER_PARAM_ST {
      * m00_00_0000_WeatherBase reaches 1.0) -1: No wetness
      * (m00_00_0000_WeatherBase remains 0.0)
      */
-    float WetTime{ -1 };
+    float WetTime{ -1.f };
 
     /**
      * @brief GparamId for weather
@@ -122,14 +122,14 @@ struct WEATHER_PARAM_ST {
     /**
      * @brief AI field of view magnification
      */
-    float aiSightRate{ 1 };
+    float aiSightRate{ 1.f };
 
     /**
      * @brief Overwrite weight value in the distance camera
      *
      * Overwrite weight value in distant view camera (SEQ16724)
      */
-    float DistViewWeatherGparamOverrideWeight{ -1 };
+    float DistViewWeatherGparamOverrideWeight{ -1.f };
 };
 
 }; // namespace paramdef

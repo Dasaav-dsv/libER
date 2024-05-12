@@ -11,7 +11,7 @@ struct CS_LIGHTING_QUALITY_DETAIL {
      * Local light effective distance coefficient (smaller, it disappears at a
      * short distance)
      */
-    float localLightDistFactor{ 0.75 };
+    float localLightDistFactor{ 0.75f };
 
     /**
      * @brief Local light shadow enabled

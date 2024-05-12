@@ -64,7 +64,7 @@ struct SOUND_CUTSCENE_PARAM_ST {
      * @brief Cutscene drawing time to unmute immediately after entering
      * [seconds] (less than 0: not canceled in drawing time)
      */
-    float EnterMapMuteStopTimeOnDrawCutscene{ -1 };
+    float EnterMapMuteStopTimeOnDrawCutscene{ -1.f };
 
     unsigned char reserved[12];
 };

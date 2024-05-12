@@ -26,42 +26,42 @@ struct MENU_PARAM_COLOR_TABLE_ST {
      *
      * Saturation 1. Treated as the first point of interpolation
      */
-    float s1{ 1 };
+    float s1{ 1.f };
 
     /**
      * @brief brightness
      *
      * Brightness 1. Treated as the first point of interpolation
      */
-    float v1{ 1 };
+    float v1{ 1.f };
 
     /**
      * @brief saturation
      *
      * Saturation 2. Treated as the second point of interpolation
      */
-    float s2{ 1 };
+    float s2{ 1.f };
 
     /**
      * @brief brightness
      *
      * Brightness 2. Treated as the second point of interpolation
      */
-    float v2{ 1 };
+    float v2{ 1.f };
 
     /**
      * @brief saturation
      *
      * Saturation 3. Treated as the third point of interpolation
      */
-    float s3{ 1 };
+    float s3{ 1.f };
 
     /**
      * @brief brightness
      *
      * Brightness 3. Treated as the third point of interpolation
      */
-    float v3{ 1 };
+    float v3{ 1.f };
 };
 
 }; // namespace paramdef

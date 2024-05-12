@@ -34,33 +34,33 @@ struct ENEMY_STANDARD_INFO_BANK {
      *
      * Height per (Please specify a size larger than the diameter)
      */
-    float HitHeight{ 2 };
+    float HitHeight{ 2.f };
 
     /**
      * @brief Radius around [m]
      *
      * Radius around
      */
-    float HitRadius{ 0.4 };
+    float HitRadius{ 0.4f };
 
     /**
      * @brief Weight [kg]
      *
      * The weight of the character
      */
-    float Weight{ 60 };
+    float Weight{ 60.f };
 
     /**
      * @brief Dynamic friction force
      */
-    float DynamicFriction{ 0 };
+    float DynamicFriction{ 0.f };
 
     /**
      * @brief Static friction
      *
      * Static friction force
      */
-    float StaticFriction{ 0 };
+    float StaticFriction{ 0.f };
 
     /**
      * @brief Upper body initial state
@@ -81,7 +81,7 @@ struct ENEMY_STANDARD_INFO_BANK {
      *
      * Y-axis turning angle per unit time [deg / s]
      */
-    float RotY_per_Second{ 10 };
+    float RotY_per_Second{ 10.f };
 
     unsigned char reserve0[20];
 

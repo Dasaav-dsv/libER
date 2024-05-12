@@ -140,7 +140,7 @@ struct OBJ_ACT_PARAM_ST {
      * activation of the treasure. A setting exclusively for the object type
      * "treasure box" of the object act.
      */
-    float enableTreasureDelaySec{ 0 };
+    float enableTreasureDelaySec{ 0.f };
 
     /**
      * @brief Damipoly ID for SFX before execution

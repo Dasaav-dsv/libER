@@ -11,7 +11,7 @@ struct HIT_MTRL_PARAM_ST {
      * Normal when 1x. When set to 0, the radius of sound becomes 0 (SE and SFX
      * are unrelated game-like parameters).
      */
-    float aiVolumeRate{ 1 };
+    float aiVolumeRate{ 1.f };
 
     /**
      * @brief Special effect 0 applied when stepping on hit material

@@ -65,7 +65,7 @@ struct BUDDY_PARAM_ST {
      * Sets the distance in meters to offset the buddy from the summon point to
      * the X coordinate
      */
-    float x_offset{ 0 };
+    float x_offset{ 0.f };
 
     /**
      * @brief Z: Placement coordinate offset [m]
@@ -73,14 +73,14 @@ struct BUDDY_PARAM_ST {
      * Sets the distance in meters that offsets the buddy from the summon point
      * to the Z coordinate.
      */
-    float z_offset{ 0 };
+    float z_offset{ 0.f };
 
     /**
      * @brief Y: Your placement angle [deg]
      *
      * Set the angle to rotate yourself around the Y axis
      */
-    float y_angle{ 0 };
+    float y_angle{ 0.f };
 
     /**
      * @brief Will it emerge from around the stone monument?

@@ -10,40 +10,40 @@ struct ATK_PARAM_ST {
      *
      * Sphere, capsule radius
      */
-    float hit0_Radius{ 0 };
+    float hit0_Radius{ 0.f };
 
     /**
      * @brief 1 radius per
      *
      * Sphere, capsule radius
      */
-    float hit1_Radius{ 0 };
+    float hit1_Radius{ 0.f };
 
     /**
      * @brief 2 radii per
      *
      * Sphere, capsule radius
      */
-    float hit2_Radius{ 0 };
+    float hit2_Radius{ 0.f };
 
     /**
      * @brief 3 radii per
      *
      * Sphere, capsule radius
      */
-    float hit3_Radius{ 0 };
+    float hit3_Radius{ 0.f };
 
     /**
      * @brief Knockback distance [m]
      */
-    float knockbackDist{ 0 };
+    float knockbackDist{ 0.f };
 
     /**
      * @brief Hit stop time [s]
      *
      * Hit stop stop time [s]
      */
-    float hitStopTime{ 0 };
+    float hitStopTime{ 0.f };
 
     /**
      * @brief Special effects 0
@@ -579,7 +579,7 @@ struct ATK_PARAM_ST {
      *
      * NPCs only. Value used for SA break calculation formula
      */
-    float atkSuperArmor{ 0 };
+    float atkSuperArmor{ 0.f };
 
     /**
      * @brief Decal ID 1 (directly specified)
@@ -807,84 +807,84 @@ struct ATK_PARAM_ST {
      *
      * Sphere, capsule radius
      */
-    float hit4_Radius{ 0 };
+    float hit4_Radius{ 0.f };
 
     /**
      * @brief 5 radii per
      *
      * Sphere, capsule radius
      */
-    float hit5_Radius{ 0 };
+    float hit5_Radius{ 0.f };
 
     /**
      * @brief 6 radii per
      *
      * Sphere, capsule radius
      */
-    float hit6_Radius{ 0 };
+    float hit6_Radius{ 0.f };
 
     /**
      * @brief 7 radii per
      *
      * Sphere, capsule radius
      */
-    float hit7_Radius{ 0 };
+    float hit7_Radius{ 0.f };
 
     /**
      * @brief 8 radii per
      *
      * Sphere, capsule radius
      */
-    float hit8_Radius{ 0 };
+    float hit8_Radius{ 0.f };
 
     /**
      * @brief 9 radii per
      *
      * Sphere, capsule radius
      */
-    float hit9_Radius{ 0 };
+    float hit9_Radius{ 0.f };
 
     /**
      * @brief 10 radii per
      *
      * Sphere, capsule radius
      */
-    float hit10_Radius{ 0 };
+    float hit10_Radius{ 0.f };
 
     /**
      * @brief 11 radii per
      *
      * Sphere, capsule radius
      */
-    float hit11_Radius{ 0 };
+    float hit11_Radius{ 0.f };
 
     /**
      * @brief 12 radii per
      *
      * Sphere, capsule radius
      */
-    float hit12_Radius{ 0 };
+    float hit12_Radius{ 0.f };
 
     /**
      * @brief 13 radii per
      *
      * Sphere, capsule radius
      */
-    float hit13_Radius{ 0 };
+    float hit13_Radius{ 0.f };
 
     /**
      * @brief 14 radii per
      *
      * Sphere, capsule radius
      */
-    float hit14_Radius{ 0 };
+    float hit14_Radius{ 0.f };
 
     /**
      * @brief 15 radii per
      *
      * Sphere, capsule radius
      */
-    float hit15_Radius{ 0 };
+    float hit15_Radius{ 0.f };
 
     /**
      * @brief 4 per Damipoli 1
@@ -1414,12 +1414,12 @@ struct ATK_PARAM_ST {
     /**
      * @brief Regainable time correction factor
      */
-    float regainableTimeScale{ 1 };
+    float regainableTimeScale{ 1.f };
 
     /**
      * @brief Regainable rate correction factor
      */
-    float regainableHpRateScale{ 1 };
+    float regainableHpRateScale{ 1.f };
 
     /**
      * @brief Same attack judgment ID
@@ -1447,7 +1447,7 @@ struct ATK_PARAM_ST {
      * PC only. Correction value to be applied to the [basic value] set for the
      * weapon
      */
-    float atkSuperArmorCorrection{ 0 };
+    float atkSuperArmorCorrection{ 0.f };
 
     /**
      * @brief Defensive material variation value

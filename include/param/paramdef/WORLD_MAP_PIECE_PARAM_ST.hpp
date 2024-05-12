@@ -34,28 +34,28 @@ struct WORLD_MAP_PIECE_PARAM_ST {
      *
      * Coordinates of the traversal area that expands when opened (Xmin)
      */
-    float openTravelAreaLeft{ 0 };
+    float openTravelAreaLeft{ 0.f };
 
     /**
      * @brief Opened traversal area: Xmax
      *
      * Coordinates of the traversal area that expands when opened (Xmax)
      */
-    float openTravelAreaRight{ 0 };
+    float openTravelAreaRight{ 0.f };
 
     /**
      * @brief Opened traversal area: Ymin
      *
      * Coordinates of the traversal area that expands when opened (Ymin)
      */
-    float openTravelAreaTop{ 0 };
+    float openTravelAreaTop{ 0.f };
 
     /**
      * @brief Opened traversal area: Ymax
      *
      * Coordinates of the traversal area that expands when opened (Ymax)
      */
-    float openTravelAreaBottom{ 0 };
+    float openTravelAreaBottom{ 0.f };
 
     /**
      * @brief Acquisition production event flag ID
@@ -70,28 +70,28 @@ struct WORLD_MAP_PIECE_PARAM_ST {
      *
      * Display magnification at the time of acquisition production
      */
-    float acquisitionEventScale{ 1 };
+    float acquisitionEventScale{ 1.f };
 
     /**
      * @brief Obtained production: Center coordinates X
      *
      * Center coordinates (X) at the time of acquisition production
      */
-    float acquisitionEventCenterX{ 0 };
+    float acquisitionEventCenterX{ 0.f };
 
     /**
      * @brief Obtained production: Center coordinates Y
      *
      * For the central seat at the time of acquisition production (Y)
      */
-    float acquisitionEventCenterY{ 0 };
+    float acquisitionEventCenterY{ 0.f };
 
     /**
      * @brief Acquisition effect: Resource multiplier
      *
      * Display magnification of blindfold resources for acquisition production
      */
-    float acquisitionEventResScale{ 1 };
+    float acquisitionEventResScale{ 1.f };
 
     /**
      * @brief Acquisition effect: Resource offset X
@@ -99,7 +99,7 @@ struct WORLD_MAP_PIECE_PARAM_ST {
      * Display position offset (X) of blindfold resource for acquisition
      * production
      */
-    float acquisitionEventResOffsetX{ 0 };
+    float acquisitionEventResOffsetX{ 0.f };
 
     /**
      * @brief Acquisition effect: Resource offset Y
@@ -107,7 +107,7 @@ struct WORLD_MAP_PIECE_PARAM_ST {
      * Offset of display position of blindfold resource for acquisition
      * production (Y)
      */
-    float acquisitionEventResOffsetY{ 0 };
+    float acquisitionEventResOffsetY{ 0.f };
 
     unsigned char pad[12];
 };

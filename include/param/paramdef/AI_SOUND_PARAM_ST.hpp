@@ -10,14 +10,14 @@ struct AI_SOUND_PARAM_ST {
      *
      * AI sound radius
      */
-    float radius{ 0 };
+    float radius{ 0.f };
 
     /**
      * @brief Extinction time [seconds]
      *
      * Time for AI sound to remain
      */
-    float lifeFrame{ 0 };
+    float lifeFrame{ 0.f };
 
     /**
      * @brief Is it affected by special effects?
@@ -63,7 +63,7 @@ struct AI_SOUND_PARAM_ST {
     /**
      * @brief Time to forget the sound target (overwrite) [sec]
      */
-    float forgetTime{ -1 };
+    float forgetTime{ -1.f };
 
     /**
      * @brief AI sound priority

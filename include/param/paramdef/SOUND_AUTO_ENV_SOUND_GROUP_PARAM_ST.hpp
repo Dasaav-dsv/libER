@@ -17,7 +17,7 @@ struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
      *
      * Extended distance of playback judgment area
      */
-    float ExpandRange{ 100 };
+    float ExpandRange{ 100.f };
 
     /**
      * @brief Sound source tracking speed
@@ -25,7 +25,7 @@ struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
      * Follow-up speed (fixed speed) to the target position of the actual sound
      * source
      */
-    float FollowSpeed{ 0.1 };
+    float FollowSpeed{ 0.1f };
 
     /**
      * @brief Sound source follow-up rate
@@ -33,7 +33,7 @@ struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
      * Follow-up speed (difference ratio) to the target position of the actual
      * sound source
      */
-    float FollowRate{ 0.015 };
+    float FollowRate{ 0.015f };
 };
 
 }; // namespace paramdef

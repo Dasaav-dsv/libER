@@ -33,7 +33,7 @@ struct WET_ASPECT_PARAM_ST {
      *
      * Base color override rate.
      */
-    float baseColorA{ 0 };
+    float baseColorA{ 0.f };
 
     /**
      * @brief Metallic value
@@ -53,14 +53,14 @@ struct WET_ASPECT_PARAM_ST {
      *
      * Metallic override rate.
      */
-    float metallicRate{ 0 };
+    float metallicRate{ 0.f };
 
     /**
      * @brief Shininess%
      *
      * Shininess override rate.
      */
-    float shininessRate{ 0 };
+    float shininessRate{ 0.f };
 
     /**
      * @brief Shininess value

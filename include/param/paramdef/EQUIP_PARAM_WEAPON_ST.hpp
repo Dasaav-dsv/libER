@@ -50,12 +50,12 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Weight [kg].
      */
-    float weight{ 1 };
+    float weight{ 1.f };
 
     /**
      * @brief Equipment weight ratio
      */
-    float weaponWeightRate{ 0 };
+    float weaponWeightRate{ 0.f };
 
     /**
      * @brief Repair price
@@ -81,56 +81,56 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Charapara correction value.
      */
-    float correctStrength{ 0 };
+    float correctStrength{ 0.f };
 
     /**
      * @brief Agility correction
      *
      * Charapara correction value.
      */
-    float correctAgility{ 0 };
+    float correctAgility{ 0.f };
 
     /**
      * @brief Magic correction
      *
      * Charapara correction value.
      */
-    float correctMagic{ 0 };
+    float correctMagic{ 0.f };
 
     /**
      * @brief Faith correction
      *
      * Charapara correction value.
      */
-    float correctFaith{ 0 };
+    float correctFaith{ 0.f };
 
     /**
      * @brief Physical attack cut rate when guarding
      *
      * Set the damage cut rate when guarding for each attack
      */
-    float physGuardCutRate{ 0 };
+    float physGuardCutRate{ 0.f };
 
     /**
      * @brief Magic attack cut rate when guarding
      *
      * If it is not a guard attack, enter 0
      */
-    float magGuardCutRate{ 0 };
+    float magGuardCutRate{ 0.f };
 
     /**
      * @brief Flame attack power cut rate when guarding
      *
      * How much to cut the fire attack?
      */
-    float fireGuardCutRate{ 0 };
+    float fireGuardCutRate{ 0.f };
 
     /**
      * @brief Electric shock attack power cut rate when guarding
      *
      * How much to cut the electric shock attack?
      */
-    float thunGuardCutRate{ 0 };
+    float thunGuardCutRate{ 0.f };
 
     /**
      * @brief Special effect ID 0 on attack hit
@@ -294,28 +294,28 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Damage multiplier for special attack A
      */
-    float weakA_DamageRate{ 1 };
+    float weakA_DamageRate{ 1.f };
 
     /**
      * @brief Special attack B damage multiplier
      *
      * Damage multiplier for special attack B
      */
-    float weakB_DamageRate{ 1 };
+    float weakB_DamageRate{ 1.f };
 
     /**
      * @brief Special attack C damage multiplier
      *
      * Damage multiplier for special attack C
      */
-    float weakC_DamageRate{ 1 };
+    float weakC_DamageRate{ 1.f };
 
     /**
      * @brief Special attack D damage multiplier
      *
      * Damage multiplier for special attack D
      */
-    float weakD_DamageRate{ 1 };
+    float weakD_DamageRate{ 1.f };
 
     /**
      * @brief Sleep tolerance cut rate_maximum correction value
@@ -323,7 +323,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against sleep
      * (set as special effect parameter)
      */
-    float sleepGuardResist_MaxCorrect{ 0 };
+    float sleepGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Madness resistance cut rate_maximum correction value
@@ -331,14 +331,14 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against
      * madness (set as special effect parameter)
      */
-    float madnessGuardResist_MaxCorrect{ 0 };
+    float madnessGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief SA weapon attack power
      *
      * Super Armor Basic Attack Power
      */
-    float saWeaponDamage{ 0 };
+    float saWeaponDamage{ 0.f };
 
     /**
      * @brief Equipment model number
@@ -431,7 +431,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Additional SA durability used during attack motion
      */
-    float saDurability{ 0 };
+    float saDurability{ 0.f };
 
     /**
      * @brief Stamina defense when guarding
@@ -1146,7 +1146,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * It is a magnification that corrects the basic value of toughness.
      */
-    float toughnessCorrectRate{ 0 };
+    float toughnessCorrectRate{ 0.f };
 
     /**
      * @brief Is the armor SA damage multiplier valid even at the initial value?
@@ -1214,21 +1214,21 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Damage multiplier for special attack E
      */
-    float weakE_DamageRate{ 1 };
+    float weakE_DamageRate{ 1.f };
 
     /**
      * @brief Special attack F damage multiplier
      *
      * Damage multiplier for special attack F
      */
-    float weakF_DamageRate{ 1 };
+    float weakF_DamageRate{ 1.f };
 
     /**
      * @brief Dark attack power cut rate when guarding
      *
      * How much to cut the dark attack?
      */
-    float darkGuardCutRate{ 0 };
+    float darkGuardCutRate{ 0.f };
 
     /**
      * @brief Dark attack power basic value
@@ -1322,7 +1322,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Charapara correction value.
      */
-    float correctLuck{ 0 };
+    float correctLuck{ 0.f };
 
     /**
      * @brief Equipment ID for quiver (magazine) display model
@@ -1361,21 +1361,21 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Maximum damage physical cut rate correction value when guarding
      */
-    float physGuardCutRate_MaxCorrect{ 0 };
+    float physGuardCutRate_MaxCorrect{ 0.f };
 
     /**
      * @brief Magic attack cut rate when guarding_maximum correction value
      *
      * Maximum value of correction value of damage magic cut rate when guarding
      */
-    float magGuardCutRate_MaxCorrect{ 0 };
+    float magGuardCutRate_MaxCorrect{ 0.f };
 
     /**
      * @brief Flame attack power cut rate when guarding_maximum correction value
      *
      * Maximum value of correction value of damage flame cut rate when guarding
      */
-    float fireGuardCutRate_MaxCorrect{ 0 };
+    float fireGuardCutRate_MaxCorrect{ 0.f };
 
     /**
      * @brief Electric shock attack power cut rate when guarding_maximum
@@ -1384,7 +1384,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of correction value of damage electric shock cut rate when
      * guarding
      */
-    float thunGuardCutRate_MaxCorrect{ 0 };
+    float thunGuardCutRate_MaxCorrect{ 0.f };
 
     /**
      * @brief Darkness attack power cut rate when guarding_maximum correction
@@ -1393,7 +1393,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of correction value of damage darkness cut rate when
      * guarding
      */
-    float darkGuardCutRate_MaxCorrect{ 0 };
+    float darkGuardCutRate_MaxCorrect{ 0.f };
 
     /**
      * @brief Poison resistance cut rate_maximum correction value
@@ -1401,7 +1401,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against
      * poison (set as special effect parameter)
      */
-    float poisonGuardResist_MaxCorrect{ 0 };
+    float poisonGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Epidemic resistance cut rate_maximum correction value
@@ -1409,7 +1409,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against
      * plague (set as special effect parameter)
      */
-    float diseaseGuardResist_MaxCorrect{ 0 };
+    float diseaseGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Bleeding resistance cut rate_maximum correction value
@@ -1417,7 +1417,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against
      * bleeding (set as special effect parameter)
      */
-    float bloodGuardResist_MaxCorrect{ 0 };
+    float bloodGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Curse resistance cut rate_maximum correction value
@@ -1425,7 +1425,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against curse
      * (set as special effect parameter)
      */
-    float curseGuardResist_MaxCorrect{ 0 };
+    float curseGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Cold resistance cut rate_maximum correction value
@@ -1433,7 +1433,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * Maximum value of cut rate correction value for attack power against cold
      * air (set as special effect parameter)
      */
-    float freezeGuardResist_MaxCorrect{ 0 };
+    float freezeGuardResist_MaxCorrect{ 0.f };
 
     /**
      * @brief Stamina defense when guarding_maximum correction value
@@ -1441,7 +1441,7 @@ struct EQUIP_PARAM_WEAPON_ST {
      * When the guard is successful, the maximum value of the defense power
      * correction value against the enemy's stamina attack
      */
-    float staminaGuardDef_MaxCorrect{ 0 };
+    float staminaGuardDef_MaxCorrect{ 0.f };
 
     /**
      * @brief Resident SfxId1
@@ -1486,63 +1486,63 @@ struct EQUIP_PARAM_WEAPON_ST {
     /**
      * @brief Stamina consumption ratio
      */
-    float staminaConsumptionRate{ 1 };
+    float staminaConsumptionRate{ 1.f };
 
     /**
      * @brief Physical damage correction factor against player
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Physics{ 1 };
+    float vsPlayerDmgCorrectRate_Physics{ 1.f };
 
     /**
      * @brief Anti-player magic damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Magic{ 1 };
+    float vsPlayerDmgCorrectRate_Magic{ 1.f };
 
     /**
      * @brief Anti-player flame damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Fire{ 1 };
+    float vsPlayerDmgCorrectRate_Fire{ 1.f };
 
     /**
      * @brief Anti-player lightning damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Thunder{ 1 };
+    float vsPlayerDmgCorrectRate_Thunder{ 1.f };
 
     /**
      * @brief Against player darkness damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Dark{ 1 };
+    float vsPlayerDmgCorrectRate_Dark{ 1.f };
 
     /**
      * @brief Anti-player poison damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Poison{ 1 };
+    float vsPlayerDmgCorrectRate_Poison{ 1.f };
 
     /**
      * @brief Anti-player bleeding damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Blood{ 1 };
+    float vsPlayerDmgCorrectRate_Blood{ 1.f };
 
     /**
      * @brief Anti-player cold damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Freeze{ 1 };
+    float vsPlayerDmgCorrectRate_Freeze{ 1.f };
 
     /**
      * @brief Weapon ability release status value: Strength
@@ -1819,21 +1819,21 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Sleep{ 1 };
+    float vsPlayerDmgCorrectRate_Sleep{ 1.f };
 
     /**
      * @brief Anti-player mad damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Madness{ 1 };
+    float vsPlayerDmgCorrectRate_Madness{ 1.f };
 
     /**
      * @brief SA attack cut rate when guarding
      *
      * SA damage cut rate when guard is successful
      */
-    float saGuardCutRate{ 0 };
+    float saGuardCutRate{ 0.f };
 
     /**
      * @brief Defensive material variation value
@@ -1861,14 +1861,14 @@ struct EQUIP_PARAM_WEAPON_ST {
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Disease{ 1 };
+    float vsPlayerDmgCorrectRate_Disease{ 1.f };
 
     /**
      * @brief Anti-player curse damage correction factor
      *
      * Only attacks on the player will correct the damage done.
      */
-    float vsPlayerDmgCorrectRate_Curse{ 1 };
+    float vsPlayerDmgCorrectRate_Curse{ 1.f };
 
     unsigned char pad[8];
 };

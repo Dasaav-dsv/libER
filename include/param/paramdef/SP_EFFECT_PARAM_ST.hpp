@@ -17,42 +17,42 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Set what percentage of maxHP the remaining HP will be activated
      */
-    float conditionHp{ -1 };
+    float conditionHp{ -1.f };
 
     /**
      * @brief Effect duration time [s]
      *
      * Change duration / -1 for permanent / 0 for one moment only
      */
-    float effectEndurance{ 0 };
+    float effectEndurance{ 0.f };
 
     /**
      * @brief Activation interval [s]
      *
      * Set how many seconds it occurs
      */
-    float motionInterval{ 0 };
+    float motionInterval{ 0.f };
 
     /**
      * @brief Maximum HP magnification [%]
      *
      * Correct the maximum HP
      */
-    float maxHpRate{ 1 };
+    float maxHpRate{ 1.f };
 
     /**
      * @brief Maximum MP magnification [%]
      *
      * Correct the maximum MP
      */
-    float maxMpRate{ 1 };
+    float maxMpRate{ 1.f };
 
     /**
      * @brief Maximum stamina magnification [%]
      *
      * Correct the maximum SP
      */
-    float maxStaminaRate{ 1 };
+    float maxStaminaRate{ 1.f };
 
     /**
      * @brief Defender: Slash damage multiplier
@@ -60,7 +60,7 @@ struct SP_EFFECT_PARAM_ST {
      * Slash damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float slashDamageCutRate{ 1 };
+    float slashDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Batter damage multiplier
@@ -68,7 +68,7 @@ struct SP_EFFECT_PARAM_ST {
      * Batter damage ratio: The calculated damage is corrected by XX times. 1 is
      * normal.
      */
-    float blowDamageCutRate{ 1 };
+    float blowDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Puncture damage multiplier
@@ -76,7 +76,7 @@ struct SP_EFFECT_PARAM_ST {
      * Puncture damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float thrustDamageCutRate{ 1 };
+    float thrustDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Non-attribute damage multiplier
@@ -84,7 +84,7 @@ struct SP_EFFECT_PARAM_ST {
      * Non-attribute damage ratio: Correct the calculated damage by XX times. 1
      * is normal.
      */
-    float neutralDamageCutRate{ 1 };
+    float neutralDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Magic damage multiplier
@@ -92,7 +92,7 @@ struct SP_EFFECT_PARAM_ST {
      * Magic damage multiplier: The calculated damage is corrected by XX times.
      * 1 is normal.
      */
-    float magicDamageCutRate{ 1 };
+    float magicDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Fire damage multiplier
@@ -100,7 +100,7 @@ struct SP_EFFECT_PARAM_ST {
      * Flame damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float fireDamageCutRate{ 1 };
+    float fireDamageCutRate{ 1.f };
 
     /**
      * @brief Defender: Electric shock damage multiplier
@@ -108,7 +108,7 @@ struct SP_EFFECT_PARAM_ST {
      * Electric shock damage ratio: Correct the calculated damage by XX times. 1
      * is normal.
      */
-    float thunderDamageCutRate{ 1 };
+    float thunderDamageCutRate{ 1.f };
 
     /**
      * @brief Attacker: Physical damage multiplier
@@ -116,7 +116,7 @@ struct SP_EFFECT_PARAM_ST {
      * Physical damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float physicsAttackRate{ 1 };
+    float physicsAttackRate{ 1.f };
 
     /**
      * @brief Attacker: Magic damage multiplier
@@ -124,7 +124,7 @@ struct SP_EFFECT_PARAM_ST {
      * Magic damage multiplier: The calculated damage is corrected by XX times.
      * 1 is normal.
      */
-    float magicAttackRate{ 1 };
+    float magicAttackRate{ 1.f };
 
     /**
      * @brief Attacker: Fire damage multiplier
@@ -132,7 +132,7 @@ struct SP_EFFECT_PARAM_ST {
      * Flame damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float fireAttackRate{ 1 };
+    float fireAttackRate{ 1.f };
 
     /**
      * @brief Attack side: Electric shock damage ratio
@@ -140,35 +140,35 @@ struct SP_EFFECT_PARAM_ST {
      * Electric shock damage ratio: Correct the calculated damage by XX times. 1
      * is normal.
      */
-    float thunderAttackRate{ 1 };
+    float thunderAttackRate{ 1.f };
 
     /**
      * @brief Physical attack power multiplier
      *
      * Multiply the physical attack power by the set value
      */
-    float physicsAttackPowerRate{ 1 };
+    float physicsAttackPowerRate{ 1.f };
 
     /**
      * @brief Magic attack power multiplier
      *
      * Multiply the magic attack power by the set value
      */
-    float magicAttackPowerRate{ 1 };
+    float magicAttackPowerRate{ 1.f };
 
     /**
      * @brief Fire attack power multiplier
      *
      * Multiply the fire attack power by the set value
      */
-    float fireAttackPowerRate{ 1 };
+    float fireAttackPowerRate{ 1.f };
 
     /**
      * @brief Electric shock attack power multiplier
      *
      * Multiply the electric shock attack power by the set value
      */
-    float thunderAttackPowerRate{ 1 };
+    float thunderAttackPowerRate{ 1.f };
 
     /**
      * @brief Physical attack power [point]
@@ -203,28 +203,28 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Multiply the set value for physical defense
      */
-    float physicsDiffenceRate{ 1 };
+    float physicsDiffenceRate{ 1.f };
 
     /**
      * @brief Magic defense multiplier
      *
      * Multiply the value set for magic defense
      */
-    float magicDiffenceRate{ 1 };
+    float magicDiffenceRate{ 1.f };
 
     /**
      * @brief Fire defense multiplier
      *
      * Multiply the fire defense by the set value
      */
-    float fireDiffenceRate{ 1 };
+    float fireDiffenceRate{ 1.f };
 
     /**
      * @brief Electric shock defense power multiplier
      *
      * Multiply the value set for the electric shock defense
      */
-    float thunderDiffenceRate{ 1 };
+    float thunderDiffenceRate{ 1.f };
 
     /**
      * @brief Physical defense [point]
@@ -260,7 +260,7 @@ struct SP_EFFECT_PARAM_ST {
      * Replace the damage ratio at the time of the gap with the set value (set
      * on the damage side)
      */
-    float NoGuardDamageRate{ 1 };
+    float NoGuardDamageRate{ 1.f };
 
     /**
      * @brief Sweet spot magnification
@@ -268,7 +268,7 @@ struct SP_EFFECT_PARAM_ST {
      * Replaces the damage calculation of the sweet spot with the specified
      * value (key point damage correction) -Invalid at 1.0
      */
-    float vitalSpotChangeRate{ -1 };
+    float vitalSpotChangeRate{ -1.f };
 
     /**
      * @brief Normal hit magnification
@@ -276,7 +276,7 @@ struct SP_EFFECT_PARAM_ST {
      * Replaces normal hit damage calculation with the specified number -Invalid
      * at 1.0
      */
-    float normalSpotChangeRate{ -1 };
+    float normalSpotChangeRate{ -1.f };
 
     /**
      * @brief LookAt Position Offset [m]
@@ -284,7 +284,7 @@ struct SP_EFFECT_PARAM_ST {
      * Offset the target position when the enemy looks at. Set to crouch or
      * mount on the side to be seen
      */
-    float lookAtTargetPosOffset{ 0 };
+    float lookAtTargetPosOffset{ 0.f };
 
     /**
      * @brief Action ID designation frame
@@ -299,7 +299,7 @@ struct SP_EFFECT_PARAM_ST {
      * Set what percentage of the maximum HP to subtract (or add) with one
      * activation
      */
-    float changeHpRate{ 0 };
+    float changeHpRate{ 0.f };
 
     /**
      * @brief HP damage [point]
@@ -314,7 +314,7 @@ struct SP_EFFECT_PARAM_ST {
      * Set what percentage of the maximum MP to subtract (or add) with one
      * activation
      */
-    float changeMpRate{ 0 };
+    float changeMpRate{ 0.f };
 
     /**
      * @brief MP damage [point]
@@ -337,7 +337,7 @@ struct SP_EFFECT_PARAM_ST {
      * Set what percentage of the maximum stamina to subtract (or add) with one
      * activation
      */
-    float changeStaminaRate{ 0 };
+    float changeStaminaRate{ 0.f };
 
     /**
      * @brief Stamina damage [point]
@@ -360,7 +360,7 @@ struct SP_EFFECT_PARAM_ST {
      * Add / subtract the time set for the effect duration only for magic that
      * has the effect duration set to 0.1 seconds or more.
      */
-    float magicEffectTimeChange{ 0 };
+    float magicEffectTimeChange{ 0.f };
 
     /**
      * @brief Durability change: Internal wear [point]
@@ -382,7 +382,7 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Multiply the stamina attack power by a factor (1.0 1 times 0.5 half)
      */
-    float staminaAttackRate{ 1 };
+    float staminaAttackRate{ 1.f };
 
     /**
      * @brief Poison resistance attack power [point]
@@ -420,7 +420,7 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Multiply the damage calculation when falling
      */
-    float fallDamageRate{ 0 };
+    float fallDamageRate{ 0.f };
 
     /**
      * @brief Get Soul Magnification
@@ -428,21 +428,21 @@ struct SP_EFFECT_PARAM_ST {
      * The amount of soul acquired when defeating an enemy is added by the
      * specified multiple.
      */
-    float soulRate{ 0 };
+    float soulRate{ 0.f };
 
     /**
      * @brief Equipment weight change rate
      *
      * Multiply the maximum equipment weight by the set magnification
      */
-    float equipWeightChangeRate{ 0 };
+    float equipWeightChangeRate{ 0.f };
 
     /**
      * @brief Possession weight change rate
      *
      * Multiply the maximum weight you have by the set magnification
      */
-    float allItemWeightChangeRate{ 0 };
+    float allItemWeightChangeRate{ 0.f };
 
     /**
      * @brief Soul addition
@@ -462,7 +462,7 @@ struct SP_EFFECT_PARAM_ST {
      * For enemy lap effect. It is applied when the soul goes out from the set
      * character.
      */
-    float haveSoulRate{ 1 };
+    float haveSoulRate{ 1.f };
 
     /**
      * @brief Target priority addition
@@ -471,73 +471,73 @@ struct SP_EFFECT_PARAM_ST {
      * target. Addition of priority. 0 is the default. It will be often targeted
      * with a positive value. Minus is up to -1.
      */
-    float targetPriority{ 0 };
+    float targetPriority{ 0.f };
 
     /**
      * @brief Those who can see: Visual magnification
      *
      * Correct the ease of finding by a magnification
      */
-    float sightSearchEnemyRate{ 1 };
+    float sightSearchEnemyRate{ 1.f };
 
     /**
      * @brief Who can hear: AI sound radius magnification
      *
      * Correct the loudness of the AI sound emitted by the magnification
      */
-    float hearingSearchEnemyRate{ 1 };
+    float hearingSearchEnemyRate{ 1.f };
 
     /**
      * @brief Gravity rate
      */
-    float grabityRate{ 1 };
+    float grabityRate{ 1.f };
 
     /**
      * @brief Poison resistance change rate
      *
      * Multiply the poison resistance value by the set multiplier
      */
-    float registPoizonChangeRate{ 1 };
+    float registPoizonChangeRate{ 1.f };
 
     /**
      * @brief Epidemic resistance change rate
      *
      * Multiply the plague resistance value by the set magnification
      */
-    float registDiseaseChangeRate{ 1 };
+    float registDiseaseChangeRate{ 1.f };
 
     /**
      * @brief Bleeding resistance change rate
      *
      * Multiply the bleeding resistance value by the set magnification
      */
-    float registBloodChangeRate{ 1 };
+    float registBloodChangeRate{ 1.f };
 
     /**
      * @brief Curse resistance change rate
      *
      * Multiply the spell resistance value by the set multiplier
      */
-    float registCurseChangeRate{ 1 };
+    float registCurseChangeRate{ 1.f };
 
     /**
      * @brief Soul Steel Coefficient
      *
      * Defense against HP robbed by NPCs in Soul Steel
      */
-    float soulStealRate{ 0 };
+    float soulStealRate{ 0.f };
 
     /**
      * @brief Defense: Life factor
      */
-    float lifeReductionRate{ 0 };
+    float lifeReductionRate{ 0.f };
 
     /**
      * @brief HP recovery coefficient
      *
      * It doesn't work when HP decreases.
      */
-    float hpRecoverRate{ 0 };
+    float hpRecoverRate{ 0.f };
 
     /**
      * @brief Special effects to replace
@@ -565,14 +565,14 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Repellent defense correction value when guarding
      */
-    float guardDefFlickPowerRate{ 1 };
+    float guardDefFlickPowerRate{ 1.f };
 
     /**
      * @brief Stamina cut magnification when guarding
      *
      * Stamina cut rate correction value when guarding
      */
-    float guardStaminaCutRate{ 1 };
+    float guardStaminaCutRate{ 1.f };
 
     /**
      * @brief Passing the line of sight: Activation time [ms]
@@ -1236,7 +1236,7 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Correct the ease of finding with a magnification
      */
-    float sightSearchRate{ 1 };
+    float sightSearchRate{ 1.f };
 
     /**
      * @brief Effect target: ● Hostile
@@ -1462,49 +1462,49 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Toughness version cut rate
      */
-    float toughnessDamageCutRate{ 1 };
+    float toughnessDamageCutRate{ 1.f };
 
     /**
      * @brief Special attack A damage multiplier correction
      *
      * Special Attack A Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateA{ 1 };
+    float weakDmgRateA{ 1.f };
 
     /**
      * @brief Special attack B damage multiplier correction
      *
      * Special attack B Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateB{ 1 };
+    float weakDmgRateB{ 1.f };
 
     /**
      * @brief Special attack C damage multiplier correction
      *
      * Special attack C Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateC{ 1 };
+    float weakDmgRateC{ 1.f };
 
     /**
      * @brief Special attack D damage multiplier correction
      *
      * Special attack D Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateD{ 1 };
+    float weakDmgRateD{ 1.f };
 
     /**
      * @brief Special attack E damage multiplier correction
      *
      * Special attack E Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateE{ 1 };
+    float weakDmgRateE{ 1.f };
 
     /**
      * @brief Special attack F damage multiplier correction
      *
      * Special attack F Damage multiplier is corrected. 1 is normal.
      */
-    float weakDmgRateF{ 1 };
+    float weakDmgRateF{ 1.f };
 
     /**
      * @brief Defender: Dark damage multiplier
@@ -1512,14 +1512,14 @@ struct SP_EFFECT_PARAM_ST {
      * Dark damage multiplier: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float darkDamageCutRate{ 1 };
+    float darkDamageCutRate{ 1.f };
 
     /**
      * @brief Dark defense multiplier
      *
      * Multiply the darkness defense by the set value
      */
-    float darkDiffenceRate{ 1 };
+    float darkDiffenceRate{ 1.f };
 
     /**
      * @brief Dark defense [point]
@@ -1534,14 +1534,14 @@ struct SP_EFFECT_PARAM_ST {
      * Dark damage multiplier: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float darkAttackRate{ 1 };
+    float darkAttackRate{ 1.f };
 
     /**
      * @brief Dark attack power multiplier
      *
      * Multiply the dark attack power by the set value
      */
-    float darkAttackPowerRate{ 1 };
+    float darkAttackPowerRate{ 1.f };
 
     /**
      * @brief Dark attack power [point]
@@ -1556,7 +1556,7 @@ struct SP_EFFECT_PARAM_ST {
      * Radius of full view of darkness [m]. If you are within this distance, you
      * will be able to see at normal distance even in the dark.
      */
-    float antiDarkSightRadius{ 0 };
+    float antiDarkSightRadius{ 0.f };
 
     /**
      * @brief Damipoli ID with full view of darkness
@@ -1571,7 +1571,7 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Activates only when you have HP above the specified value
      */
-    float conditionHpRate{ -1 };
+    float conditionHpRate{ -1.f };
 
     /**
      * @brief Consumption stamina magnification
@@ -1579,14 +1579,14 @@ struct SP_EFFECT_PARAM_ST {
      * Multiply by multiplying the consumption stamina value of the behavior
      * parameter
      */
-    float consumeStaminaRate{ 1 };
+    float consumeStaminaRate{ 1.f };
 
     /**
      * @brief Item drop correction
      *
      * The set value is added to [Item Drop Correction]
      */
-    float itemDropRate{ 0 };
+    float itemDropRate{ 0.f };
 
     /**
      * @brief Poison resistance change [point]
@@ -1629,7 +1629,7 @@ struct SP_EFFECT_PARAM_ST {
      * Slash damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float slashAttackRate{ 1 };
+    float slashAttackRate{ 1.f };
 
     /**
      * @brief Attacker: Batter damage multiplier
@@ -1637,7 +1637,7 @@ struct SP_EFFECT_PARAM_ST {
      * Batter damage ratio: The calculated damage is corrected by XX times. 1 is
      * normal.
      */
-    float blowAttackRate{ 1 };
+    float blowAttackRate{ 1.f };
 
     /**
      * @brief Attack side: piercing damage multiplier
@@ -1645,7 +1645,7 @@ struct SP_EFFECT_PARAM_ST {
      * Puncture damage ratio: Correct the calculated damage by XX times. 1 is
      * normal.
      */
-    float thrustAttackRate{ 1 };
+    float thrustAttackRate{ 1.f };
 
     /**
      * @brief Attacker: Non-attribute damage multiplier
@@ -1653,35 +1653,35 @@ struct SP_EFFECT_PARAM_ST {
      * Non-attribute damage ratio: Correct the calculated damage by XX times. 1
      * is normal.
      */
-    float neutralAttackRate{ 1 };
+    float neutralAttackRate{ 1.f };
 
     /**
      * @brief Slash attack power multiplier
      *
      * Multiply the slashing attack power by the set value
      */
-    float slashAttackPowerRate{ 1 };
+    float slashAttackPowerRate{ 1.f };
 
     /**
      * @brief Batter attack power multiplier
      *
      * Multiply the hit attack power by the set value
      */
-    float blowAttackPowerRate{ 1 };
+    float blowAttackPowerRate{ 1.f };
 
     /**
      * @brief Puncture attack power multiplier
      *
      * Multiply the piercing attack power by the set value
      */
-    float thrustAttackPowerRate{ 1 };
+    float thrustAttackPowerRate{ 1.f };
 
     /**
      * @brief Non-attribute attack power multiplier
      *
      * Multiply the non-attribute attack power by the set value
      */
-    float neutralAttackPowerRate{ 1 };
+    float neutralAttackPowerRate{ 1.f };
 
     /**
      * @brief Slash attack power [point]
@@ -1861,161 +1861,161 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Multiplier for SA damage
      */
-    float saReceiveDamageRate{ 1 };
+    float saReceiveDamageRate{ 1.f };
 
     /**
      * @brief Defending player Physical damage compensation factor
      *
      * Damage correction for the damage value received from the player.
      */
-    float defPlayerDmgCorrectRate_Physics{ 1 };
+    float defPlayerDmgCorrectRate_Physics{ 1.f };
 
     /**
      * @brief Defending player magic damage correction multiplier
      *
      * Damage correction for the damage value received from the player.
      */
-    float defPlayerDmgCorrectRate_Magic{ 1 };
+    float defPlayerDmgCorrectRate_Magic{ 1.f };
 
     /**
      * @brief Defending player Fire damage compensation factor
      *
      * Damage correction for the damage value received from the player.
      */
-    float defPlayerDmgCorrectRate_Fire{ 1 };
+    float defPlayerDmgCorrectRate_Fire{ 1.f };
 
     /**
      * @brief Defending player Lightning damage compensation factor
      *
      * Damage correction for the damage value received from the player.
      */
-    float defPlayerDmgCorrectRate_Thunder{ 1 };
+    float defPlayerDmgCorrectRate_Thunder{ 1.f };
 
     /**
      * @brief Defending player Dark damage correction factor
      *
      * Damage correction for the damage value received from the player.
      */
-    float defPlayerDmgCorrectRate_Dark{ 1 };
+    float defPlayerDmgCorrectRate_Dark{ 1.f };
 
     /**
      * @brief Defender Enemy Physical Damage Compensation Magnification
      *
      * Damage correction for the damage value received from the enemy.
      */
-    float defEnemyDmgCorrectRate_Physics{ 1 };
+    float defEnemyDmgCorrectRate_Physics{ 1.f };
 
     /**
      * @brief Defender enemy magic damage correction factor
      *
      * Damage correction for the damage value received from the enemy.
      */
-    float defEnemyDmgCorrectRate_Magic{ 1 };
+    float defEnemyDmgCorrectRate_Magic{ 1.f };
 
     /**
      * @brief Defender enemy flame damage correction factor
      *
      * Damage correction for the damage value received from the enemy.
      */
-    float defEnemyDmgCorrectRate_Fire{ 1 };
+    float defEnemyDmgCorrectRate_Fire{ 1.f };
 
     /**
      * @brief Defender enemy lightning damage correction factor
      *
      * Damage correction for the damage value received from the enemy.
      */
-    float defEnemyDmgCorrectRate_Thunder{ 1 };
+    float defEnemyDmgCorrectRate_Thunder{ 1.f };
 
     /**
      * @brief Defender enemy darkness damage correction factor
      *
      * Damage correction for the damage value received from the enemy.
      */
-    float defEnemyDmgCorrectRate_Dark{ 1 };
+    float defEnemyDmgCorrectRate_Dark{ 1.f };
 
     /**
      * @brief Defender Object Damage Compensation Magnification
      *
      * Damage correction for the damage value received from OBJ.
      */
-    float defObjDmgCorrectRate{ 1 };
+    float defObjDmgCorrectRate{ 1.f };
 
     /**
      * @brief Attacking player Physical damage correction factor
      *
      * Damage correction for the damage value given to the player.
      */
-    float atkPlayerDmgCorrectRate_Physics{ 1 };
+    float atkPlayerDmgCorrectRate_Physics{ 1.f };
 
     /**
      * @brief Attacking player Magic damage compensation factor
      *
      * Damage correction for the damage value given to the player.
      */
-    float atkPlayerDmgCorrectRate_Magic{ 1 };
+    float atkPlayerDmgCorrectRate_Magic{ 1.f };
 
     /**
      * @brief Attacker Player Flame Damage Compensation Multiplier
      *
      * Damage correction for the damage value given to the player.
      */
-    float atkPlayerDmgCorrectRate_Fire{ 1 };
+    float atkPlayerDmgCorrectRate_Fire{ 1.f };
 
     /**
      * @brief Attacking player Lightning damage compensation factor
      *
      * Damage correction for the damage value given to the player.
      */
-    float atkPlayerDmgCorrectRate_Thunder{ 1 };
+    float atkPlayerDmgCorrectRate_Thunder{ 1.f };
 
     /**
      * @brief Attacking player Dark damage correction factor
      *
      * Damage correction for the damage value given to the player.
      */
-    float atkPlayerDmgCorrectRate_Dark{ 1 };
+    float atkPlayerDmgCorrectRate_Dark{ 1.f };
 
     /**
      * @brief Attacker Enemy Physical Damage Compensation Magnification
      *
      * Damage correction for the damage value given to the enemy.
      */
-    float atkEnemyDmgCorrectRate_Physics{ 1 };
+    float atkEnemyDmgCorrectRate_Physics{ 1.f };
 
     /**
      * @brief Attacking side Enemy magic damage correction factor
      *
      * Damage correction for the damage value given to the enemy.
      */
-    float atkEnemyDmgCorrectRate_Magic{ 1 };
+    float atkEnemyDmgCorrectRate_Magic{ 1.f };
 
     /**
      * @brief Attacking side Enemy flame damage correction factor
      *
      * Damage correction for the damage value given to the enemy.
      */
-    float atkEnemyDmgCorrectRate_Fire{ 1 };
+    float atkEnemyDmgCorrectRate_Fire{ 1.f };
 
     /**
      * @brief Attacking side Enemy lightning damage correction factor
      *
      * Damage correction for the damage value given to the enemy.
      */
-    float atkEnemyDmgCorrectRate_Thunder{ 1 };
+    float atkEnemyDmgCorrectRate_Thunder{ 1.f };
 
     /**
      * @brief Attacking side Enemy darkness damage correction factor
      *
      * Damage correction for the damage value given to the enemy.
      */
-    float atkEnemyDmgCorrectRate_Dark{ 1 };
+    float atkEnemyDmgCorrectRate_Dark{ 1.f };
 
     /**
      * @brief Cold resistance change rate
      *
      * Multiply the cold resistance value by the set magnification
      */
-    float registFreezeChangeRate{ 1 };
+    float registFreezeChangeRate{ 1.f };
 
     /**
      * @brief Trigger condition state change type 1
@@ -2044,85 +2044,85 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Magnification over the height of the character capsule
      */
-    float chrProxyHeightRate{ 1 };
+    float chrProxyHeightRate{ 1.f };
 
     /**
      * @brief Search side addition correction_viewer
      */
-    float addAwarePointCorrectValue_forMe{ 0 };
+    float addAwarePointCorrectValue_forMe{ 0.f };
 
     /**
      * @brief Searching degree addition correction _ side to be seen
      */
-    float addAwarePointCorrectValue_forTarget{ 0 };
+    float addAwarePointCorrectValue_forTarget{ 0.f };
 
     /**
      * @brief Those who can see: Visual addition
      *
      * Correct the ease of finding with a real number
      */
-    float sightSearchEnemyAdd{ 0 };
+    float sightSearchEnemyAdd{ 0.f };
 
     /**
      * @brief How to see: Visual addition
      *
      * Correct the ease of finding with a real number
      */
-    float sightSearchAdd{ 0 };
+    float sightSearchAdd{ 0.f };
 
     /**
      * @brief Listener: AI sound radius addition
      *
      * Correct the hearing of AI sounds with real numbers
      */
-    float hearingSearchAdd{ 0 };
+    float hearingSearchAdd{ 0.f };
 
     /**
      * @brief Listener: AI sound radius magnification
      *
      * Correct the audibility of AI sound by magnification
      */
-    float hearingSearchRate{ 1 };
+    float hearingSearchRate{ 1.f };
 
     /**
      * @brief Those who can hear: AI sound radius addition
      *
      * Correct the loudness of the emitted AI sound with a real number
      */
-    float hearingSearchEnemyAdd{ 0 };
+    float hearingSearchEnemyAdd{ 0.f };
 
     /**
      * @brief Sales price correction: Magnification
      */
-    float value_Magnification{ 1 };
+    float value_Magnification{ 1.f };
 
     /**
      * @brief Arts MP consumption magnification
      *
      * Arts MP consumption multiplier [%]
      */
-    float artsConsumptionRate{ 1 };
+    float artsConsumptionRate{ 1.f };
 
     /**
      * @brief Magic consumption MP magnification
      *
      * Magic consumption MP multiplier [%]
      */
-    float magicConsumptionRate{ 1 };
+    float magicConsumptionRate{ 1.f };
 
     /**
      * @brief Magic consumption MP multiplier
      *
      * Magic consumption MP multiplier [%]
      */
-    float shamanConsumptionRate{ 1 };
+    float shamanConsumptionRate{ 1.f };
 
     /**
      * @brief Miracle consumption MP magnification
      *
      * Miracle consumption MP magnification [%]
      */
-    float miracleConsumptionRate{ 1 };
+    float miracleConsumptionRate{ 1.f };
 
     /**
      * @brief Est bottle HP damage amount [%]
@@ -2159,14 +2159,14 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Correct the damage amount of the HP Est bottle
      */
-    float changeHpEstusFlaskCorrectRate{ 1 };
+    float changeHpEstusFlaskCorrectRate{ 1.f };
 
     /**
      * @brief Est bottle MP damage multiplier
      *
      * Correct the damage amount of MP Est Bottle
      */
-    float changeMpEstusFlaskCorrectRate{ 1 };
+    float changeMpEstusFlaskCorrectRate{ 1.f };
 
     /**
      * @brief HP drain activation special effect
@@ -2183,14 +2183,14 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Extension coefficient of state change type "life extension"
      */
-    float extendLifeRate{ 1 };
+    float extendLifeRate{ 1.f };
 
     /**
      * @brief Life shortening ratio
      *
      * Shortening coefficient of state change type "life shortening"
      */
-    float contractLifeRate{ 1 };
+    float contractLifeRate{ 1.f };
 
     /**
      * @brief Damaged object attack power multiplier
@@ -2198,7 +2198,7 @@ struct SP_EFFECT_PARAM_ST {
      * Corrects the attack power against the damage received from OBJ. (Not
      * damage compensation)
      */
-    float defObjectAttackPowerRate{ 1 };
+    float defObjectAttackPowerRate{ 1.f };
 
     /**
      * @brief Group ID that deletes the character's paint decal when the special
@@ -2314,17 +2314,17 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Change the recovery speed of SA durability
      */
-    float changeSaRecoveryVelocity{ 1 };
+    float changeSaRecoveryVelocity{ 1.f };
 
     /**
      * @brief Regain magnification
      */
-    float regainRate{ 1 };
+    float regainRate{ 1.f };
 
     /**
      * @brief SA attack power multiplier
      */
-    float saAttackPowerRate{ 1 };
+    float saAttackPowerRate{ 1.f };
 
     /**
      * @brief Sleep tolerance attack power [point]
@@ -2346,14 +2346,14 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Multiply the sleep tolerance value by the set magnification
      */
-    float registSleepChangeRate{ 1 };
+    float registSleepChangeRate{ 1.f };
 
     /**
      * @brief Madness resistance change rate
      *
      * Multiply the madness resistance value by the set multiplier
      */
-    float registMadnessChangeRate{ 1 };
+    float registMadnessChangeRate{ 1.f };
 
     /**
      * @brief Changes in sleep tolerance [point]
@@ -2425,19 +2425,19 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Value to add to the super armor value
      */
-    float changeSuperArmorPoint{ 0 };
+    float changeSuperArmorPoint{ 0.f };
 
     /**
      * @brief SA damage amount [point]
      *
      * Set how many points to subtract (or add) with one activation
      */
-    float changeSaPoint{ 0 };
+    float changeSaPoint{ 0.f };
 
     /**
      * @brief Giant enemy lift height overwrite [m]
      */
-    float hugeEnemyPickupHeightOverwrite{ 0 };
+    float hugeEnemyPickupHeightOverwrite{ 0.f };
 
     /**
      * @brief Defender: Poison resistance damage multiplier
@@ -2445,7 +2445,7 @@ struct SP_EFFECT_PARAM_ST {
      * Poison resistance damage ratio: Correct the calculated damage by XX
      * times. 1 is normal.
      */
-    float poisonDefDamageRate{ 1 };
+    float poisonDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Epidemic resistance damage multiplier
@@ -2453,7 +2453,7 @@ struct SP_EFFECT_PARAM_ST {
      * Epidemic resistance damage ratio: Correct the calculated damage by XX
      * times. 1 is normal.
      */
-    float diseaseDefDamageRate{ 1 };
+    float diseaseDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Bleeding resistance damage multiplier
@@ -2461,7 +2461,7 @@ struct SP_EFFECT_PARAM_ST {
      * Bleeding resistance damage ratio: Correct the calculated damage by XX
      * times. 1 is normal.
      */
-    float bloodDefDamageRate{ 1 };
+    float bloodDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Curse resistance damage multiplier
@@ -2469,7 +2469,7 @@ struct SP_EFFECT_PARAM_ST {
      * Curse resistance damage multiplier: Corrects the calculated damage by XX
      * times. 1 is normal.
      */
-    float curseDefDamageRate{ 1 };
+    float curseDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Cold resistance damage multiplier
@@ -2477,7 +2477,7 @@ struct SP_EFFECT_PARAM_ST {
      * Cold resistance damage ratio: Correct the calculated damage by XX times.
      * 1 is normal.
      */
-    float freezeDefDamageRate{ 1 };
+    float freezeDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Sleep resistance damage multiplier
@@ -2485,7 +2485,7 @@ struct SP_EFFECT_PARAM_ST {
      * Sleep resistance damage ratio: Correct the calculated damage by XX times.
      * 1 is normal.
      */
-    float sleepDefDamageRate{ 1 };
+    float sleepDefDamageRate{ 1.f };
 
     /**
      * @brief Defender: Madness resistance damage multiplier
@@ -2493,7 +2493,7 @@ struct SP_EFFECT_PARAM_ST {
      * Madness resistance damage multiplier: Correct the calculated damage by XX
      * times. 1 is normal.
      */
-    float madnessDefDamageRate{ 1 };
+    float madnessDefDamageRate{ 1.f };
 
     /**
      * @brief Distance to go home no matter what [m] _ overwrite
@@ -2521,9 +2521,9 @@ struct SP_EFFECT_PARAM_ST {
      *
      * Item consumption MP multiplier
      */
-    float goodsConsumptionRate{ 1 };
+    float goodsConsumptionRate{ 1.f };
 
-    float guardStaminaMult{ 1 };
+    float guardStaminaMult{ 1.f };
 
     unsigned char unk3[4];
 };

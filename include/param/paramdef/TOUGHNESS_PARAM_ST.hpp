@@ -11,7 +11,7 @@ struct TOUGHNESS_PARAM_ST {
      * It is a correction magnification applied to the "toughness correction
      * magnification" of the weapon when calculating the toughness.
      */
-    float correctionRate{ 1 };
+    float correctionRate{ 1.f };
 
     /**
      * @brief Minimum toughness
@@ -47,7 +47,7 @@ struct TOUGHNESS_PARAM_ST {
      * This is the correction factor applied to the "toughness correction
      * factor" of the armor when determining the toughness.
      */
-    float proCorrectionRate{ 1 };
+    float proCorrectionRate{ 1.f };
 
     unsigned char pad1[16];
 };

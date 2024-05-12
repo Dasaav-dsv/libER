@@ -21,32 +21,32 @@ struct DECAL_PARAM_ST {
     /**
      * @brief Reference angle offset_up / down [deg]
      */
-    float pitchAngle{ 0 };
+    float pitchAngle{ 0.f };
 
     /**
      * @brief Reference angle offset_left / right [deg]
      */
-    float yawAngle{ 0 };
+    float yawAngle{ 0.f };
 
     /**
      * @brief Pasting start distance [m]
      */
-    float nearDistance{ 0 };
+    float nearDistance{ 0.f };
 
     /**
      * @brief Paste end distance [m]
      */
-    float farDistance{ 0 };
+    float farDistance{ 0.f };
 
     /**
      * @brief Size at the start distance [m]
      */
-    float nearSize{ 0 };
+    float nearSize{ 0.f };
 
     /**
      * @brief Size at the end distance [m]
      */
-    float farSize{ 0 };
+    float farSize{ 0.f };
 
     /**
      * @brief Monitoring special effects ID
@@ -138,37 +138,37 @@ struct DECAL_PARAM_ST {
     /**
      * @brief Random angle_minimum twist [deg]
      */
-    float randomRollMin{ 0 };
+    float randomRollMin{ 0.f };
 
     /**
      * @brief Random angle _ maximum twist [deg]
      */
-    float randomRollMax{ 0 };
+    float randomRollMax{ 0.f };
 
     /**
      * @brief Random angle_minimum top and bottom [deg]
      */
-    float randomPitchMin{ 0 };
+    float randomPitchMin{ 0.f };
 
     /**
      * @brief Random angle_maximum value [deg]
      */
-    float randomPitchMax{ 0 };
+    float randomPitchMax{ 0.f };
 
     /**
      * @brief Random angle_minimum left and right [deg]
      */
-    float randomYawMin{ 0 };
+    float randomYawMin{ 0.f };
 
     /**
      * @brief Random angle_maximum left and right [deg]
      */
-    float randomYawMax{ 0 };
+    float randomYawMax{ 0.f };
 
     /**
      * @brief POM height scale
      */
-    float pomHightScale{ 1 };
+    float pomHightScale{ 1.f };
 
     /**
      * @brief Minimum number of POM samples
@@ -196,19 +196,19 @@ struct DECAL_PARAM_ST {
     /**
      * @brief Emissive starting price
      */
-    float emissiveValueBegin{ 1 };
+    float emissiveValueBegin{ 1.f };
 
     /**
      * @brief Emissive end value
      */
-    float emissiveValueEnd{ 1 };
+    float emissiveValueEnd{ 1.f };
 
     /**
      * @brief Emissive update time (seconds)
      *
      * Interpolation time from start value to end value
      */
-    float emissiveTime{ 0 };
+    float emissiveTime{ 0.f };
 
     /**
      * @brief Do you want to interpolate?
@@ -226,7 +226,7 @@ struct DECAL_PARAM_ST {
      * Distance to interpolate decals generated between TAE bars when
      * interpolation is enabled
      */
-    float intpIntervalDist{ 0.1 };
+    float intpIntervalDist{ 0.1f };
 
     /**
      * @brief Texture ID at the start of interpolation
@@ -256,7 +256,7 @@ struct DECAL_PARAM_ST {
      *
      * Offset distance of SFX generation position
      */
-    float appearSfxOffsetPos{ 0 };
+    float appearSfxOffsetPos{ 0.f };
 
     /**
      * @brief Mask texture ID
@@ -284,7 +284,7 @@ struct DECAL_PARAM_ST {
      *
      * Mask strength (currently valid only with deferred decals)
      */
-    float maskScale{ 1 };
+    float maskScale{ 1.f };
 
     /**
      * @brief Normal texture ID
@@ -347,7 +347,7 @@ struct DECAL_PARAM_ST {
     /**
      * @brief The strength of shinyness
      */
-    float siniScale{ 1 };
+    float siniScale{ 1.f };
 
     /**
      * @brief Lifespan [seconds]
@@ -355,12 +355,12 @@ struct DECAL_PARAM_ST {
      * Lifespan [seconds] (Time after decal is applied, fade-in time does not
      * matter)
      */
-    float lifeTimeSec{ 0 };
+    float lifeTimeSec{ 0.f };
 
     /**
      * @brief Fade out time [seconds]
      */
-    float fadeOutTimeSec{ 0 };
+    float fadeOutTimeSec{ 0.f };
 
     /**
      * @brief priority
@@ -390,7 +390,7 @@ struct DECAL_PARAM_ST {
      *
      * Candidates for thinning if there is a decal within this distance
      */
-    float distThinOutCheckDist{ 0 };
+    float distThinOutCheckDist{ 0.f };
 
     /**
      * @brief Candidates for thinning if the difference in direction is within
@@ -399,7 +399,7 @@ struct DECAL_PARAM_ST {
      * Candidates for thinning if the difference in decal direction is within
      * this angle
      */
-    float distThinOutCheckAngleDeg{ 0 };
+    float distThinOutCheckAngleDeg{ 0.f };
 
     /**
      * @brief If the number of satisfied conditions is more than this number,
@@ -479,7 +479,7 @@ struct DECAL_PARAM_ST {
     /**
      * @brief Fade-in time [seconds]
      */
-    float fadeInTimeSec{ 0 };
+    float fadeInTimeSec{ 0.f };
 
     /**
      * @brief Decimation: Duplicate multiplication value
@@ -487,7 +487,7 @@ struct DECAL_PARAM_ST {
      * Determine if the decal size is duplicated by multiplying it by this
      * value.
      */
-    float thinOutOverlapMultiRadius{ 0 };
+    float thinOutOverlapMultiRadius{ 0.f };
 
     /**
      * @brief Decimation: Neighborhood addition distance [m]
@@ -495,7 +495,7 @@ struct DECAL_PARAM_ST {
      * Judge whether it is a neighborhood within the range of adding this
      * distance [m] to the decal size.
      */
-    float thinOutNeighborAddRadius{ 0 };
+    float thinOutNeighborAddRadius{ 0.f };
 
     /**
      * @brief Decimation: Overlapping limit
@@ -534,7 +534,7 @@ struct DECAL_PARAM_ST {
     /**
      * @brief SFX generation upper limit angle
      */
-    float maxDecalSfxCreatableSlopeAngleDeg{ -1 };
+    float maxDecalSfxCreatableSlopeAngleDeg{ -1.f };
 
     unsigned char pad_02[40];
 };

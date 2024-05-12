@@ -130,7 +130,7 @@ struct WORLD_MAP_POINT_PARAM_ST {
      *
      * Display icon rotation angle [deg]
      */
-    float angle{ 0 };
+    float angle{ 0.f };
 
     /**
      * @brief Area number
@@ -158,19 +158,19 @@ struct WORLD_MAP_POINT_PARAM_ST {
     /**
      * @brief X coordinate
      */
-    float posX{ 0 };
+    float posX{ 0.f };
 
     /**
      * @brief Y coordinate
      *
      * Y coordinate (not used)
      */
-    float posY{ 0 };
+    float posY{ 0.f };
 
     /**
      * @brief Z coordinate
      */
-    float posZ{ 0 };
+    float posZ{ 0.f };
 
     /**
      * @brief Text ID
@@ -440,21 +440,21 @@ struct WORLD_MAP_POINT_PARAM_ST {
      *
      * X coordinate
      */
-    float posX_forDistViewMark{ 0 };
+    float posX_forDistViewMark{ 0.f };
 
     /**
      * @brief Distance viewing mark overwrite Y coordinate
      *
      * Y coordinate
      */
-    float posY_forDistViewMark{ 0 };
+    float posY_forDistViewMark{ 0.f };
 
     /**
      * @brief Distant mark overwrite Z coordinate
      *
      * Z coordinate
      */
-    float posZ_forDistViewMark{ 0 };
+    float posZ_forDistViewMark{ 0.f };
 
     /**
      * @brief Distance stand ID1

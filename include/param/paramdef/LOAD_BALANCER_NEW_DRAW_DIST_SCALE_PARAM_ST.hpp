@@ -26,14 +26,14 @@ struct LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST {
      *
      * Drawing distance scale (start)
      */
-    float DrawDist_ScaleBegin{ 1 };
+    float DrawDist_ScaleBegin{ 1.f };
 
     /**
      * @brief Scale (end)
      *
      * Drawing distance scale (completed)
      */
-    float DrawDist_ScaleEnd{ 1 };
+    float DrawDist_ScaleEnd{ 1.f };
 
     /**
      * @brief Activation level (start)
@@ -56,14 +56,14 @@ struct LOAD_BALANCER_NEW_DRAW_DIST_SCALE_PARAM_ST {
      *
      * Shadow drawing distance scale (start)
      */
-    float ShadwDrawDist_ScaleBegin{ 1 };
+    float ShadwDrawDist_ScaleBegin{ 1.f };
 
     /**
      * @brief Scale (end)
      *
      * Shadow drawing distance scale (completed)
      */
-    float ShadwDrawDist_ScaleEnd{ 1 };
+    float ShadwDrawDist_ScaleEnd{ 1.f };
 
     unsigned char reserve2[24];
 };

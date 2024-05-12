@@ -10,84 +10,84 @@ struct PARTS_DRAW_PARAM_ST {
      *
      * Switching center
      */
-    float lv01_BorderDist{ 5 };
+    float lv01_BorderDist{ 5.f };
 
     /**
      * @brief LOD level 0-1 play distance [m]
      *
      * ± play at the center of the boundary
      */
-    float lv01_PlayDist{ 1 };
+    float lv01_PlayDist{ 1.f };
 
     /**
      * @brief LOD level 1-2 boundary distance [m]
      *
      * Switching center
      */
-    float lv12_BorderDist{ 20 };
+    float lv12_BorderDist{ 20.f };
 
     /**
      * @brief LOD level 1-2 play distance [m]
      *
      * ± play at the center of the boundary
      */
-    float lv12_PlayDist{ 2 };
+    float lv12_PlayDist{ 2.f };
 
     /**
      * @brief LOD level 2-3 Boundary distance [m]
      *
      * Switching center
      */
-    float lv23_BorderDist{ 30 };
+    float lv23_BorderDist{ 30.f };
 
     /**
      * @brief LOD level 2-3 play distance [m]
      *
      * ± play at the center of the boundary
      */
-    float lv23_PlayDist{ 0 };
+    float lv23_PlayDist{ 0.f };
 
     /**
      * @brief LOD level 3-4 Boundary distance [m]
      *
      * Switching center
      */
-    float lv34_BorderDist{ 9999 };
+    float lv34_BorderDist{ 9999.f };
 
     /**
      * @brief LOD level 3-4 play distance [m]
      *
      * ± play at the center of the boundary
      */
-    float lv34_PlayDist{ 0 };
+    float lv34_PlayDist{ 0.f };
 
     /**
      * @brief LOD level 4-5 Boundary distance [m]
      *
      * Switching center
      */
-    float lv45_BorderDist{ 9999 };
+    float lv45_BorderDist{ 9999.f };
 
     /**
      * @brief LOD level 4-5 play distance [m]
      *
      * ± play at the center of the boundary
      */
-    float lv45_PlayDist{ 0 };
+    float lv45_PlayDist{ 0.f };
 
     /**
      * @brief Texture LOD Level 0-1 Boundary distance [m]
      *
      * Texture switching center (Texure LOD disabled at 0)
      */
-    float tex_lv01_BorderDist{ 30 };
+    float tex_lv01_BorderDist{ 30.f };
 
     /**
      * @brief Texture LOD Level 0-1 Play distance [m]
      *
      * Texture Play around the boundary
      */
-    float tex_lv01_PlayDist{ 1 };
+    float tex_lv01_PlayDist{ 1.f };
 
     /**
      * @brief Crossfade enabled
@@ -102,7 +102,7 @@ struct PARTS_DRAW_PARAM_ST {
      * Maximum drawing distance. In the open, it will be used for the activation
      * distance
      */
-    float drawDist{ 9999 };
+    float drawDist{ 9999.f };
 
     /**
      * @brief Fade range [m]
@@ -110,14 +110,14 @@ struct PARTS_DRAW_PARAM_ST {
      * Fade distance from the maximum drawing distance to the actual
      * disappearance
      */
-    float drawFadeRange{ 0 };
+    float drawFadeRange{ 0.f };
 
     /**
      * @brief Shadow drawing distance [m]
      *
      * Maximum shadow drawing distance
      */
-    float shadowDrawDist{ 9999 };
+    float shadowDrawDist{ 9999.f };
 
     /**
      * @brief Shadow fade range [m]
@@ -125,14 +125,14 @@ struct PARTS_DRAW_PARAM_ST {
      * Fade distance from the maximum shadow drawing distance to the actual
      * disappearance
      */
-    float shadowFadeRange{ 0 };
+    float shadowFadeRange{ 0.f };
 
     /**
      * @brief Motion blur drawing boundary distance [m]
      *
      * Distance at which motion blur is enabled
      */
-    float motionBlur_BorderDist{ 20 };
+    float motionBlur_BorderDist{ 20.f };
 
     /**
      * @brief Cast the shadow of a point light source
@@ -208,12 +208,12 @@ struct PARTS_DRAW_PARAM_ST {
     /**
      * @brief Distance switching distance [m]
      */
-    float DistantViewModel_BorderDist{ 30 };
+    float DistantViewModel_BorderDist{ 30.f };
 
     /**
      * @brief Distant view switching play distance [m]
      */
-    float DistantViewModel_PlayDist{ 5 };
+    float DistantViewModel_PlayDist{ 5.f };
 
     /**
      * @brief Construction limit distance for open [m]
@@ -222,14 +222,14 @@ struct PARTS_DRAW_PARAM_ST {
      * is less than this distance in the open, it will not be built. This is a
      * function for distant view assets. -1: Function disabled (default)
      */
-    float LimtedActivate_BorderDist_forGrid{ -1 };
+    float LimtedActivate_BorderDist_forGrid{ -1.f };
 
     /**
      * @brief Construction limit play distance for open [m]
      *
      * Open construction limit play distance [m]
      */
-    float LimtedActivate_PlayDist_forGrid{ 10 };
+    float LimtedActivate_PlayDist_forGrid{ 10.f };
 
     /**
      * @brief Z sort offset
@@ -240,14 +240,14 @@ struct PARTS_DRAW_PARAM_ST {
      * origin in the celestial sphere drawing phase. Other than that, it is
      * mainly Model AABB. (GR SEQ09242)
      */
-    float zSortOffsetForNoFarClipDraw{ 0 };
+    float zSortOffsetForNoFarClipDraw{ 0.f };
 
     /**
      * @brief Shadow drawing alpha test effective distance [m]
      *
      * Distance to perform alpha test when drawing shadow [m]
      */
-    float shadowDrawAlphaTestDist{ 9999 };
+    float shadowDrawAlphaTestDist{ 9999.f };
 
     /**
      * @brief Forward Drawing environment map Blend type

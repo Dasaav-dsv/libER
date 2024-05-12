@@ -10,7 +10,7 @@ struct SE_ACTIVATION_RANGE_PARAM_ST {
      *
      * Distance to enable placement SE (m) (0 or less: always enabled)
      */
-    float activateRange{ 0 };
+    float activateRange{ 0.f };
 };
 
 }; // namespace paramdef

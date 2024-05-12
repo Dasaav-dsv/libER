@@ -8,34 +8,34 @@ struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
     /**
      * @brief Appearance distance Min [m]
      */
-    float RangeMin{ 10 };
+    float RangeMin{ 10.f };
 
     /**
      * @brief Appearance distance Max [m]
      *
      * Appearance distance Max [
      */
-    float RangeMax{ 25 };
+    float RangeMax{ 25.f };
 
     /**
      * @brief Lifespan Min [seconds]
      */
-    float LifeTimeMin{ 30 };
+    float LifeTimeMin{ 30.f };
 
     /**
      * @brief Lifespan Max [seconds]
      */
-    float LifeTimeMax{ 30 };
+    float LifeTimeMax{ 30.f };
 
     /**
      * @brief Delete distance [m]
      */
-    float DeleteDist{ 30 };
+    float DeleteDist{ 30.f };
 
     /**
      * @brief Neighborhood judgment distance [m]
      */
-    float NearDist{ 15 };
+    float NearDist{ 15.f };
 
     /**
      * @brief Generation angle limit Min [degree]
@@ -43,7 +43,7 @@ struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
      * Angle limit Min [degree] (Specify the Y-axis angle +-in front of the
      * camera. 180 is omnidirectional)
      */
-    float LimiteRotateMin{ 0 };
+    float LimiteRotateMin{ 0.f };
 
     /**
      * @brief Generation angle limit Max [degrees]
@@ -51,7 +51,7 @@ struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
      * Angle limit Max [degree] (Specify the Y-axis angle +-in front of the
      * camera. 180 is omnidirectional)
      */
-    float LimiteRotateMax{ 180 };
+    float LimiteRotateMax{ 180.f };
 };
 
 }; // namespace paramdef

@@ -10,140 +10,140 @@ struct REINFORCE_PARAM_WEAPON_ST {
      *
      * Physical attack power correction value
      */
-    float physicsAtkRate{ 1 };
+    float physicsAtkRate{ 1.f };
 
     /**
      * @brief Magic attack power basic value
      *
      * Magic attack power correction value
      */
-    float magicAtkRate{ 1 };
+    float magicAtkRate{ 1.f };
 
     /**
      * @brief Fire attack power basic value
      *
      * Fire attack power correction value
      */
-    float fireAtkRate{ 1 };
+    float fireAtkRate{ 1.f };
 
     /**
      * @brief Electric shock attack power basic value
      *
      * Correction value of electric shock attack power
      */
-    float thunderAtkRate{ 1 };
+    float thunderAtkRate{ 1.f };
 
     /**
      * @brief Stamina attack power
      *
      * Stamina attack power correction value
      */
-    float staminaAtkRate{ 1 };
+    float staminaAtkRate{ 1.f };
 
     /**
      * @brief SA weapon attack power
      *
      * Super Armor Weapon Attack Color Correction Value
      */
-    float saWeaponAtkRate{ 1 };
+    float saWeaponAtkRate{ 1.f };
 
     /**
      * @brief SA durability value
      *
      * SA endurance correction value
      */
-    float saDurabilityRate{ 1 };
+    float saDurabilityRate{ 1.f };
 
     /**
      * @brief Strength correction
      *
      * Correction value of muscle strength correction
      */
-    float correctStrengthRate{ 1 };
+    float correctStrengthRate{ 1.f };
 
     /**
      * @brief Agility correction
      *
      * Correction value of agility correction
      */
-    float correctAgilityRate{ 1 };
+    float correctAgilityRate{ 1.f };
 
     /**
      * @brief Magic correction
      *
      * Correction value of magic power correction
      */
-    float correctMagicRate{ 1 };
+    float correctMagicRate{ 1.f };
 
     /**
      * @brief Faith correction
      *
      * Correction value of faith correction
      */
-    float correctFaithRate{ 1 };
+    float correctFaithRate{ 1.f };
 
     /**
      * @brief Physical attack cut rate when guarding
      *
      * Correction value of physical attack cut rate when guarding
      */
-    float physicsGuardCutRate{ 1 };
+    float physicsGuardCutRate{ 1.f };
 
     /**
      * @brief Magic attack cut rate when guarding
      *
      * Correction value of magic attack cut rate when guarding
      */
-    float magicGuardCutRate{ 1 };
+    float magicGuardCutRate{ 1.f };
 
     /**
      * @brief Flame attack cut rate when guarding
      *
      * Correction value of flame attack cut rate when guarding
      */
-    float fireGuardCutRate{ 1 };
+    float fireGuardCutRate{ 1.f };
 
     /**
      * @brief Electric shock attack cut rate when guarding
      *
      * Correction value of electric shock attack cut rate when guarding
      */
-    float thunderGuardCutRate{ 1 };
+    float thunderGuardCutRate{ 1.f };
 
     /**
      * @brief Guard time poison attack cut rate
      *
      * Correction value of poison attack cut rate when guarding
      */
-    float poisonGuardResistRate{ 1 };
+    float poisonGuardResistRate{ 1.f };
 
     /**
      * @brief Epidemic attack cut rate when guarding
      *
      * Correction value of plague attack cut rate when guarding
      */
-    float diseaseGuardResistRate{ 1 };
+    float diseaseGuardResistRate{ 1.f };
 
     /**
      * @brief Bleeding attack cut rate when guarding
      *
      * Correction value for bleeding attack cut rate when guarding
      */
-    float bloodGuardResistRate{ 1 };
+    float bloodGuardResistRate{ 1.f };
 
     /**
      * @brief Curse attack cut rate when guarding
      *
      * Correction value of curse attack cut rate when guarding
      */
-    float curseGuardResistRate{ 1 };
+    float curseGuardResistRate{ 1.f };
 
     /**
      * @brief Stamina defense when guarding
      *
      * Correction value of stamina defense power when guarding
      */
-    float staminaGuardDefRate{ 1 };
+    float staminaGuardDefRate{ 1.f };
 
     /**
      * @brief Special effect ID1
@@ -204,28 +204,28 @@ struct REINFORCE_PARAM_WEAPON_ST {
      *
      * Dark attack power correction value
      */
-    float darkAtkRate{ 1 };
+    float darkAtkRate{ 1.f };
 
     /**
      * @brief Dark attack cut rate when guarding
      *
      * Correction value of darkness attack cut rate when guarding
      */
-    float darkGuardCutRate{ 1 };
+    float darkGuardCutRate{ 1.f };
 
     /**
      * @brief Luck correction
      *
      * Correction value of luck correction
      */
-    float correctLuckRate{ 1 };
+    float correctLuckRate{ 1.f };
 
     /**
      * @brief Cold attack cut rate when guarding
      *
      * Correction value of cold air attack cut rate when guarding
      */
-    float freezeGuardDefRate{ 1 };
+    float freezeGuardDefRate{ 1.f };
 
     /**
      * @brief Enhanced price correction value
@@ -233,14 +233,14 @@ struct REINFORCE_PARAM_WEAPON_ST {
      * Correction value to multiply the enhancement price of the weapon
      * parameter
      */
-    float reinforcePriceRate{ 1 };
+    float reinforcePriceRate{ 1.f };
 
     /**
      * @brief Evolution price correction value
      *
      * Correction value to multiply the evolution price of the weapon parameter
      */
-    float baseChangePriceRate{ 1 };
+    float baseChangePriceRate{ 1.f };
 
     /**
      * @brief Mountable magic stone rank
@@ -254,19 +254,19 @@ struct REINFORCE_PARAM_WEAPON_ST {
      *
      * Correction value of sleep attack cut rate when guarding
      */
-    float sleepGuardDefRate{ 1 };
+    float sleepGuardDefRate{ 1.f };
 
     /**
      * @brief Mad attack cut rate when guarding
      *
      * Correction value of mad attack cut rate when guarding
      */
-    float madnessGuardDefRate{ 1 };
+    float madnessGuardDefRate{ 1.f };
 
     /**
      * @brief Additional attack power multiplier
      */
-    float baseAtkRate{ 1 };
+    float baseAtkRate{ 1.f };
 };
 
 }; // namespace paramdef

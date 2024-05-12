@@ -45,7 +45,7 @@ struct ACTIONBUTTON_PARAM_ST {
      *
      * Radius (cylinder / capsule)
      */
-    float radius{ 0 };
+    float radius{ 0.f };
 
     /**
      * @brief angle
@@ -59,21 +59,21 @@ struct ACTIONBUTTON_PARAM_ST {
      *
      * Depth (prism)
      */
-    float depth{ 0 };
+    float depth{ 0.f };
 
     /**
      * @brief width
      *
      * Width (prism)
      */
-    float width{ 0 };
+    float width{ 0.f };
 
     /**
      * @brief height
      *
      * Height (cylinder / prism)
      */
-    float height{ 0 };
+    float height{ 0.f };
 
     /**
      * @brief Bottom height offset
@@ -81,7 +81,7 @@ struct ACTIONBUTTON_PARAM_ST {
      * How much to raise or lower the Y coordinate of the bottom (cylinder /
      * prism)
      */
-    float baseHeightOffset{ 0 };
+    float baseHeightOffset{ 0.f };
 
     /**
      * @brief Angle difference judgment type
@@ -187,7 +187,7 @@ struct ACTIONBUTTON_PARAM_ST {
      *
      * Invalid time after execution (-infinite by value)
      */
-    float execInvalidTime{ 0 };
+    float execInvalidTime{ 0.f };
 
     unsigned char padding6[28];
 };

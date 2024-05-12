@@ -28,7 +28,7 @@ struct PERFORMANCE_CHECK_PARAM {
     /**
      * @brief Comparison value
      */
-    float compareValue{ 0 };
+    float compareValue{ 0.f };
 
     /**
      * @brief Reservation 2

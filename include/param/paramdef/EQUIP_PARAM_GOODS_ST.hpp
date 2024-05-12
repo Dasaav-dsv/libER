@@ -40,7 +40,7 @@ struct EQUIP_PARAM_GOODS_ST {
     /**
      * @brief Weight [kg]
      */
-    float weight{ 1 };
+    float weight{ 1.f };
 
     /**
      * @brief Basic price

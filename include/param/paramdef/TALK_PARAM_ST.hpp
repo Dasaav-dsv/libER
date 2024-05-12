@@ -122,7 +122,7 @@ struct TALK_PARAM_ST {
      * performed in "NPC conversation voice playback timeout time" of
      * "Common_Game system parameter".
      */
-    float timeout{ -1 };
+    float timeout{ -1.f };
 
     /**
      * @brief Speaker: Subtitled play Anime ID

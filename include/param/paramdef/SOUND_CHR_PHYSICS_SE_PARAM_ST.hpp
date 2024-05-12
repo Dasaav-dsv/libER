@@ -62,14 +62,14 @@ struct SOUND_CHR_PHYSICS_SE_PARAM_ST {
      * Minimum impulse value required for ground contact determination after
      * death
      */
-    float ContactLandMinImpuse{ 20 };
+    float ContactLandMinImpuse{ 20.f };
 
     /**
      * @brief Ground contact minimum velocity value
      *
      * Minimum speed value required for ground contact determination after death
      */
-    float ContactLandMinSpeed{ 0 };
+    float ContactLandMinSpeed{ 0.f };
 
     /**
      * @brief Player contact SEID
@@ -84,14 +84,14 @@ struct SOUND_CHR_PHYSICS_SE_PARAM_ST {
      *
      * Minimum impulse value required for Player contact judgment after death
      */
-    float ContactPlayerMinImpuse{ 20 };
+    float ContactPlayerMinImpuse{ 20.f };
 
     /**
      * @brief Player minimum contact speed value
      *
      * Minimum speed value required for Player contact judgment after death
      */
-    float ContactPlayerMinSpeed{ 0 };
+    float ContactPlayerMinSpeed{ 0.f };
 
     /**
      * @brief Contact judgment rigid body IDX0

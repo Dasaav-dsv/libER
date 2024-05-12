@@ -29,7 +29,7 @@ struct MAP_GD_REGION_DRAW_PARAM {
      * overwrite) [GR] SEQ13338 [Irradiance volume] I want to change the
      * indirect scale of the SFX light source uniformly.
      */
-    float overrideIVLocalLightScale{ -1 };
+    float overrideIVLocalLightScale{ -1.f };
 };
 
 }; // namespace paramdef

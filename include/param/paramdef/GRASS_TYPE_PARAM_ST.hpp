@@ -35,7 +35,7 @@ struct GRASS_TYPE_PARAM_ST {
     /**
      * @brief Basic density
      */
-    float baseDensity{ 1 };
+    float baseDensity{ 1.f };
 
     /**
      * @brief Model name (0)
@@ -135,7 +135,7 @@ struct GRASS_TYPE_PARAM_ST {
     /**
      * @brief Plane distance
      */
-    float flatRadius{ 0 };
+    float flatRadius{ 0.f };
 
     /**
      * @brief Do you want to cast a shadow
@@ -159,17 +159,17 @@ struct GRASS_TYPE_PARAM_ST {
      *
      * Random for -1
      */
-    float orientationAngle{ -1 };
+    float orientationAngle{ -1.f };
 
     /**
      * @brief Directional range (degrees)
      */
-    float orientationRange{ -1 };
+    float orientationRange{ -1.f };
 
     /**
      * @brief Model spacing
      */
-    float spacing{ 0 };
+    float spacing{ 0.f };
 
     /**
      * @brief Dithering

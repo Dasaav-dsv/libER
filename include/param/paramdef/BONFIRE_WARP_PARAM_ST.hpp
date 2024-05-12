@@ -135,19 +135,19 @@ struct BONFIRE_WARP_PARAM_ST {
     /**
      * @brief X coordinate
      */
-    float posX{ 0 };
+    float posX{ 0.f };
 
     /**
      * @brief Y coordinate
      *
      * Y coordinate (not used)
      */
-    float posY{ 0 };
+    float posY{ 0.f };
 
     /**
      * @brief Z coordinate
      */
-    float posZ{ 0 };
+    float posZ{ 0.f };
 
     /**
      * @brief Text ID

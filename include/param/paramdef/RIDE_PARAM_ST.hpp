@@ -72,14 +72,14 @@ struct RIDE_PARAM_ST {
      * riding side and the "front judgment Damipoly ID" on the riding side. The
      * higher the value, the more you can ride even if you are facing away.
      */
-    float diffAngMyToDef{ 0 };
+    float diffAngMyToDef{ 0.f };
 
     /**
      * @brief Riding judgment_effective distance [m]
      *
      * It is a parameter that determines the "mountable distance to the target"
      */
-    float dist{ 0 };
+    float dist{ 0.f };
 
     /**
      * @brief Riding judgment_effective height upward [m]
@@ -87,7 +87,7 @@ struct RIDE_PARAM_ST {
      * Is it possible to ride even if the target to be ridden is above the
      * target to be ridden? Is set in meters
      */
-    float upperYRange{ 0 };
+    float upperYRange{ 0.f };
 
     /**
      * @brief Riding judgment_effective height downward [m]
@@ -95,21 +95,21 @@ struct RIDE_PARAM_ST {
      * Is it possible to ride even if the target to be ridden is below the
      * target to be ridden? Is set in meters
      */
-    float lowerYRange{ 0 };
+    float lowerYRange{ 0.f };
 
     /**
      * @brief Riding judgment_angle difference range between objects min [deg]
      *
      * In what range (angle) of the rider can ride? Set the minimum value of
      */
-    float diffAngMin{ 0 };
+    float diffAngMin{ 0.f };
 
     /**
      * @brief Riding judgment_angle difference range between objects max [deg]
      *
      * In what range (angle) of the rider can ride? Set the maximum value of
      */
-    float diffAngMax{ 0 };
+    float diffAngMax{ 0.f };
 
     unsigned char pad[12];
 };

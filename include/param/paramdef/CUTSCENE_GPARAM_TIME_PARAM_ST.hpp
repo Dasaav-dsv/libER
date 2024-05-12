@@ -94,7 +94,7 @@ struct CUTSCENE_GPARAM_TIME_PARAM_ST {
      * Specify in-game time at the end of playback [hour] [-1.0 to 24.0] (-1
      * (less than 0): do nothing)
      */
-    float PostPlayIngameTime{ -1 };
+    float PostPlayIngameTime{ -1.f };
 };
 
 }; // namespace paramdef

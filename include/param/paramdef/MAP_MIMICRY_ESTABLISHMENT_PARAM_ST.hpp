@@ -8,17 +8,17 @@ struct MAP_MIMICRY_ESTABLISHMENT_PARAM_ST {
     /**
      * @brief Mimicry weight 0
      */
-    float mimicryEstablishment0{ -1 };
+    float mimicryEstablishment0{ -1.f };
 
     /**
      * @brief Mimicry weight 1
      */
-    float mimicryEstablishment1{ -1 };
+    float mimicryEstablishment1{ -1.f };
 
     /**
      * @brief Mimicry weight 2
      */
-    float mimicryEstablishment2{ -1 };
+    float mimicryEstablishment2{ -1.f };
 
     /**
      * @brief Mimicry 0 SFXID Forward swing

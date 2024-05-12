@@ -80,7 +80,7 @@ struct TUTORIAL_PARAM_ST {
      * an event etc., it will be closed after displaying at least this time.
      * It's only for toast, so it's ignored in modals
      */
-    float displayMinTime{ 1 };
+    float displayMinTime{ 1.f };
 
     /**
      * @brief Longest
@@ -89,7 +89,7 @@ struct TUTORIAL_PARAM_ST {
      * passed since the toast was displayed. It's only for toast, so it's
      * ignored in modals
      */
-    float displayTime{ 3 };
+    float displayTime{ 3.f };
 
     unsigned char pad3[4];
 };

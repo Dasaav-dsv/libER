@@ -24,14 +24,14 @@ struct AI_ATTACK_PARAM_ST {
      *
      * For arguments of Common_Attack type subgoals
      */
-    float successDistance{ 0 };
+    float successDistance{ 0.f };
 
     /**
      * @brief Turn time before attack
      *
      * For arguments of Common_Attack type subgoals
      */
-    float turnTimeBeforeAttack{ 0 };
+    float turnTimeBeforeAttack{ 0.f };
 
     /**
      * @brief Front judgment angle
@@ -73,14 +73,14 @@ struct AI_ATTACK_PARAM_ST {
      *
      * Minimum value of proper attack distance
      */
-    float minOptimalDistance{ 0 };
+    float minOptimalDistance{ 0.f };
 
     /**
      * @brief Maximum proper distance
      *
      * Maximum attack suitability distance
      */
-    float maxOptimalDistance{ 0 };
+    float maxOptimalDistance{ 0.f };
 
     /**
      * @brief Appropriate angle reference direction 1
@@ -117,42 +117,42 @@ struct AI_ATTACK_PARAM_ST {
      *
      * Time required to attack once and then use it again
      */
-    float intervalForExec{ 1 };
+    float intervalForExec{ 1.f };
 
     /**
      * @brief Selection rate
      *
      * Specify the ease of selection by magnification
      */
-    float selectionTendency{ -1 };
+    float selectionTendency{ -1.f };
 
     /**
      * @brief Short range selection rate
      *
      * Selection rate at close range
      */
-    float shortRangeTendency{ -1 };
+    float shortRangeTendency{ -1.f };
 
     /**
      * @brief Medium range selection rate
      *
      * Selection rate at medium range
      */
-    float middleRangeTendency{ -1 };
+    float middleRangeTendency{ -1.f };
 
     /**
      * @brief Distance selection rate
      *
      * Selection rate at long distances
      */
-    float farRangeTendency{ -1 };
+    float farRangeTendency{ -1.f };
 
     /**
      * @brief Out of range rate
      *
      * Selection rate out of range
      */
-    float outRangeTendency{ -1 };
+    float outRangeTendency{ -1.f };
 
     /**
      * @brief Derived attack 1
@@ -269,12 +269,12 @@ struct AI_ATTACK_PARAM_ST {
     /**
      * @brief Minimum life of the goal
      */
-    float goalLifeMin{ 0 };
+    float goalLifeMin{ 0.f };
 
     /**
      * @brief Maximum life span of the goal
      */
-    float goalLifeMax{ 0 };
+    float goalLifeMax{ 0.f };
 
     /**
      * @brief Whether to select within the appropriate distance
@@ -298,12 +298,12 @@ struct AI_ATTACK_PARAM_ST {
     /**
      * @brief Minimum reach judgment distance
      */
-    float minArriveDistance{ 0 };
+    float minArriveDistance{ 0.f };
 
     /**
      * @brief Maximum reach judgment distance
      */
-    float maxArriveDistance{ 0 };
+    float maxArriveDistance{ 0.f };
 
     /**
      * @brief Continuous attack execution distance
@@ -311,7 +311,7 @@ struct AI_ATTACK_PARAM_ST {
      * Distance used to determine the execution of attacks from the second stage
      * onward
      */
-    float comboExecDistance{ 4 };
+    float comboExecDistance{ 4.f };
 
     /**
      * @brief Continuous attack execution angle
@@ -319,7 +319,7 @@ struct AI_ATTACK_PARAM_ST {
      * Distance used to determine the execution of attacks from the second stage
      * onward
      */
-    float comboExecRange{ 180 };
+    float comboExecRange{ 180.f };
 };
 
 }; // namespace paramdef

@@ -51,7 +51,7 @@ struct BEHAVIOR_PARAM_ST {
      *
      * Set the amount of SA consumed during action.
      */
-    float consumeSA{ 0 };
+    float consumeSA{ 0.f };
 
     /**
      * @brief Consumption stamina

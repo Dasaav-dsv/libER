@@ -10,7 +10,7 @@ struct SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST {
      *
      * Asset sound sound source effective distance [m] (less than 0: invalid)
      */
-    float SoundObjEnableDist{ -1 };
+    float SoundObjEnableDist{ -1.f };
 };
 
 }; // namespace paramdef

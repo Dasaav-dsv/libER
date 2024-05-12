@@ -287,17 +287,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_0{ 0 };
+    float time1_0{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_0{ 0 };
+    float time2_0{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_0{ 0.5 };
+    float a2dThreshold_0{ 0.5f };
 
     /**
      * @brief Pad physical key
@@ -352,17 +352,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_1{ 0 };
+    float time1_1{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_1{ 0 };
+    float time2_1{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_1{ 0.5 };
+    float a2dThreshold_1{ 0.5f };
 
     /**
      * @brief Pad physical key
@@ -417,17 +417,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_2{ 0 };
+    float time1_2{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_2{ 0 };
+    float time2_2{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_2{ 0.5 };
+    float a2dThreshold_2{ 0.5f };
 
     /**
      * @brief Pad physical key
@@ -482,17 +482,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_3{ 0 };
+    float time1_3{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_3{ 0 };
+    float time2_3{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_3{ 0.5 };
+    float a2dThreshold_3{ 0.5f };
 
     /**
      * @brief PC physical key
@@ -547,17 +547,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_4{ 0 };
+    float time1_4{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_4{ 0 };
+    float time2_4{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_4{ 0.5 };
+    float a2dThreshold_4{ 0.5f };
 
     /**
      * @brief PC physical key
@@ -612,17 +612,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_5{ 0 };
+    float time1_5{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_5{ 0 };
+    float time2_5{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_5{ 0.5 };
+    float a2dThreshold_5{ 0.5f };
 
     /**
      * @brief PC physical key
@@ -677,17 +677,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_6{ 0 };
+    float time1_6{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_6{ 0 };
+    float time2_6{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_6{ 0.5 };
+    float a2dThreshold_6{ 0.5f };
 
     /**
      * @brief PC physical key
@@ -742,17 +742,17 @@ struct DEFAULT_KEY_ASSIGN {
     /**
      * @brief time
      */
-    float time1_7{ 0 };
+    float time1_7{ 0.f };
 
     /**
      * @brief Interval time for repeat
      */
-    float time2_7{ 0 };
+    float time2_7{ 0.f };
 
     /**
      * @brief Analog-to-digital conversion threshold
      */
-    float a2dThreshold_7{ 0.5 };
+    float a2dThreshold_7{ 0.5f };
 };
 
 }; // namespace paramdef

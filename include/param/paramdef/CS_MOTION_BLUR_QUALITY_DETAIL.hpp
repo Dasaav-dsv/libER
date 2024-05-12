@@ -46,7 +46,7 @@ struct CS_MOTION_BLUR_QUALITY_DETAIL {
     /**
      * @brief Scale value for blur maximum length parameter
      */
-    float blurMaxLengthScale{ 0.75 };
+    float blurMaxLengthScale{ 0.75f };
 };
 
 }; // namespace paramdef

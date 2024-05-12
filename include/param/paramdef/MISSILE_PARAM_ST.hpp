@@ -38,22 +38,22 @@ struct MISSILE_PARAM_ST {
     /**
      * @brief Initial speed [m / s]
      */
-    float InitVelocity{ 0 };
+    float InitVelocity{ 0.f };
 
     /**
      * @brief Range distance
      */
-    float distance{ 0 };
+    float distance{ 0.f };
 
     /**
      * @brief Gravity within range
      */
-    float gravityInRange{ 0 };
+    float gravityInRange{ 0.f };
 
     /**
      * @brief Out-of-range gravity
      */
-    float gravityOutRange{ 0 };
+    float gravityOutRange{ 0.f };
 
     /**
      * @brief MP consumption
@@ -63,12 +63,12 @@ struct MISSILE_PARAM_ST {
     /**
      * @brief Acceleration within range
      */
-    float accelInRange{ 0 };
+    float accelInRange{ 0.f };
 
     /**
      * @brief Out-of-range acceleration
      */
-    float accelOutRange{ 0 };
+    float accelOutRange{ 0.f };
 
     unsigned char reserve1[20];
 

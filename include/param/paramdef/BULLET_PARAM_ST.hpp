@@ -40,28 +40,28 @@ struct BULLET_PARAM_ST {
      *
      * Time for missiles to continue to exist (-1 is infinite).
      */
-    float life{ -1 };
+    float life{ -1.f };
 
     /**
      * @brief Range [m]
      *
      * Distance at which attenuation begins (not actual flight distance).
      */
-    float dist{ 0 };
+    float dist{ 0.f };
 
     /**
      * @brief Fire interval [s]
      *
      * Specify how many seconds the missile will be fired.
      */
-    float shootInterval{ 0 };
+    float shootInterval{ 0.f };
 
     /**
      * @brief Gravity within range [m / s ^ 2]
      *
      * Downward gravity within range.
      */
-    float gravityInRange{ 0 };
+    float gravityInRange{ 0.f };
 
     /**
      * @brief Gravity outside range [m / s ^ 2]
@@ -69,7 +69,7 @@ struct BULLET_PARAM_ST {
      * Gravity applied downward when damping begins (expresses the feeling of
      * falling down.
      */
-    float gravityOutRange{ 0 };
+    float gravityOutRange{ 0.f };
 
     /**
      * @brief Guidance stop distance [m]
@@ -77,42 +77,42 @@ struct BULLET_PARAM_ST {
      * The distance to the target to stop the guidance. A parameter that
      * prevents you from hitting too much with a guided bullet.
      */
-    float hormingStopRange{ 0 };
+    float hormingStopRange{ 0.f };
 
     /**
      * @brief Initial velocity [m / s]
      *
      * Initial speed of SFX.
      */
-    float initVellocity{ 0 };
+    float initVellocity{ 0.f };
 
     /**
      * @brief Acceleration within range [m / s ^ 2]
      *
      * Acceleration within SFX range.
      */
-    float accelInRange{ 0 };
+    float accelInRange{ 0.f };
 
     /**
      * @brief Acceleration outside range [m / s ^ 2]
      *
      * Acceleration when SFX goes out of range.
      */
-    float accelOutRange{ 0 };
+    float accelOutRange{ 0.f };
 
     /**
      * @brief Maximum speed [m / s]
      *
      * maximum speed.
      */
-    float maxVellocity{ 0 };
+    float maxVellocity{ 0.f };
 
     /**
      * @brief Minimum speed [m / s]
      *
      * Minimum guaranteed speed.
      */
-    float minVellocity{ 0 };
+    float minVellocity{ 0.f };
 
     /**
      * @brief Acceleration start time [s]
@@ -120,21 +120,21 @@ struct BULLET_PARAM_ST {
      * Until this time, do not accelerate (make sure you can shoot magic like
      * rockets).
      */
-    float accelTime{ 0 };
+    float accelTime{ 0.f };
 
     /**
      * @brief Guidance start distance [m]
      *
      * How many meters should the guidance start?
      */
-    float homingBeginDist{ 0 };
+    float homingBeginDist{ 0.f };
 
     /**
      * @brief Initial radius [m]
      *
      * Set the radius of the hit ball.
      */
-    float hitRadius{ -1 };
+    float hitRadius{ -1.f };
 
     /**
      * @brief Maximum radius [m]
@@ -142,21 +142,21 @@ struct BULLET_PARAM_ST {
      * Maximum radius of the hit sphere (If -1, make it the same as the initial
      * radius / default)
      */
-    float hitRadiusMax{ -1 };
+    float hitRadiusMax{ -1.f };
 
     /**
      * @brief Range diffusion time [s]
      *
      * The time when the radius of the range expands to a small extent.
      */
-    float spreadTime{ 0 };
+    float spreadTime{ 0.f };
 
     /**
      * @brief Activation delay [s]
      *
      * Time from landing to explosion (if 0, it explodes immediately).
      */
-    float expDelay{ 0 };
+    float expDelay{ 0.f };
 
     /**
      * @brief Induction shift amount [m]
@@ -164,21 +164,21 @@ struct BULLET_PARAM_ST {
      * It is accurate if it is 0. At the time of shooting, each component of XYZ
      * should be aimed by shifting this amount.
      */
-    float hormingOffsetRange{ 0 };
+    float hormingOffsetRange{ 0.f };
 
     /**
      * @brief Time to live in damage hit history [s]
      *
      * Damage hit history survival time [sec] (<= 0.0f: indefinite)
      */
-    float dmgHitRecordLifeTime{ 0 };
+    float dmgHitRecordLifeTime{ 0.f };
 
     /**
      * @brief External force [m / s ^ 2]
      *
      * External force applied in the direction of shooting. (Y-axis is removed)
      */
-    float externalForce{ 0 };
+    float externalForce{ 0.f };
 
     /**
      * @brief Special effects on the person who shot
@@ -554,21 +554,21 @@ struct BULLET_PARAM_ST {
      * Vertical offset of landing position. Shift the target position up and
      * down at the time of launch and during homing. (-N ~ n)
      */
-    float targetYOffsetRange{ 0 };
+    float targetYOffsetRange{ 0.f };
 
     /**
      * @brief Launch angle random number [deg]
      *
      * Upper limit of random number of firing angle (0 to 360)
      */
-    float shootAngleYMaxRandom{ 0 };
+    float shootAngleYMaxRandom{ 0.f };
 
     /**
      * @brief Elevation angle random number [deg]
      *
      * Upper limit of firing elevation random number (0 to 360)
      */
-    float shootAngleXMaxRandom{ 0 };
+    float shootAngleXMaxRandom{ 0.f };
 
     /**
      * @brief Interval specified bullet ID
@@ -582,7 +582,7 @@ struct BULLET_PARAM_ST {
      *
      * Minimum interval for making bullets at regular intervals (0 to n)
      */
-    float intervalCreateTimeMin{ 0 };
+    float intervalCreateTimeMin{ 0.f };
 
     /**
      * @brief Occurrence interval: Maximum time [s]
@@ -590,7 +590,7 @@ struct BULLET_PARAM_ST {
      * Maximum interval for making bullets at regular intervals (function is
      * disabled if 0 to n 0)
      */
-    float intervalCreateTimeMax{ 0 };
+    float intervalCreateTimeMax{ 0.f };
 
     /**
      * @brief Predicted shooting velocity observation time [s]
@@ -598,14 +598,14 @@ struct BULLET_PARAM_ST {
      * Average speed observation time of predicted shooting function (function
      * is invalid if 0 to 40)
      */
-    float predictionShootObserveTime{ 0 };
+    float predictionShootObserveTime{ 0.f };
 
     /**
      * @brief Waiting time for start of specified interval [s]
      *
      * Waiting time to start making bullets at regular intervals
      */
-    float intervalCreateWaitTime{ 0 };
+    float intervalCreateWaitTime{ 0.f };
 
     /**
      * @brief The type of SFX attitude generated from the bullet
@@ -687,12 +687,12 @@ struct BULLET_PARAM_ST {
      * The range of bullets used when the source type is set to occur at random
      * locations.
      */
-    float randomCreateRadius{ 0 };
+    float randomCreateRadius{ 0.f };
 
     /**
      * @brief Funnel tracking position_base point height [m]
      */
-    float followOffset_BaseHeight{ 0 };
+    float followOffset_BaseHeight{ 0.f };
 
     /**
      * @brief Asset number generated at the time of landing
@@ -709,7 +709,7 @@ struct BULLET_PARAM_ST {
      * Add a random number of seconds with a set time fluctuation range to the
      * "lifetime [s]".
      */
-    float lifeRandomRange{ 0 };
+    float lifeRandomRange{ 0.f };
 
     /**
      * @brief Induction performance (X-axis individual) [deg / s]
@@ -785,14 +785,14 @@ struct BULLET_PARAM_ST {
      * [Song firing] The minimum speed limit for song firing calculation [m /
      * s].
      */
-    float howitzerInitMinVelocity{ 0 };
+    float howitzerInitMinVelocity{ 0.f };
 
     /**
      * @brief [Song shooting] Maximum speed limit [m / s]
      *
      * [Song firing] Maximum speed limit for song firing calculation [m / s].
      */
-    float howitzerInitMaxVelocity{ 0 };
+    float howitzerInitMaxVelocity{ 0.f };
 
     /**
      * @brief SFXID [At the time of forced erasure]
@@ -816,19 +816,19 @@ struct BULLET_PARAM_ST {
     /**
      * @brief Funnel tracking position_radius [m]
      */
-    float followOffset_Radius{ 0 };
+    float followOffset_Radius{ 0.f };
 
     /**
      * @brief Special effect flight distance correction magnification
      */
-    float spBulletDistUpRate{ 1 };
+    float spBulletDistUpRate{ 1.f };
 
     /**
      * @brief Target range [m] when unlocked
      *
      * Target range when unlocked (-1: Refer to "range", 0: No target)
      */
-    float nolockTargetDist{ 0 };
+    float nolockTargetDist{ 0.f };
 
     unsigned char pad4[8];
 };

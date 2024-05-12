@@ -50,21 +50,21 @@ struct NPC_PARAM_ST {
      *
      * Rotational speed [degrees / second] that can turn in 1 second.
      */
-    float turnVellocity{ 0 };
+    float turnVellocity{ 0.f };
 
     /**
      * @brief Height per map [m]
      *
      * The height of the capsule per character.
      */
-    float hitHeight{ 0 };
+    float hitHeight{ 0.f };
 
     /**
      * @brief Radius per map [m]
      *
      * Radius of capsule per character.
      */
-    float hitRadius{ 0 };
+    float hitRadius{ 0.f };
 
     /**
      * @brief Weight [kg]
@@ -79,7 +79,7 @@ struct NPC_PARAM_ST {
      * Offset of the model display position in the Y (height) direction. It can
      * be floated from the hit position.
      */
-    float hitYOffset{ 0 };
+    float hitYOffset{ 0.f };
 
     /**
      * @brief HP
@@ -123,7 +123,7 @@ struct NPC_PARAM_ST {
      *
      * FootIK Ankle roll limit angle (-1: no limit)
      */
-    float maxAnkleRollAngle{ -1 };
+    float maxAnkleRollAngle{ -1.f };
 
     /**
      * @brief Per group and used navigation mesh
@@ -160,7 +160,7 @@ struct NPC_PARAM_ST {
     /**
      * @brief FootIK Appearance up / down limit
      */
-    float footIkErrorHeightLimit{ 0 };
+    float footIkErrorHeightLimit{ 0.f };
 
     /**
      * @brief Human nature lottery ID
@@ -220,28 +220,28 @@ struct NPC_PARAM_ST {
      *
      * Set the damage cut rate when guarding for each attack
      */
-    float physGuardCutRate{ 0 };
+    float physGuardCutRate{ 0.f };
 
     /**
      * @brief Magic attack cut rate [%]
      *
      * If it is not a guard attack, enter 0
      */
-    float magGuardCutRate{ 0 };
+    float magGuardCutRate{ 0.f };
 
     /**
      * @brief Flame attack power cut rate [%]
      *
      * How much to cut the fire attack?
      */
-    float fireGuardCutRate{ 0 };
+    float fireGuardCutRate{ 0.f };
 
     /**
      * @brief Electric shock attack power cut rate [%]
      *
      * How much to cut the electric shock attack?
      */
-    float thunGuardCutRate{ 0 };
+    float thunGuardCutRate{ 0.f };
 
     /**
      * @brief Anime ID offset 1
@@ -305,7 +305,7 @@ struct NPC_PARAM_ST {
      * Distance to warp instead of complementary movement in network
      * synchronization. Faster people (ex dragons) need to be longer.
      */
-    float networkWarpDist{ 0 };
+    float networkWarpDist{ 0.f };
 
     /**
      * @brief R1
@@ -404,77 +404,77 @@ struct NPC_PARAM_ST {
      *
      * Magnification that adapts to damage processing for part 1
      */
-    float partsDamageRate1{ 1 };
+    float partsDamageRate1{ 1.f };
 
     /**
      * @brief Damage group 2 Damage multiplier
      *
      * Magnification that adapts to damage processing for part 2
      */
-    float partsDamageRate2{ 1 };
+    float partsDamageRate2{ 1.f };
 
     /**
      * @brief Damage group 3 Damage multiplier
      *
      * Magnification that adapts to damage processing for part 3
      */
-    float partsDamageRate3{ 1 };
+    float partsDamageRate3{ 1.f };
 
     /**
      * @brief Damage group 4 damage multiplier
      *
      * Magnification that adapts to damage processing for part 4
      */
-    float partsDamageRate4{ 1 };
+    float partsDamageRate4{ 1.f };
 
     /**
      * @brief Damage group 5 damage multiplier
      *
      * Magnification that adapts to damage processing for part 5
      */
-    float partsDamageRate5{ 1 };
+    float partsDamageRate5{ 1.f };
 
     /**
      * @brief Damage group 6 damage multiplier
      *
      * Magnification to adapt to damage processing for part 6
      */
-    float partsDamageRate6{ 1 };
+    float partsDamageRate6{ 1.f };
 
     /**
      * @brief Damage group 7 Damage multiplier
      *
      * Magnification that adapts to damage processing for part 7
      */
-    float partsDamageRate7{ 1 };
+    float partsDamageRate7{ 1.f };
 
     /**
      * @brief Damage group 8 damage multiplier
      *
      * Magnification that adapts to damage processing for part 8
      */
-    float partsDamageRate8{ 1 };
+    float partsDamageRate8{ 1.f };
 
     /**
      * @brief Weak point damage ratio
      *
      * Magnification that adapts to damage processing for weak points
      */
-    float weakPartsDamageRate{ 1 };
+    float weakPartsDamageRate{ 1.f };
 
     /**
      * @brief SA recovery time correction value
      *
      * Correction value for super armor recovery time
      */
-    float superArmorRecoverCorrection{ 0 };
+    float superArmorRecoverCorrection{ 0.f };
 
     /**
      * @brief Knockback distance at SA break
      *
      * Knockback distance that can be used only at the time of SA break
      */
-    float superArmorBrakeKnockbackDist{ 0 };
+    float superArmorBrakeKnockbackDist{ 0.f };
 
     /**
      * @brief stamina
@@ -1290,21 +1290,21 @@ struct NPC_PARAM_ST {
      * search judgment (applicable to enemy drop items. Used for large
      * characters etc.)
      */
-    float itemSearchRadius{ 0 };
+    float itemSearchRadius{ 0.f };
 
     /**
      * @brief Height per character [m]
      *
      * The height of the capsule per character.
      */
-    float chrHitHeight{ 0 };
+    float chrHitHeight{ 0.f };
 
     /**
      * @brief Radius per character [m]
      *
      * Radius of capsule per character.
      */
-    float chrHitRadius{ 0 };
+    float chrHitRadius{ 0.f };
 
     /**
      * @brief Special turning type
@@ -1388,7 +1388,7 @@ struct NPC_PARAM_ST {
      * Make a special turn when the distance to the target is greater than or
      * equal to the set threshold
      */
-    float specialTurnDistanceThreshold{ 4 };
+    float specialTurnDistanceThreshold{ 4.f };
 
     /**
      * @brief Foot effect identifier
@@ -1503,7 +1503,7 @@ struct NPC_PARAM_ST {
      *
      * Correction value for toughness recovery time
      */
-    float toughnessRecoverCorrection{ 0 };
+    float toughnessRecoverCorrection{ 0.f };
 
     /**
      * @brief Non-attribute damage multiplier
@@ -1511,7 +1511,7 @@ struct NPC_PARAM_ST {
      * Non-attribute damage multiplier. The final damage value is the value
      * obtained by multiplying the damage calculation result by this value.
      */
-    float neutralDamageCutRate{ 1 };
+    float neutralDamageCutRate{ 1.f };
 
     /**
      * @brief Slash damage multiplier
@@ -1519,7 +1519,7 @@ struct NPC_PARAM_ST {
      * Slash damage multiplier. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float slashDamageCutRate{ 1 };
+    float slashDamageCutRate{ 1.f };
 
     /**
      * @brief Batter damage multiplier
@@ -1527,7 +1527,7 @@ struct NPC_PARAM_ST {
      * Batter damage multiplier. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float blowDamageCutRate{ 1 };
+    float blowDamageCutRate{ 1.f };
 
     /**
      * @brief Puncture damage ratio
@@ -1535,7 +1535,7 @@ struct NPC_PARAM_ST {
      * Puncture damage ratio. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float thrustDamageCutRate{ 1 };
+    float thrustDamageCutRate{ 1.f };
 
     /**
      * @brief Magic damage multiplier
@@ -1543,7 +1543,7 @@ struct NPC_PARAM_ST {
      * Magic damage multiplier. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float magicDamageCutRate{ 1 };
+    float magicDamageCutRate{ 1.f };
 
     /**
      * @brief Flame damage multiplier
@@ -1551,7 +1551,7 @@ struct NPC_PARAM_ST {
      * Flame damage multiplier. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float fireDamageCutRate{ 1 };
+    float fireDamageCutRate{ 1.f };
 
     /**
      * @brief Electric shock damage ratio
@@ -1559,7 +1559,7 @@ struct NPC_PARAM_ST {
      * Electric shock damage ratio. The final damage value is the value obtained
      * by multiplying the damage calculation result by this value.
      */
-    float thunderDamageCutRate{ 1 };
+    float thunderDamageCutRate{ 1.f };
 
     /**
      * @brief Dark damage multiplier
@@ -1567,14 +1567,14 @@ struct NPC_PARAM_ST {
      * Dark damage multiplier. The final damage value is the value obtained by
      * multiplying the damage calculation result by this value.
      */
-    float darkDamageCutRate{ 1 };
+    float darkDamageCutRate{ 1.f };
 
     /**
      * @brief Dark attack power cut rate [%]
      *
      * How much to cut the dark attack?
      */
-    float darkGuardCutRate{ 0 };
+    float darkGuardCutRate{ 0.f };
 
     /**
      * @brief Cross update priority offset [m]
@@ -1634,7 +1634,7 @@ struct NPC_PARAM_ST {
      * FootIK Ankle pitch limit angle (-1: no limit). If you have not set Foot
      * End L S in HAT, this angle is used in common with rolls.
      */
-    float maxAnklePitchAngle{ -1 };
+    float maxAnklePitchAngle{ -1.f };
 
     /**
      * @brief Cold resistance
@@ -1747,7 +1747,7 @@ struct NPC_PARAM_ST {
      * Create a conical lock-on non-lockable area beneath the enemy. The angle
      * of the size of the cone. Can be changed temporarily from TAE
      */
-    float disableLockOnAng{ 0 };
+    float disableLockOnAng{ 0.f };
 
     /**
      * @brief Cross OffLOD level
@@ -1886,7 +1886,7 @@ struct NPC_PARAM_ST {
      * hearing judgment. Use this value as an offset only if it is set to 0 or
      * higher.
      */
-    float hearingHeadSize{ -1 };
+    float hearingHeadSize{ -1.f };
 
     /**
      * @brief Sound bank ID
@@ -1915,12 +1915,12 @@ struct NPC_PARAM_ST {
     /**
      * @brief Platoon Deactive Movement Speed [m / s]
      */
-    float deactiveMoveSpeed{ 0 };
+    float deactiveMoveSpeed{ 0.f };
 
     /**
      * @brief Distance to switch to platoon deactive movement [m]
      */
-    float deactiveMoveDist{ 0 };
+    float deactiveMoveDist{ 0.f };
 
     /**
      * @brief Sound source effective distance [m]
@@ -1928,14 +1928,14 @@ struct NPC_PARAM_ST {
      * The distance from the player for which the character sound source is
      * valid. -1: Effective at all distances
      */
-    float enableSoundObjDist{ 48 };
+    float enableSoundObjDist{ 48.f };
 
     /**
      * @brief Correction gain value to match undulations
      *
      * Set the speed when adjusting the angle to the undulations
      */
-    float undulationCorrectGain{ 0.1 };
+    float undulationCorrectGain{ 0.1f };
 
     /**
      * @brief Foot decal identifier 2
@@ -1975,7 +1975,7 @@ struct NPC_PARAM_ST {
      * Used to determine the activation / renewal level. The larger it is, the
      * lower the update level will be even if you are far from the player.
      */
-    float updateActivatePriolity{ 1 };
+    float updateActivatePriolity{ 1.f };
 
     /**
      * @brief Pre-death navigation mesh flag
@@ -2005,14 +2005,14 @@ struct NPC_PARAM_ST {
      *
      * Specify the radius of the wheel [m]
      */
-    float wheelRotRadius{ 0 };
+    float wheelRotRadius{ 0.f };
 
     /**
      * @brief Retarget movement amount magnification
      *
      * Magnification of movement amount at the time of retargeting
      */
-    float retargetMoveRate{ 1 };
+    float retargetMoveRate{ 1.f };
 
     /**
      * @brief Ladder warp position offset
@@ -2020,7 +2020,7 @@ struct NPC_PARAM_ST {
      * Offsets along the Damipoly Z-axis at the specified value. Both positive
      * and negative numbers can be specified.
      */
-    float ladderWarpOffset{ 0 };
+    float ladderWarpOffset{ 0.f };
 
     /**
      * @brief Load asset ID
@@ -2082,12 +2082,12 @@ struct NPC_PARAM_ST {
     /**
      * @brief FootIK Appearance height correction ON gain value
      */
-    float footIkErrorOnGain{ 0.1 };
+    float footIkErrorOnGain{ 0.1f };
 
     /**
      * @brief FootIK Appearance height correction OFF gain value
      */
-    float footIkErrorOffGain{ 0.4 };
+    float footIkErrorOffGain{ 0.4f };
 
     /**
      * @brief Additional sound bank ID
@@ -2118,21 +2118,21 @@ struct NPC_PARAM_ST {
      *
      * Super armor durability value
      */
-    float superArmorDurability{ 0 };
+    float superArmorDurability{ 0.f };
 
     /**
      * @brief SA recovery speed correction value
      *
      * Correct the SA recovery speed by multiplying the SA basic recovery amount
      */
-    float saRecoveryRate{ 1 };
+    float saRecoveryRate{ 1.f };
 
     /**
      * @brief SA attack cut rate [%]
      *
      * Cut rate of SA damage when guard is successful
      */
-    float saGuardCutRate{ 0 };
+    float saGuardCutRate{ 0.f };
 
     /**
      * @brief Bleeding resistance correction rule ID
@@ -2190,17 +2190,17 @@ struct NPC_PARAM_ST {
     /**
      * @brief Step crossing display interpolation time
      */
-    float stepDispInterpolateTime{ 0.5 };
+    float stepDispInterpolateTime{ 0.5f };
 
     /**
      * @brief Step crossing display activation judgment value
      */
-    float stepDispInterpolateTriggerValue{ 0.6 };
+    float stepDispInterpolateTriggerValue{ 0.6f };
 
     /**
      * @brief Lock score correction value
      */
-    float lockScoreOffset{ 0 };
+    float lockScoreOffset{ 0.f };
 
     unsigned char pad12[8];
 };

@@ -39,7 +39,7 @@ struct ENEMY_COMMON_PARAM_ST {
      * At the time of Unreach pass, if the end and the target are within this
      * distance, an interrupt is generated.
      */
-    float findUnfavorableFailedPointDist{ 0 };
+    float findUnfavorableFailedPointDist{ 0.f };
 
     /**
      * @brief The height that causes an interrupt, which turns out that the
@@ -48,7 +48,7 @@ struct ENEMY_COMMON_PARAM_ST {
      * At the time of Unreach pass, if the end and the target are more than this
      * distance, an interrupt is generated.
      */
-    float findUnfavorableFailedPointHeight{ 0 };
+    float findUnfavorableFailedPointHeight{ 0.f };
 
     unsigned char reserved18[184];
 };

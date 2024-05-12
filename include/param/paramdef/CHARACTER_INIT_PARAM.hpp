@@ -10,14 +10,14 @@ struct CHARACTER_INIT_PARAM {
      *
      * Time until MP recovers 1 point (first decimal place)
      */
-    float baseRec_mp{ 0 };
+    float baseRec_mp{ 0.f };
 
     /**
      * @brief Stamina recovery speed basic value [s]
      *
      * Time to recover 1 point of stamina (first decimal place)
      */
-    float baseRec_sp{ 0 };
+    float baseRec_sp{ 0.f };
 
     /**
      * @brief Fall damage reduction correction [%]
@@ -25,7 +25,7 @@ struct CHARACTER_INIT_PARAM {
      * Damage reduction amount (%) that can be a cushion when scolded by another
      * character from above (first decimal place)
      */
-    float red_Falldam{ 0 };
+    float red_Falldam{ 0.f };
 
     /**
      * @brief Early soul

@@ -186,7 +186,7 @@ struct GAME_AREA_PARAM_ST {
      * the intrusion position search when "Is the intrusion point automatically
      * generated?" In the multiplayer area para.
      */
-    float bossPosX{ 0 };
+    float bossPosX{ 0.f };
 
     /**
      * @brief Boss position_Y coordinates
@@ -196,7 +196,7 @@ struct GAME_AREA_PARAM_ST {
      * the intrusion position search when "Is the intrusion point automatically
      * generated?" In the multiplayer area para.
      */
-    float bossPosY{ 0 };
+    float bossPosY{ 0.f };
 
     /**
      * @brief Boss position_Z coordinates
@@ -206,7 +206,7 @@ struct GAME_AREA_PARAM_ST {
      * the intrusion position search when "Is the intrusion point automatically
      * generated?" In the multiplayer area para.
      */
-    float bossPosZ{ 0 };
+    float bossPosZ{ 0.f };
 
     /**
      * @brief Boss position_Area number (mXX_00_00_00)

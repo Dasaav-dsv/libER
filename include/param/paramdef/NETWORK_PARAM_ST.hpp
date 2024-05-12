@@ -8,17 +8,17 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Sign height offset [m]
      */
-    float signVerticalOffset{ 0 };
+    float signVerticalOffset{ 0.f };
 
     /**
      * @brief Sign position correction maximum distance [m]
      */
-    float maxSignPosCorrectionRange{ 0 };
+    float maxSignPosCorrectionRange{ 0.f };
 
     /**
      * @brief Summon desired timeout time [seconds]
      */
-    float summonTimeoutTime{ 0 };
+    float summonTimeoutTime{ 0.f };
 
     unsigned char pad_0[4];
 
@@ -26,23 +26,23 @@ struct NETWORK_PARAM_ST {
      * @brief Message display interval [seconds] during registration of
      * signature accumulation
      */
-    float signPuddleActiveMessageIntervalSec{ 1 };
+    float signPuddleActiveMessageIntervalSec{ 1.f };
 
     /**
      * @brief Key guide vertical range [m]
      */
-    float keyGuideHeight_0{ 1 };
+    float keyGuideHeight_0{ 1.f };
 
     /**
      * @brief Waiting time for reacquisition of summoning sign (during
      * depopulation) [seconds]
      */
-    float reloadSignIntervalTime1{ 1 };
+    float reloadSignIntervalTime1{ 1.f };
 
     /**
      * @brief Summon sign reacquisition waiting time [seconds]
      */
-    float reloadSignIntervalTime2{ 1 };
+    float reloadSignIntervalTime2{ 1.f };
 
     /**
      * @brief Maximum number of summon signs you can have (overall)
@@ -61,27 +61,27 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Summon sign update waiting time [seconds]
      */
-    float updateSignIntervalTime{ 1 };
+    float updateSignIntervalTime{ 1.f };
 
     /**
      * @brief Exclusive horizontal range for drawing between summon signs [m]
      */
-    float basicExclusiveRange_0{ 1 };
+    float basicExclusiveRange_0{ 1.f };
 
     /**
      * @brief Exclusive vertical range for drawing between summon signs [m]
      */
-    float basicExclusiveHeight_0{ 1 };
+    float basicExclusiveHeight_0{ 1.f };
 
     /**
      * @brief Summon sign character model drawing waiting time [seconds]
      */
-    float previewChrWaitingTime{ 1 };
+    float previewChrWaitingTime{ 1.f };
 
     /**
      * @brief Summon sign PC drawing distance [m]
      */
-    float signVisibleRange_0{ 1 };
+    float signVisibleRange_0{ 1.f };
 
     /**
      * @brief Summon sign acquisition cell range (horizontal)
@@ -107,32 +107,32 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief White spirit sign display time limit lower limit magnification
      */
-    float minWhitePhantomLimitTimeScale{ 1 };
+    float minWhitePhantomLimitTimeScale{ 1.f };
 
     /**
      * @brief Small spirit sign display time limit lower limit magnification
      */
-    float minSmallPhantomLimitTimeScale{ 1 };
+    float minSmallPhantomLimitTimeScale{ 1.f };
 
     /**
      * @brief White spirit sign keyword extension magnification
      */
-    float whiteKeywordLimitTimeScale{ 1 };
+    float whiteKeywordLimitTimeScale{ 1.f };
 
     /**
      * @brief Ghost sign keyword extension magnification
      */
-    float smallKeywordLimitTimeScale{ 1 };
+    float smallKeywordLimitTimeScale{ 1.f };
 
     /**
      * @brief Dark Spirit Sign Keyword Extension Magnification
      */
-    float blackKeywordLimitTimeScale{ 1 };
+    float blackKeywordLimitTimeScale{ 1.f };
 
     /**
      * @brief Dragon Spirit Sign Keyword Extension Magnification
      */
-    float dragonKeywordLimitTimeScale{ 1 };
+    float dragonKeywordLimitTimeScale{ 1.f };
 
     /**
      * @brief Sign acquisition limit
@@ -144,12 +144,12 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Sign download span
      */
-    float signDownloadSpan{ 1 };
+    float signDownloadSpan{ 1.f };
 
     /**
      * @brief Sign upload span
      */
-    float signUpdateSpan{ 1 };
+    float signUpdateSpan{ 1.f };
 
     /**
      * @brief reserve
@@ -164,24 +164,24 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Intrusion request interval [seconds]
      */
-    float breakInRequestIntervalTimeSec{ 4 };
+    float breakInRequestIntervalTimeSec{ 4.f };
 
     /**
      * @brief Intrusion request timeout time [seconds]
      */
-    float breakInRequestTimeOutSec{ 20 };
+    float breakInRequestTimeOutSec{ 20.f };
 
     unsigned char pad_1[4];
 
     /**
      * @brief Key guide horizontal range [m]
      */
-    float keyGuideRange{ 1 };
+    float keyGuideRange{ 1.f };
 
     /**
      * @brief Key guide vertical range [m]
      */
-    float keyGuideHeight_1{ 1 };
+    float keyGuideHeight_1{ 1.f };
 
     /**
      * @brief Number of blood characters acquired (overall)
@@ -223,17 +223,17 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Blood character drawing exclusive horizontal range [m]
      */
-    float basicExclusiveRange_1{ 1 };
+    float basicExclusiveRange_1{ 1.f };
 
     /**
      * @brief Blood character drawing exclusive vertical range [m]
      */
-    float basicExclusiveHeight_1{ 1 };
+    float basicExclusiveHeight_1{ 1.f };
 
     /**
      * @brief Blood character PC drawing distance [m]
      */
-    float signVisibleRange_1{ 1 };
+    float signVisibleRange_1{ 1.f };
 
     /**
      * @brief Maximum number of written blood characters history
@@ -252,7 +252,7 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Blood character reacquisition waiting time [seconds]
      */
-    float reloadSignIntervalTime_0{ 1 };
+    float reloadSignIntervalTime_0{ 1.f };
 
     /**
      * @brief Blood character acquisition cell range (horizontal)
@@ -285,12 +285,12 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Blood character download interval
      */
-    float downloadSpan_0{ 0 };
+    float downloadSpan_0{ 0.f };
 
     /**
      * @brief Blood character evaluation number Download interval
      */
-    float downloadEvaluationSpan{ 0 };
+    float downloadEvaluationSpan{ 0.f };
 
     unsigned char pad_2[4];
 
@@ -301,22 +301,22 @@ struct NETWORK_PARAM_ST {
      * If the distance between the bloodstain position and the illusion start
      * position is farther than this value, the server will not be registered.
      */
-    float deadingGhostStartPosThreshold{ 1 };
+    float deadingGhostStartPosThreshold{ 1.f };
 
     /**
      * @brief Key guide vertical range [m]
      */
-    float keyGuideHeight_2{ 1 };
+    float keyGuideHeight_2{ 1.f };
 
     /**
      * @brief Player Bloodstain Key Guide Horizontal Range [m]
      */
-    float keyGuideRangePlayer{ 1 };
+    float keyGuideRangePlayer{ 1.f };
 
     /**
      * @brief Player Bloodstain Key Guide Vertical Range [m]
      */
-    float keyGuideHeightPlayer{ 1 };
+    float keyGuideHeightPlayer{ 1.f };
 
     /**
      * @brief Number of blood stains acquired (overall)
@@ -350,22 +350,22 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Waiting time for reacquisition of blood stains [seconds]
      */
-    float reloadSignIntervalTime_1{ 1 };
+    float reloadSignIntervalTime_1{ 1.f };
 
     /**
      * @brief Bloodstain PC drawing distance [m]
      */
-    float signVisibleRange_2{ 1 };
+    float signVisibleRange_2{ 1.f };
 
     /**
      * @brief Exclusive horizontal range for drawing between blood stains [m]
      */
-    float basicExclusiveRange_2{ 1 };
+    float basicExclusiveRange_2{ 1.f };
 
     /**
      * @brief Exclusive vertical range for drawing between blood stains [m]
      */
-    float basicExclusiveHeight_2{ 1 };
+    float basicExclusiveHeight_2{ 1.f };
 
     /**
      * @brief Blood stain acquisition cell range (horizontal)
@@ -398,7 +398,7 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Death illusion record total time [seconds]
      */
-    float recordDeadingGhostTotalTime{ 0 };
+    float recordDeadingGhostTotalTime{ 0.f };
 
     /**
      * @brief Minimum recording time of death illusion [seconds]
@@ -406,12 +406,12 @@ struct NETWORK_PARAM_ST {
      * Death illusions less than this recording time will not register the
      * server
      */
-    float recordDeadingGhostMinTime{ 5 };
+    float recordDeadingGhostMinTime{ 5.f };
 
     /**
      * @brief Bloodstain download interval
      */
-    float downloadSpan_1{ 0 };
+    float downloadSpan_1{ 0.f };
 
     /**
      * @brief Petrified blood stain drawing limit distance [m]
@@ -420,7 +420,7 @@ struct NETWORK_PARAM_ST {
      * the distance between the PC and the generation position is greater than
      * or equal to this value.
      */
-    float statueCreatableDistance{ 80 };
+    float statueCreatableDistance{ 80.f };
 
     /**
      * @brief Number of illusions acquired (overall)
@@ -446,27 +446,27 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Hostile PC replay recording start distance [m]
      */
-    float distanceOfBeginRecordVersus{ 1 };
+    float distanceOfBeginRecordVersus{ 1.f };
 
     /**
      * @brief Hostile PC replay recording end distance [m]
      */
-    float distanceOfEndRecordVersus{ 1 };
+    float distanceOfEndRecordVersus{ 1.f };
 
     /**
      * @brief Wandering illusion upload interval [seconds]
      */
-    float updateWanderGhostIntervalTime{ 1 };
+    float updateWanderGhostIntervalTime{ 1.f };
 
     /**
      * @brief Battle illusion upload interval [seconds]
      */
-    float updateVersusGhostIntervalTime{ 1 };
+    float updateVersusGhostIntervalTime{ 1.f };
 
     /**
      * @brief Phantom recording time [seconds]
      */
-    float recordWanderingGhostTime{ 1 };
+    float recordWanderingGhostTime{ 1.f };
 
     /**
      * @brief Minimum recording time of wandering illusion [seconds]
@@ -474,56 +474,56 @@ struct NETWORK_PARAM_ST {
      * Wandering illusions less than this recording time do not register the
      * server
      */
-    float recordWanderingGhostMinTime{ 5 };
+    float recordWanderingGhostMinTime{ 5.f };
 
     /**
      * @brief Kagaribi illusion upload interval [seconds]
      */
-    float updateBonfireGhostIntervalTime{ 1 };
+    float updateBonfireGhostIntervalTime{ 1.f };
 
     /**
      * @brief Phantom reproduction distance (in the field of view) [seconds]
      */
-    float replayGhostRangeOnView{ 1 };
+    float replayGhostRangeOnView{ 1.f };
 
     /**
      * @brief Phantom playback distance (out of field of view) [seconds]
      */
-    float replayGhostRangeOutView{ 1 };
+    float replayGhostRangeOutView{ 1.f };
 
     /**
      * @brief Kagaribi illusion Playing time [seconds]
      */
-    float replayBonfireGhostTime{ 1 };
+    float replayBonfireGhostTime{ 1.f };
 
     /**
      * @brief Kagaribi illusion placement minimum distance [seconds]
      *
      * Do not place bonfire illusions less than this distance from the bonfire
      */
-    float minBonfireGhostValidRange{ 1 };
+    float minBonfireGhostValidRange{ 1.f };
 
     /**
      * @brief Kagaribi illusion placement maximum distance [seconds]
      *
      * Do not place bonfire illusions beyond this distance from the bonfire
      */
-    float maxBonfireGhostValidRange{ 1 };
+    float maxBonfireGhostValidRange{ 1.f };
 
     /**
      * @brief Phantom playback interval lower limit [seconds]
      */
-    float minReplayIntervalTime{ 1 };
+    float minReplayIntervalTime{ 1.f };
 
     /**
      * @brief Phantom playback interval upper limit [seconds]
      */
-    float maxReplayIntervalTime{ 1 };
+    float maxReplayIntervalTime{ 1.f };
 
     /**
      * @brief Phantom periodic acquisition interval [seconds]
      */
-    float reloadGhostIntervalTime{ 1 };
+    float reloadGhostIntervalTime{ 1.f };
 
     /**
      * @brief Phantom acquisition cell range (horizontal)
@@ -549,7 +549,7 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Phantom bonfire mode playback applicable distance
      */
-    float replayBonfireModeRange{ 1 };
+    float replayBonfireModeRange{ 1.f };
 
     /**
      * @brief Phantom bonfire mode phantom parameter ID
@@ -564,7 +564,7 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Ring search interval [seconds]
      */
-    float reloadVisitListCoolTime{ 1 };
+    float reloadVisitListCoolTime{ 1.f };
 
     /**
      * @brief Maximum number of rescue blue spirits appearing
@@ -588,32 +588,32 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Relief Blue Spirit reload time minimum [sec]
      */
-    float reloadSearch_CoopBlue_Min{ 0 };
+    float reloadSearch_CoopBlue_Min{ 0.f };
 
     /**
      * @brief Relief Blue Spirit reload time maximum [sec]
      */
-    float reloadSearch_CoopBlue_Max{ 0 };
+    float reloadSearch_CoopBlue_Max{ 0.f };
 
     /**
      * @brief Kanemori reload time minimum [sec]
      */
-    float reloadSearch_BellGuard_Min{ 0 };
+    float reloadSearch_BellGuard_Min{ 0.f };
 
     /**
      * @brief Kanemori reload time maximum [sec]
      */
-    float reloadSearch_BellGuard_Max{ 0 };
+    float reloadSearch_BellGuard_Max{ 0.f };
 
     /**
      * @brief Mouse King Reload Time Minimum [sec]
      */
-    float reloadSearch_RatKing_Min{ 0 };
+    float reloadSearch_RatKing_Min{ 0.f };
 
     /**
      * @brief Mouse King Reload Time Maximum [sec]
      */
-    float reloadSearch_RatKing_Max{ 0 };
+    float reloadSearch_RatKing_Max{ 0.f };
 
     /**
      * @brief reserve
@@ -623,32 +623,32 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief SRTT upper limit [milliseconds]
      */
-    float srttMaxLimit{ 1000 };
+    float srttMaxLimit{ 1000.f };
 
     /**
      * @brief SRTT upper limit (when stable) [milliseconds]
      */
-    float srttMeanLimit{ 1000 };
+    float srttMeanLimit{ 1000.f };
 
     /**
      * @brief RTT mean deviation upper limit [milliseconds]
      */
-    float srttMeanDeviationLimit{ 1000 };
+    float srttMeanDeviationLimit{ 1000.f };
 
     /**
      * @brief Dark spirit time limit Acceleration time [seconds]
      */
-    float darkPhantomLimitBoostTime{ 1000 };
+    float darkPhantomLimitBoostTime{ 1000.f };
 
     /**
      * @brief Dark spirit time limit acceleration time magnification
      */
-    float darkPhantomLimitBoostScale{ 1000 };
+    float darkPhantomLimitBoostScale{ 1000.f };
 
     /**
      * @brief Multiplayer invalidation life
      */
-    float multiplayDisableLifeTime{ 1 };
+    float multiplayDisableLifeTime{ 1.f };
 
     /**
      * @brief Abyss Spirit Multiplayer Count
@@ -695,7 +695,7 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Sales time limit for "Line Reason" [seconds]
      */
-    float penaltyForgiveItemLimitTime{ 0 };
+    float penaltyForgiveItemLimitTime{ 0.f };
 
     /**
      * @brief Area search rate: Relief Blue Spirit [0-100]
@@ -736,7 +736,7 @@ struct NETWORK_PARAM_ST {
      * invalid area thicker with this parameter on the thinner side of the OBJ's
      * bounding box with a black door.
      */
-    float doorInvalidPlayAreaExtents{ 1 };
+    float doorInvalidPlayAreaExtents{ 1.f };
 
     /**
      * @brief Maximum number of simultaneous displays of signs
@@ -760,32 +760,32 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Summon message is displayed at interval [seconds]
      */
-    float summonMessageInterval{ 1 };
+    float summonMessageInterval{ 1.f };
 
     /**
      * @brief Host periodic update request interval [seconds]
      */
-    float hostRegisterUpdateTime{ 1 };
+    float hostRegisterUpdateTime{ 1.f };
 
     /**
      * @brief Host guest join wait timeout time [seconds]
      */
-    float hostTimeOutTime{ 1 };
+    float hostTimeOutTime{ 1.f };
 
     /**
      * @brief Authentication wait timeout time from guest host [seconds]
      */
-    float guestUpdateTime{ 1 };
+    float guestUpdateTime{ 1.f };
 
     /**
      * @brief Guest PlayNo Sync wait timeout time [seconds]
      */
-    float guestPlayerNoTimeOutTime{ 1 };
+    float guestPlayerNoTimeOutTime{ 1.f };
 
     /**
      * @brief Host PlayNo Sync wait timeout time [seconds]
      */
-    float hostPlayerNoTimeOutTime{ 1 };
+    float hostPlayerNoTimeOutTime{ 1.f };
 
     /**
      * @brief RequestSearchQuickMatch limit value
@@ -828,12 +828,12 @@ struct NETWORK_PARAM_ST {
     /**
      * @brief Time-out waiting for visit
      */
-    float VisitorTimeOutTime{ 1 };
+    float VisitorTimeOutTime{ 1.f };
 
     /**
      * @brief Visitor list download interval [seconds]
      */
-    float DownloadSpan{ 1 };
+    float DownloadSpan{ 1.f };
 
     /**
      * @brief Visit search message display interval [seconds]
@@ -841,29 +841,29 @@ struct NETWORK_PARAM_ST {
      * Display interval [seconds] of messages sent by visiting guests while
      * searching for a destination
      */
-    float VisitorGuestRequestMessageIntervalSec{ 1 };
+    float VisitorGuestRequestMessageIntervalSec{ 1.f };
 
     /**
      * @brief Wandering illusion life
      */
-    float wanderGhostIntervalLifeTime{ 40 };
+    float wanderGhostIntervalLifeTime{ 40.f };
 
     unsigned char pad13[12];
 
     /**
      * @brief Yellow robe's old man waiting time out
      */
-    float YellowMonkTimeOutTime{ 1 };
+    float YellowMonkTimeOutTime{ 1.f };
 
     /**
      * @brief Yellow robe list download interval
      */
-    float YellowMonkDownloadSpan{ 1 };
+    float YellowMonkDownloadSpan{ 1.f };
 
     /**
      * @brief Yellow robe's whole flow time-out
      */
-    float YellowMonkOverallFlowTimeOutTime{ 1 };
+    float YellowMonkOverallFlowTimeOutTime{ 1.f };
 
     unsigned char pad14_0[4];
 

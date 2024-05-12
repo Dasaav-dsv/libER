@@ -221,12 +221,12 @@ struct OBJECT_PARAM_ST {
     /**
      * @brief Wind coefficient (before destruction)
      */
-    float windEffectRate_0{ 0.5 };
+    float windEffectRate_0{ 0.5f };
 
     /**
      * @brief Wind coefficient (after destruction)
      */
-    float windEffectRate_1{ 0.5 };
+    float windEffectRate_1{ 0.5f };
 
     /**
      * @brief Forced stop time after destruction
@@ -234,21 +234,21 @@ struct OBJECT_PARAM_ST {
      * Time from destruction to forced stop of rigid body (do not force stop at
      * 0)
      */
-    float breakStopTime{ 0 };
+    float breakStopTime{ 0.f };
 
     /**
      * @brief Burning time (seconds)
      *
      * Burning time (seconds) (continues to burn at 0)
      */
-    float burnTime{ 0 };
+    float burnTime{ 0.f };
 
     /**
      * @brief Combustion fracture judgment progress
      *
      * Burnup threshold for switching to the ruptured state
      */
-    float burnBraekRate{ 0.5 };
+    float burnBraekRate{ 0.5f };
 
     /**
      * @brief Combustion SFXID: 0
@@ -334,7 +334,7 @@ struct OBJECT_PARAM_ST {
      *
      * Time to delay the generation of bullets for fire spread (seconds)
      */
-    float burnBulletDelayTime{ 0 };
+    float burnBulletDelayTime{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 0
@@ -342,7 +342,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin{ 0 };
+    float burnSfxDelayTimeMin{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 1
@@ -350,7 +350,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_1{ 0 };
+    float burnSfxDelayTimeMin_1{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 2
@@ -358,7 +358,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_2{ 0 };
+    float burnSfxDelayTimeMin_2{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay Start time (seconds): 3
@@ -366,7 +366,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMin_3{ 0 };
+    float burnSfxDelayTimeMin_3{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 0
@@ -374,7 +374,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax{ 0 };
+    float burnSfxDelayTimeMax{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 1
@@ -382,7 +382,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_1{ 0 };
+    float burnSfxDelayTimeMax_1{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 2
@@ -390,7 +390,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_2{ 0 };
+    float burnSfxDelayTimeMax_2{ 0.f };
 
     /**
      * @brief Combustion SFX generation delay End time (seconds): 3
@@ -398,7 +398,7 @@ struct OBJECT_PARAM_ST {
      * SFX generation delay time during combustion Randomly determined between
      * start and end times
      */
-    float burnSfxDelayTimeMax_3{ 0 };
+    float burnSfxDelayTimeMax_3{ 0.f };
 
     /**
      * @brief AI sound ID generated at the time of destruction
@@ -410,14 +410,14 @@ struct OBJECT_PARAM_ST {
      *
      * Material ID of debris (-1: Do not hide)
      */
-    float FragmentInvisibleWaitTime{ 0 };
+    float FragmentInvisibleWaitTime{ 0.f };
 
     /**
      * @brief Debris non-display time (seconds)
      *
      * Time to hide debris (seconds)
      */
-    float FragmentInvisibleTime{ 0 };
+    float FragmentInvisibleTime{ 0.f };
 
     unsigned char pad_3[16];
 
@@ -427,21 +427,21 @@ struct OBJECT_PARAM_ST {
      * Rigid body soft contact setting Collision point distance coefficient
      * [soft]
      */
-    float RigidPenetrationScale_Soft{ 0 };
+    float RigidPenetrationScale_Soft{ 0.f };
 
     /**
      * @brief Rigid body collision point distance coefficient [normal]
      *
      * Rigid soft contact setting Collision point distance coefficient [Normal]
      */
-    float RigidPenetrationScale_Normal{ 0 };
+    float RigidPenetrationScale_Normal{ 0.f };
 
     /**
      * @brief Rigid body collision point distance coefficient [hard]
      *
      * Rigid soft contact setting Collision point distance coefficient [hard]
      */
-    float RigidPenetrationScale_Hard{ 0 };
+    float RigidPenetrationScale_Hard{ 0.f };
 
     /**
      * @brief SFX ID at the time of terrain contact
@@ -473,14 +473,14 @@ struct OBJECT_PARAM_ST {
      * Time until dynamically generated Obj disappears after generation (0: does
      * not disappear)
      */
-    float lifeTime_forDC{ 0 };
+    float lifeTime_forDC{ 0.f };
 
     /**
      * @brief Cross update distance (m)
      *
      * Distance from the camera to update havokCloth (0: always update)
      */
-    float clothUpdateDist{ 0 };
+    float clothUpdateDist{ 0.f };
 
     /**
      * @brief SE ID when contacting a player
@@ -532,7 +532,7 @@ struct OBJECT_PARAM_ST {
      * Map automatic generation OBJ appearance height offset [m], does it float
      * from where the ray cast hits?
      */
-    float autoCreateDynamicOffsetHeight{ 0.1 };
+    float autoCreateDynamicOffsetHeight{ 0.1f };
 
     int reserved0{ -1 };
 

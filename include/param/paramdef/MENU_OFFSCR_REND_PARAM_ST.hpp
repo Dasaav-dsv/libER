@@ -8,57 +8,57 @@ struct MENU_OFFSCR_REND_PARAM_ST {
     /**
      * @brief Camera gaze point X
      */
-    float camAtPosX{ 0 };
+    float camAtPosX{ 0.f };
 
     /**
      * @brief Camera gaze point Y
      */
-    float camAtPosY{ 0 };
+    float camAtPosY{ 0.f };
 
     /**
      * @brief Camera gaze point Z
      */
-    float camAtPosZ{ 0 };
+    float camAtPosZ{ 0.f };
 
     /**
      * @brief Camera distance
      */
-    float camDist{ 10 };
+    float camDist{ 10.f };
 
     /**
      * @brief Camera oriented X
      */
-    float camRotX{ 0 };
+    float camRotX{ 0.f };
 
     /**
      * @brief Suitable for camera Y
      */
-    float camRotY{ 0 };
+    float camRotY{ 0.f };
 
     /**
      * @brief Camera angle of view
      */
-    float camFov{ 49 };
+    float camFov{ 49.f };
 
     /**
      * @brief Shortest distance when operating the camera
      */
-    float camDistMin{ 0 };
+    float camDistMin{ 0.f };
 
     /**
      * @brief Longest distance when operating the camera
      */
-    float camDistMax{ 100 };
+    float camDistMax{ 100.f };
 
     /**
      * @brief Minimum orientation when operating the camera
      */
-    float camRotXMin{ -89 };
+    float camRotXMin{ -89.f };
 
     /**
      * @brief Maximum orientation when operating the camera
      */
-    float camRotXMax{ 89 };
+    float camRotXMax{ 89.f };
 
     /**
      * @brief GparamID

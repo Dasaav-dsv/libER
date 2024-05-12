@@ -45,7 +45,7 @@ struct CHR_MODEL_PARAM_ST {
      *
      * If this value is exceeded, a report will be sent by the reporting system.
      */
-    float reportAnimMemSizeMb{ 12 };
+    float reportAnimMemSizeMb{ 12.f };
 
     unsigned int unk{ 0 };
 };

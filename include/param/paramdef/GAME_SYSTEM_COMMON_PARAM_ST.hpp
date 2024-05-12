@@ -10,7 +10,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * This is the basic value of toughness recovery time. (Seconds)
      */
-    float baseToughnessRecoverTime{ 0 };
+    float baseToughnessRecoverTime{ 0.f };
 
     /**
      * @brief Character event turning animation (90 ° left)
@@ -60,7 +60,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Stealth attack damage multiplier
      */
-    float stealthAtkDamageRate{ 0 };
+    float stealthAtkDamageRate{ 0.f };
 
     /**
      * @brief Damage cut rate when the guard is successful when repelled
@@ -68,7 +68,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Damage cut rate when the guard is successful when repelled. Multiply the
      * final damage
      */
-    float flickDamageCutRateSuccessGurad{ 0 };
+    float flickDamageCutRateSuccessGurad{ 0.f };
 
     /**
      * @brief Difference angle to start playing NPC conversation animation
@@ -76,7 +76,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * This is the difference angle at which the animation playback of the
      * motion during the conversation of the NPC conversation starts.
      */
-    float npcTalkAnimBeginDiffAngle{ 0 };
+    float npcTalkAnimBeginDiffAngle{ 0.f };
 
     /**
      * @brief Difference angle to stop animation playback of NPC conversation
@@ -84,7 +84,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * This is the difference angle at which the animation playback of the
      * motion during the conversation of the NPC conversation is stopped.
      */
-    float npcTalkAnimEndDiffAngle{ 0 };
+    float npcTalkAnimEndDiffAngle{ 0.f };
 
     /**
      * @brief Nemuri Item Acquisition Range_Action Button Para ID
@@ -98,7 +98,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Buddy item permission_SFX occurrence interval [s]
      */
-    float allowUseBuddyItem_sfxInterval{ 0 };
+    float allowUseBuddyItem_sfxInterval{ 0.f };
 
     /**
      * @brief Buddy Item Permission_SFX Occurrence PC Damipoli ID
@@ -118,7 +118,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Buddy Summoning_Initial Range_SFX Occurrence Interval [s]
      */
-    float onBuddySummon_inActivateRange_sfxInterval{ 0 };
+    float onBuddySummon_inActivateRange_sfxInterval{ 0.f };
 
     /**
      * @brief Buddy Summoning_Initial Range_SFX Occurrence PC Damipoli ID
@@ -286,12 +286,12 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Distance at which you can create a sign away from the last safe position
      * on your PC [m]
      */
-    float signCreatableDistFromSafePos{ 0 };
+    float signCreatableDistFromSafePos{ 0.f };
 
     /**
      * @brief Distance between host and guest where resummoning occurs [m]
      */
-    float guestResummonDist{ 0 };
+    float guestResummonDist{ 0.f };
 
     /**
      * @brief Distance to notify the guest that they are about to leave the host
@@ -300,7 +300,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Distance [m] to notify the guest that they are about to leave the host.
      * Notify me when I'm farther than this distance.
      */
-    float guestLeavingMessageDistMax{ 0 };
+    float guestLeavingMessageDistMax{ 0.f };
 
     /**
      * @brief Distance that allows guests to be re-notified that they are about
@@ -309,7 +309,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Distance [m] that allows the guest to be re-notified that they are about
      * to leave the host. Do not re-notify until closer than this distance.
      */
-    float guestLeavingMessageDistMin{ 0 };
+    float guestLeavingMessageDistMin{ 0.f };
 
     /**
      * @brief Maximum distance the guest can be away from the host [m]
@@ -318,7 +318,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * of time elapses while the distance is longer than this distance, the
      * session will be withdrawn.
      */
-    float guestLeaveSessionDist{ 0 };
+    float guestLeaveSessionDist{ 0.f };
 
     /**
      * @brief Retry area radius_default value (m)
@@ -327,7 +327,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * the radius and area are not set in the event type "Retry Point" of
      * MapStudio.
      */
-    float retryPointAreaRadius{ -1 };
+    float retryPointAreaRadius{ -1.f };
 
     /**
      * @brief Special effect ID that activates when Nemuri items can be acquired
@@ -381,7 +381,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * @brief Time from the start of est absorption SFX playback to the start of
      * est addition processing
      */
-    float estusFlaskRecovery_AddEstusTime{ 0 };
+    float estusFlaskRecovery_AddEstusTime{ 0.f };
 
     /**
      * @brief Soul correction value acquired when defeating enemies at multi
@@ -390,7 +390,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Correction value of the amount of soul acquired by the host when
      * defeating a normal enemy in multiplayer
      */
-    float defeatMultiModeEnemyOfSoulCorrectRate_byHost{ 0 };
+    float defeatMultiModeEnemyOfSoulCorrectRate_byHost{ 0.f };
 
     /**
      * @brief Soul correction value acquired when defeating enemies at multi
@@ -399,7 +399,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Correction value of the amount of soul acquired by cooperating spirits
      * when defeating a normal enemy in multiplayer
      */
-    float defeatMultiModeEnemyOfSoulCorrectRate_byTeamGhost{ 0 };
+    float defeatMultiModeEnemyOfSoulCorrectRate_byTeamGhost{ 0.f };
 
     /**
      * @brief Soul correction value acquired when defeating the boss at the time
@@ -408,7 +408,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Correction value of the amount of soul acquired by the host when
      * defeating the boss in multiplayer
      */
-    float defeatMultiModeBossOfSoulCorrectRate_byHost{ 0 };
+    float defeatMultiModeBossOfSoulCorrectRate_byHost{ 0.f };
 
     /**
      * @brief Soul correction value acquired when defeating the boss at the time
@@ -417,7 +417,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Correction value of the amount of soul acquired when the boss is defeated
      * in multiplayer
      */
-    float defeatMultiModeBossOfSoulCorrectRate_byTeamGhost{ 0 };
+    float defeatMultiModeBossOfSoulCorrectRate_byTeamGhost{ 0.f };
 
     /**
      * @brief Offset to prevent the HP gauge of the enemy character from being
@@ -464,7 +464,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * Magnification to be corrected at the time of riding special attack
      */
-    float saAttackRate_forVsRideAtk{ 1 };
+    float saAttackRate_forVsRideAtk{ 1.f };
 
     /**
      * @brief Special effects on the enemy side when drawing Nemuri items
@@ -534,7 +534,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * For tutorial judgment: The riding large jump point is expanded by ○ [m]
      * to judge inside and outside. ○ Set the value of [m] here.
      */
-    float tutorialCheckRideJumpRegionExpandRange{ 0 };
+    float tutorialCheckRideJumpRegionExpandRange{ 0.f };
 
     /**
      * @brief PC animation ID when retry point is activated
@@ -547,7 +547,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Delay time of dialog display when retry point is started [seconds]
      */
-    float retryPointActivatedDialogDelayTime{ 0 };
+    float retryPointActivatedDialogDelayTime{ 0.f };
 
     /**
      * @brief Text ID of the dialog when starting the retry point
@@ -569,7 +569,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * @brief Delay time of dialog display at startup of sign accumulation
      * [seconds]
      */
-    float signPuddleOpenDialogDelayTime{ 0 };
+    float signPuddleOpenDialogDelayTime{ 0.f };
 
     /**
      * @brief Bullet ID when the "Activity of the Dead" special effect is
@@ -596,13 +596,13 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Fade time when the corpse fades out when the "Activity of the Dead"
      * special effect is activated
      */
-    float activityOfDeadSpEffect_DeadFadeOutTime{ 0 };
+    float activityOfDeadSpEffect_DeadFadeOutTime{ 0.f };
 
     /**
      * @brief Time to ignore transitions due to network information at the start
      * of throwing
      */
-    float ignorNetStateSyncTime_ForThrow{ 0 };
+    float ignorNetStateSyncTime_ForThrow{ 0.f };
 
     /**
      * @brief Multi-pre-penalty: LAN disconnection
@@ -631,7 +631,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Multi-pre-penalty: Waiting time (seconds) to start the generation (sale)
      * of the bone of reason
      */
-    float netPenaltyForgiveItemLimitTime{ 0 };
+    float netPenaltyForgiveItemLimitTime{ 0.f };
 
     /**
      * @brief Multi-pre-penalty: Penalty judgment points
@@ -668,13 +668,13 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * Maximum searchable distance
      */
-    float activityOfDeadTargetSearchSpEffect_MaxLength{ 0 };
+    float activityOfDeadTargetSearchSpEffect_MaxLength{ 0.f };
 
     /**
      * @brief Field of view_Minimum guaranteed distance [magnification
      * conversion]
      */
-    float sightRangeLowerPromiseRate{ 0 };
+    float sightRangeLowerPromiseRate{ 0.f };
 
     /**
      * @brief SA large damage hit production SFX_ Occurrence condition SA damage
@@ -702,14 +702,14 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Voice playback timeout for NPC conversations. If voice playback does not
      * end after this time, proceed to the next message.
      */
-    float npcTalkTimeOutThreshold{ 0 };
+    float npcTalkTimeOutThreshold{ 0.f };
 
     /**
      * @brief Playlog transmission interval
      *
      * Interval to send item usage log etc. to the server
      */
-    float sendPlayLogIntervalTime{ 0 };
+    float sendPlayLogIntervalTime{ 0.f };
 
     /**
      * @brief Maximum number of seven-colored stones installed
@@ -982,7 +982,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * Interval to send global event log to server
      */
-    float sendGlobalEventLogIntervalTime{ 0 };
+    float sendGlobalEventLogIntervalTime{ 0.f };
 
     /**
      * @brief Solo intrusion point addition value_white sign
@@ -1027,7 +1027,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * door = Soul required for red hunting to change from the previous Lv to
      * the current Lv * This magnification
      */
-    float redHunter_HostBossAreaGetSoulRate{ 0 };
+    float redHunter_HostBossAreaGetSoulRate{ 0.f };
 
     /**
      * @brief Decal parameter ID of the trace of wandering illusion
@@ -1044,7 +1044,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * If this count time elapses while you are out of the multiplayer limit
      * distance, the multiplayer will be disbanded.
      */
-    float leaveAroundHostWarningTime{ 0 };
+    float leaveAroundHostWarningTime{ 0.f };
 
     /**
      * @brief Hosting cost Item ID
@@ -1059,25 +1059,25 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Deceleration parameters for AI jump (0.0: constant velocity motion, 1.0:
      * maximum deceleration, speed 0 at target point)
      */
-    float aIJump_DecelerateParam{ 0 };
+    float aIJump_DecelerateParam{ 0.f };
 
     /**
      * @brief Buddy Instance Deletion Guarantee Time
      *
      * The time from the death flag to the actual disappearance of the instance
      */
-    float buddyDisappearDelaySec{ 0 };
+    float buddyDisappearDelaySec{ 0.f };
 
     /**
      * @brief AI jump jumping Y movement amount correction factor
      */
-    float aIJump_AnimYMoveCorrectRate_onJumpOff{ 0 };
+    float aIJump_AnimYMoveCorrectRate_onJumpOff{ 0.f };
 
     /**
      * @brief Stealth visibility magnification_Crouching without stealth effect
      */
     float stealthSystemSightRate_NotInStealthRigid_NotSightHide_StealthMode{
-        1
+        1.f
     };
 
     /**
@@ -1085,38 +1085,38 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * area
      */
     float stealthSystemSightRate_NotInStealthRigid_SightHide_NotStealthMode{
-        1
+        1.f
     };
 
     /**
      * @brief Stealth visibility magnification_Crouching in stealth ray shielded
      * area
      */
-    float stealthSystemSightRate_NotInStealthRigid_SightHide_StealthMode{ 1 };
+    float stealthSystemSightRate_NotInStealthRigid_SightHide_StealthMode{ 1.f };
 
     /**
      * @brief Stealth visibility magnification_Standing within a stealth hit
      */
     float stealthSystemSightRate_InStealthRigid_NotSightHide_NotStealthMode{
-        1
+        1.f
     };
 
     /**
      * @brief Stealth visibility magnification_Crouching within a stealth hit
      */
-    float stealthSystemSightRate_InStealthRigid_NotSightHide_StealthMode{ 1 };
+    float stealthSystemSightRate_InStealthRigid_NotSightHide_StealthMode{ 1.f };
 
     /**
      * @brief Stealth visibility magnification_Stealth ray shielded area +
      * standing in stealth hit
      */
-    float stealthSystemSightRate_InStealthRigid_SightHide_NotStealthMode{ 1 };
+    float stealthSystemSightRate_InStealthRigid_SightHide_NotStealthMode{ 1.f };
 
     /**
      * @brief Stealth visibility magnification_Stealth ray shielded area +
      * crouching in stealth hit
      */
-    float stealthSystemSightRate_InStealthRigid_SightHide_StealthMode{ 1 };
+    float stealthSystemSightRate_InStealthRigid_SightHide_StealthMode{ 1.f };
 
     /**
      * @brief Treasure corpse default action button parameter ID
@@ -1214,12 +1214,12 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Rider's fall damage multiplier correction_for PC
      */
-    float fallDamageRate_forRidePC{ 1 };
+    float fallDamageRate_forRidePC{ 1.f };
 
     /**
      * @brief Rider's Fall Damage Multiplier Correction_for NPCs
      */
-    float fallDamageRate_forRideNPC{ 1 };
+    float fallDamageRate_forRideNPC{ 1.f };
 
     /**
      * @brief Special effect ID when creating the old man sign of yellow robe
@@ -1229,7 +1229,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Defeated soldier activation distance
      */
-    float StragglerActivateDist{ 0 };
+    float StragglerActivateDist{ 0.f };
 
     /**
      * @brief Permission to use defeated soldier items_Special effects for PC
@@ -1255,57 +1255,57 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Time for a buddy to warp a player with a ray block [s]
      */
-    float buddyWarp_TriggerTimeRayBlocked{ 10 };
+    float buddyWarp_TriggerTimeRayBlocked{ 10.f };
 
     /**
      * @brief Distance at which the buddy warps the player at a straight line
      * distance [m]
      */
-    float buddyWarp_TriggerDistToPlayer{ 25 };
+    float buddyWarp_TriggerDistToPlayer{ 25.f };
 
     /**
      * @brief Time to judge that the buddy is stuck in the pass movement [s]
      *
      * Judgment time when the buddy is stuck in the pass movement [s]
      */
-    float buddyWarp_ThresholdTimePathStacked{ 5 };
+    float buddyWarp_ThresholdTimePathStacked{ 5.f };
 
     /**
      * @brief Distance [m] that the buddy considers to be clogged with a pass
      * move
      */
-    float buddyWarp_ThresholdRangePathStacked{ 1 };
+    float buddyWarp_ThresholdRangePathStacked{ 1.f };
 
     /**
      * @brief [Morning] AI visibility magnification
      */
-    float aiSightRate_morning{ 1 };
+    float aiSightRate_morning{ 1.f };
 
     /**
      * @brief [Day] AI visibility magnification
      */
-    float aiSightRate_noonA{ 1 };
+    float aiSightRate_noonA{ 1.f };
 
     /**
      * @brief Time when the buddy and the player collide and start slipping
      * through [s]
      */
-    float buddyPassThroughTriggerTime{ 0.5 };
+    float buddyPassThroughTriggerTime{ 0.5f };
 
     /**
      * @brief [Evening] AI visibility magnification
      */
-    float aiSightRate_evening{ 1 };
+    float aiSightRate_evening{ 1.f };
 
     /**
      * @brief [Night] AI visibility magnification
      */
-    float aiSightRate_night{ 1 };
+    float aiSightRate_night{ 1.f };
 
     /**
      * @brief [Midnight] AI visibility magnification
      */
-    float aiSightRate_midnightA{ 1 };
+    float aiSightRate_midnightA{ 1.f };
 
     unsigned char reserve4_2[4];
 
@@ -1313,19 +1313,19 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * @brief AI visibility magnification_place where the sun cannot be seen
      * (bright)
      */
-    float aiSightRate_sunloss_light{ 1 };
+    float aiSightRate_sunloss_light{ 1.f };
 
     /**
      * @brief AI visibility magnification_place where the sun cannot be seen
      * (darkness)
      */
-    float aiSightRate_sunloss_dark{ 1 };
+    float aiSightRate_sunloss_dark{ 1.f };
 
     /**
      * @brief AI visibility magnification_place where the sun cannot be seen
      * (total darkness)
      */
-    float aiSightRate_sunloss_veryDark{ 1 };
+    float aiSightRate_sunloss_veryDark{ 1.f };
 
     /**
      * @brief Stealth view angle attenuation factor_ crouching without stealth
@@ -1333,7 +1333,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_NotInStealthRigid_NotSightHide_StealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1342,7 +1342,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_NotInStealthRigid_SightHide_NotStealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1351,7 +1351,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_NotInStealthRigid_SightHide_StealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1359,7 +1359,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_InStealthRigid_NotSightHide_NotStealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1370,7 +1370,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_InStealthRigid_NotSightHide_StealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1379,7 +1379,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_InStealthRigid_SightHide_NotStealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1388,7 +1388,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float
         stealthSystemSightAngleReduceRate_InStealthRigid_SightHide_StealthMode{
-            0
+            0.f
         };
 
     /**
@@ -1502,7 +1502,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * Time zone Player light intensity scale change value (SEQ16562)
      */
-    float pclightScaleByTimezone{ 1 };
+    float pclightScaleByTimezone{ 1.f };
 
     /**
      * @brief Large Rune: Greater Demon Buddy Summon Buddy Special Effect ID
@@ -1858,7 +1858,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      *
      * Network PC Threat Level Notification_Notification Distance [m] (SEQ21950)
      */
-    float remotePlayerThreatLvNotify_NotifyDist{ 0 };
+    float remotePlayerThreatLvNotify_NotifyDist{ 0.f };
 
     /**
      * @brief Network PC threat level notification_notification end distance [m]
@@ -1866,7 +1866,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * Network PC threat level notification_notification end distance [m]
      * (SEQ21950)
      */
-    float remotePlayerThreatLvNotify_EndNotifyDist{ 0 };
+    float remotePlayerThreatLvNotify_EndNotifyDist{ 0.f };
 
     /**
      * @brief Default extended distance of map point discovery area [m]
@@ -1876,7 +1876,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * discovery area is generated by expanding from its own area. Its extended
      * distance
      */
-    float worldMapPointDiscoveryExpandRange{ 0 };
+    float worldMapPointDiscoveryExpandRange{ 0.f };
 
     /**
      * @brief Map point participation area default extended distance [m]
@@ -1886,7 +1886,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * participation area is generated by expanding from its own area. Its
      * extended distance
      */
-    float worldMapPointReentryExpandRange{ 0 };
+    float worldMapPointReentryExpandRange{ 0.f };
 
     /**
      * @brief Network PC threat level notification_Notification time [seconds]
@@ -1916,7 +1916,7 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Big jump to get off_SFX base point offset in the sky
      */
-    float rideJumpoff_SfxHeightOffset{ 0 };
+    float rideJumpoff_SfxHeightOffset{ 0.f };
 
     /**
      * @brief In the big jump area to get off _ Special effect ID for PC horse
@@ -1972,12 +1972,12 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * @brief Time to disable action button operation by holding down the action
      * button
      */
-    float actionButtonInputCancelTime{ -1 };
+    float actionButtonInputCancelTime{ -1.f };
 
     /**
      * @brief Clear bonus acquisition delay time after boss defeat processing
      */
-    float blockClearBonusDelayTime{ 7 };
+    float blockClearBonusDelayTime{ 7.f };
 
     /**
      * @brief [Unused] (Refer to SEQ25048) Distance from the PC to determine the
@@ -1987,23 +1987,23 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      * invalidation of bonfire by enemy [m] (0 or less: PC distance is not
      * checked. Checked at all distances)
      */
-    float bonfireCheckEnemyRange{ -1 };
+    float bonfireCheckEnemyRange{ -1.f };
 
     unsigned char reserved_124[32];
-    float unkR00{ 0 };
-    float unkR04{ 0 };
-    float unkR08{ 0 };
-    float unkR12{ 0 };
-    float unkR16{ 0 };
-    float unkR20{ 0 };
-    float unkR24{ 0 };
-    float unkR28{ 0 };
-    float unkR32{ 0 };
-    float unkR36{ 0 };
-    float unkR40{ 0 };
-    float unkR44{ 0 };
-    float unkR48{ 0 };
-    float unkR52{ 0 };
+    float unkR00{ 0.f };
+    float unkR04{ 0.f };
+    float unkR08{ 0.f };
+    float unkR12{ 0.f };
+    float unkR16{ 0.f };
+    float unkR20{ 0.f };
+    float unkR24{ 0.f };
+    float unkR28{ 0.f };
+    float unkR32{ 0.f };
+    float unkR36{ 0.f };
+    float unkR40{ 0.f };
+    float unkR44{ 0.f };
+    float unkR48{ 0.f };
+    float unkR52{ 0.f };
     unsigned char reserved_124_2[40];
 };
 

@@ -61,7 +61,7 @@ struct WEATHER_ASSET_CREATE_PARAM_ST {
      * Specify the elapsed time. It is referenced only when the occurrence
      * condition is "time elapsed". Real time Specify in seconds.
      */
-    float ElapsedTime{ 0 };
+    float ElapsedTime{ 0.f };
 
     /**
      * @brief Generation delay time [Second]
@@ -70,7 +70,7 @@ struct WEATHER_ASSET_CREATE_PARAM_ST {
      * created slot will be in use while it is delayed. Created immediately with
      * 0 or less.
      */
-    float CreateDelayTime{ -1 };
+    float CreateDelayTime{ -1.f };
 
     /**
      * @brief Probability of occurrence [%]
@@ -85,14 +85,14 @@ struct WEATHER_ASSET_CREATE_PARAM_ST {
      *
      * Specifies the life of the generated asset. Real time Specify in seconds.
      */
-    float LifeTime{ 600 };
+    float LifeTime{ 600.f };
 
     /**
      * @brief Fade time [Second]
      *
      * Time [seconds] used for fade-in and fade-out. No fade below 0.
      */
-    float FadeTime{ 1 };
+    float FadeTime{ 1.f };
 
     /**
      * @brief Generateable start time [Hour]
@@ -101,7 +101,7 @@ struct WEATHER_ASSET_CREATE_PARAM_ST {
      * in either the start or the end, it will be treated as unlimited (can be
      * generated in all time).
      */
-    float EnableCreateTimeMin{ -1 };
+    float EnableCreateTimeMin{ -1.f };
 
     /**
      * @brief Generateable end time [Hour]
@@ -110,7 +110,7 @@ struct WEATHER_ASSET_CREATE_PARAM_ST {
      * in either the start or the end, it will be treated as unlimited (can be
      * generated in all time).
      */
-    float EnableCreateTimeMax{ -1 };
+    float EnableCreateTimeMax{ -1.f };
 
     /**
      * @brief Generation point 0
