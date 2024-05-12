@@ -5,10 +5,33 @@ namespace from {
 namespace paramdef {
 
 struct WHITE_SIGN_COOL_TIME_PARAM_ST {
-    float limitationTime_Normal{ 0 };
-    float limitationTime_NormalDriedFinger{ 0 };
-    float limitationTime_Guardian{ 0 };
-    float limitationTime_GuardianDriedFinger{ 0 };
+    /**
+     * @brief Time limit (normal, no finger)
+     *
+     * Time limit [sec] (normal, dry fingerless)
+     */
+    float limitationTime_Normal{ 0.f };
+
+    /**
+     * @brief Time limit (normal, with fingers)
+     *
+     * Time limit [sec] (normal / dry finger)
+     */
+    float limitationTime_NormalDriedFinger{ 0.f };
+
+    /**
+     * @brief Time limit (map protection, no fingers)
+     *
+     * Time limit [sec] (Map guardian, dry fingerless)
+     */
+    float limitationTime_Guardian{ 0.f };
+
+    /**
+     * @brief Time limit (map protection, with fingers)
+     *
+     * Time limit [sec] (Map guardian / dry finger)
+     */
+    float limitationTime_GuardianDriedFinger{ 0.f };
 };
 
 }; // namespace paramdef

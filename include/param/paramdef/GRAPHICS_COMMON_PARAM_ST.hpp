@@ -5,9 +5,23 @@ namespace from {
 namespace paramdef {
 
 struct GRAPHICS_COMMON_PARAM_ST {
-    float hitBulletDecalOffset_HitIns{ 0.05 };
+    /**
+     * @brief Decal generation position offset when a bullet hits HIT INS
+     *
+     * The position where the decal that occurs when hitting HIT INS is offset
+     * by this value in the normal direction.
+     */
+    float hitBulletDecalOffset_HitIns{ 0.05f };
+
     unsigned char reserved02[8];
-    float charaWetDecalFadeRange{ 0.6 };
+
+    /**
+     * @brief Decal fade range when the character gets wet [m]
+     *
+     * Fade range that erases decals when the character gets wet [m]
+     */
+    float charaWetDecalFadeRange{ 0.6f };
+
     unsigned char reserved04[240];
 };
 

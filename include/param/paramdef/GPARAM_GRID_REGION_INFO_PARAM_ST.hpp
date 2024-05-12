@@ -5,7 +5,14 @@ namespace from {
 namespace paramdef {
 
 struct GPARAM_GRID_REGION_INFO_PARAM_ST {
+    /**
+     * @brief Open local ID for MapGparam
+     *
+     * Open local ID for MapGparam. Used for the XX part of
+     * m60_00_00XX.gparamxml
+     */
     unsigned int GparamGridRegionId{ 0 };
+
     unsigned char Reserve[28];
 };
 

@@ -5,7 +5,12 @@ namespace from {
 namespace paramdef {
 
 struct SE_ACTIVATION_RANGE_PARAM_ST {
-    float activateRange{ 0 };
+    /**
+     * @brief Activate distance
+     *
+     * Distance to enable placement SE (m) (0 or less: always enabled)
+     */
+    float activateRange{ 0.f };
 };
 
 }; // namespace paramdef

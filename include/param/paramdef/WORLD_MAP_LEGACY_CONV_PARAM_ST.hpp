@@ -5,25 +5,97 @@ namespace from {
 namespace paramdef {
 
 struct WORLD_MAP_LEGACY_CONV_PARAM_ST {
+    /**
+     * @brief Do you remove it from the NT version output?
+     *
+     * Parameters marked with ○ are excluded in the NT version package.
+     */
     bool disableParam_NT : 1 { false };
+
+    /**
+     * @brief Reserve for package output 1
+     */
     unsigned char disableParamReserve1 : 7;
+
+    /**
+     * @brief Reserve for package output 2
+     */
     unsigned char disableParamReserve2[3];
+
+    /**
+     * @brief Conversion source map ID: Area number
+     */
     unsigned char srcAreaNo{ 0 };
+
+    /**
+     * @brief Source map ID: Grid X
+     */
     unsigned char srcGridXNo{ 0 };
+
+    /**
+     * @brief Source map ID: Grid Z
+     */
     unsigned char srcGridZNo{ 0 };
+
     unsigned char pad1[1];
-    float srcPosX{ 0 };
-    float srcPosY{ 0 };
-    float srcPosZ{ 0 };
+
+    /**
+     * @brief Source map reference coordinates X
+     */
+    float srcPosX{ 0.f };
+
+    /**
+     * @brief Source map reference coordinates Y
+     */
+    float srcPosY{ 0.f };
+
+    /**
+     * @brief Source map reference coordinates Z
+     */
+    float srcPosZ{ 0.f };
+
+    /**
+     * @brief Conversion destination map ID: Area number
+     */
     unsigned char dstAreaNo{ 0 };
+
+    /**
+     * @brief Destination map ID: Grid X
+     */
     unsigned char dstGridXNo{ 0 };
+
+    /**
+     * @brief Destination map ID: Grid Z
+     */
     unsigned char dstGridZNo{ 0 };
+
     unsigned char pad2[1];
-    float dstPosX{ 0 };
-    float dstPosY{ 0 };
-    float dstPosZ{ 0 };
+
+    /**
+     * @brief Destination map reference coordinates X
+     */
+    float dstPosX{ 0.f };
+
+    /**
+     * @brief Destination map reference coordinates Y
+     */
+    float dstPosY{ 0.f };
+
+    /**
+     * @brief Destination map reference coordinates Z
+     */
+    float dstPosZ{ 0.f };
+
+    /**
+     * @brief Is it a reference connection point?
+     *
+     * Is it a reference connection point? One reference connection point is
+     * always set for one conversion source map ID.
+     */
     bool isBasePoint : 1 { false };
+
     unsigned char pad3 : 7;
+
     unsigned char pad4[11];
 };
 

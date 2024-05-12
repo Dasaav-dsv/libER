@@ -5,9 +5,20 @@ namespace from {
 namespace paramdef {
 
 struct BULLET_CREATE_LIMIT_PARAM_ST {
+    /**
+     * @brief Maximum number of bullets in the group
+     *
+     * Maximum number of creations in the same group
+     */
     unsigned char limitNum_byGroup{ 0 };
+
+    /**
+     * @brief Is it restricted for each owner?
+     */
     bool isLimitEachOwner : 1 { false };
+
     unsigned char pad2 : 7;
+
     unsigned char pad[30];
 };
 

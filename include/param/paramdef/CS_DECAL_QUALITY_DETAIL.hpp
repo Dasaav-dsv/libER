@@ -5,7 +5,14 @@ namespace from {
 namespace paramdef {
 
 struct CS_DECAL_QUALITY_DETAIL {
+    /**
+     * @brief Decal valid
+     */
     bool enabled{ true };
+
+    /**
+     * @brief dmy
+     */
     unsigned char dmy[3];
 };
 

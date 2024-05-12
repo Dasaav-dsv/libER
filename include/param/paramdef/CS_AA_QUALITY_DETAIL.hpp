@@ -5,8 +5,19 @@ namespace from {
 namespace paramdef {
 
 struct CS_AA_QUALITY_DETAIL {
+    /**
+     * @brief AA valid
+     */
     bool enabled{ false };
+
+    /**
+     * @brief Force FXAA2
+     */
     bool forceFXAA2{ false };
+
+    /**
+     * @brief dmy
+     */
     unsigned char dmy[2];
 };
 

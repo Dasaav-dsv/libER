@@ -5,12 +5,35 @@ namespace from {
 namespace paramdef {
 
 struct GRASS_LOD_RANGE_PARAM_ST {
-    float LOD0_range{ 0 };
-    float LOD0_play{ 0 };
-    float LOD1_range{ 0 };
-    float LOD1_play{ 0 };
-    float LOD2_range{ 0 };
-    float LOD2_play{ 0 };
+    /**
+     * @brief LOD0-distance
+     */
+    float LOD0_range{ 0.f };
+
+    /**
+     * @brief LOD0-play
+     */
+    float LOD0_play{ 0.f };
+
+    /**
+     * @brief LOD1-distance
+     */
+    float LOD1_range{ 0.f };
+
+    /**
+     * @brief LOD1-Play
+     */
+    float LOD1_play{ 0.f };
+
+    /**
+     * @brief LOD2-distance
+     */
+    float LOD2_range{ 0.f };
+
+    /**
+     * @brief LOD2-Play
+     */
+    float LOD2_play{ 0.f };
 };
 
 }; // namespace paramdef

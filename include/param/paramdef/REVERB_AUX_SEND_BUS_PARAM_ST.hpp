@@ -5,6 +5,9 @@ namespace from {
 namespace paramdef {
 
 struct REVERB_AUX_SEND_BUS_PARAM_ST {
+    /**
+     * @brief ReverbAuxSendBus name
+     */
     char ReverbAuxSendBusName[32];
 };
 

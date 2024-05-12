@@ -5,10 +5,26 @@ namespace from {
 namespace paramdef {
 
 struct WAYPOINT_PARAM_ST {
+    /**
+     * @brief Attribute 1
+     */
     short attribute1{ -1 };
+
+    /**
+     * @brief Attribute 2
+     */
     short attribute2{ -1 };
+
+    /**
+     * @brief Attribute 3
+     */
     short attribute3{ -1 };
+
+    /**
+     * @brief Attribute 4
+     */
     short attribute4{ -1 };
+
     unsigned char padding4[8];
 };
 

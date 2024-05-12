@@ -5,16 +5,55 @@ namespace from {
 namespace paramdef {
 
 struct SPEEDTREE_MODEL_PARAM_ST {
-    float MinFadeLeaf{ 0 };
-    float MinFadeFrond{ 0 };
-    float MinFadeBranch{ 0 };
-    float MinTranslucencyLeaf{ 0 };
-    float MaxTranslucencyLeaf{ 5 };
-    float MinTranslucencyFrond{ 0 };
-    float MaxTranslucencyFrond{ 5 };
-    float MinTranslucencyBranch{ 0 };
-    float MaxTranslucencyBranch{ 5 };
-    float BillboardBackSpecularWeakenParam{ 1 };
+    /**
+     * @brief Leaf minimum fade value
+     */
+    float MinFadeLeaf{ 0.f };
+
+    /**
+     * @brief Frond minimum fade value
+     */
+    float MinFadeFrond{ 0.f };
+
+    /**
+     * @brief Branch minimum fade value
+     */
+    float MinFadeBranch{ 0.f };
+
+    /**
+     * @brief Minimum transmitted light of Leaf
+     */
+    float MinTranslucencyLeaf{ 0.f };
+
+    /**
+     * @brief Maximum transmitted light of Leaf
+     */
+    float MaxTranslucencyLeaf{ 5.f };
+
+    /**
+     * @brief Minimum transmitted light of Frond
+     */
+    float MinTranslucencyFrond{ 0.f };
+
+    /**
+     * @brief Maximum transmitted light of Frond
+     */
+    float MaxTranslucencyFrond{ 5.f };
+
+    /**
+     * @brief Minimum transmitted light of Branch
+     */
+    float MinTranslucencyBranch{ 0.f };
+
+    /**
+     * @brief Maximum transmitted light of Branch
+     */
+    float MaxTranslucencyBranch{ 5.f };
+
+    /**
+     * @brief Billboard Specular suppression value
+     */
+    float BillboardBackSpecularWeakenParam{ 1.f };
 };
 
 }; // namespace paramdef

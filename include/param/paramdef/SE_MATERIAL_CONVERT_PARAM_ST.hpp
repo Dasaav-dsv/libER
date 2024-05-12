@@ -5,7 +5,13 @@ namespace from {
 namespace paramdef {
 
 struct SE_MATERIAL_CONVERT_PARAM_ST {
+    /**
+     * @brief SE material ID
+     *
+     * Conversion from SFX material ID (3 digits) to SE material ID (2 digits)
+     */
     unsigned char seMaterialId{ 0 };
+
     unsigned char pad[3];
 };
 

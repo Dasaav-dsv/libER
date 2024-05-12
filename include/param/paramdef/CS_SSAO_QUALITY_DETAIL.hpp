@@ -5,10 +5,31 @@ namespace from {
 namespace paramdef {
 
 struct CS_SSAO_QUALITY_DETAIL {
+    /**
+     * @brief SSAO enabled
+     */
     bool enabled{ true };
+
+    /**
+     * @brief Reprojection enabled
+     *
+     * When reprojection is forcibly enabled, Prevent Ghost is also enabled.
+     */
     unsigned char cs_reprojEnabledType{ 1 };
+
+    /**
+     * @brief Bilateral upscale effective
+     */
     unsigned char cs_upScaleEnabledType{ 0 };
+
+    /**
+     * @brief Valid to use normals
+     */
     unsigned char cs_useNormalEnabledType{ 1 };
+
+    /**
+     * @brief dmy
+     */
     unsigned char dmy[1];
 };
 
