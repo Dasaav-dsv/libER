@@ -5,8 +5,19 @@ namespace from {
 namespace paramdef {
 
 struct CS_TEXTURE_FILTER_QUALITY_DETAIL {
+    /**
+     * @brief filter
+     */
     unsigned char filter{ 3 };
+
+    /**
+     * @brief dmy
+     */
     unsigned char dmy[3];
+
+    /**
+     * @brief Aniso level
+     */
     unsigned int maxAnisoLevel{ 4 };
 };
 

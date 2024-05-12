@@ -5,11 +5,31 @@ namespace from {
 namespace paramdef {
 
 struct RUNTIME_BONE_CONTROL_PARAM_ST {
+    /**
+     * @brief Character ID
+     */
     unsigned int chrId{ 0 };
+
+    /**
+     * @brief Control type
+     */
     unsigned char ctrlType{ 0 };
+
     unsigned char pad[11];
+
+    /**
+     * @brief Applicable joint
+     */
     char applyBone[32];
+
+    /**
+     * @brief Target joint 1
+     */
     char targetBone1[32];
+
+    /**
+     * @brief Target joint 2
+     */
     char targetBone2[32];
 };
 

@@ -5,9 +5,21 @@ namespace from {
 namespace paramdef {
 
 struct EQUIP_PARAM_CUSTOM_WEAPON_ST {
+    /**
+     * @brief Weapon base ID
+     */
     int baseWepId{ 0 };
+
+    /**
+     * @brief Magic stone ID
+     */
     int gemId{ 0 };
+
+    /**
+     * @brief Enhancement value
+     */
     unsigned char reinforceLv{ 0 };
+
     unsigned char pad[7];
 };
 
