@@ -19,14 +19,25 @@
 #include <param/detail/paramdef.hpp>
 #include <param/param_file.hpp>
 
-#include <algorithm>
-
 namespace from {
 namespace CS {
+/**
+ * @brief A resource capsule containing a param table capsule.
+ *
+ * In ELDEN RING, the newer namespace CS ParamResCaps hold
+ * the older namespace FD4 ParamResCaps, which in turn
+ * hold the raw param file data.
+ *
+ */
 class ParamResCap : public FD4::FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(ParamResCap);
 
+    /**
+     * @brief Get the param file associated with this capsule.
+     *
+     * @return liber::optref<param::param_file*> param file pointer, if bound
+     */
     liber::optref<param::param_file*> get_param_file() {
         if (!this->underlying)
             return std::nullopt;
@@ -42,7 +53,10 @@ private:
 };
 
 /**
- * @brief The interface to access and modify param data
+ * @brief A singleton responsible for storing param resource capsules.
+ *
+ * The capsules are stored in a flat table with param::param_count entries.
+ *
  */
 class SoloParamRepositoryImp : public FD4::FD4ResCap {
 public:
@@ -66,9 +80,15 @@ public:
      */
     LIBERAPI static bool wait_for_params(int timeout);
 
+    /**
+     * @brief Get the raw param file at the associated param index.
+     *
+     * @param index a value from the param index enum
+     * @return liber::optref<param::param_file*>
+     */
     liber::optref<param::param_file*> get_param_file(param::param_index index) {
         auto res_cap = this->param_entries[int(index)].res_cap[0];
-        if (!res_cap) 
+        if (!res_cap)
             return std::nullopt;
         return res_cap->get_param_file();
     }

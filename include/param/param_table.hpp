@@ -20,23 +20,71 @@
 #include <cstdint>
 #include <iterator>
 #include <memory>
+#include <type_traits>
 #include <utility>
 
 namespace from {
 namespace param {
-template <param_index Index, typename Def>
+/**
+ * @brief An interface to a param table of one of the predefined types.
+ *
+ * @tparam ParamType one of the predefined param types
+ */
+template <typename ParamType>
 class param_table {
 public:
-    using paramdef_type = Def;
-    static constexpr param_index index = Index;
+    /**
+     * @brief The paramdefs this param type uses.
+     *
+     */
+    using paramdef_type = typename ParamType::paramdef_type;
 
+    /**
+     * @brief The param index of this param table.
+     *
+     */
+    static constexpr param_index index = ParamType::index;
+
+    /**
+     * @brief Param iterator type.
+     *
+     */
     using iterator = param_iterator<paramdef_type>;
+
+    /**
+     * @brief Reverse order param iterator type.
+     *
+     */
     using reverse_iterator = std::reverse_iterator<iterator>;
+
+    /**
+     * @brief Param const iterator type.
+     *
+     */
     using const_iterator = param_const_iterator<paramdef_type>;
+
+    /**
+     * @brief Reverse order param const iterator type.
+     *
+     */
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
     constexpr param_table() = default;
 
+    /**
+     * @brief Get a param row from this param table by its row index.
+     *
+     * Performs a binary search on the param table to find a matching
+     * param row index and returns the row on success. If the desired param
+     * row does not exist, returns a default-initialized param row instead.
+     *
+     * The bool in the param row/bool pair indicates whether the row exists.
+     *
+     * @example auto [row, row_exists] = param::EquipParamAccessory[5020];
+     *
+     * @param row The row id.
+     * @return std::pair<paramdef_type&, bool>
+     */
     std::pair<paramdef_type&, bool> operator[](
         row_index_type row) const noexcept {
         iterator first = this->begin();
@@ -55,6 +103,15 @@ public:
         return { (*found).second, true };
     }
 
+    /**
+     * @brief Get the iterator to the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return iterator an iterator to the first param row or a
+     * default constructed iterator
+     */
     iterator begin() noexcept {
         auto file = this->get_file();
         // Param table is not loaded, return default constructed iterator
@@ -64,6 +121,15 @@ public:
         return iterator(file_ref, 0);
     }
 
+    /**
+     * @brief Get the iterator after the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return iterator an iterator past the end of the param table or a
+     * default constructed iterator
+     */
     iterator end() noexcept {
         auto file = this->get_file();
         // Param table is not loaded, return default constructed iterator
@@ -73,42 +139,132 @@ public:
         return iterator(file_ref, file_ref.row_count);
     }
 
+    /**
+     * @brief Get the iterator to the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_iterator an iterator to the first param row or a
+     * default constructed iterator
+     */
     const_iterator begin() const noexcept {
-        return const_cast<param_table<Index, Def>*>(this)->begin();
+        return const_cast<param_table*>(this)->begin();
     }
 
+    /**
+     * @brief Get the iterator after the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_iterator an iterator past the end of the param table or a
+     * default constructed iterator
+     */
     const_iterator end() const noexcept {
-        return const_cast<param_table<Index, Def>*>(this)->end();
+        return const_cast<param_table*>(this)->end();
     }
 
+    /**
+     * @brief Get the const iterator to the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_iterator an iterator to the first param row or a
+     * default constructed iterator
+     */
     const_iterator cbegin() const noexcept {
         return this->begin();
     }
 
+    /**
+     * @brief Get the const iterator after the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const iterator an iterator past the end of the param table or a
+     * default constructed iterator
+     */
     const_iterator cend() const noexcept {
         return this->end();
     }
 
+    /**
+     * @brief Get the reverse iterator to the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return reverse_iterator an iterator to the last param row or a
+     * default constructed iterator
+     */
     reverse_iterator rbegin() noexcept {
         return this->end();
     }
 
+    /**
+     * @brief Get the reverse iterator before the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return reverse_iterator an iterator before the start of the param table
+     * or a default constructed iterator
+     */
     reverse_iterator rend() noexcept {
         return this->begin();
     }
 
+    /**
+     * @brief Get the reverse iterator to the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_reverse_iterator an iterator to the last param row or a
+     * default constructed iterator
+     */
     const_reverse_iterator rbegin() const noexcept {
         return this->end();
     }
 
+    /**
+     * @brief Get the reverse iterator before the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_reverse_iterator an iterator before the start of the param table
+     * or a default constructed iterator
+     */
     const_reverse_iterator rend() const noexcept {
         return this->begin();
     }
 
+    /**
+     * @brief Get the reverse iterator to the last param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_reverse_iterator an iterator to the last param row or a
+     * default constructed iterator
+     */
     const_reverse_iterator crbegin() const noexcept {
         return this->end();
     }
 
+    /**
+     * @brief Get the reverse iterator before the first param row in the table.
+     *
+     * If the table has not been yet initialized, returns a default
+     * constructed iterator.
+     *
+     * @return const_reverse_iterator an iterator before the start of the param table
+     * or a default constructed iterator
+     */
     const_reverse_iterator crend() const noexcept {
         return this->begin();
     }
@@ -124,8 +280,19 @@ private:
     }
 };
 
-#define LIBER_PARAM_ENTRY(PARAM, PARAMDEF) \
-    inline param_table<param_index::PARAM, paramdef::PARAMDEF> PARAM;
+/**
+ * @brief A helper structure with param type data.
+ * 
+ */
+template <param_index Index, typename Def>
+struct param_type {
+    using paramdef_type = Def;
+    static constexpr param_index index = Index;
+};
+
+#define LIBER_PARAM_ENTRY(PARAM, PARAMDEF)                                 \
+    inline param_table<param_type<param_index::PARAM, paramdef::PARAMDEF>> \
+        PARAM;
 
 #include <param/detail/paramlist.inl>
 
