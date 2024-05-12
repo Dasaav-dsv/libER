@@ -17,7 +17,6 @@ LIBER_ADD_SYMBOL(CS::CSSoundImp::make_system_sound)
 LIBER_ADD_SYMBOL(CS::CSSoundImp::play_character_sound)
 LIBER_ADD_SYMBOL(GXBS::GXDrawQueue::queue_callback)
 LIBER_ADD_SYMBOL(GLOBAL_ID3D12RootSignature)
-LIBER_ADD_SYMBOL(CS::SoloParamRepositoryImp::get_param_res_cap_address)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)
 LIBER_ADD_SYMBOL(DLIO::DLFileDeviceManager::instance)
