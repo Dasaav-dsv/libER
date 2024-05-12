@@ -43,6 +43,10 @@ public:
     param_iterator(const param_iterator& other) noexcept
         : file_start(other.file_start), ptr(other.ptr) {}
 
+    param_iterator(const param_iterator<const Def>& other) noexcept
+        requires(!std::is_const_v<Def>)
+        : file_start(other.file_start), ptr(other.ptr) {}
+
     value_type operator*() const noexcept {
         return { this->ptr->row,
             *reinterpret_cast<Def*>(
@@ -93,7 +97,11 @@ public:
         return tmp;
     }
 
-    difference_type operator-(const param_iterator& rhs) const noexcept {
+    template <typename OtherDef>
+    difference_type operator-(
+        const param_iterator<OtherDef>& rhs) const noexcept
+        requires(std::is_same_v<const Def, const OtherDef>)
+    {
         return static_cast<difference_type>(this->ptr - rhs.ptr);
     }
 
@@ -101,13 +109,35 @@ public:
         return *(*this + offset);
     }
 
-    bool operator==(const param_iterator& rhs) const noexcept {
+    template <typename OtherDef>
+    bool operator==(const param_iterator<OtherDef>& rhs) const noexcept
+        requires(std::is_same_v<const Def, const OtherDef>)
+    {
         return this->ptr == rhs.ptr;
     }
 
-    std::strong_ordering operator<=>(const param_iterator& rhs) const noexcept {
+    template <typename OtherDef>
+    std::strong_ordering operator<=>(
+        const param_iterator<OtherDef>& rhs) const noexcept
+        requires(std::is_same_v<const Def, const OtherDef>)
+    {
         return this->ptr <=> rhs.ptr;
     }
+
+private:
+    template <typename Def>
+    friend class param_iterator;
+
+    template <param_index Index, typename Def>
+    friend class param_table;
+
+    param_iterator(
+        const param_iterator<std::remove_const_t<Def>>& other) noexcept
+        requires(std::is_const_v<Def>)
+        : file_start(other.file_start), ptr(other.ptr) {}
 };
+
+template <typename Def>
+using param_const_iterator = param_iterator<const Def>;
 } // namespace param
 } // namespace from
