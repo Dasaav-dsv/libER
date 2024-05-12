@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct ATTACK_ELEMENT_CORRECT_PARAM_ST {
     /**
      * @brief Whether to correct muscle strength (physical)

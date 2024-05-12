@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SOUND_COMMON_INGAME_PARAM_ST {
     /**
      * @brief Parameter Key string

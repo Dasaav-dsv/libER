@@ -80,7 +80,9 @@ public:
      *
      * The bool in the param row/bool pair indicates whether the row exists.
      *
-     * @example auto [row, row_exists] = param::EquipParamAccessory[5020];
+     * Example:
+     * @code{.cpp} auto [row, row_exists] =
+     *     from::param::EquipParamAccessory[5020]; @endcode
      *
      * @param row The row id.
      * @return std::pair<paramdef_type&, bool>
@@ -236,8 +238,8 @@ public:
      * If the table has not been yet initialized, returns a default
      * constructed iterator.
      *
-     * @return const_reverse_iterator an iterator before the start of the param table
-     * or a default constructed iterator
+     * @return const_reverse_iterator an iterator before the start of the param
+     * table or a default constructed iterator
      */
     const_reverse_iterator rend() const noexcept {
         return this->begin();
@@ -262,8 +264,8 @@ public:
      * If the table has not been yet initialized, returns a default
      * constructed iterator.
      *
-     * @return const_reverse_iterator an iterator before the start of the param table
-     * or a default constructed iterator
+     * @return const_reverse_iterator an iterator before the start of the param
+     * table or a default constructed iterator
      */
     const_reverse_iterator crend() const noexcept {
         return this->begin();
@@ -282,11 +284,20 @@ private:
 
 /**
  * @brief A helper structure with param type data.
- * 
+ *
  */
 template <param_index Index, typename Def>
 struct param_type {
+    /**
+     * @brief The paramdefs this param uses.
+     *
+     */
     using paramdef_type = Def;
+
+    /**
+     * @brief The param index of this param table.
+     *
+     */
     static constexpr param_index index = Index;
 };
 

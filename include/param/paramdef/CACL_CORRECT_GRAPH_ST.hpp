@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CACL_CORRECT_GRAPH_ST {
     /**
      * @brief Threshold point 0

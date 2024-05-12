@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct PERFORMANCE_CHECK_PARAM {
     /**
      * @brief Report destination_Job type tag

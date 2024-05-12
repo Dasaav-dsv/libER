@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SP_EFFECT_VFX_PARAM_ST {
     /**
      * @brief In effect SfxID

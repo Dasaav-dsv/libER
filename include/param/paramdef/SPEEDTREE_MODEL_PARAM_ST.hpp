@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SPEEDTREE_MODEL_PARAM_ST {
     /**
      * @brief Leaf minimum fade value

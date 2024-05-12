@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct FE_TEXT_EFFECT_PARAM_ST {
     /**
      * @brief Resource ID

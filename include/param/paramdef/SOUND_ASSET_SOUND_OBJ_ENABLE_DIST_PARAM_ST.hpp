@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SOUND_ASSET_SOUND_OBJ_ENABLE_DIST_PARAM_ST {
     /**
      * @brief Asset sound sound source effective distance setting [m]

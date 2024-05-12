@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
      * @brief Basic toughness durability recovery time

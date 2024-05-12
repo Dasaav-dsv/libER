@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CS_SHADOW_QUALITY_DETAIL {
     /**
      * @brief Shadow is enabled

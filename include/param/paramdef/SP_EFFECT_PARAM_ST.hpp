@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SP_EFFECT_PARAM_ST {
     /**
      * @brief Icon ID
@@ -2523,6 +2526,9 @@ struct SP_EFFECT_PARAM_ST {
      */
     float goodsConsumptionRate{ 1.f };
 
+    /**
+     * @brief Guard stamina magnification 
+     */
     float guardStaminaMult{ 1.f };
 
     unsigned char unk3[4];

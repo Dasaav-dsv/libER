@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct REINFORCE_PARAM_WEAPON_ST {
     /**
      * @brief Physical attack power basic value

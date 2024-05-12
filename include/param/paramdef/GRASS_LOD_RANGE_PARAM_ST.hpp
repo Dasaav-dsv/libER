@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct GRASS_LOD_RANGE_PARAM_ST {
     /**
      * @brief LOD0-distance

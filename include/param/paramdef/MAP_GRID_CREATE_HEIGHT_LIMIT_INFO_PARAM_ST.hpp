@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MAP_GRID_CREATE_HEIGHT_LIMIT_INFO_PARAM_ST {
     /**
      * @brief Grid can be constructed Height Min [m]

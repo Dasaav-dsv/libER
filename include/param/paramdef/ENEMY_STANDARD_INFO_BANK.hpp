@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct ENEMY_STANDARD_INFO_BANK {
     /**
      * @brief Behavior id

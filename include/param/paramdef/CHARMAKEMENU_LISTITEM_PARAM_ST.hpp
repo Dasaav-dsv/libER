@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CHARMAKEMENU_LISTITEM_PARAM_ST {
     /**
      * @brief value

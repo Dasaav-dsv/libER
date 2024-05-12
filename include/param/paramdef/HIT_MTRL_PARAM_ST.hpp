@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct HIT_MTRL_PARAM_ST {
     /**
      * @brief Sound radius magnification

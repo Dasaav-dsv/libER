@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct KNOCKBACK_PARAM_ST {
     /**
      * @brief Minimal damage_speed maintenance time [s]

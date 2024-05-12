@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SOUND_AUTO_REVERB_EVALUATION_DIST_PARAM_ST {
     /**
      * @brief Distance to No Hit [m]

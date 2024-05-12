@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct EQUIP_PARAM_CUSTOM_WEAPON_ST {
     /**
      * @brief Weapon base ID

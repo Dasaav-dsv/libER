@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct RUNTIME_BONE_CONTROL_PARAM_ST {
     /**
      * @brief Character ID

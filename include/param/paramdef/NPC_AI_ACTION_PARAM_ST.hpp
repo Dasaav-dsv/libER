@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct NPC_AI_ACTION_PARAM_ST {
     /**
      * @brief Move direction input

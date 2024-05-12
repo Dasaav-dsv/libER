@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct WORLD_MAP_PIECE_PARAM_ST {
     /**
      * @brief Do you remove it from the NT version output?

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SOUND_AUTO_REVERB_SELECT_PARAM_ST {
     /**
      * @brief Reverb type

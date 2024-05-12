@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct AUTO_CREATE_ENV_SOUND_PARAM_ST {
     /**
      * @brief Appearance distance Min [m]

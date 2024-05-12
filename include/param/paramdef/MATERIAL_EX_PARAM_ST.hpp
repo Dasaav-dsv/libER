@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MATERIAL_EX_PARAM_ST {
     /**
      * @brief Material parameter name

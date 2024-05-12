@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct ASSET_MODEL_SFX_PARAM_ST {
     /**
      * @brief 0: SfxID

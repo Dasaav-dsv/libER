@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CHARACTER_INIT_PARAM {
     /**
      * @brief MP recovery speed basic value [s]

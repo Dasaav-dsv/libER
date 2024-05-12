@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct NPC_AI_BEHAVIOR_PROBABILITY_PARAM_ST {
     /**
      * @brief Right hand proximity_R1 combo

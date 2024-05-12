@@ -3,9 +3,19 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CS_RAYTRACING_QUALITY_DETAIL {
+    /**
+     * @brief Enable ray traced ambient occlusion.
+     */
     unsigned char enableRaytraceAO{ 0 };
+
+    /**
+     * @brief Enable ray traced shadows.
+     */
     unsigned char enableRaytraceShadows{ 0 };
     unsigned char Unk0x02{ 0 };
     unsigned char Unk0x03{ 0 };

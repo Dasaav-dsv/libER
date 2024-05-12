@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct POSTURE_CONTROL_PARAM_WEP_LEFT_ST {
     /**
      * @brief Left arm_front and back

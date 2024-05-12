@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CUTSCENE_TIMEZONE_CONVERT_PARAM_ST {
     /**
      * @brief Pre-conversion time zone start time [hour]

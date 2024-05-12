@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct POSTURE_CONTROL_PARAM_GENDER_ST {
     /**
      * @brief Right elbow _ inside and outside

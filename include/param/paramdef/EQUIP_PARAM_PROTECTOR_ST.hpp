@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct EQUIP_PARAM_PROTECTOR_ST {
     /**
      * @brief Do you remove it from the NT version output?
@@ -753,233 +756,233 @@ struct EQUIP_PARAM_PROTECTOR_ST {
     unsigned short defenseDark{ 100 };
 
     /**
-     * @brief PAD_original_ # 48 # hidden
+     * @brief PAD_original_ num. 48 num. hidden
      *
-     * Original _ # 48 # hidden
+     * Original _ num. 48 num. hidden
      */
     unsigned char invisibleFlag48 : 1;
 
     /**
-     * @brief PAD_original_ # 49 # hidden
+     * @brief PAD_original_ num. 49 num. hidden
      *
-     * Original _ # 49 # hidden
+     * Original _ num. 49 num. hidden
      */
     unsigned char invisibleFlag49 : 1;
 
     /**
-     * @brief PAD_original_ # 50 # hidden
+     * @brief PAD_original_ num. 50 num. hidden
      *
-     * Original _ # 50 # hidden
+     * Original _ num. 50 num. hidden
      */
     unsigned char invisibleFlag50 : 1;
 
     /**
-     * @brief PAD_original_ # 51 # hidden
+     * @brief PAD_original_ num. 51 num. hidden
      *
-     * Original _ # 51 # hidden
+     * Original _ num. 51 num. hidden
      */
     unsigned char invisibleFlag51 : 1;
 
     /**
-     * @brief PAD_original_ # 52 # hidden
+     * @brief PAD_original_ num. 52 num. hidden
      *
-     * Original _ # 52 # hidden
+     * Original _ num. 52 num. hidden
      */
     unsigned char invisibleFlag52 : 1;
 
     /**
-     * @brief PAD_original_ # 53 # hidden
+     * @brief PAD_original_ num. 53 num. hidden
      *
-     * Original _ # 53 # hidden
+     * Original _ num. 53 num. hidden
      */
     unsigned char invisibleFlag53 : 1;
 
     /**
-     * @brief PAD_original_ # 54 # hidden
+     * @brief PAD_original_ num. 54 num. hidden
      *
-     * Original _ # 54 # hidden
+     * Original _ num. 54 num. hidden
      */
     unsigned char invisibleFlag54 : 1;
 
     /**
-     * @brief PAD_original_ # 55 # hidden
+     * @brief PAD_original_ num. 55 num. hidden
      *
-     * Original _ # 55 # hidden
+     * Original _ num. 55 num. hidden
      */
     unsigned char invisibleFlag55 : 1;
 
     /**
-     * @brief PAD_original_ # 56 # hidden
+     * @brief PAD_original_ num. 56 num. hidden
      *
-     * Original _ # 56 # hidden
+     * Original _ num. 56 num. hidden
      */
     unsigned char invisibleFlag56 : 1;
 
     /**
-     * @brief PAD_original_ # 57 # hidden
+     * @brief PAD_original_ num. 57 num. hidden
      *
-     * Original _ # 57 # hidden
+     * Original _ num. 57 num. hidden
      */
     unsigned char invisibleFlag57 : 1;
 
     /**
-     * @brief PAD_original_ # 58 # hidden
+     * @brief PAD_original_ num. 58 num. hidden
      *
-     * Original _ # 58 # hidden
+     * Original _ num. 58 num. hidden
      */
     unsigned char invisibleFlag58 : 1;
 
     /**
-     * @brief PAD_original_ # 59 # hidden
+     * @brief PAD_original_ num. 59 num. hidden
      *
-     * Original _ # 59 # hidden
+     * Original _ num. 59 num. hidden
      */
     unsigned char invisibleFlag59 : 1;
 
     /**
-     * @brief PAD_original_ # 60 # hidden
+     * @brief PAD_original_ num. 60 num. hidden
      *
-     * Original _ # 60 # hidden
+     * Original _ num. 60 num. hidden
      */
     unsigned char invisibleFlag60 : 1;
 
     /**
-     * @brief PAD_original_ # 61 # hidden
+     * @brief PAD_original_ num. 61 num. hidden
      *
-     * Original _ # 61 # Hidden
+     * Original _ num. 61 num. Hidden
      */
     unsigned char invisibleFlag61 : 1;
 
     /**
-     * @brief PAD_original_ # 62 # hidden
+     * @brief PAD_original_ num. 62 num. hidden
      *
-     * Original _ # 62 # hidden
+     * Original _ num. 62 num. hidden
      */
     unsigned char invisibleFlag62 : 1;
 
     /**
-     * @brief PAD_original_ # 63 # hidden
+     * @brief PAD_original_ num. 63 num. hidden
      *
-     * Original _ # 63 # hidden
+     * Original _ num. 63 num. hidden
      */
     unsigned char invisibleFlag63 : 1;
 
     /**
-     * @brief PAD_original_ # 64 # hidden
+     * @brief PAD_original_ num. 64 num. hidden
      *
-     * Original _ # 64 # hidden
+     * Original _ num. 64 num. hidden
      */
     unsigned char invisibleFlag64 : 1;
 
     /**
-     * @brief PAD_original_ # 65 # hidden
+     * @brief PAD_original_ num. 65 num. hidden
      *
-     * Original _ # 65 # hidden
+     * Original _ num. 65 num. hidden
      */
     unsigned char invisibleFlag65 : 1;
 
     /**
-     * @brief PAD_original_ # 66 # hidden
+     * @brief PAD_original_ num. 66 num. hidden
      *
-     * Original _ # 66 # hidden
+     * Original _ num. 66 num. hidden
      */
     unsigned char invisibleFlag66 : 1;
 
     /**
-     * @brief PAD_original_ # 67 # hidden
+     * @brief PAD_original_ num. 67 num. hidden
      *
-     * Original _ # 67 # hidden
+     * Original _ num. 67 num. hidden
      */
     unsigned char invisibleFlag67 : 1;
 
     /**
-     * @brief PAD_original_ # 68 # hidden
+     * @brief PAD_original_ num. 68 num. hidden
      *
-     * Original _ # 68 # hidden
+     * Original _ num. 68 num. hidden
      */
     unsigned char invisibleFlag68 : 1;
 
     /**
-     * @brief PAD_original_ # 69 # hidden
+     * @brief PAD_original_ num. 69 num. hidden
      *
-     * Original _ # 69 # hidden
+     * Original _ num. 69 num. hidden
      */
     unsigned char invisibleFlag69 : 1;
 
     /**
-     * @brief PAD_original_ # 70 # hidden
+     * @brief PAD_original_ num. 70 num. hidden
      *
-     * Original _ # 70 # hidden
+     * Original _ num. 70 num. hidden
      */
     unsigned char invisibleFlag70 : 1;
 
     /**
-     * @brief PAD_original_ # 71 # hidden
+     * @brief PAD_original_ num. 71 num. hidden
      *
-     * Original _ # 71 # hidden
+     * Original _ num. 71 num. hidden
      */
     unsigned char invisibleFlag71 : 1;
 
     /**
-     * @brief PAD_original_ # 72 # hidden
+     * @brief PAD_original_ num. 72 num. hidden
      *
-     * Original _ # 72 # hidden
+     * Original _ num. 72 num. hidden
      */
     unsigned char invisibleFlag72 : 1;
 
     /**
-     * @brief PAD_original_ # 73 # hidden
+     * @brief PAD_original_ num. 73 num. hidden
      *
-     * Original _ # 73 # hidden
+     * Original _ num. 73 num. hidden
      */
     unsigned char invisibleFlag73 : 1;
 
     /**
-     * @brief PAD_original_ # 74 # hidden
+     * @brief PAD_original_ num. 74 num. hidden
      *
-     * Original _ # 74 # hidden
+     * Original _ num. 74 num. hidden
      */
     unsigned char invisibleFlag74 : 1;
 
     /**
-     * @brief PAD_original_ # 75 # hidden
+     * @brief PAD_original_ num. 75 num. hidden
      *
-     * Original _ # 75 # hidden
+     * Original _ num. 75 num. hidden
      */
     unsigned char invisibleFlag75 : 1;
 
     /**
-     * @brief PAD_original_ # 76 # hidden
+     * @brief PAD_original_ num. 76 num. hidden
      *
-     * Original _ # 76 # hidden
+     * Original _ num. 76 num. hidden
      */
     unsigned char invisibleFlag76 : 1;
 
     /**
-     * @brief PAD_original_ # 77 # hidden
+     * @brief PAD_original_ num. 77 num. hidden
      *
-     * Original _ # 77 # hidden
+     * Original _ num. 77 num. hidden
      */
     unsigned char invisibleFlag77 : 1;
 
     /**
-     * @brief PAD_original_ # 78 # hidden
+     * @brief PAD_original_ num. 78 num. hidden
      *
-     * Original _ # 78 # hidden
+     * Original _ num. 78 num. hidden
      */
     unsigned char invisibleFlag78 : 1;
 
     /**
-     * @brief PAD_original_ # 79 # hidden
+     * @brief PAD_original_ num. 79 num. hidden
      *
-     * Original _ # 79 # hidden
+     * Original _ num. 79 num. hidden
      */
     unsigned char invisibleFlag79 : 1;
 
     /**
-     * @brief PAD_original_ # 80 # hidden
+     * @brief PAD_original_ num. 80 num. hidden
      *
-     * Original _ # 80 # hidden
+     * Original _ num. 80 num. hidden
      */
     unsigned char invisibleFlag80 : 1;
 
@@ -1005,510 +1008,510 @@ struct EQUIP_PARAM_PROTECTOR_ST {
     unsigned short resistFreeze{ 0 };
 
     /**
-     * @brief # 00 #Hidden (Gender designation)
+     * @brief num. 00 num.Hidden (Gender designation)
      *
      * Bangs tip
      */
     unsigned char invisibleFlag_SexVer00{ 0 };
 
     /**
-     * @brief # 01 #Hidden (Gender designation)
+     * @brief num. 01 num.Hidden (Gender designation)
      *
      * Bangs root
      */
     unsigned char invisibleFlag_SexVer01{ 0 };
 
     /**
-     * @brief # 02 #Hidden (Gender designation)
+     * @brief num. 02 num.Hidden (Gender designation)
      *
      * Sideburns
      */
     unsigned char invisibleFlag_SexVer02{ 0 };
 
     /**
-     * @brief # 03 #Hidden (Gender designation)
+     * @brief num. 03 num.Hidden (Gender designation)
      *
      * Top of the head
      */
     unsigned char invisibleFlag_SexVer03{ 0 };
 
     /**
-     * @brief # 04 #Hidden (Gender designation)
+     * @brief num. 04 num.Hidden (Gender designation)
      *
      * Top of the head
      */
     unsigned char invisibleFlag_SexVer04{ 0 };
 
     /**
-     * @brief # 05 #Hidden (Gender designation)
+     * @brief num. 05 num.Hidden (Gender designation)
      *
      * Back hair
      */
     unsigned char invisibleFlag_SexVer05{ 0 };
 
     /**
-     * @brief # 06 #Hidden (Gender designation)
+     * @brief num. 06 num.Hidden (Gender designation)
      *
      * The tip of the back hair
      */
     unsigned char invisibleFlag_SexVer06{ 0 };
 
     /**
-     * @brief # 07 #Hidden (Gender designation)
+     * @brief num. 07 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer07{ 0 };
 
     /**
-     * @brief # 08 #Hidden (Gender designation)
+     * @brief num. 08 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer08{ 0 };
 
     /**
-     * @brief # 09 #Hidden (Gender designation)
+     * @brief num. 09 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer09{ 0 };
 
     /**
-     * @brief # 10 #Hidden (Gender designation)
+     * @brief num. 10 num.Hidden (Gender designation)
      *
      * collar
      */
     unsigned char invisibleFlag_SexVer10{ 0 };
 
     /**
-     * @brief # 11 #Hidden (Gender designation)
+     * @brief num. 11 num.Hidden (Gender designation)
      *
      * Around the collar
      */
     unsigned char invisibleFlag_SexVer11{ 0 };
 
     /**
-     * @brief # 12 #Hidden (Gender designation)
+     * @brief num. 12 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer12{ 0 };
 
     /**
-     * @brief # 13 #Hidden (Gender designation)
+     * @brief num. 13 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer13{ 0 };
 
     /**
-     * @brief # 14 #Hidden (Gender designation)
+     * @brief num. 14 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer14{ 0 };
 
     /**
-     * @brief # 15 #Hidden (Gender designation)
+     * @brief num. 15 num.Hidden (Gender designation)
      *
      * Hood hem
      */
     unsigned char invisibleFlag_SexVer15{ 0 };
 
     /**
-     * @brief # 16 #Hidden (Gender designation)
+     * @brief num. 16 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer16{ 0 };
 
     /**
-     * @brief # 17 #Hidden (Gender designation)
+     * @brief num. 17 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer17{ 0 };
 
     /**
-     * @brief # 18 #Hidden (Gender designation)
+     * @brief num. 18 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer18{ 0 };
 
     /**
-     * @brief # 19 #Hidden (Gender designation)
+     * @brief num. 19 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer19{ 0 };
 
     /**
-     * @brief # 20 #Hidden (Gender designation)
+     * @brief num. 20 num.Hidden (Gender designation)
      *
      * Sleeve A
      */
     unsigned char invisibleFlag_SexVer20{ 0 };
 
     /**
-     * @brief # 21 #Hidden (Gender designation)
+     * @brief num. 21 num.Hidden (Gender designation)
      *
      * Sleeve B
      */
     unsigned char invisibleFlag_SexVer21{ 0 };
 
     /**
-     * @brief # 22 #Hidden (Gender designation)
+     * @brief num. 22 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer22{ 0 };
 
     /**
-     * @brief # 23 #Hidden (Gender designation)
+     * @brief num. 23 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer23{ 0 };
 
     /**
-     * @brief # 24 #Hidden (Gender designation)
+     * @brief num. 24 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer24{ 0 };
 
     /**
-     * @brief # 25 #Hidden (Gender designation)
+     * @brief num. 25 num.Hidden (Gender designation)
      *
      * arm
      */
     unsigned char invisibleFlag_SexVer25{ 0 };
 
     /**
-     * @brief # 26 #Hidden (Gender designation)
+     * @brief num. 26 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer26{ 0 };
 
     /**
-     * @brief # 27 #Hidden (Gender designation)
+     * @brief num. 27 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer27{ 0 };
 
     /**
-     * @brief # 28 #Hidden (Gender designation)
+     * @brief num. 28 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer28{ 0 };
 
     /**
-     * @brief # 29 #Hidden (Gender designation)
+     * @brief num. 29 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer29{ 0 };
 
     /**
-     * @brief # 30 #Hidden (Gender designation)
+     * @brief num. 30 num.Hidden (Gender designation)
      *
      * belt
      */
     unsigned char invisibleFlag_SexVer30{ 0 };
 
     /**
-     * @brief # 31 #Hidden (Gender designation)
+     * @brief num. 31 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer31{ 0 };
 
     /**
-     * @brief # 32 #Hidden (Men and women specified)
+     * @brief num. 32 num.Hidden (Men and women specified)
      */
     unsigned char invisibleFlag_SexVer32{ 0 };
 
     /**
-     * @brief # 33 #Hidden (Gender designation)
+     * @brief num. 33 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer33{ 0 };
 
     /**
-     * @brief # 34 #Hidden (Gender designation)
+     * @brief num. 34 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer34{ 0 };
 
     /**
-     * @brief # 35 #Hidden (Gender designation)
+     * @brief num. 35 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer35{ 0 };
 
     /**
-     * @brief # 36 #Hidden (Gender designation)
+     * @brief num. 36 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer36{ 0 };
 
     /**
-     * @brief # 37 #Hidden (Gender designation)
+     * @brief num. 37 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer37{ 0 };
 
     /**
-     * @brief # 38 #Hidden (Gender designation)
+     * @brief num. 38 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer38{ 0 };
 
     /**
-     * @brief # 39 #Hidden (Gender designation)
+     * @brief num. 39 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer39{ 0 };
 
     /**
-     * @brief # 40 #Hidden (Gender designation)
+     * @brief num. 40 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer40{ 0 };
 
     /**
-     * @brief # 41 #Hidden (Gender designation)
+     * @brief num. 41 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer41{ 0 };
 
     /**
-     * @brief # 42 #Hidden (Gender designation)
+     * @brief num. 42 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer42{ 0 };
 
     /**
-     * @brief # 43 #Hidden (Gender designation)
+     * @brief num. 43 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer43{ 0 };
 
     /**
-     * @brief # 44 #Hidden (Gender designation)
+     * @brief num. 44 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer44{ 0 };
 
     /**
-     * @brief # 45 #Hidden (Gender designation)
+     * @brief num. 45 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer45{ 0 };
 
     /**
-     * @brief # 46 #Hidden (Gender designation)
+     * @brief num. 46 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer46{ 0 };
 
     /**
-     * @brief # 47 #Hidden (Gender designation)
+     * @brief num. 47 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer47{ 0 };
 
     /**
-     * @brief # 48 #Hidden (Gender designation)
+     * @brief num. 48 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer48{ 0 };
 
     /**
-     * @brief # 49 #Hidden (Gender designation)
+     * @brief num. 49 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer49{ 0 };
 
     /**
-     * @brief # 50 #Hidden (Gender designation)
+     * @brief num. 50 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer50{ 0 };
 
     /**
-     * @brief # 51 #Hidden (Gender designation)
+     * @brief num. 51 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer51{ 0 };
 
     /**
-     * @brief # 52 #Hidden (Gender designation)
+     * @brief num. 52 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer52{ 0 };
 
     /**
-     * @brief # 53 #Hidden (Gender designation)
+     * @brief num. 53 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer53{ 0 };
 
     /**
-     * @brief # 54 #Hidden (Gender designation)
+     * @brief num. 54 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer54{ 0 };
 
     /**
-     * @brief # 55 #Hidden (Gender designation)
+     * @brief num. 55 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer55{ 0 };
 
     /**
-     * @brief # 56 #Hidden (Gender designation)
+     * @brief num. 56 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer56{ 0 };
 
     /**
-     * @brief # 57 #Hidden (Gender designation)
+     * @brief num. 57 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer57{ 0 };
 
     /**
-     * @brief # 58 #Hidden (Gender designation)
+     * @brief num. 58 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer58{ 0 };
 
     /**
-     * @brief # 59 #Hidden (Gender designation)
+     * @brief num. 59 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer59{ 0 };
 
     /**
-     * @brief # 60 #Hidden (Men and women specified)
+     * @brief num. 60 num.Hidden (Men and women specified)
      */
     unsigned char invisibleFlag_SexVer60{ 0 };
 
     /**
-     * @brief # 61 #Hidden (Gender designation)
+     * @brief num. 61 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer61{ 0 };
 
     /**
-     * @brief # 62 #Hidden (Gender designation)
+     * @brief num. 62 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer62{ 0 };
 
     /**
-     * @brief # 63 #Hidden (Gender designation)
+     * @brief num. 63 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer63{ 0 };
 
     /**
-     * @brief # 64 #Hidden (Gender designation)
+     * @brief num. 64 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer64{ 0 };
 
     /**
-     * @brief # 65 #Hidden (Gender designation)
+     * @brief num. 65 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer65{ 0 };
 
     /**
-     * @brief # 66 #Hidden (Gender designation)
+     * @brief num. 66 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer66{ 0 };
 
     /**
-     * @brief # 67 #Hidden (Gender designation)
+     * @brief num. 67 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer67{ 0 };
 
     /**
-     * @brief # 68 #Hidden (Gender designation)
+     * @brief num. 68 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer68{ 0 };
 
     /**
-     * @brief # 69 #Hidden (Gender designation)
+     * @brief num. 69 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer69{ 0 };
 
     /**
-     * @brief # 70 #Hidden (Gender designation)
+     * @brief num. 70 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer70{ 0 };
 
     /**
-     * @brief # 71 #Hidden (Gender designation)
+     * @brief num. 71 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer71{ 0 };
 
     /**
-     * @brief # 72 #Hidden (Gender designation)
+     * @brief num. 72 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer72{ 0 };
 
     /**
-     * @brief # 73 #Hidden (Gender designation)
+     * @brief num. 73 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer73{ 0 };
 
     /**
-     * @brief # 74 #Hidden (Gender designation)
+     * @brief num. 74 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer74{ 0 };
 
     /**
-     * @brief # 75 #Hidden (Gender designation)
+     * @brief num. 75 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer75{ 0 };
 
     /**
-     * @brief # 76 #Hidden (Gender designation)
+     * @brief num. 76 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer76{ 0 };
 
     /**
-     * @brief # 77 #Hidden (Gender designation)
+     * @brief num. 77 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer77{ 0 };
 
     /**
-     * @brief # 78 #Hidden (Gender designation)
+     * @brief num. 78 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer78{ 0 };
 
     /**
-     * @brief # 79 #Hidden (Gender designation)
+     * @brief num. 79 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer79{ 0 };
 
     /**
-     * @brief # 80 #Hidden (Gender designation)
+     * @brief num. 80 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer80{ 0 };
 
     /**
-     * @brief # 81 #Hidden (Gender designation)
+     * @brief num. 81 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer81{ 0 };
 
     /**
-     * @brief # 82 #Hidden (Gender designation)
+     * @brief num. 82 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer82{ 0 };
 
     /**
-     * @brief # 83 #Hidden (Gender designation)
+     * @brief num. 83 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer83{ 0 };
 
     /**
-     * @brief # 84 #Hidden (Gender designation)
+     * @brief num. 84 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer84{ 0 };
 
     /**
-     * @brief # 85 #Hidden (Gender designation)
+     * @brief num. 85 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer85{ 0 };
 
     /**
-     * @brief # 86 #Hidden (Gender designation)
+     * @brief num. 86 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer86{ 0 };
 
     /**
-     * @brief # 87 #Hidden (Gender designation)
+     * @brief num. 87 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer87{ 0 };
 
     /**
-     * @brief # 88 #Hidden (Gender designation)
+     * @brief num. 88 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer88{ 0 };
 
     /**
-     * @brief # 89 #Hidden (Gender designation)
+     * @brief num. 89 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer89{ 0 };
 
     /**
-     * @brief # 90 #Hidden (Gender designation)
+     * @brief num. 90 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer90{ 0 };
 
     /**
-     * @brief # 91 #Hidden (Gender designation)
+     * @brief num. 91 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer91{ 0 };
 
     /**
-     * @brief # 92 #Hidden (Gender designation)
+     * @brief num. 92 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer92{ 0 };
 
     /**
-     * @brief # 93 #Hidden (Gender designation)
+     * @brief num. 93 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer93{ 0 };
 
     /**
-     * @brief # 94 #Hidden (Gender designation)
+     * @brief num. 94 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer94{ 0 };
 
     /**
-     * @brief # 95 #Hidden (Gender designation)
+     * @brief num. 95 num.Hidden (Gender designation)
      */
     unsigned char invisibleFlag_SexVer95{ 0 };
 

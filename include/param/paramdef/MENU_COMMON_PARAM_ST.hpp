@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MENU_COMMON_PARAM_ST {
     /**
      * @brief Solo play Fade out start time at death [seconds]

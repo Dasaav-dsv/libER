@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MENU_PARAM_COLOR_TABLE_ST {
     /**
      * @brief Interpolation method

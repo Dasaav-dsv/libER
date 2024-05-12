@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SE_MATERIAL_CONVERT_PARAM_ST {
     /**
      * @brief SE material ID

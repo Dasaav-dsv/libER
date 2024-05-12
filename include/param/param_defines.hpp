@@ -47,6 +47,12 @@ inline constexpr row_index_type row_index_none = -1;
 
 #define LIBER_PARAM_ENTRY(PARAM, PARAMDEF) PARAM,
 
+/**
+ * @brief An enum of all param tables as they appear in order.
+ * 
+ * Contains every param type used.
+ * 
+ */
 enum class param_index : int {
 #include <param/detail/paramlist.inl>
     PARAM_COUNT

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CS_MOTION_BLUR_QUALITY_DETAIL {
     /**
      * @brief Motion blur enabled

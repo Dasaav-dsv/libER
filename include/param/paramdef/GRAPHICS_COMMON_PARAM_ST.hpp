@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct GRAPHICS_COMMON_PARAM_ST {
     /**
      * @brief Decal generation position offset when a bullet hits HIT INS

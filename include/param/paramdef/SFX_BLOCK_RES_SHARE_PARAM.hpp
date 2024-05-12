@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SFX_BLOCK_RES_SHARE_PARAM {
     /**
      * @brief Block Sfx resource reference map number

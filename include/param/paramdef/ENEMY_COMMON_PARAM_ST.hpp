@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct ENEMY_COMMON_PARAM_ST {
     unsigned char reserved0[8];
 

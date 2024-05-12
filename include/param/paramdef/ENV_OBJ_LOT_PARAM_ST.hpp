@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct ENV_OBJ_LOT_PARAM_ST {
     /**
      * @brief AssetId_0

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CS_EFFECT_QUALITY_DETAIL {
     /**
      * @brief Soft particles enabled

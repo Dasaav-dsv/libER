@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CLEAR_COUNT_CORRECT_PARAM_ST {
     /**
      * @brief 《Maximum HP magnification [%]》

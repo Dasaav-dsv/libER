@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MULTI_ESTUS_FLASK_BONUS_PARAM_ST {
     /**
      * @brief host

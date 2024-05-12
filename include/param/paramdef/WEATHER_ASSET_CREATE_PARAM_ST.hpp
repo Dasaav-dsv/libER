@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct WEATHER_ASSET_CREATE_PARAM_ST {
     /**
      * @brief Asset Id

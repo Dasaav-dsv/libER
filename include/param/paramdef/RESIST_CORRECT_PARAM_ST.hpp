@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct RESIST_CORRECT_PARAM_ST {
     /**
      * @brief Addition after the first activation pt

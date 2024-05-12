@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct LOAD_BALANCER_PARAM_ST {
     /**
      * @brief lowerFpsThreshold

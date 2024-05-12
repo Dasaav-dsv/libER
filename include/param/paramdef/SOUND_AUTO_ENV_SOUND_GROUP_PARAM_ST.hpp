@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct SOUND_AUTO_ENV_SOUND_GROUP_PARAM_ST {
     /**
      * @brief Sound No

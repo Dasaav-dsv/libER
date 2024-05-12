@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MENU_OFFSCR_REND_PARAM_ST {
     /**
      * @brief Camera gaze point X

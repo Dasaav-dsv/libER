@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MAP_MIMICRY_ESTABLISHMENT_PARAM_ST {
     /**
      * @brief Mimicry weight 0

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct EVENT_FLAG_USAGE_PARAM_ST {
     /**
      * @brief Use

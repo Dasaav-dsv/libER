@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct WHITE_SIGN_COOL_TIME_PARAM_ST {
     /**
      * @brief Time limit (normal, no finger)

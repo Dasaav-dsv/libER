@@ -1082,7 +1082,7 @@ EXCLUDE_PATTERNS       = */include/detail/* */include/version/detail/* */build/*
 # wildcard * is used, a substring. Examples: ANamespace, AClass,
 # ANamespace::AClass, ANamespace::*Test
 
-EXCLUDE_SYMBOLS        = liber_* LIBER_* FD4_RUNTIME_CLASS FD4_SINGLETON_CLASS
+EXCLUDE_SYMBOLS        = liber_* LIBER_* FD4_RUNTIME_CLASS FD4_SINGLETON_CLASS unk* pad* reserve* Unk* Pad* Reserve*
 
 # The EXAMPLE_PATH tag can be used to specify one or more files or directories
 # that contain example code fragments that are included (see the \include

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct PARTS_DRAW_PARAM_ST {
     /**
      * @brief LOD level 0-1 boundary distance [m]

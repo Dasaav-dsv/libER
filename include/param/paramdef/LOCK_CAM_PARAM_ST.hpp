@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct LOCK_CAM_PARAM_ST {
     /**
      * @brief Camera distance target [m]

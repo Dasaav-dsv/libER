@@ -21,11 +21,12 @@
 
 namespace from {
 namespace param {
-template <typename Def>
 /**
  * @brief The bidirectional param table iterator.
- *
+ * 
+ * @tparam Def paramdef type being iterated
  */
+template <typename Def>
 class param_iterator {
     uintptr_t file_start;
     param_file::param_row_locator* ptr;
@@ -278,6 +279,11 @@ private:
         : file_start(other.file_start), ptr(other.ptr) {}
 };
 
+/**
+ * @brief The bidirectional param table const iterator.
+ * 
+ * @tparam Def paramdef type being iterated
+ */
 template <typename Def>
 using param_const_iterator = param_iterator<const Def>;
 } // namespace param

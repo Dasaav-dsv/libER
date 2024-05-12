@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct MULTI_SOUL_BONUS_RATE_PARAM_ST {
     /**
      * @brief host

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct TOUGHNESS_PARAM_ST {
     /**
      * @brief Weapon toughness correction factor

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct RANDOM_APPEAR_EDIT_PARAM_ST {
     /**
      * @brief Number of simultaneous appearances

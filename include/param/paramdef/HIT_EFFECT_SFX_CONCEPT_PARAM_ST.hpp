@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct HIT_EFFECT_SFX_CONCEPT_PARAM_ST {
     /**
      * @brief Iron: Concept 1

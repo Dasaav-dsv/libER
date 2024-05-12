@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct LEGACY_DISTANT_VIEW_PARTS_REPLACE_PARAM {
     /**
      * @brief Map ID

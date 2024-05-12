@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct BULLET_CREATE_LIMIT_PARAM_ST {
     /**
      * @brief Maximum number of bullets in the group

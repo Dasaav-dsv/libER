@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct CS_GRAPHICS_CONFIG_PARAM_ST {
     /**
      * @brief Texture filter quality

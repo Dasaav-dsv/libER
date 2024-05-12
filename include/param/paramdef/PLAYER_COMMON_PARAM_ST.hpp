@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct PLAYER_COMMON_PARAM_ST {
     /**
      * @brief Player's automatic foot effect SFX identifier [3 digits]

@@ -3,7 +3,10 @@
 
 namespace from {
 namespace paramdef {
-
+/**
+ * @brief This struct was automatically generated from XML paramdefs.
+ * 
+ */
 struct RANDOM_APPEAR_PARAM_ST {
     /**
      * @brief Lottery slot ID 0
