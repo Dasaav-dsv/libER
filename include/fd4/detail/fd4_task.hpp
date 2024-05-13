@@ -258,6 +258,7 @@ private:
         void* liber_unknown[6];
         void* liber_unknown[6];
     }* liber_unknown;
+    void* liber_unknown;
     bool liber_unknown;
     bool liber_unknown;
     CS::CSTask* cs_task;
