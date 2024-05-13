@@ -1,0 +1,8 @@
+/**
+ * @page example_param_page Param Examples
+ * 
+ * ## Modify PostureControlParam at runtime:
+ * 
+ * @include posture_param.cpp
+ * 
+ */

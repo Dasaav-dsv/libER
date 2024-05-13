@@ -1,7 +1,10 @@
+#include <ProtectMemory.h>
 #include <detail/symbols.hpp>
+#include <detail/windows.inl>
 #include <fd4/detail/fd4_memory.hpp>
 #include <memory/from_allocator.hpp>
 
+#include <mutex>
 #include <utility>
 
 using namespace from::FD4;
@@ -11,6 +14,19 @@ struct allocator_range {
     void* range_begin;
     void* range_end;
 };
+
+// Fix a use after free in a CS::GaitemSelectDialog callback
+void patch_gaitem_dialog_vtable(void* vtable) {
+    auto& method = reinterpret_cast<int* (**)(void*, int*)>(vtable)[3];
+    WinTypes::ProtectMemory protect{ method, PAGE_READWRITE };
+    std::scoped_lock lock{ protect };
+    // This method reaches into freed memory in a destructor,
+    // so it's overriden by libER
+    method = [](void*, int* out) {
+        *out = 0;
+        return out;
+    };
+}
 
 void FD4MemoryManager::init_allocators() {
     auto allocator_table = reinterpret_cast<from::allocator<void>*>(
@@ -24,4 +40,13 @@ void FD4MemoryManager::init_allocators() {
     std::construct_at(&allocator_ranges_1.allocator);
     allocator_ranges_1.range_begin = nullptr;
     allocator_ranges_1.range_end = (void*)(1ull << 47);
+    patch_gaitem_dialog_vtable(
+        liber::symbol<"CS::GaitemSelectDialog::vtable">::get());
+    patch_gaitem_dialog_vtable(
+        liber::symbol<"CS::InventoryDialog::vtable">::get());
+    patch_gaitem_dialog_vtable(
+        liber::symbol<"CS::BaseChangeDstSelectDialog::vtable">::get());
+    patch_gaitem_dialog_vtable(
+        liber::symbol<"CS::ExchangeShopDialog::vtable">::get());
+    patch_gaitem_dialog_vtable(liber::symbol<"CS::ShopDialog::vtable">::get());
 }

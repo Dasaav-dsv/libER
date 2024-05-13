@@ -3,4 +3,12 @@ GLOBAL_init_flip_counter,0x3CFC2CC
 CS::CSEzTask::register_task,0xE71C70
 CS::CSEzTaskProxy::free_task,0xE71D60
 CS::CSSoundImp::make_system_sound,0xD73640
+CS::CSSoundImp::play_character_sound,0x4AA020
+GXBS::GXDrawQueue::queue_callback,0x1A9A130
+GLOBAL_ID3D12RootSignature,0x4558250
+CS::GaitemSelectDialog::vtable,0x2A9C400
+CS::InventoryDialog::vtable,0x2AA5040
+CS::BaseChangeDstSelectDialog::vtable,0x2AC6E30
+CS::ExchangeShopDialog::vtable,0x2AC7FC8
+CS::ShopDialog::vtable,0x2ACA4F0
 ),"cppsv-fmt"

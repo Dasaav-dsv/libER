@@ -34,6 +34,21 @@
  * @see **EXAMPLES**: @ref example_resources_page
  * @see file.hpp
  * 
+ * - @link draw.hpp DirectX 12 3D graphics @endlink: accessing **ELDEN RING**'s D3D12
+ * resources and dispatching draw tasks via its task system (described above). The
+ * provided abstract draw task exposes both the game world render target and the UI render target,
+ * allowing to draw on either.
+ * None of the DirectX resources are acquired via hooking.
+ * @see **EXAMPLES**: @ref example_d3d12_page
+ * @see draw.hpp
+ * 
+ * - @link param.hpp Runtime Param Management @endlink: read/write access to all
+ * param tables used by **ELDEN RING**, with full iterator support, paramdef layouts,
+ * type safety and field documentation (thanks ThomasJClark and Nordgaren!).
+ * @see **EXAMPLES**: @ref example_param_page
+ * @see param.hpp
+ * @see cs_param.hpp
+ * 
  * - @link from_allocator.hpp Memory Allocation@endlink: **libER** documents the
  * **ELDEN RING** allocation implementation, and replaces it with a modern <a
  * href="https://github.com/microsoft/mimalloc/">mimalloc</a> implementation
@@ -81,5 +96,6 @@
  *   - @link include/fd4 FD4@endlink - internal **ELDEN RING** implementation
  * details
  *   - @link include/memory from::* containers and memory@endlink
+ *   - @link include/graphics GX* namespace(s)@endlink ELDEN RING graphics
  *
  */
