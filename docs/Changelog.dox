@@ -31,4 +31,10 @@
  *   - play_system_sound and play_character_sound, restructure sound playback
  *   - Simplify sound playback example
  * 
+ * ## Version 0.1.4.0:
+ *   - Add runtime param manipulation based on a pull request by <a href="https://github.com/ThomasJClark">ThomasJClark</a>
+ *   - Add 186 param tables with iterator support
+ *   - Autogenerate paramdef headers with ParamStructGenerator by <a href="https://github.com/tremwil">tremwil</a> and <a href="https://github.com/Nordgaren">Nordgaren</a>
+ *   - Add paramdef Doxygen documentation based on Nordgaren's translations
+ * 
  */

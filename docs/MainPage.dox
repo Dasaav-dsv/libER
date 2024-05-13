@@ -42,6 +42,13 @@
  * @see **EXAMPLES**: @ref example_d3d12_page
  * @see draw.hpp
  * 
+ * - @link param.hpp Runtime Param Management @endlink: read/write access to all
+ * param tables used by **ELDEN RING**, with full iterator support, paramdef layouts,
+ * type safety and field documentation (thanks ThomasJClark and Nordgaren!).
+ * @see **EXAMPLES**: @ref example_param_page
+ * @see param.hpp
+ * @see cs_param.hpp
+ * 
  * - @link from_allocator.hpp Memory Allocation@endlink: **libER** documents the
  * **ELDEN RING** allocation implementation, and replaces it with a modern <a
  * href="https://github.com/microsoft/mimalloc/">mimalloc</a> implementation
