@@ -68,7 +68,8 @@ struct FD4TaskData {
      * @return CS::CSTaskGroup
      */
     CS::CSTaskGroup get_task_group() const noexcept {
-        return static_cast<CS::CSTaskGroup>(CS_TASK_GROUP_ID(this->task_group_id));
+        return static_cast<CS::CSTaskGroup>(
+            CS_TASK_GROUP_ID(this->task_group_id));
     }
 
     /**
@@ -183,28 +184,37 @@ private:
     int liber_unknown = 0;
 };
 
-// Internal FD4TaskManager strucures
-struct task_entry_group {
-    LIBER_CLASS(task_entry_group);
+// Internal FD4TaskManager structures
+struct FD4TaskEntryGroup {
+    LIBER_CLASS(FD4TaskEntryGroup);
 
-    struct task_entry {
-        virtual ~task_entry() = default;
+    struct FD4TaskCallbacker {
+        virtual ~FD4TaskCallbacker() = default;
+        virtual void execute_callback() = 0;
+
         FD4TaskBase* task;
-        void* liber_unknown;
+        void* callback;
+    };
+
+    struct FD4TaskEntry {
+        virtual ~FD4TaskEntry() = default;
+
+        FD4TaskBase* task;
+        FD4TaskCallbacker* callbacker;
         CS::cstgi group_id;
     };
 
-    struct task_state {
+    struct FD4TaskEntryState {
         FD4TaskBase* task;
-        void* liber_unknown;
+        FD4TaskCallbacker* callbacker;
         int liber_unknown;
         bool active;
     };
 
-    virtual ~task_entry_group() = default;
-    from::vector<task_entry> entries;
-    from::vector<task_state> states;
-    from::deque<task_state> queue;
+    virtual ~FD4TaskEntryGroup() = default;
+    from::vector<FD4TaskEntry> entries;
+    from::vector<FD4TaskEntryState> states;
+    from::deque<FD4TaskEntryState> queue;
     int flags[2];
     CS::cstgi group_id;
     DLKR::DLPlainAdaptiveMutex mutex;
@@ -226,24 +236,38 @@ public:
     virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
 
 private:
+    struct FD4TaskQueue {
+        virtual ~task_queue() LIBER_INTERFACE_ONLY;
+
+        from::allocator<void> allocator;
+        from::map<CS::cstgi, FD4TaskEntryGroup*> task_groups;
+        from::vector<FD4TaskEntryGroup> task_groups_flat;
+    };
+
     from::allocator<void> liber_unknown;
     struct {
-        void* liber_unknown;
+        void* vtable;
         DLKR::DLPlainLightMutex* mutex;
         from::vector<liber::dummy> liber_unknown;
     }* liber_unknown[3];
-    void* liber_unknown;
-    void* liber_unknown;
+    struct {
+        from::allocator<void> allocator;
+        DLKR::DLPlainLightMutex mutex;
+        from::vector<std::pair<void*, int>> liber_unknown;
+        CS::CSTask* cs_task;
+        void* liber_unknown[6];
+        void* liber_unknown[6];
+    }* liber_unknown;
     bool liber_unknown;
     bool liber_unknown;
     CS::CSTask* cs_task;
+    FD4TaskQueue* task_queue;
     struct {
-        void* liber_unknown;
+        void* vtable;
         from::allocator<void> liber_unknown;
-        from::map<CS::cstgi, task_entry_group*> liber_unknown;
-        from::vector<task_entry_group> liber_unknown;
+        from::vector<void*> liber_unknown;
+        bool liber_unknown;
     }* liber_unknown;
-    void* liber_unknown;
 };
 
 LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
@@ -254,7 +278,7 @@ LIBER_ASSERT_OFFS(0x70, unk_wstr);
 LIBER_ASSERT_OFFS(0xA0, state);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(task_entry_group);
+LIBER_ASSERTS_BEGIN(FD4TaskEntryGroup);
 LIBER_ASSERT_SIZE(0xD0);
 LIBER_ASSERT_OFFS(0x08, entries);
 LIBER_ASSERT_OFFS(0x28, states);
