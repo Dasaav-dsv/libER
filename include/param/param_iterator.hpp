@@ -268,10 +268,10 @@ public:
     }
 
 private:
-    template <typename Def>
+    template <typename>
     friend class param_iterator;
 
-    template <typename ParamType>
+    template <typename>
     friend class param_table;
 
     param_iterator(const param_iterator<const Def>& other) noexcept
