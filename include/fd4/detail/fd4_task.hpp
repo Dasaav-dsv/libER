@@ -237,7 +237,7 @@ public:
 
 private:
     struct FD4TaskQueue {
-        virtual ~task_queue() LIBER_INTERFACE_ONLY;
+        virtual ~FD4TaskQueue() LIBER_INTERFACE_ONLY;
 
         from::allocator<void> allocator;
         from::map<CS::cstgi, FD4TaskEntryGroup*> task_groups;
