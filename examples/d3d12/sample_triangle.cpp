@@ -142,7 +142,7 @@ private:
         D3D12_HEAP_PROPERTIES heap_properties{ D3D12_HEAP_TYPE_UPLOAD,
             D3D12_CPU_PAGE_PROPERTY_UNKNOWN, D3D12_MEMORY_POOL_UNKNOWN, 1, 1 };
         D3D12_RESOURCE_DESC resource_desc{ D3D12_RESOURCE_DIMENSION_BUFFER, 0,
-            sizeof(vertices), 1, 1, 1, DXGI_FORMAT_UNKNOWN, 1, 0,
+            sizeof(vertices), 1, 1, 1, DXGI_FORMAT_UNKNOWN, { 1, 0 },
             D3D12_TEXTURE_LAYOUT_ROW_MAJOR, D3D12_RESOURCE_FLAG_NONE };
         device.CreateCommittedResource(&heap_properties, D3D12_HEAP_FLAG_NONE,
             &resource_desc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
