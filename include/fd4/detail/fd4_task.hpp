@@ -161,7 +161,7 @@ private:
 
     steps_type* steps;
     struct {
-        void* liber_unknown;
+        void* vtable;
         from::set<void*> liber_unknown;
         from::allocator<void> liber_unknown;
         from::allocator<void> liber_unknown;
