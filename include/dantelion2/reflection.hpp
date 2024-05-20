@@ -202,7 +202,7 @@ public:
 
     DLRuntimeClass() noexcept : base_class(nullptr) {}
 
-    virtual ~DLRuntimeClass() = default;
+    virtual ~DLRuntimeClass();
 
     /**
      * @brief Get the name of the type.

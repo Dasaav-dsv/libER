@@ -33,6 +33,8 @@ class ParamResCap : public FD4::FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(ParamResCap);
 
+    virtual ~ParamResCap();
+
     /**
      * @brief Get the param file associated with this capsule.
      *
@@ -100,7 +102,7 @@ private:
         ParamResCap* res_cap[8];
     } param_entries[int(param::param_index::PARAM_COUNT)];
     struct CSWepReinforceTree {
-        virtual ~CSWepReinforceTree() = default;
+        virtual ~CSWepReinforceTree();
         from::allocator<void*> allocator;
         void* liber_unknown;
     } wep_reinforce_tree;

@@ -37,3 +37,9 @@ CSTaskGroup CSEzTask::get_task_group() const noexcept {
 void CSEzTaskProxy::execute(FD4::FD4TaskData* data) {
     this->owner->eztask_execute(data);
 }
+
+CSEzTask::~CSEzTask() {
+    this->free_task();
+}
+
+EzChildStepBase::~EzChildStepBase() = default;

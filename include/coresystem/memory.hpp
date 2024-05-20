@@ -24,8 +24,7 @@ class CSMemoryImp : public FD4::FD4MemoryManager {
 public:
     LIBER_CLASS(CSMemoryImp);
 
-    CSMemoryImp() = default;
-    virtual ~CSMemoryImp() = default;
+    virtual ~CSMemoryImp();
 
 private:
     virtual void liber_unknown() {}

@@ -7,3 +7,5 @@ DLRuntimeClass* FD4ComponentBase::get_runtime_class() noexcept {
     return &DLRuntimeClassTemplate<FD4ComponentBase,
         LIBER_STRINGIFY(FD4ComponentBase)>::dl_runtime_class;
 }
+
+FD4ComponentBase::~FD4ComponentBase() = default;

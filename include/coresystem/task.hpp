@@ -54,9 +54,7 @@ public:
 
     CSEzTask() = default;
 
-    virtual ~CSEzTask() {
-        this->free_task();
-    }
+    virtual ~CSEzTask();
 
     /**
      * @brief FD4::FD4TaskBase execute method that calls @ref eztask_execute.
@@ -161,7 +159,7 @@ class EzChildStepBase {
 public:
     LIBER_CLASS(EzChildStepBase);
 
-    virtual ~EzChildStepBase() = default;
+    virtual ~EzChildStepBase();
 
 private:
     CSEzTask* task = nullptr;

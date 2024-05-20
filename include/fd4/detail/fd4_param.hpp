@@ -20,6 +20,8 @@ class FD4ParamResCap : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ParamResCap);
 
+    virtual ~FD4ParamResCap();
+
     /**
      * @brief Get a pointer to the underlying param file.
      * 

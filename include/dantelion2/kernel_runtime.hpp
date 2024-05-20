@@ -25,7 +25,10 @@ namespace from {
 // mutexes, signals, allocators etc.
 namespace DLKR {
 // Non-copyable dummy (empty) synchronization object
-class DLDummySyncObject : public DLUT::DLNonCopyable {};
+class DLDummySyncObject : public DLUT::DLNonCopyable {
+public:
+    virtual ~DLDummySyncObject();
+};
 
 /**
  * @brief A wrapper around a Windows Critical Section.
@@ -169,7 +172,7 @@ public:
     explicit DLPlainAdaptiveMutex(int spin_count) noexcept
         : DLPlainLightMutex(spin_count), spin_count(spin_count) {}
 
-    virtual ~DLPlainAdaptiveMutex() noexcept = default;
+    virtual ~DLPlainAdaptiveMutex() noexcept;
 
     DLPlainAdaptiveMutex(DLPlainAdaptiveMutex&&) noexcept = delete;
 

@@ -39,7 +39,7 @@ struct FD4ComponentBase {
      */
     LIBERAPI virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept;
 
-    virtual ~FD4ComponentBase() = default;
+    virtual ~FD4ComponentBase();
 };
 } // namespace FD4
 } // namespace from
