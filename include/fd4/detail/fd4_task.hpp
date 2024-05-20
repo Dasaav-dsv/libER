@@ -145,16 +145,6 @@ private:
     virtual bool unk_tree_op10() LIBER_INTERFACE;
 };
 
-// TODO:
-// Unnamed (no RTTI) structure
-// Has a virtual destructor
-struct _unk_tree {
-    virtual ~_unk_tree() = default;
-    from::set<void*> _tree;
-    from::allocator<void> liber_unknown;
-    from::allocator<void> liber_unknown;
-};
-
 // Base step layout.
 // Common base class for all steppers
 template <class Impl>
@@ -170,7 +160,12 @@ private:
     using steps_type = std::pair<void (*)(Impl*), const char*>;
 
     steps_type* steps;
-    _unk_tree _tree;
+    struct {
+        void* liber_unknown;
+        from::set<void*> liber_unknown;
+        from::allocator<void> liber_unknown;
+        from::allocator<void> liber_unknown;
+    } liber_unknown;
     void* liber_unknown = nullptr;
     bool liber_unknown = false;
     from::allocator<void> liber_unknown;
