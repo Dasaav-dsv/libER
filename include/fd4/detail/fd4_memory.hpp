@@ -23,7 +23,7 @@ public:
 
     FD4MemoryManager() = default;
 
-    virtual ~FD4MemoryManager();
+    LIBERAPI virtual ~FD4MemoryManager();
 
 private:
     virtual void init_allocators();

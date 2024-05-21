@@ -27,7 +27,7 @@ class FD4ResRep;
  */
 class FD4FileLoadProcess {
 public:
-    virtual ~FD4FileLoadProcess();
+    LIBERAPI virtual ~FD4FileLoadProcess();
 
 private:
     FD4FileCap* file_cap;
@@ -46,7 +46,7 @@ class FD4ResCapHolderItem : public FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4ResCapHolderItem);
 
-    virtual ~FD4ResCapHolderItem();
+    LIBERAPI virtual ~FD4ResCapHolderItem();
 
     /**
      * @brief Get the item name.
@@ -119,7 +119,7 @@ class FD4ResCap : public FD4ResCapHolderItem {
 public:
     FD4_RUNTIME_CLASS(FD4ResCap);
 
-    virtual ~FD4ResCap();
+    LIBERAPI virtual ~FD4ResCap();
 
     /**
      * @brief Set the internal debugging state.
@@ -147,7 +147,7 @@ class FD4ResCapHolder : public FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4ResCapHolder);
 
-    virtual ~FD4ResCapHolder();
+    LIBERAPI virtual ~FD4ResCapHolder();
 
 private:
     virtual from::allocator<void> get_allocator1() const noexcept {
@@ -315,7 +315,7 @@ class FD4ResRep : public FD4ResCap {
 public:
     FD4_RUNTIME_CLASS(FD4ResRep);
 
-    virtual ~FD4ResRep();
+    LIBERAPI virtual ~FD4ResRep();
 
     /**
      * @brief Get the resource capsule holder.

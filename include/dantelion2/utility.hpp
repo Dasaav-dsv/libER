@@ -52,7 +52,7 @@ public:
      *
      */
     virtual void deleter() = 0;
-    virtual ~DLReferenceCountObject();
+    LIBERAPI virtual ~DLReferenceCountObject();
 
 private:
     template <typename T>

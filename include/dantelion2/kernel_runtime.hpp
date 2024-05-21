@@ -27,7 +27,7 @@ namespace DLKR {
 // Non-copyable dummy (empty) synchronization object
 class DLDummySyncObject : public DLUT::DLNonCopyable {
 public:
-    virtual ~DLDummySyncObject();
+    LIBERAPI virtual ~DLDummySyncObject();
 };
 
 /**
@@ -172,7 +172,7 @@ public:
     explicit DLPlainAdaptiveMutex(int spin_count) noexcept
         : DLPlainLightMutex(spin_count), spin_count(spin_count) {}
 
-    virtual ~DLPlainAdaptiveMutex() noexcept;
+    LIBERAPI virtual ~DLPlainAdaptiveMutex() noexcept;
 
     DLPlainAdaptiveMutex(DLPlainAdaptiveMutex&&) noexcept = delete;
 
