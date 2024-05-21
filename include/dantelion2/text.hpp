@@ -13,7 +13,6 @@
 #include <string>
 #include <utility>
 
-// TODO: anchor vtable
 namespace from {
 // "Dantelion text" namespace
 namespace DLTX {
@@ -121,7 +120,7 @@ class FD4BasicHashString {
 public:
     LIBER_CLASS(FD4BasicHashString);
 
-    virtual ~FD4BasicHashString() = default;
+    virtual ~FD4BasicHashString();
 
     /**
      * @brief Construct a new FD4BasicHashString object with from::wstring

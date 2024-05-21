@@ -61,3 +61,5 @@ DLRuntimeClass::get_runtime_pairs() noexcept {
     return *reinterpret_cast<from::vector<DLRuntimeClassPair>*>(
         liber::symbol<"DLRF::DLRuntimeClass::GLOBAL_runtime_pairs">::get());
 }
+
+DLRuntimeClass::~DLRuntimeClass() = default;

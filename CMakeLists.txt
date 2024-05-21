@@ -93,6 +93,7 @@ target_sources("objlibER" PUBLIC
     "source/dantelion2/system.cpp"
     "source/dantelion2/utility.cpp"
     "source/dantelion2/fileio.cpp"
+    "source/dantelion2/text.cpp"
 )
 
 # Namespace FD4 source files
@@ -111,6 +112,7 @@ target_sources("objlibER" PUBLIC
     "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
     "source/coresystem/sound.cpp"
+    "source/coresystem/memory.cpp"
 )
 
 # Namespace GX source files

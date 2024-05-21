@@ -47,3 +47,6 @@ void DLPlainMutex::unlock() noexcept {
 bool DLPlainMutex::try_lock() noexcept {
     return WaitForSingleObject(this->mutex_handle, 0) == WAIT_OBJECT_0;
 }
+
+DLDummySyncObject::~DLDummySyncObject() = default;
+DLPlainAdaptiveMutex::~DLPlainAdaptiveMutex() = default;

@@ -50,3 +50,5 @@ void FD4MemoryManager::init_allocators() {
         liber::symbol<"CS::ExchangeShopDialog::vtable">::get());
     patch_gaitem_dialog_vtable(liber::symbol<"CS::ShopDialog::vtable">::get());
 }
+
+FD4MemoryManager::~FD4MemoryManager() = default;

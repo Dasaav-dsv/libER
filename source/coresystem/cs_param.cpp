@@ -7,7 +7,9 @@ using namespace from;
 
 LIBER_SINGLETON_INSTANCE(CS::SoloParamRepositoryImp);
 
-bool CS::SoloParamRepositoryImp::wait_for_params(int timeout) {
+using namespace from::CS;
+
+bool SoloParamRepositoryImp::wait_for_params(int timeout) {
     auto are_params_ready = [](int& num_loaded) {
         auto param_repository_ref = instance();
         if (!param_repository_ref)
@@ -33,3 +35,6 @@ bool CS::SoloParamRepositoryImp::wait_for_params(int timeout) {
     }
     return true;
 }
+
+ParamResCap::~ParamResCap() = default;
+SoloParamRepositoryImp::CSWepReinforceTree::~CSWepReinforceTree() = default;

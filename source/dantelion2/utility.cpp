@@ -2,5 +2,6 @@
 
 using namespace from::DLUT;
 
-// Anchored vtable:
+// Anchored vtables:
 DLNonCopyable::~DLNonCopyable() = default;
+DLReferenceCountObject::~DLReferenceCountObject() = default;
