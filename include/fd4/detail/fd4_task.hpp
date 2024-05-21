@@ -167,14 +167,15 @@ private:
     virtual bool unk_tree_op12() LIBER_INTERFACE;
     virtual bool unk_tree_op13() LIBER_INTERFACE;
 
-    using steps_type = std::pair<void (*)(Impl*), const char*>;
+    using steps_type = std::pair<void (*)(Impl*), const wchar_t*>;
 
     steps_type* steps;
     _unk_tree _tree;
     void* liber_unknown = nullptr;
     bool liber_unknown = false;
     from::allocator<void> liber_unknown;
-    void* liber_unknown = nullptr;
+    unsigned int cur_step;
+    unsigned int max_step;
     bool liber_unknown = false;
     bool liber_unknown = false;
     from::wstring unk_wstr;
