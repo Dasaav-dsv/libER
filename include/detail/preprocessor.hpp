@@ -74,7 +74,8 @@
 // Allows assert macros to access private members
 #define LIBER_CLASS(CLASSNAME) \
     using self = CLASSNAME;    \
-    friend class _liber_asserts_##CLASSNAME
+    template <typename>        \
+    friend class _liber_asserts
 
 // A class declaration with deleted constructors.
 // Only instances created by ELDEN RING directly may be used
@@ -86,15 +87,20 @@
     CLASSNAME& operator=(const CLASSNAME&) = delete; \
     CLASSNAME& operator=(CLASSNAME&&) noexcept = delete
 
+template <typename>
+class _liber_asserts;
+
 // The beginning of a libER class assert block.
-// LIBER_ASSERTS_END closes the block 
+// LIBER_ASSERTS_END closes the block
 #define LIBER_ASSERTS_BEGIN(CLASSNAME) \
-    class _liber_asserts_##CLASSNAME { \
+    template <>                        \
+    class _liber_asserts<CLASSNAME> {  \
         using _liber_asserts_type = CLASSNAME
 
 // See above. Used for template classes
 #define LIBER_ASSERTS_TEMPLATE_BEGIN(CLASSNAME, ...) \
-    class _liber_asserts_##CLASSNAME {               \
+    template <>                                      \
+    class _liber_asserts<CLASSNAME<__VA_ARGS__>> {   \
         using _liber_asserts_type = CLASSNAME<__VA_ARGS__>
 
 // Assert the size of an instance of the class
