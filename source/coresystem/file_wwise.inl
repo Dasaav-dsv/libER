@@ -6,12 +6,12 @@
 
 #include <algorithm>
 #include <exception>
+#include <filesystem>
 #include <memory>
 #include <mutex>
 #include <shared_mutex>
 #include <span>
 #include <unordered_map>
-#include <filesystem>
 
 using namespace from;
 namespace fs = std::filesystem;
@@ -108,13 +108,13 @@ void override_wwise_loader_once() {
         do {
             MemoryBarrier();
             void** overwritten_vtable = old_vtable;
-            std::copy_n(old_vtable, 7, new_vtable);
+            std::copy_n(overwritten_vtable, 7, new_vtable);
             new_vtable[1] = (void*)&load_wem_override;
             new_vtable[2] = (void*)&load_bnk_override;
-            success = overwritten_vtable
-                   == InterlockedCompareExchangePointer(
-                       reinterpret_cast<void**>(&old_vtable), new_vtable,
-                       overwritten_vtable);
+            void* result =
+                InterlockedCompareExchangePointer((void**)&old_vtable,
+                    (void*)new_vtable, (void*)overwritten_vtable);
+            success = reinterpret_cast<void*>(overwritten_vtable) == result;
         } while (!success);
         return true;
     }();
