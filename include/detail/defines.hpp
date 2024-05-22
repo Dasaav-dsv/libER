@@ -60,6 +60,7 @@
 
 // Resource names used by program-wide resources,
 // based on named shared memory mapping backed by Windows
-#define LIBER_MY_ALLOCATORS_RESOURCE L"LIBER_MY_ALLOCATORS_RESOURCE"
+#define LIBER_MY_ALLOCATORS_RESOURCE L"LIBER_MY_ALLOCATORS"
+#define LIBER_EXECUTABLE_ALLOCATOR_RESOURCE L"LIBER_EXECUTABLE_ALLOCATOR"
 
 // clang-format on
