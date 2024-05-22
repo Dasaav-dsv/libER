@@ -19,7 +19,10 @@
 #include <memory/from_string.hpp>
 #include <memory/from_vector.hpp>
 
+#include <string>
+#include <typeinfo>
 #include <utility>
+#include <vector>
 
 /**
  * @brief Convert a task group id into a task group index, or back.
@@ -99,7 +102,7 @@ private:
  * as it implements the necessary task registration methods.
  *
  */
-class FD4TaskBase : public FD4::FD4ComponentBase {
+class FD4TaskBase : public FD4ComponentBase {
 public:
     FD4_RUNTIME_CLASS(FD4TaskBase);
 
@@ -118,19 +121,32 @@ private:
 
 /// @cond DOXYGEN_SKIP
 
-// The base step interface.
-// Only its FD4TaskBase instantiation is implemented
-template <class Impl>
-class FD4StepTemplateInterface;
+class FD4StepBaseInterface : public FD4ComponentBase {
+public:
+    FD4_RUNTIME_CLASS(FD4StepBaseInterface);
 
-// TODO: methods
-template <>
-class FD4StepTemplateInterface<FD4TaskBase> : public FD4TaskBase {
+    LIBERAPI virtual ~FD4StepBaseInterface();
+
+private:
+    virtual void execute(FD4TaskData*) LIBER_INTERFACE;
+    virtual void fd4step_execute(FD4TaskData*) LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
+    virtual void liber_unknown() LIBER_INTERFACE;
+};
+
+// The base step interface.
+template <class Impl>
+class FD4StepTemplateInterface : public Impl {
 public:
     FD4_RUNTIME_CLASS(FD4StepTemplateInterface);
 
+    virtual ~FD4StepTemplateInterface() = default;
+
 private:
-    virtual void execute_second(FD4TaskData*) LIBER_INTERFACE;
+    virtual void fd4step_execute(FD4TaskData*) LIBER_INTERFACE;
     virtual bool test_int_0x48() LIBER_INTERFACE;
     virtual int get_int_0x48() LIBER_INTERFACE;
     virtual bool unk_tree_op1() LIBER_INTERFACE;
@@ -145,32 +161,50 @@ private:
     virtual bool unk_tree_op10() LIBER_INTERFACE;
 };
 
+LIBERAPI void hook_step_array(std::pair<void*, const wchar_t*>*& array,
+    void* hook, int index, int array_size);
+
 // Base step layout.
 // Common base class for all steppers
-template <class Impl>
-class FD4StepTemplateBase : public FD4StepTemplateInterface<FD4TaskBase> {
+template <class Impl, class Base>
+class FD4StepTemplateBase : public FD4StepTemplateInterface<Base> {
 public:
     FD4_RUNTIME_CLASS(FD4StepTemplateBase);
+
+    using step_type = Impl;
+    using step_base_type = FD4StepTemplateBase;
+    using step_method_type = void (*)(step_type*);
+    using step_method_array_type = std::pair<step_method_type, const wchar_t*>;
+
+    template <typename Index = typename step_type::step_method_index>
+    void add_step_callback(step_method_type callback, Index method_index) {
+        hook_step_array(
+            reinterpret_cast<std::pair<void*, const wchar_t*>*&>(this->steps),
+            (void*)callback, method_index, Index::STEP_SIZE);
+    }
+
+    template <typename Index = typename step_type::step_method_index>
+    auto get_current_step() const noexcept {
+        return static_cast<Index>(this->step_execute);
+    }
 
 private:
     virtual bool unk_tree_op11() LIBER_INTERFACE;
     virtual bool unk_tree_op12() LIBER_INTERFACE;
     virtual bool unk_tree_op13() LIBER_INTERFACE;
 
-    using steps_type = std::pair<void (*)(Impl*), const wchar_t*>;
-
-    steps_type* steps;
+    step_method_array_type* steps;
     struct {
         void* vtable;
         from::set<void*> liber_unknown;
         from::allocator<void> liber_unknown;
         from::allocator<void> liber_unknown;
     } liber_unknown;
-    void* liber_unknown = nullptr;
+    int step_execute;
+    int step_advance;
     bool liber_unknown = false;
     from::allocator<void> liber_unknown;
-    unsigned int cur_step;
-    unsigned int max_step;
+    void* liber_unknown = nullptr;
     bool liber_unknown = false;
     bool liber_unknown = false;
     from::wstring unk_wstr;
@@ -222,7 +256,7 @@ struct FD4TaskEntryGroup {
 
 // TODO: expose more functionality
 /**
- * @brief Singleton responsible for managing all tasks
+ * @brief Singleton responsible for managing all tasks.
  *
  */
 class FD4TaskManager {
@@ -230,6 +264,24 @@ public:
     FD4_SINGLETON_CLASS(FD4TaskManager);
 
     virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
+
+    template <typename T>
+    std::vector<T*> find_tasks() {
+        std::string_view t_name{ typeid(T).name() };
+        std::string_view ref_name = t_name.substr(t_name.find_last_of(':') + 1);
+        std::vector<T*> out;
+        for (const auto& [cstgi, task_group] :
+            this->task_queue->task_groups) {
+            for (const auto& entry : task_group->entries) {
+                FD4::FD4TaskBase* task = entry.task;
+                if (!task)
+                    continue;
+                if (task->get_runtime_class()->class_name() == ref_name)
+                    out.push_back(reinterpret_cast<T*>(task));
+            }
+        }
+        return out;
+    }
 
 private:
     struct FD4TaskQueue {
@@ -267,7 +319,14 @@ private:
     }* liber_unknown;
 };
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void);
+LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void, FD4StepBaseInterface);
+LIBER_ASSERT_SIZE(0xA8);
+LIBER_ASSERT_OFFS(0x8, steps);
+LIBER_ASSERT_OFFS(0x68, unk_wstr);
+LIBER_ASSERT_OFFS(0x98, state);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void, FD4TaskBase);
 LIBER_ASSERT_SIZE(0xB0);
 LIBER_ASSERT_OFFS(0x10, steps);
 LIBER_ASSERT_OFFS(0x70, unk_wstr);
