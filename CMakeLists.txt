@@ -72,6 +72,7 @@ target_sources("objlibER" PUBLIC
     "source/detail/base_address.cpp"
     "source/detail/symbols.cpp"
     "source/detail/preprocessor.cpp"
+    "source/detail/executable_allocator.cpp"
 )
 
 # Versioning source files
