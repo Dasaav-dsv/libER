@@ -23,6 +23,7 @@ LIBER_ADD_SYMBOL(CS::BaseChangeDstSelectDialog::vtable)
 LIBER_ADD_SYMBOL(CS::ExchangeShopDialog::vtable)
 LIBER_ADD_SYMBOL(CS::ShopDialog::vtable)
 LIBER_ADD_SYMBOL(hkbCharacter::patch)
+LIBER_ADD_SYMBOL(hkaSkeletonMapper::patch)
 LIBER_ADD_SYMBOL(RETZERO_STUB)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)

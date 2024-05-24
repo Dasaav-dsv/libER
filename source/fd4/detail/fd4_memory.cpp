@@ -28,12 +28,8 @@ void patch_gaitem_dialog_vtable(void* vtable) {
     };
 }
 
-// Fix an overlooked reference counted free in a non-reference counted object,
-// which leads to uninitialized memory access and/or a double free
-void patch_hkaskeleton_crash() {
-    // Get the call which "frees" the freed hkaSkeleton instance
-    uintptr_t call_site = reinterpret_cast<uintptr_t>(
-        liber::symbol<"hkbCharacter::patch">::get());
+void null_stub_call(void* pcall_site) {
+    uintptr_t call_site = reinterpret_cast<uintptr_t>(pcall_site);
     // Get the call to redirect to (a null stub)
     uintptr_t call_target =
         reinterpret_cast<uintptr_t>(liber::symbol<"RETZERO_STUB">::get());
@@ -45,6 +41,13 @@ void patch_hkaskeleton_crash() {
         std::scoped_lock lock{ protect };
         call_disp32 = new_disp32;
     }
+}
+
+// Fix an overlooked reference counted free in a non-reference counted object,
+// which leads to uninitialized memory access and/or a double free
+void patch_hkaskeleton_crash() {
+    null_stub_call(liber::symbol<"hkbCharacter::patch">::get());
+    null_stub_call(liber::symbol<"hkaSkeletonMapper::patch">::get());
 }
 
 void FD4MemoryManager::init_allocators() {

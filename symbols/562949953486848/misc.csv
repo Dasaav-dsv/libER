@@ -12,5 +12,6 @@ CS::BaseChangeDstSelectDialog::vtable,0x2AC6E30
 CS::ExchangeShopDialog::vtable,0x2AC7FC8
 CS::ShopDialog::vtable,0x2ACA4F0
 hkbCharacter::patch,0x13D1387
+hkaSkeletonMapper::patch,0x160C101
 RETZERO_STUB,0x110AA0
 ),"cppsv-fmt"
