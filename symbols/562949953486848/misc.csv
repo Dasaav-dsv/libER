@@ -11,4 +11,5 @@ CS::InventoryDialog::vtable,0x2AA5040
 CS::BaseChangeDstSelectDialog::vtable,0x2AC6E30
 CS::ExchangeShopDialog::vtable,0x2AC7FC8
 CS::ShopDialog::vtable,0x2ACA4F0
+hkaSkeleton::vtable,0x2AF3190
 ),"cppsv-fmt"

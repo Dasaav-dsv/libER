@@ -28,6 +28,15 @@ void patch_gaitem_dialog_vtable(void* vtable) {
     };
 }
 
+// Fix an overlooked reference counted free in a non-reference
+// counted object which leads to a double free
+void patch_hkaskeleton_vtable(void* vtable) {
+    auto& method = reinterpret_cast<void (**)(void*)>(vtable)[2];
+    WinTypes::ProtectMemory protect{ method, PAGE_READWRITE };
+    std::scoped_lock lock{ protect };
+    method = [](void*) {};
+}
+
 void FD4MemoryManager::init_allocators() {
     auto allocator_table = reinterpret_cast<from::allocator<void>*>(
         liber::symbol<"FD4::FD4MemoryManager::GLOBAL_allocator_table">::get());
@@ -49,6 +58,7 @@ void FD4MemoryManager::init_allocators() {
     patch_gaitem_dialog_vtable(
         liber::symbol<"CS::ExchangeShopDialog::vtable">::get());
     patch_gaitem_dialog_vtable(liber::symbol<"CS::ShopDialog::vtable">::get());
+    patch_hkaskeleton_vtable(liber::symbol<"hkaSkeleton::vtable">::get());
 }
 
 FD4MemoryManager::~FD4MemoryManager() = default;

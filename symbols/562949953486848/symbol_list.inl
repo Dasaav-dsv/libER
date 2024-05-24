@@ -22,6 +22,7 @@ LIBER_ADD_SYMBOL(CS::InventoryDialog::vtable)
 LIBER_ADD_SYMBOL(CS::BaseChangeDstSelectDialog::vtable)
 LIBER_ADD_SYMBOL(CS::ExchangeShopDialog::vtable)
 LIBER_ADD_SYMBOL(CS::ShopDialog::vtable)
+LIBER_ADD_SYMBOL(hkaSkeleton::vtable)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntimeImpl::instance)
 LIBER_ADD_SYMBOL(DLIO::DLFileDeviceManager::instance)
