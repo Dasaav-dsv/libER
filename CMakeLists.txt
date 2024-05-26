@@ -114,6 +114,8 @@ target_sources("objlibER" PUBLIC
     "source/coresystem/file.cpp"
     "source/coresystem/sound.cpp"
     "source/coresystem/memory.cpp"
+    "source/coresystem/world.cpp"
+    "source/coresystem/world_character.cpp"
 )
 
 # Namespace GX source files
