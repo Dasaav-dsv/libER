@@ -83,6 +83,7 @@ private:
     WorldAreaInfo* area_info;
 };
 
+// TODO: FieldIns handle, methods, how does the second array work?
 class OpenFieldChrSet : public ChrSet {
 public:
     LIBER_CLASS(OpenFieldChrSet);
@@ -91,13 +92,13 @@ private:
     from::list<WorldArea> areas;
     float liber_unknown;
     struct {
-        long long handle; // TODO: FieldIns handle
+        long long handle;
         ChrIns* chr;
     } chr_array[1500];
     long long liber_unknown;
     int chr_count;
     struct {
-        long long handle; // TODO: FieldIns handle
+        long long handle;
         int liber_unknown;
     } chr_search_array[1500];
     long long liber_unknown;
@@ -233,6 +234,29 @@ private:
     ChrSet* chr_set_array[197];
     WorldGridAreaChr* player_grid_area_chr;
     PlayerIns* player;
+    void* liber_unknown;
+    WorldArea player_area;
+    bool liber_unknown;
+    unsigned int frame_counter;
+    int world_update_state;
+    int world_update_flag1;
+    int world_update_flag2;
+    bool is_world_update_flag1;
+    bool is_world_update_flag2;
+    void* liber_unknown; // TODO: +1E538
+    void* liber_unknown;
+    struct {
+        int liber_unknown;
+        int liber_unknown;
+        int liber_unknown;
+        int frame_countdown;
+    }* liber_unknown;
+    void* liber_unknown;                   // GXSG flat tree
+    bool player_has_sleep_collection_item; // EquipParamGoods + 0x65 bit 5
+    float player_threat[32];
+    void* net_chr_sync; // TODO:
+    void* net_speffect_sync;
+    void* net_damage_sync;
 };
 
 LIBER_ASSERTS_BEGIN(ChrSet);
