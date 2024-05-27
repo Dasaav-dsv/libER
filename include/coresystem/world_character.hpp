@@ -7,6 +7,8 @@
  */
 #pragma once
 
+#include <coresystem/step.hpp>
+#include <coresystem/task.hpp>
 #include <coresystem/world.hpp>
 #include <dantelion2/text.hpp>
 #include <detail/preprocessor.hpp>
@@ -14,11 +16,14 @@
 #include <fd4/resource.hpp>
 #include <memory/from_list.hpp>
 #include <memory/from_map.hpp>
+#include <memory/from_set.hpp>
+#include <memory/from_vector.hpp>
 
 #include <cstddef>
 #include <cstdint>
 #include <span>
 #include <utility>
+#include <atomic>
 
 namespace from {
 namespace CS {
@@ -31,7 +36,7 @@ public:
     // TODO: flag type instead of int
     using ChrEntry = std::pair<ChrIns*, int>;
 
-    virtual int get_capacity() const;
+    LIBERAPI virtual int get_capacity() const;
 
     std::span<ChrEntry> get_entries() const noexcept {
         return std::span(this->set, this->capacity);
@@ -71,18 +76,6 @@ private:
     from::map<int, ChrEntry*> entity_group_id_map;
 };
 
-class WorldAreaChrBase {
-public:
-    virtual ~WorldAreaChrBase();
-
-    const WorldAreaInfo* get_area_info() const noexcept {
-        return this->area_info;
-    }
-
-private:
-    WorldAreaInfo* area_info;
-};
-
 // TODO: FieldIns handle, methods, how does the second array work?
 class OpenFieldChrSet : public ChrSet {
 public:
@@ -105,11 +98,23 @@ private:
     int chr_search_count;
 };
 
+class WorldAreaChrBase {
+public:
+    LIBERAPI virtual ~WorldAreaChrBase();
+
+    const WorldAreaInfo* get_area_info() const noexcept {
+        return this->area_info;
+    }
+
+private:
+    WorldAreaInfo* area_info;
+};
+
 class WorldBlockChr {
 public:
     LIBER_CLASS(WorldBlockChr);
 
-    virtual ~WorldBlockChr();
+    LIBERAPI virtual ~WorldBlockChr();
 
     WorldArea get_area() const noexcept {
         return this->area;
@@ -163,7 +168,7 @@ class WorldAreaChr : public WorldAreaChrBase {
 public:
     LIBER_CLASS(WorldAreaChr);
 
-    virtual ~WorldAreaChr();
+    LIBERAPI virtual ~WorldAreaChr();
 
     const WorldAreaInfo* get_area_info() const noexcept {
         return this->area_info;
@@ -201,13 +206,71 @@ private:
     from::map<WorldArea, WorldBlockChr*> area_chr_map;
 };
 
+struct DebugChrInit {
+    LIBER_CLASS(DebugChrInit);
+
+    float pos[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    float rot[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    float unk[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float scale[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    int NpcParamID;
+    int NpcThinkParamID;
+    int EventEntityID;
+    int TalkID;
+    wchar_t name[32];
+    long long liber_unknown;
+    wchar_t* pName = this->name;
+    long long liber_unknown[2];
+    size_t nameCapacity = 31;
+    bool liber_unknown;
+    long long liber_unknown;
+    char enemyType = 0;
+    bool ChrInsSimulate = false;
+    int CharacterInitParamID;
+    int SpawnManipulatorType = 5; // can be Network = 2?
+    long long liber_unknown[3];
+    int liber_unknown[4];
+};
+
+class CCSDebugChrCreator : public CSDebugChrCreator {
+public:
+    FD4_RUNTIME_CLASS(CCSDebugChrCreator);
+
+    using ChrEntry = typename ChrSet::ChrEntry;
+
+    LIBERAPI virtual ~CCSDebugChrCreator();
+
+    DebugChrInit& get_chr_init() noexcept {
+        return this->chr_init;
+    }
+
+    const DebugChrInit& get_chr_init() const noexcept {
+        return this->chr_init;
+    }
+
+    void spawn_chr() noexcept {
+        this->set_next_step(STEP_Load);
+    }
+
+    ChrIns* get_spawned_chr() const noexcept {
+        return this->last_spawned_chr.first;
+    }
+
+private:
+    DebugChrInit chr_init;
+    ChrEntry last_spawned_chr;
+};
+
 class WorldChrManImp {
 public:
     FD4_SINGLETON_CLASS(WorldChrManImp);
 
-    virtual ~WorldChrManImp();
+    virtual ~WorldChrManImp() LIBER_INTERFACE_ONLY;
 
 private:
+    using void_task_type = CSEzVoidTask<CSEzTask, WorldChrManImp>;
+    using update_task_type = CSEzUpdateTask<CSEzRabbitTask, WorldChrManImp>;
+
     alignas(16) WorldAreaChr area_chr_array[28];
     alignas(16) WorldBlockChr block_chr_array[192];
     alignas(16) WorldGridAreaChr grid_area_chr_array[6];
@@ -258,6 +321,74 @@ private:
     void* net_speffect_sync;
     void* net_damage_sync;
     void* net_super_armor_sync;
+    int liber_unknown;
+    bool liber_unknown;
+    bool liber_unknown;
+    void* liber_unknown;
+    int liber_unknown[3];
+    from::vector<liber::dummy> liber_unknown;
+    CCSDebugChrCreator* debug_chr_creator; // 0x1E640
+    void* liber_unknown;
+    void* liber_unknown;
+    from::set<liber::dummy> liber_unknown;
+    int liber_unknown[3];
+    bool liber_unknown;
+    bool liber_unknown;
+    void* liber_unknown[6];
+    void* liber_unknown[196];
+    void* chr_cam; // TODO: 0x1ECD8
+    update_task_type liber_unknown;
+    void_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    from::vector<update_task_type> liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    from::vector<update_task_type> liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    from::vector<update_task_type> liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    update_task_type liber_unknown;
+    std::atomic_int chr_count;
+    from::vector<ChrIns*> chr_vector;
+    from::vector<std::pair<ChrIns*, float>> chr_distance_vector;
+    struct {
+        void* vtable;
+        std::atomic_int lock;
+    } spin_lock; // TODO:
+    from::vector<ChrIns*> chr_c0000_vector;
+    int liber_unknown;
+    struct {
+        from::allocator<void> allocator;
+        void* liber_unknown;
+    } liber_unknown; // TODO: 0x1F220
+    int liber_unknown[6];
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    void_task_type liber_unknown;
+    int liber_unknown;
 };
 
 LIBER_ASSERTS_BEGIN(ChrSet);
@@ -279,6 +410,14 @@ LIBER_ASSERT_SIZE(0x160);
 LIBER_ASSERT_OFFS(0x78, chr_set);
 LIBER_ASSERT_OFFS(0xE0, msb_res_cap);
 LIBER_ASSERT_OFFS(0x100, can_interact);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(DebugChrInit);
+LIBER_ASSERT_SIZE(0x100);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(CCSDebugChrCreator);
+LIBER_ASSERT_SIZE(0x100);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldChrManImp);
