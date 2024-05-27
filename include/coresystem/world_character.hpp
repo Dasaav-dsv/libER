@@ -257,6 +257,7 @@ private:
     void* net_chr_sync; // TODO:
     void* net_speffect_sync;
     void* net_damage_sync;
+    void* net_super_armor_sync;
 };
 
 LIBER_ASSERTS_BEGIN(ChrSet);
