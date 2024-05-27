@@ -168,7 +168,7 @@ public:
 private:
     int liber_unknown;
     int liber_unknown;
-    size_t block_count;
+    int block_count;
     WorldBlockInfo* blocks;
 };
 
@@ -218,15 +218,15 @@ public:
     }
 
 private:
-    size_t area_info_count;
+    int area_info_count;
     WorldAreaInfo* area_info = this->area_info_array; // Pointer to +0x160
-    size_t grid_area_info_count;
+    int grid_area_info_count;
     WorldGridAreaInfo* grid_area_info =
         this->grid_area_info_array; // Pointer to +0xB220
-    size_t area_info_pointer_count;
+    int area_info_pointer_count;
     WorldAreaInfoBase*
         area_info_pointer_array[34]; // Map (m10, m19, ..., m60) count times two
-    size_t block_info_count;
+    int block_info_count;
     WorldBlockInfo* block_info =
         this->block_info_array; // Pointer to +0xA20
     bool liber_unknown;
@@ -325,7 +325,7 @@ public:
 
 private:
     WorldAreaInfo* area_info;
-    size_t block_count;
+    int block_count;
     WorldBlockRes* blocks;
 };
 
@@ -410,13 +410,13 @@ public:
     }
 
 private:
-    size_t area_res_count;
+    int area_res_count;
     WorldAreaRes* area_res = this->area_res_array;
     float liber_unknown;
     float liber_unknown;
-    size_t grid_area_res_count;
+    int grid_area_res_count;
     WorldGridAreaRes* grid_area_res = this->grid_area_res_array;
-    size_t block_res_count;
+    int block_res_count;
     WorldBlockRes* block_res = this->block_res_array;
     WorldAreaTile tile;
     short liber_unknown;
@@ -428,7 +428,8 @@ private:
     alignas(16) WorldBlockRes block_res_array[192];
     alignas(16) WorldGridAreaRes grid_area_res_array[6];
     WorldAreaResBase* area_res_pointer_array[34];
-    size_t area_res_pointer_count;
+    int area_res_pointer_count;
+    int liber_unknown;
     WorldAreaTile tile_res;
     long long liber_unknown[17];
     float liber_unknown[4];
