@@ -42,4 +42,5 @@ CSEzTask::~CSEzTask() {
     this->free_task();
 }
 
+CSEzRabbitTask::~CSEzRabbitTask() = default;
 EzChildStepBase::~EzChildStepBase() = default;

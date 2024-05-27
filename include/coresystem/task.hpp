@@ -65,7 +65,7 @@ public:
      *
      * @param data a struct with additional data passed to the task
      */
-    void execute(FD4::FD4TaskData* data) final {
+    void execute(FD4::FD4TaskData* data) override {
         this->eztask_execute(data);
     }
 
@@ -151,6 +151,188 @@ private:
     CSTaskGroup task_group;
 };
 
+/**
+ * @brief A task template that executes a function on a subject.
+ *
+ * Its bound function is executed every frame. Some ELDEN RING classes will use
+ * this template to implement per-frame updates.
+ *
+ * @tparam Base task base to inherit from
+ * @tparam Impl type of the subject
+ */
+template <typename Base, typename Impl>
+class CSEzVoidTask : public Base {
+public:
+    LIBER_CLASS(CSEzVoidTask);
+
+    /**
+     * @brief The type of the subject this task executes on.
+     *
+     */
+    using subject_type = Impl;
+
+    /**
+     * @brief The type of the executor function.
+     *
+     */
+    using executor_type = void (*)(subject_type*);
+
+    /**
+     * @brief Construct a new CSEzVoidTask.
+     *
+     * @param subject the subject
+     * @param executor the executor function
+     */
+    CSEzVoidTask(subject_type subject, executor_type executor)
+        : subject(subject), executor(executor) {}
+
+    virtual ~CSEzVoidTask() = default;
+
+    /**
+     * @brief Virtual method that is called whenever the task is executed.
+     *
+     * Calls the executor function on the subject.
+     *
+     * The FD4::FD4TaskData parameter is ignored.
+     *
+     */
+    void eztask_execute(FD4::FD4TaskData*) override {
+        this->executor(this->subject);
+    }
+
+private:
+    subject_type subject;
+    executor_type executor;
+};
+
+/**
+ * @brief A task type with an "active" field, which controls
+ * its execution.
+ *
+ * Base of many update tasks in ELDEN RING.
+ *
+ * @see from::CS::CSEzUpdateTask
+ *
+ */
+class CSEzRabbitTask : public CSEzTask {
+public:
+    LIBER_CLASS(CSEzRabbitTask);
+
+    LIBERAPI virtual ~CSEzRabbitTask();
+
+    /**
+     * @brief Register a task to be called in a specified task group.
+     *
+     * Call this method with a task instance to register it for execution.
+     * ELDEN RING task runners execute task groups in a strict order, going
+     * from FrameBegin to FrameEnd. After a task is registered, it will be
+     * executed in the next pass of all the task groups the following frame,
+     * calling its eztask_execute method.
+     *
+     * Also sets the task's activation state.
+     *
+     * @param task_group a value from the CS::CSTaskGroup enum when the task
+     * should be executed
+     */
+    void register_task(CSTaskGroup task_group) override {
+        this->set_active(true);
+        CSEzTask::register_task(task_group);
+    }
+
+    /**
+     * @brief Get the active state of the task.
+     *
+     * @return true
+     * @return false
+     */
+    bool get_active() const noexcept {
+        return this->active;
+    }
+
+    /**
+     * @brief Set the active state of the task.
+     *
+     * @param active new state
+     */
+    void set_active(bool active) noexcept {
+        this->active = active;
+    }
+
+private:
+    int active = 0;
+};
+
+/**
+ * @brief A task template that executes a function on a subject.
+ *
+ * Used in combination with a stateful base, this task runs only when requested.
+ * Some ELDEN RING classes will use this template to implement on-request
+ * updates.
+ *
+ * @tparam Base task base to inherit from
+ * @tparam Impl type of the subject
+ */
+template <typename Base, typename Impl>
+class CSEzUpdateTask : public Base {
+public:
+    LIBER_CLASS(CSEzUpdateTask);
+
+    /**
+     * @brief The type of the subject this task executes on.
+     *
+     */
+    using subject_type = Impl;
+
+    /**
+     * @brief The type of the executor function.
+     *
+     */
+    using executor_type = void (*)(subject_type*);
+
+    /**
+     * @brief Construct a new CSEzUpdateTask.
+     *
+     * @param subject the subject
+     * @param executor the executor function
+     */
+    CSEzUpdateTask(subject_type subject, executor_type executor)
+        : subject(subject), executor(executor) {}
+
+    virtual ~CSEzUpdateTask() = default;
+
+    /**
+     * @brief Task execute override that resets its active state.
+     *
+     * @param data a struct with additional data passed to the task, like delta
+     * time and the task group
+     */
+    void execute(FD4::FD4TaskData* data) override {
+        if (!Base::get_active()) {
+            Base::free_task();
+            return;
+        }
+        Base::set_active(false);
+        this->eztask_execute(data);
+    }
+
+    /**
+     * @brief Virtual method that is called whenever the task is executed.
+     *
+     * Calls the executor function on the subject.
+     *
+     * The FD4::FD4TaskData parameter is ignored.
+     *
+     */
+    void eztask_execute(FD4::FD4TaskData*) override {
+        this->executor(this->subject);
+    }
+
+private:
+    subject_type subject;
+    executor_type executor;
+};
+
+// TODO:
 /**
  * @brief A child task executed by tasks and steppers in ELDEN RING.
  *
