@@ -188,6 +188,11 @@ public:
         return static_cast<Index>(this->step_execute);
     }
 
+    template <typename Index = typename step_type::step_method_index>
+    void set_next_step(Index new_step) noexcept {
+        this->step_advance = static_cast<int>(new_step);
+    }
+
 private:
     virtual bool unk_tree_op11() LIBER_INTERFACE;
     virtual bool unk_tree_op12() LIBER_INTERFACE;
