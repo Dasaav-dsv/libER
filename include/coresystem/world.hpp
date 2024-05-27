@@ -72,7 +72,7 @@ class WorldAreaInfoBase : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(WorldAreaInfoBase);
 
-    virtual ~WorldAreaInfoBase();
+    LIBERAPI virtual ~WorldAreaInfoBase();
 
     // TODO: virtual methods
 
@@ -98,7 +98,7 @@ class alignas(16) WorldBlockInfo : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(WorldBlockInfo);
 
-    virtual ~WorldBlockInfo();
+    LIBERAPI virtual ~WorldBlockInfo();
 
     WorldArea get_area() const noexcept {
         return this->area;
@@ -159,7 +159,7 @@ class WorldAreaInfo : public WorldAreaInfoBase {
 public:
     LIBER_CLASS(WorldAreaInfo);
 
-    virtual ~WorldAreaInfo();
+    LIBERAPI virtual ~WorldAreaInfo();
 
     std::span<WorldBlockInfo> get_blocks() const noexcept {
         return std::span(this->blocks, this->block_count);
@@ -172,11 +172,12 @@ private:
     WorldBlockInfo* blocks;
 };
 
+// TODO: methods
 class WorldGridAreaInfo : public WorldAreaInfoBase {
 public:
     LIBER_CLASS(WorldGridAreaInfo);
 
-    virtual ~WorldGridAreaInfo();
+    LIBERAPI virtual ~WorldGridAreaInfo();
 
 private:
     int grid_position[3];
@@ -198,7 +199,7 @@ class WorldInfo : public DLUT::DLNonCopyable {
 public:
     LIBER_INTERFACE_CLASS(WorldInfo);
 
-    virtual ~WorldInfo();
+    LIBERAPI virtual ~WorldInfo();
 
     std::span<WorldAreaInfo> get_area_info() const noexcept {
         return std::span(this->area_info, this->area_info_count);
@@ -239,7 +240,7 @@ class WorldAreaResBase : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(WorldAreaResBase);
 
-    virtual ~WorldAreaResBase();
+    LIBERAPI virtual ~WorldAreaResBase();
 
     WorldAreaInfo* get_area() const noexcept {
         return this->area_info;
@@ -265,7 +266,7 @@ class WorldBlockResBase : public DLUT::DLNonCopyable {
 public:
     LIBER_CLASS(WorldBlockResBase);
 
-    virtual ~WorldBlockResBase();
+    LIBERAPI virtual ~WorldBlockResBase();
 
     WorldBlockInfo* get_block() const noexcept {
         return this->block;
@@ -290,7 +291,7 @@ class WorldBlockRes : public WorldBlockResBase {
 public:
     LIBER_CLASS(WorldBlockRes);
 
-    virtual ~WorldBlockRes();
+    LIBERAPI virtual ~WorldBlockRes();
 
 private:
     long long liber_unknown[348];
@@ -304,7 +305,7 @@ class WorldLodBlockRes : public WorldBlockResBase {
 public:
     LIBER_CLASS(WorldLodBlockRes);
 
-    virtual ~WorldLodBlockRes();
+    LIBERAPI virtual ~WorldLodBlockRes();
 
 private:
     long long liber_unknown[8];
@@ -319,6 +320,8 @@ class WorldAreaRes : public WorldAreaResBase {
 public:
     LIBER_CLASS(WorldAreaRes);
 
+    LIBERAPI virtual ~WorldAreaRes();
+
     std::span<WorldBlockRes> get_blocks() const noexcept {
         return std::span(this->blocks, this->block_count);
     }
@@ -332,6 +335,8 @@ private:
 class WorldGridAreaRes : public WorldAreaResBase {
 public:
     LIBER_CLASS(WorldAreaRes);
+
+    LIBERAPI virtual ~WorldGridAreaRes();
 
     WorldGridAreaInfo* get_grid_area_info() const noexcept {
         this->grid_area_info;
@@ -390,7 +395,7 @@ class WorldRes : public WorldInfo {
 public:
     LIBER_INTERFACE_CLASS(WorldRes);
 
-    virtual ~WorldRes();
+    LIBERAPI virtual ~WorldRes();
 
     std::span<WorldAreaRes> get_area_info() const noexcept {
         return std::span(this->area_res, this->area_res_count);
@@ -441,7 +446,7 @@ class WorldInfoOwner : public WorldRes {
 public:
     LIBER_INTERFACE_CLASS(WorldInfoOwner);
 
-    virtual ~WorldInfoOwner();
+    LIBERAPI virtual ~WorldInfoOwner();
 };
 
 LIBER_ASSERTS_BEGIN(WorldBlockInfo);
