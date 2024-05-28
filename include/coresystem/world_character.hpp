@@ -29,6 +29,7 @@ namespace from {
 namespace CS {
 class ChrIns;
 class PlayerIns;
+class ChrCam;
 
 class ChrSet {
 public:
@@ -305,7 +306,8 @@ public:
     };
 
 private:
-    from::map<param::row_index_type, buddy_platoon_info> trigger_speffect_buddy_param_map;
+    from::map<param::row_index_type, buddy_platoon_info>
+        trigger_speffect_buddy_param_map;
     buddy_platoon_info* buddy_platoons_info;
     buddy_param_row buddy_param_to_spawn = -1;
     buddy_param_row buddy_param_summoned = -1;
@@ -352,6 +354,11 @@ private:
     using void_task_type = CSEzVoidTask<CSEzTask, WorldChrManImp>;
     using update_task_type = CSEzUpdateTask<CSEzRabbitTask, WorldChrManImp>;
 
+    struct chr_set_update_node {
+        ChrIns* chr_to_update;
+        chr_set_update_node* next;
+    };
+
     alignas(16) WorldAreaChr area_chr_array[28];
     alignas(16) WorldBlockChr block_chr_array[192];
     alignas(16) WorldGridAreaChr grid_area_chr_array[6];
@@ -365,7 +372,7 @@ private:
     WorldAreaChrBase* area_chr_pointer_array[34];
     int area_chr_pointer_array_count;
     ChrSet player_chr_set;
-    ChrSet chr_set2;
+    ChrSet chr_set2;      // Unknown, potentially unused
     ChrSet buddy_chr_set; // Includes Torrent
     ChrSet debug_chr_set;
     OpenFieldChrSet open_field_chr_set;
@@ -388,7 +395,7 @@ private:
     bool is_world_update_flag1;
     bool is_world_update_flag2;
     SummonBuddy* summon_buddy;
-    void* liber_unknown;
+    void* net_pos_sync;
     struct {
         int liber_unknown;
         int liber_unknown;
@@ -398,68 +405,70 @@ private:
     void* liber_unknown;                   // GXSG flat tree
     bool player_has_sleep_collection_item; // EquipParamGoods + 0x65 bit 5
     float player_threat[32];
-    void* net_chr_sync; // TODO:
+    void* net_chr_sync;
     void* net_speffect_sync;
     void* net_damage_sync;
     void* net_super_armor_sync;
     int liber_unknown;
-    bool liber_unknown;
+    bool prohibit_magic;
     bool liber_unknown;
     void* liber_unknown;
     int liber_unknown[3];
     from::vector<liber::dummy> liber_unknown;
-    CCSDebugChrCreator* debug_chr_creator; // 0x1E640
+    CCSDebugChrCreator* debug_chr_creator;
     void* liber_unknown;
     void* liber_unknown;
     from::set<liber::dummy> liber_unknown;
-    int liber_unknown[3];
+    int liber_unknown;
     bool liber_unknown;
+    int liber_unknown;
     bool liber_unknown;
-    void* liber_unknown[6];
-    void* liber_unknown[196];
-    void* chr_cam; // TODO: 0x1ECD8
+    std::pair<chr_set_update_node*, chr_set_update_node*>
+        world_chr_set_update[3];
+    chr_set_update_node* area_chr_set_update[197];
+    ChrCam* chr_cam;
+    update_task_type update_debug_chr_creator; // TODO: hook fn pointers thing
+    void_task_type populate_chr_vector;
+    update_task_type update_world_chr_man_misc;
+    update_task_type populate_active_chr_vector;
+    from::vector<update_task_type> update_lod_levels;
+    update_task_type update_active_chr_vector;
+    update_task_type update_chr_states;
+    update_task_type update_net_sync;
+    update_task_type update_havok_behavior1;
+    update_task_type update_world_singletons;
+    update_task_type update_prohibit_magic;
+    update_task_type update_havok_behavior2;
+    update_task_type update_lock_tgt;
+    void_task_type update_world_ai_manager;
+    void_task_type update_chr_distance_vector;
+    void_task_type update_ride_non_player;
+    from::vector<update_task_type> update_chr_visibility;
+    update_task_type update_chr_set_nodes;
+    update_task_type update_chr_step1;
+    update_task_type update_chr_step2;
+    update_task_type reset_chr_job_count;
+    from::vector<update_task_type> update_chr_step3;
     update_task_type liber_unknown;
-    void_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    from::vector<update_task_type> liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    void_task_type liber_unknown;
-    void_task_type liber_unknown;
-    void_task_type liber_unknown;
-    from::vector<update_task_type> liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    from::vector<update_task_type> liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
-    update_task_type liber_unknown;
+    update_task_type update_chr_step4;
+    update_task_type update_chr_step5;
+    update_task_type update_chr_step6;
+    update_task_type update_chr_step7;
     std::atomic_int chr_count;
     from::vector<ChrIns*> chr_vector;
-    from::vector<std::pair<ChrIns*, float>> chr_distance_vector;
+    from::vector<std::pair<ChrIns*, std::pair<float, int>>> chr_distance_vector;
     struct {
         void* vtable;
         std::atomic_int lock;
     } spin_lock; // TODO:
-    from::vector<ChrIns*> chr_c0000_vector;
+    from::vector<ChrIns*> active_chr_vector;
     int liber_unknown;
     struct {
         from::allocator<void> allocator;
         void* liber_unknown;
     } liber_unknown; // TODO: 0x1F220
     int liber_unknown[6];
-    void_task_type liber_unknown;
+    void_task_type reset_chr_count;
     void_task_type liber_unknown;
     void_task_type liber_unknown;
     void_task_type liber_unknown;
@@ -514,6 +523,10 @@ LIBER_ASSERT_OFFS(0x470, block_chr_array);
 LIBER_ASSERT_OFFS(0x10C70, grid_area_chr_array);
 LIBER_ASSERT_OFFS(0x1E500, player_grid_area_chr);
 LIBER_ASSERT_OFFS(0x1E538, summon_buddy);
+LIBER_ASSERT_OFFS(0x1E640, debug_chr_creator);
+LIBER_ASSERT_OFFS(0x1ECD8, chr_cam);
+LIBER_ASSERT_OFFS(0x1F1A8, chr_vector);
+LIBER_ASSERT_OFFS(0x1F1F8, active_chr_vector);
 LIBER_ASSERTS_END;
 } // namespace CS
 } // namespace from
