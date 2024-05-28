@@ -1,6 +1,8 @@
 #include <coresystem/world_character.hpp>
+#include <detail/singleton.hpp>
 
 using namespace from;
+
 LIBER_SINGLETON_INSTANCE(CS::WorldChrManImp);
 
 using namespace from::CS;

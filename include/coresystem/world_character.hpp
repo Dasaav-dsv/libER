@@ -19,11 +19,11 @@
 #include <memory/from_set.hpp>
 #include <memory/from_vector.hpp>
 
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <span>
 #include <utility>
-#include <atomic>
 
 namespace from {
 namespace CS {
@@ -209,10 +209,10 @@ private:
 struct DebugChrInit {
     LIBER_CLASS(DebugChrInit);
 
-    float pos[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float rot[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-    float unk[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    float scale[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    alignas(16) float pos[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    alignas(16) float rot[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    alignas(16) float unk[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    alignas(16) float scale[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
     int NpcParamID;
     int NpcThinkParamID;
     int EventEntityID;
@@ -261,6 +261,87 @@ private:
     ChrEntry last_spawned_chr;
 };
 
+class SummonBuddy {
+public:
+    LIBER_CLASS(SummonBuddy);
+
+    using buddy_param_row = param::row_index_type;
+    using buddy_stone_eliminate_target_id = long long;
+
+    struct CSBuddyStoneEliminateTargetCalc : public FD4::FD4ComponentBase {
+        FD4_RUNTIME_CLASS(CSBuddyStoneEliminateTargetCalc);
+
+        using buddy_stone_param_row = param::row_index_type;
+
+        buddy_stone_eliminate_target_id id;
+        buddy_stone_param_row buddy_stone_param;
+        int eliminate_target_entity_id;
+        bool active;
+        unsigned int frame_counter;
+    };
+
+    struct buddy_platoon_info {
+        buddy_param_row row;
+        buddy_platoon_info* next_buddy;
+    };
+
+    struct buddy_instance {
+        ChrIns* buddy;
+        int liber_unknown;
+        bool liber_unknown;
+        bool liber_unknown;
+        buddy_param_row row;
+        int buddy_generator_event_flag;
+        int liber_unknown;
+        param::row_index_type doping_speffect;
+        int generate_anim_id;
+        int liber_unknown;
+        float liber_unknown;
+        bool liber_unknown;
+        bool liber_unknown;
+        bool liber_unknown;
+        bool liber_unknown;
+        bool has_mohg_rune_effect;
+    };
+
+private:
+    from::map<param::row_index_type, buddy_platoon_info> trigger_speffect_buddy_param_map;
+    buddy_platoon_info* buddy_platoons_info;
+    buddy_param_row buddy_param_to_spawn = -1;
+    buddy_param_row buddy_param_summoned = -1;
+    bool prohibit_summon;
+    ChrSet* buddy_chr_set;
+    int buddy_generator_event_flag;
+    from::map<int, liber::dummy> liber_unknown;
+    from::map<int, liber::dummy> liber_unknown;
+    from::map<int, from::list<buddy_instance>> player_buddy_map;
+    int liber_unknown;
+    int liber_unknown;
+    int liber_unknown;
+    float disappear_delay_sec;
+    float liber_unknown;
+    alignas(16) float home_pos[4];
+    float liber_unknown;
+    bool liber_unknown;
+    bool liber_unknown;
+    bool liber_unknown;
+    bool allow_summon;
+    bool liber_unknown;
+    int summon_state;
+    float liber_unknown;
+    from::map<buddy_stone_eliminate_target_id, CSBuddyStoneEliminateTargetCalc>
+        eliminate_target_calc_map;
+    param::row_index_type trigger_speffect1;
+    param::row_index_type trigger_speffect2;
+    void* liber_unknown;
+    struct {
+        void* vtable;
+        long long liber_unknown[4];
+    }* liber_unknown;
+    int liber_unknown;
+    void* liber_unknown;
+};
+
 class WorldChrManImp {
 public:
     FD4_SINGLETON_CLASS(WorldChrManImp);
@@ -285,8 +366,8 @@ private:
     int area_chr_pointer_array_count;
     ChrSet player_chr_set;
     ChrSet chr_set2;
-    ChrSet chr_set3;
-    ChrSet chr_set4;
+    ChrSet torrent_chr_set;
+    ChrSet buddy_chr_set;
     OpenFieldChrSet open_field_chr_set;
     int chr_set_holder_count;
     struct chr_set_holder {
@@ -306,7 +387,7 @@ private:
     int world_update_flag2;
     bool is_world_update_flag1;
     bool is_world_update_flag2;
-    void* liber_unknown; // TODO: +1E538
+    SummonBuddy* summon_buddy;
     void* liber_unknown;
     struct {
         int liber_unknown;
@@ -417,7 +498,13 @@ LIBER_ASSERT_SIZE(0x100);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(CCSDebugChrCreator);
-LIBER_ASSERT_SIZE(0x100);
+LIBER_ASSERT_SIZE(0x1C0);
+LIBER_ASSERT_OFFS(0xB0, chr_init);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(SummonBuddy);
+LIBER_ASSERT_SIZE(0x110);
+LIBER_ASSERT_OFFS(0xA0, home_pos);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldChrManImp);
@@ -426,6 +513,7 @@ LIBER_ASSERT_OFFS(0x10, area_chr_array);
 LIBER_ASSERT_OFFS(0x470, block_chr_array);
 LIBER_ASSERT_OFFS(0x10C70, grid_area_chr_array);
 LIBER_ASSERT_OFFS(0x1E500, player_grid_area_chr);
+LIBER_ASSERT_OFFS(0x1E538, summon_buddy);
 LIBER_ASSERTS_END;
 } // namespace CS
 } // namespace from
