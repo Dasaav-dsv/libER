@@ -366,8 +366,8 @@ private:
     int area_chr_pointer_array_count;
     ChrSet player_chr_set;
     ChrSet chr_set2;
-    ChrSet torrent_chr_set;
-    ChrSet buddy_chr_set;
+    ChrSet buddy_chr_set; // Includes Torrent
+    ChrSet debug_chr_set;
     OpenFieldChrSet open_field_chr_set;
     int chr_set_holder_count;
     struct chr_set_holder {
