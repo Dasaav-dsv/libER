@@ -8,4 +8,5 @@ DLRuntimeClass* FD4ComponentBase::get_runtime_class() noexcept {
         LIBER_STRINGIFY(FD4ComponentBase)>::dl_runtime_class;
 }
 
-FD4ComponentBase::~FD4ComponentBase() = default;
+// Transition: FD4ComponentBase does not necessary have a virtual dtor
+// FD4ComponentBase::~FD4ComponentBase() = default;
