@@ -201,7 +201,7 @@ public:
     }
 
 private:
-    subject_type subject;
+    subject_type* subject;
     executor_type executor;
 };
 
@@ -328,7 +328,7 @@ public:
     }
 
 private:
-    subject_type subject;
+    subject_type* subject;
     executor_type executor;
 };
 
