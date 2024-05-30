@@ -69,7 +69,7 @@ public:
     LIBERAPI void unlock() noexcept;
 
     /**
-     * @brief Try to lock the mutex
+     * @brief Try to lock the mutex.
      *
      * Prefer using STL lock objects over calling this explicitly.
      *
@@ -129,7 +129,7 @@ public:
     LIBERAPI void unlock() noexcept;
 
     /**
-     * @brief Try to lock the mutex
+     * @brief Try to lock the mutex.
      *
      * Prefer using STL lock objects over calling this explicitly.
      *
@@ -179,6 +179,42 @@ public:
 private:
     int spin_count;
 };
+
+class DLPlainSpinLock : public DLUT::DLNonCopyable {
+public:
+    DLPlainSpinLock() noexcept : signal_variable(0) {}
+
+    virtual ~DLPlainSpinLock() noexcept = default;
+
+    /**
+     * @brief Lock the spin lock.
+     *
+     * Prefer using STL lock objects over calling this explicitly.
+     */
+    LIBERAPI void lock() noexcept;
+
+    /**
+     * @brief Unlock the spin lock.
+     *
+     * Prefer using STL lock objects over calling this explicitly.
+     */
+    LIBERAPI void unlock() noexcept;
+
+    /**
+     * @brief Try to lock the spin lock.
+     *
+     * Prefer using STL lock objects over calling this explicitly.
+     *
+     * @return true acquired the lock
+     * @return false failed to acquire the lock
+     */
+    [[nodiscard]] LIBERAPI bool try_lock() noexcept;
+
+    DLPlainSpinLock(DLPlainSpinLock&&) noexcept = delete;
+
+private:
+    long signal_variable;
+}
 
 LIBER_ASSERTS_BEGIN(DLPlainAdaptiveMutex);
 LIBER_ASSERT_SIZE(0x38);

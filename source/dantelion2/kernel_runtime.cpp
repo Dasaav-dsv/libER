@@ -48,5 +48,18 @@ bool DLPlainMutex::try_lock() noexcept {
     return WaitForSingleObject(this->mutex_handle, 0) == WAIT_OBJECT_0;
 }
 
+void DLPlainSpinLock::lock() noexcept {
+    while (_interlockedbittestandset(&this->signal_variable, 0))
+        YieldProcessor();
+}
+
+void DLPlainSpinLock::unlock() noexcept {
+    this->signal_variable = 0;
+}
+
+bool DLPlainSpinLock::try_lock() noexcept {
+    return _interlockedbittestandset(&this->signal_variable, 0);
+}
+
 DLDummySyncObject::~DLDummySyncObject() = default;
 DLPlainAdaptiveMutex::~DLPlainAdaptiveMutex() = default;
