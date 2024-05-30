@@ -109,6 +109,7 @@ target_sources("objlibER" PUBLIC
 # Namespace CS source files
 target_sources("objlibER" PUBLIC
     "source/coresystem/cs_param.cpp"
+    "source/coresystem/field.cpp"
     "source/coresystem/task.cpp"
     "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
