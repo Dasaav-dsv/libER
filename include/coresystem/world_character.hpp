@@ -7,9 +7,11 @@
  */
 #pragma once
 
+#include <coresystem/field.hpp>
 #include <coresystem/step.hpp>
 #include <coresystem/task.hpp>
 #include <coresystem/world.hpp>
+#include <dantelion2/kernel_runtime.hpp>
 #include <dantelion2/text.hpp>
 #include <detail/preprocessor.hpp>
 #include <fd4/detail/singleton.hpp>
@@ -77,7 +79,7 @@ private:
     from::map<int, ChrEntry*> entity_group_id_map;
 };
 
-// TODO: FieldIns handle, methods, how does the second array work?
+// TODO: methods, how does the second array work?
 class OpenFieldChrSet : public ChrSet {
 public:
     LIBER_CLASS(OpenFieldChrSet);
@@ -85,16 +87,10 @@ public:
 private:
     from::list<WorldArea> areas;
     float liber_unknown;
-    struct {
-        long long handle;
-        ChrIns* chr;
-    } chr_array[1500];
+    std::pair<FieldInsHandle, ChrIns*> chr_array[1500];
     long long liber_unknown;
     int chr_count;
-    struct {
-        long long handle;
-        int liber_unknown;
-    } chr_search_array[1500];
+    std::pair<FieldInsHandle, int> chr_search_array[1500];
     long long liber_unknown;
     int chr_search_count;
 };
@@ -228,7 +224,7 @@ struct DebugChrInit {
     char enemyType = 0;
     bool ChrInsSimulate = false;
     int CharacterInitParamID;
-    int SpawnManipulatorType = 5; // can be Network = 2?
+    int SpawnManipulatorType = 5;
     long long liber_unknown[3];
     int liber_unknown[4];
 };
@@ -457,16 +453,11 @@ private:
     std::atomic_int chr_count;
     from::vector<ChrIns*> chr_vector;
     from::vector<std::pair<ChrIns*, std::pair<float, int>>> chr_distance_vector;
-    struct {
-        void* vtable;
-        std::atomic_int lock;
-    } spin_lock; // TODO:
+    DLKR::DLPlainSpinLock spin_lock;
     from::vector<ChrIns*> active_chr_vector;
     int liber_unknown;
-    struct {
-        from::allocator<void> allocator;
-        void* liber_unknown;
-    } liber_unknown; // TODO: 0x1F220
+    from::allocator<void> liber_unknown;
+    int* liber_unknown;
     int liber_unknown[6];
     void_task_type reset_chr_count;
     void_task_type liber_unknown;
