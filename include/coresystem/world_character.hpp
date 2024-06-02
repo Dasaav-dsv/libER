@@ -13,6 +13,7 @@
 #include <coresystem/world.hpp>
 #include <dantelion2/kernel_runtime.hpp>
 #include <dantelion2/text.hpp>
+#include <detail/optref.hpp>
 #include <detail/preprocessor.hpp>
 #include <fd4/detail/singleton.hpp>
 #include <fd4/resource.hpp>
@@ -21,6 +22,7 @@
 #include <memory/from_set.hpp>
 #include <memory/from_vector.hpp>
 
+#include <algorithm>
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
@@ -41,7 +43,7 @@ public:
 
     LIBERAPI virtual int get_capacity() const;
 
-    std::span<ChrEntry> get_entries() const noexcept {
+    std::span<ChrEntry> get_set() const noexcept {
         return std::span(this->set, this->capacity);
     }
 
@@ -69,6 +71,20 @@ public:
         return this->entity_group_id_map;
     }
 
+    liber::optref<ChrEntry> find_chr(FieldInsHandle handle) const noexcept {
+        if (!this->set)
+            return std::nullopt;
+        auto set = this->get_entries();
+        for (auto& entry : set) {
+            if (!entry.first)
+                continue;
+            auto field_ins = reinterpret_cast<FieldInsBase*>(entry.first);
+            if (handle == field_ins->get_handle())
+                return entry;
+        }
+        return std::nullopt;
+    }
+
 private:
     int set_index;
     WorldArea area;
@@ -83,6 +99,44 @@ private:
 class OpenFieldChrSet : public ChrSet {
 public:
     LIBER_CLASS(OpenFieldChrSet);
+
+    auto& get_areas() noexcept {
+        return this->areas;
+    }
+
+    const auto& get_areas() const noexcept {
+        return this->areas;
+    }
+
+    std::span<std::pair<FieldInsHandle, ChrIns*>>
+    get_chr_entries() const noexcept {
+        return std::span{ this->chr_array, this->chr_array_count };
+    }
+
+    std::span<std::pair<FieldInsHandle, int>>
+    get_search_entries() const noexcept {
+        return std::span{ this->chr_search_array, this->chr_search_count };
+    }
+
+    liber::optref<ChrEntry> find_chr(FieldInsHandle handle) const noexcept {
+        if (!this->set)
+            return std::nullopt;
+        auto entries = this->get_search_entries();
+        auto iter = std::lower_bound(
+            entries.begin(), entries.end(),
+            [](const std::pair<FieldInsHandle, int>& entry,
+                const FieldInsHandle& handle) { return entry.first < handle; },
+            handle);
+        if (iter == entries.end())
+            return std::nullopt;
+        auto [found, index] = *iter;
+        if (found != handle)
+            return std::nullopt;
+        auto set = this->get_entries();
+        if (index > set.size())
+            return std::nullopt;
+        return set[index];
+    }
 
 private:
     from::list<WorldArea> areas;
@@ -368,7 +422,7 @@ private:
     WorldAreaChrBase* area_chr_pointer_array[34];
     int area_chr_pointer_array_count;
     ChrSet player_chr_set;
-    ChrSet chr_set2;      // Unknown, potentially unused
+    ChrSet replay_ghost_chr_set;
     ChrSet buddy_chr_set; // Includes Torrent
     ChrSet debug_chr_set;
     OpenFieldChrSet open_field_chr_set;
@@ -377,8 +431,10 @@ private:
         ChrSet* set;
         int set_index;
         WorldBlockChr* block;
-    } chr_set_holder_array[197];
-    ChrSet* chr_set_array[197];
+    } chr_set_holder_array[196];
+    chr_set_holder null_chr_set_holder;
+    ChrSet* chr_set_array[196];
+    ChrSet* null_chr_set;
     WorldGridAreaChr* player_grid_area_chr;
     PlayerIns* player;
     void* liber_unknown;
@@ -421,7 +477,8 @@ private:
     bool liber_unknown;
     std::pair<chr_set_update_node*, chr_set_update_node*>
         world_chr_set_update[3];
-    chr_set_update_node* area_chr_set_update[197];
+    chr_set_update_node* area_chr_set_update[196];
+    chr_set_update_node* null_area_chr_set_update;
     ChrCam* chr_cam;
     update_task_type update_debug_chr_creator; // TODO: hook fn pointers thing
     void_task_type populate_chr_vector;
