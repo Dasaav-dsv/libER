@@ -14,6 +14,7 @@
 #include <memory/from_set.hpp>
 #include <param/param.hpp>
 
+#include <compare>
 #include <span>
 
 namespace from {
@@ -21,6 +22,8 @@ namespace CS {
 using area_id = unsigned int;
 
 struct WorldArea {
+    LIBER_CLASS(WorldArea);
+
     static constexpr area_id debug_area = 89;
     static constexpr area_id any_area_id = 0xFFFF'FFFFu;
 
@@ -34,6 +37,14 @@ struct WorldArea {
 
     bool is_debug_area() const noexcept {
         return this->area >= debug_area;
+    }
+
+    bool operator==(const WorldArea& rhs) const noexcept {
+        return this->to_area_id() == rhs.to_area_id();
+    }
+
+    std::strong_ordering operator<=>(const WorldArea& rhs) const noexcept {
+        return this->to_area_id() <=> rhs.to_area_id();
     }
 
     area_id index : 4;
@@ -215,7 +226,7 @@ public:
 
     std::span<WorldAreaInfoBase*> get_area_info_array() const noexcept {
         return std::span(const_cast<WorldInfo*>(this)->area_info_pointer_array,
-            34);
+            this->area_info_pointer_count);
     }
 
 private:
@@ -448,6 +459,10 @@ public:
 
     LIBERAPI virtual ~WorldInfoOwner();
 };
+
+LIBER_ASSERTS_BEGIN(WorldArea);
+LIBER_ASSERT_SIZE(0x4);
+LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldBlockInfo);
 LIBER_ASSERT_SIZE(0xE0);
