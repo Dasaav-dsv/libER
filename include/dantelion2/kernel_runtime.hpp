@@ -214,7 +214,7 @@ public:
 
 private:
     long signal_variable;
-}
+};
 
 LIBER_ASSERTS_BEGIN(DLPlainAdaptiveMutex);
 LIBER_ASSERT_SIZE(0x38);

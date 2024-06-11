@@ -28,7 +28,7 @@ enum class FieldInsType : int {
     GEOM_HIT = 8
 };
 
-struct FieldInsHandle {
+struct alignas(8) FieldInsHandle {
     LIBER_CLASS(FieldInsHandle);
 
     using handle_uid = unsigned long long;

@@ -74,7 +74,7 @@ public:
     liber::optref<ChrEntry> find_chr(FieldInsHandle handle) const noexcept {
         if (!this->set)
             return std::nullopt;
-        auto set = this->get_entries();
+        auto set = this->get_set();
         for (auto& entry : set) {
             if (!entry.first)
                 continue;
@@ -95,7 +95,6 @@ private:
     from::map<int, ChrEntry*> entity_group_id_map;
 };
 
-// TODO: methods, how does the second array work?
 class OpenFieldChrSet : public ChrSet {
 public:
     LIBER_CLASS(OpenFieldChrSet);
@@ -110,29 +109,27 @@ public:
 
     std::span<std::pair<FieldInsHandle, ChrIns*>>
     get_chr_entries() const noexcept {
-        return std::span{ this->chr_array, this->chr_array_count };
+        return std::span(const_cast<OpenFieldChrSet*>(this)->chr_array,
+            this->chr_count);
     }
 
     std::span<std::pair<FieldInsHandle, int>>
     get_search_entries() const noexcept {
-        return std::span{ this->chr_search_array, this->chr_search_count };
+        return std::span(const_cast<OpenFieldChrSet*>(this)->chr_search_array,
+            this->chr_search_count);
     }
 
     liber::optref<ChrEntry> find_chr(FieldInsHandle handle) const noexcept {
-        if (!this->set)
-            return std::nullopt;
         auto entries = this->get_search_entries();
-        auto iter = std::lower_bound(
-            entries.begin(), entries.end(),
+        auto iter = std::lower_bound(entries.begin(), entries.end(), handle,
             [](const std::pair<FieldInsHandle, int>& entry,
-                const FieldInsHandle& handle) { return entry.first < handle; },
-            handle);
+                const FieldInsHandle& handle) { return entry.first < handle; });
         if (iter == entries.end())
             return std::nullopt;
         auto [found, index] = *iter;
         if (found != handle)
             return std::nullopt;
-        auto set = this->get_entries();
+        auto set = this->get_set();
         if (index > set.size())
             return std::nullopt;
         return set[index];
