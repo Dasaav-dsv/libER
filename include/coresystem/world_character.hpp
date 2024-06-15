@@ -38,8 +38,27 @@ class ChrCam;
 class ChrSet {
 public:
     LIBER_CLASS(ChrSet);
-    // TODO: flag type instead of int
-    using ChrEntry = std::pair<ChrIns*, int>;
+    
+    struct ChrUpdateFlags {
+        enum : char {
+            UNLOADED = 0,
+            LOAD_BEGIN = 1,
+            LOAD_INSTANCE = 2,
+            LOAD_MODEL = 3,
+            LOADED = 4
+        } current_state;
+
+        enum : char {
+            UNLOADED = 0,
+            DISABLED = 2,
+            ENABLED = 4
+        } target_state;
+
+        char disabled : 1;
+        char liber_unknown : 1;
+    };
+
+    using ChrEntry = std::pair<ChrIns*, ChrUpdateFlags>;
 
     LIBERAPI virtual int get_capacity() const;
 
