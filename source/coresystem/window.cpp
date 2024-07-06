@@ -3,4 +3,4 @@
 
 using namespace from;
 
-LIBER_SINGLETON_INSTANCE(CS::CSWindowImp);
+LIBER_SINGLETON_INSTANCE(CS::CSWindow);

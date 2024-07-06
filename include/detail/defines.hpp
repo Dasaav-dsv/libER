@@ -19,7 +19,7 @@
 // BUILD, REVISION, MINOR, MAJOR 16-bit fields in LE order
 // This does NOT mean incompatibility with other versions
 // See the documentation/README for more details
-#define LIBER_TARGET_VERSION 562949953486848
+#define LIBER_TARGET_VERSION 562958543552512
 #endif
 
 // Invalid version constant

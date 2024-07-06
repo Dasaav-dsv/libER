@@ -5,8 +5,6 @@
 
 using namespace from;
 
-// LIBER_SINGLETON_INSTANCE(DLSY::DLRuntimeImpl);
-
 bool DLSY::wait_for_system(int timeout) noexcept {
     auto counter = reinterpret_cast<volatile int*>(
         liber::symbol<"GLOBAL_init_flip_counter">::get());
