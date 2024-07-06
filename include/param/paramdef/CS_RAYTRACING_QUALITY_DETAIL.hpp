@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct CS_RAYTRACING_QUALITY_DETAIL {
     /**
@@ -23,8 +23,16 @@ struct CS_RAYTRACING_QUALITY_DETAIL {
     int Unk0x08{ 0 };
     float UnkFloat0x0C{ 0.f };
     int Unk0x10{ 0 };
-    float UnkFloat0x14{ 0.f };
-    float UnkFloat0x18{ 0.f };
+
+    /**
+     * @brief penumbraSize
+     */
+    float penumbraSize{ 0.0f };
+
+    /**
+     * @brief renderDistance
+     */
+    float renderDistance{ 0.0f };
 };
 
 }; // namespace paramdef

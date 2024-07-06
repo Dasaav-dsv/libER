@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct OBJ_ACT_PARAM_ST {
     /**
@@ -161,11 +161,25 @@ struct OBJ_ACT_PARAM_ST {
      */
     int preActionSfxId{ -1 };
 
-    unsigned char pad2[40];
+    unsigned char pad2_old[40];
+
+    unsigned char unknown_0x38{ 0 };
+
+    unsigned char unknown_0x3c{ 0 };
+
+    unsigned char unknown_0x40{ 0 };
+
+    unsigned char unknown_0x44{ 0 };
+
+    unsigned char unknown_0x48{ 0 };
+
+    unsigned char unknown_0x4c{ 0 };
+
+    unsigned char pad2[34];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::OBJ_ACT_PARAM_ST) == 96,
+static_assert(sizeof(from::paramdef::OBJ_ACT_PARAM_ST) == 136,
     "OBJ_ACT_PARAM_ST paramdef size does not match detected size");

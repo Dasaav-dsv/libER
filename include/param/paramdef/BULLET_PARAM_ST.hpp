@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct BULLET_PARAM_ST {
     /**
@@ -389,7 +389,11 @@ struct BULLET_PARAM_ST {
      */
     bool isPenetrateObj : 1 { false };
 
-    unsigned char pad : 6;
+    unsigned char pad_old : 6;
+
+    unsigned char unknown_0x98_3 : 1 { 0 };
+
+    unsigned char pad : 5;
 
     /**
      * @brief Occurrence condition
@@ -671,6 +675,8 @@ struct BULLET_PARAM_ST {
 
     unsigned char pad1 : 1;
 
+    unsigned char unknown_0xc3_5 : 1 { 0 };
+
     /**
      * @brief The number of funnels on the PC does not fluctuate due to reason
      *
@@ -839,5 +845,5 @@ struct BULLET_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::BULLET_PARAM_ST) == 272,
+static_assert(sizeof(from::paramdef::BULLET_PARAM_ST) == 280,
     "BULLET_PARAM_ST paramdef size does not match detected size");

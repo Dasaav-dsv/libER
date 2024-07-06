@@ -186,3 +186,11 @@
 #include <param/paramdef/WORLD_MAP_PLACE_NAME_PARAM_ST.hpp>
 #include <param/paramdef/WORLD_MAP_POINT_PARAM_ST.hpp>
 #include <param/paramdef/WWISE_VALUE_TO_STR_CONVERT_PARAM_ST.hpp>
+#include <param/paramdef/CHR_EQUIP_MODEL_PARAM_ST.hpp>
+#include <param/paramdef/MAP_GRID_CREATE_HEIGHT_LIMIT_DETAIL_INFO_PARAM_ST.hpp>
+#include <param/paramdef/MAP_NAME_TEX_PARAM_ST_DLC02.hpp>
+#include <param/paramdef/MAP_PIECE_TEX_PARAM_ST_DLC02.hpp>
+#include <param/paramdef/MIMICRY_ESTABLISHMENT_TEX_PARAM_ST_DLC02.hpp>
+#include <param/paramdef/SIGN_PUDDLE_SUB_CATEGORY_PARAM_ST.hpp>
+#include <param/paramdef/SIGN_PUDDLE_TAB_PARAM_ST.hpp>
+#include <param/paramdef/WEATHER_LOT_TEX_PARAM_ST_DLC02.hpp>

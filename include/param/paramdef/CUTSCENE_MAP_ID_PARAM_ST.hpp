@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct CUTSCENE_MAP_ID_PARAM_ST {
     /**
@@ -77,7 +77,11 @@ struct CUTSCENE_MAP_ID_PARAM_ST {
      */
     int RefCamPosHitPartsID{ -1 };
 
-    unsigned char reserved_2[12];
+    unsigned char reserved_2_old[12];
+
+    int unknown_0x18{ 0 };
+
+    unsigned char reserved_2[8];
 
     /**
      * @brief Waiting time when cannot be displayed [seconds]
@@ -106,5 +110,5 @@ struct CUTSCENE_MAP_ID_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::CUTSCENE_MAP_ID_PARAM_ST) == 48,
+static_assert(sizeof(from::paramdef::CUTSCENE_MAP_ID_PARAM_ST) == 60,
     "CUTSCENE_MAP_ID_PARAM_ST paramdef size does not match detected size");

@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct POSTURE_CONTROL_PARAM_WEP_RIGHT_ST {
     /**
@@ -279,11 +279,32 @@ struct POSTURE_CONTROL_PARAM_WEP_RIGHT_ST {
     short a016_leftWristIO{ 0 };
 
     unsigned char pad[4];
+
+    int unknown_0x6c{ 0 };
+
+    int unknown_0x70{ 0 };
+
+    int unknown_0x74{ 0 };
+
+    int unknown_0x78{ 0 };
+
+    int unknown_0x7c{ 0 };
+
+    int unknown_0x80{ 0 };
+
+    int unknown_0x84{ 0 };
+
+    int unknown_0x88{ 0 };
+
+    /**
+     * @brief endPad
+     */
+    unsigned char endPad[4];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::POSTURE_CONTROL_PARAM_WEP_RIGHT_ST) == 112,
+static_assert(sizeof(from::paramdef::POSTURE_CONTROL_PARAM_WEP_RIGHT_ST) == 148,
     "POSTURE_CONTROL_PARAM_WEP_RIGHT_ST paramdef size does not match detected "
     "size");

@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct EQUIP_PARAM_GEM_ST {
     /**
@@ -342,8 +342,14 @@ struct EQUIP_PARAM_GEM_ST {
      */
     unsigned char defaultWepAttr{ 0 };
 
-    unsigned char pad2[2];
+    unsigned char pad2_old[2];
 
+    /**
+     * @brief isSpecialSwordArt
+     */
+    bool isSpecialSwordArt{ false };
+
+    unsigned char pad2[1];
     /**
      * @brief dagger
      *
@@ -600,7 +606,51 @@ struct EQUIP_PARAM_GEM_ST {
 
     unsigned char reserved_canMountWep : 4;
 
-    unsigned char reserved2_canMountWep[3];
+    /**
+     * @brief canMountWep_HandToHand
+     */
+    unsigned char canMountWep_HandToHand : 1 { 0 };
+
+    /**
+     * @brief canMountWep_PerfumeBottle
+     */
+    unsigned char canMountWep_PerfumeBottle : 1 { 0 };
+
+    /**
+     * @brief canMountWep_ThrustingShield
+     */
+    unsigned char canMountWep_ThrustingShield : 1 { 0 };
+
+    /**
+     * @brief canMountWep_ThrowingWeapon
+     */
+    unsigned char canMountWep_ThrowingWeapon : 1 { 0 };
+
+    unsigned char reserved2_canMountWep_old[3];
+
+    /**
+     * @brief canMountWep_ReverseHandSword
+     */
+    unsigned char canMountWep_ReverseHandSword : 1 { 0 };
+
+    /**
+     * @brief canMountWep_LightGreatsword
+     */
+    unsigned char canMountWep_LightGreatsword : 1 { 0 };
+
+    /**
+     * @brief canMountWep_GreatKatana
+     */
+    unsigned char canMountWep_GreatKatana : 1 { 0 };
+
+    /**
+     * @brief canMountWep_BeastClaw
+     */
+    unsigned char canMountWep_BeastClaw : 1 { 0 };
+
+    unsigned char reserved_canMountWep_0x3d_4 : 4;
+
+    unsigned char reserved2_canMountWep[2];
 
     /**
      * @brief Effect text ID 00
@@ -653,5 +703,5 @@ struct EQUIP_PARAM_GEM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::EQUIP_PARAM_GEM_ST) == 96,
+static_assert(sizeof(from::paramdef::EQUIP_PARAM_GEM_ST) == 104,
     "EQUIP_PARAM_GEM_ST paramdef size does not match detected size");
