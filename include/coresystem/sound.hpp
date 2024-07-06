@@ -62,7 +62,7 @@ public:
     }
 
 private:
-    friend class CSSoundImp;
+    friend class CSSound;
 
     std::pair<int, int> sound;
     void* wwise_obj;
@@ -86,9 +86,9 @@ private:
  * @brief Singleton responsible for managing the sound engine.
  *
  */
-class CSSoundImp {
+class CSSound {
 public:
-    FD4_SINGLETON_CLASS(CSSoundImp);
+    FD4_SINGLETON_CLASS(CSSound);
 
     /**
      * @brief Play a 2d system wwise sound.

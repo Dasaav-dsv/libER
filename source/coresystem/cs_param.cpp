@@ -5,9 +5,9 @@
 
 using namespace from;
 
-LIBER_SINGLETON_INSTANCE(CS::SoloParamRepositoryImp);
+LIBER_SINGLETON_INSTANCE(CS::SoloParamRepository);
 
-bool CS::SoloParamRepositoryImp::wait_for_params(int timeout) {
+bool CS::SoloParamRepository::wait_for_params(int timeout) {
     auto are_params_ready = [](int& num_loaded) {
         auto param_repository_ref = instance();
         if (!param_repository_ref)
