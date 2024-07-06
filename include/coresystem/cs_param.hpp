@@ -111,7 +111,7 @@ private:
 };
 
 LIBER_ASSERTS_BEGIN(SoloParamRepository);
-LIBER_ASSERT_SIZE(0x3558);
+LIBER_ASSERT_SIZE(0x3798);
 LIBER_ASSERTS_END;
 }; // namespace CS
 }; // namespace from
