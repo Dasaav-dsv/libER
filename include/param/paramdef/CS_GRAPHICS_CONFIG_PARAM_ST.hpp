@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct CS_GRAPHICS_CONFIG_PARAM_ST {
     /**
@@ -100,13 +100,23 @@ struct CS_GRAPHICS_CONFIG_PARAM_ST {
     unsigned char m_volumetricEffectQuality{ 3 };
 
     /**
+     * @brief m_dummy
+     */
+    unsigned char m_dummy_0[3];
+
+    /**
+     * @brief m_RayTracingQuality
+     */
+    unsigned char m_RayTracingQuality{ 0 };
+
+    /**
      * @brief dmy
      */
-    unsigned char m_dummy[3];
+    unsigned char m_dummy_1[2];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::CS_GRAPHICS_CONFIG_PARAM_ST) == 16,
+static_assert(sizeof(from::paramdef::CS_GRAPHICS_CONFIG_PARAM_ST) == 19,
     "CS_GRAPHICS_CONFIG_PARAM_ST paramdef size does not match detected size");

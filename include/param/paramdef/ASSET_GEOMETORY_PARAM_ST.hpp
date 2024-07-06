@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct ASSET_GEOMETORY_PARAM_ST {
     /**
@@ -899,11 +899,25 @@ struct ASSET_GEOMETORY_PARAM_ST {
      */
     unsigned char excludeActivateRatio_PS4_Legacy{ 0 };
 
-    unsigned char Reserve_0[32];
+    unsigned char Reserve_0_Old[32];
+
+    unsigned char unknown_0x120{ 0 };
+
+    unsigned char unknown_0x121{ 0 };
+
+    unsigned char unknown_0x122{ 0 };
+
+    unsigned char unknown_0x123{ 0 };
+
+    unsigned char unknown_0x124{ 0 };
+
+    unsigned char unknown_0x125{ 0 };
+
+    unsigned char Reserve_0[26];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::ASSET_GEOMETORY_PARAM_ST) == 320,
+static_assert(sizeof(from::paramdef::ASSET_GEOMETORY_PARAM_ST) == 352,
     "ASSET_GEOMETORY_PARAM_ST paramdef size does not match detected size");

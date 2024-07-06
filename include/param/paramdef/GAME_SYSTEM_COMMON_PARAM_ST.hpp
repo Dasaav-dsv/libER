@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct GAME_SYSTEM_COMMON_PARAM_ST {
     /**
@@ -1310,7 +1310,9 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float aiSightRate_midnightA{ 1.f };
 
-    unsigned char reserve4_2[4];
+	unsigned char reserve4_2[4];
+
+	int unknown_0x230 { 0 };
 
     /**
      * @brief AI visibility magnification_place where the sun cannot be seen
@@ -1992,26 +1994,102 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float bonfireCheckEnemyRange{ -1.f };
 
-    unsigned char reserved_124[32];
-    float unkR00{ 0.f };
-    float unkR04{ 0.f };
-    float unkR08{ 0.f };
-    float unkR12{ 0.f };
-    float unkR16{ 0.f };
-    float unkR20{ 0.f };
-    float unkR24{ 0.f };
-    float unkR28{ 0.f };
-    float unkR32{ 0.f };
-    float unkR36{ 0.f };
-    float unkR40{ 0.f };
-    float unkR44{ 0.f };
-    float unkR48{ 0.f };
-    float unkR52{ 0.f };
-    unsigned char reserved_124_2[40];
+    unsigned char reserved_124_0[48];
+
+    unsigned char reserved_124_1[32];
+
+    int unknown_0x2f0{ 0 };
+
+    int unknown_0x2f4{ 0 };
+
+    int unknown_0x2f8{ 0 };
+
+    int unknown_0x2fc{ 0 };
+
+    int unknown_0x300{ 0 };
+
+    int unknown_0x304{ 0 };
+
+    int unknown_0x308{ 0 };
+
+    int unknown_0x30c{ 0 };
+
+    float unknown_0x310{ 0.0f };
+
+    float unknown_0x314{ 0.0f };
+
+    float unknown_0x318{ 0.0f };
+
+    float unknown_0x31c{ 0.0f };
+
+    float unknown_0x320{ 0.0f };
+
+    float unknown_0x324{ 0.0f };
+
+    float unknown_0x328{ 0.0f };
+
+    float unknown_0x32c{ 0.0f };
+
+    float unknown_0x330{ 0.0f };
+
+    float unknown_0x334{ 0.0f };
+
+    float unknown_0x338{ 0.0f };
+
+    float unknown_0x33c{ 0.0f };
+
+    float unknown_0x340{ 0.0f };
+
+    float unknown_0x344{ 0.0f };
+
+    unsigned char pad_0x348[40];
+
+    int unknown_0x34c{ 0 };
+
+    int unknown_0x350{ 0 };
+
+    int unknown_0x354{ 0 };
+
+    int unknown_0x358{ 0 };
+
+    int unknown_0x35c{ 0 };
+
+    int unknown_0x360{ 0 };
+
+    int unknown_0x364{ 0 };
+
+    int unknown_0x368{ 0 };
+
+    int unknown_0x36c{ 0 };
+
+    int unknown_0x370{ 0 };
+
+    int unknown_0x374{ 0 };
+
+    int unknown_0x378{ 0 };
+
+    int unknown_0x37c{ 0 };
+
+    int unknown_0x380{ 0 };
+
+    int unknown_0x384{ 0 };
+
+    int unknown_0x388{ 0 };
+
+    int unknown_0x38c{ 0 };
+
+    int unknown_0x390{ 0 };
+
+    int unknown_0x394{ 0 };
+
+    /**
+     * @brief endPad
+     */
+    unsigned char endPad[108];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::GAME_SYSTEM_COMMON_PARAM_ST) == 880,
+static_assert(sizeof(from::paramdef::GAME_SYSTEM_COMMON_PARAM_ST) == 1148,
     "GAME_SYSTEM_COMMON_PARAM_ST paramdef size does not match detected size");
