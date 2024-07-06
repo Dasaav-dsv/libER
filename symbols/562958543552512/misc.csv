@@ -1,0 +1,15 @@
+"\"" R","cppsv-fmt(cppsv"
+GLOBAL_init_flip_counter,0x3D8569C
+CS::CSEzTask::register_task,0xEB1330
+CS::CSEzTaskProxy::free_task,0xEB1420
+CS::CSSound::make_system_sound,0xDAB070
+CS::CSSound::play_character_sound,0x4AD100
+GXBS::GXDrawQueue::queue_callback,0x1AEA190
+GLOBAL_ID3D12RootSignature,0x4801090
+CS::DepositoryDialog::vtable,0x2AEBB80
+CS::GaitemSelectDialog::vtable,0x2AEED80
+CS::InventoryDialog::vtable,0x2AF7B38
+CS::BaseChangeDstSelectDialog::vtable,0x2B19F78
+CS::ExchangeShopDialog::vtable,0x2B1B2B8
+CS::ShopDialog::vtable,0x2B1D7E0
+),"cppsv-fmt"

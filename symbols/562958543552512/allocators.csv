@@ -1,0 +1,8 @@
+"\"" R","cppsv-fmt(cppsv"
+DLKR::DLAllocator::SYSTEM,0x4844028
+DLKR::DLAllocator::get_allocator_of,0xE19E40
+FD4::FD4MemoryManager::GLOBAL_allocator_table,0x3D87300
+FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count,0x3D873A8
+FD4::FD4MemoryManager::GLOBAL_allocator_ranges,0x3D873B0
+DLKR::DLBackAllocator::get,0x1EBAE40
+),"cppsv-fmt"
