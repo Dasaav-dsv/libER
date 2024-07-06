@@ -108,10 +108,12 @@ private:
     from::vector<std::pair<int, int>> liber_unknown;
     from::set<int> liber_unknown;
     from::set<int> liber_unknown;
+    from::set<int> liber_unknown;
+    from::set<int> liber_unknown;
 };
 
 LIBER_ASSERTS_BEGIN(SoloParamRepository);
-LIBER_ASSERT_SIZE(0x3798);
+LIBER_ASSERT_SIZE(0x37C8);
 LIBER_ASSERTS_END;
 }; // namespace CS
 }; // namespace from
