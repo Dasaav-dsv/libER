@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct ATK_PARAM_ST {
     /**
@@ -1460,11 +1460,30 @@ struct ATK_PARAM_ST {
      */
     unsigned char defSfxMaterialVariationValue{ 0 };
 
-    unsigned char pad4[19];
+    unsigned char pad4[3];
+
+    /**
+     * @brief finalDamageRateId
+     */
+    int finalDamageRateId{ 0 };
+
+    unsigned char pad7_old[12];
+
+    /**
+     * @brief subCategory3
+     */
+    unsigned char subCategory3{ 0 };
+
+    /**
+     * @brief subCategory4
+     */
+    unsigned char subCategory4{ 0 };
+
+    unsigned char pad7[10];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::ATK_PARAM_ST) == 456,
+static_assert(sizeof(from::paramdef::ATK_PARAM_ST) == 468,
     "ATK_PARAM_ST paramdef size does not match detected size");

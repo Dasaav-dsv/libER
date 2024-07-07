@@ -42,11 +42,11 @@ enum class CSResourceRepository {
  * Stores a resource repository where the resources are file capsules.
  *
  */
-class CSFileImp {
+class CSFile {
 public:
-    FD4_SINGLETON_CLASS(CSFileImp);
+    FD4_SINGLETON_CLASS(CSFile);
 
-    virtual ~CSFileImp() LIBER_INTERFACE_ONLY;
+    virtual ~CSFile() LIBER_INTERFACE_ONLY;
 
     /**
      * @brief Get the file repository.
@@ -67,11 +67,11 @@ private:
  * Like CS::CSFileRepository, but for Wwise audio bank files.
  *
  */
-class CSFD4MoWwisebankRepositoryImp : public FD4::FD4ResRep {
+class CSFD4MoWwisebankRepository : public FD4::FD4ResRep {
 public:
-    FD4_SINGLETON_CLASS(CSFD4MoWwisebankRepositoryImp);
+    FD4_SINGLETON_CLASS(CSFD4MoWwisebankRepository);
 
-    virtual ~CSFD4MoWwisebankRepositoryImp() LIBER_INTERFACE_ONLY;
+    virtual ~CSFD4MoWwisebankRepository() LIBER_INTERFACE_ONLY;
 };
 } // namespace CS
 
@@ -216,7 +216,7 @@ public:
      * @brief File capsule loader callback signature, for internal use.
      *
      */
-    using loader_type = FD4::FD4FileCap* (*)(CS::CSFileImp*, const wchar_t*,
+    using loader_type = FD4::FD4FileCap* (*)(CS::CSFile*, const wchar_t*,
         void*, void*, void*, void*);
 
 private:

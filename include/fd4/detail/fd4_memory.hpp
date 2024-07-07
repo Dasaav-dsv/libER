@@ -13,7 +13,7 @@
 namespace from {
 namespace FD4 {
 /**
- * @brief Base of CS::CSMemoryImp, a singleton responsible for managing memory
+ * @brief Base of CS::CSMemory, a singleton responsible for managing memory
  * allocation.
  *
  */

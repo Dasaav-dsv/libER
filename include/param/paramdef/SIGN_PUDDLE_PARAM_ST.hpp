@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct SIGN_PUDDLE_PARAM_ST {
     /**
@@ -33,10 +33,66 @@ struct SIGN_PUDDLE_PARAM_ST {
     int matchAreaId{ 0 };
 
     unsigned char pad1[24];
+
+    int unknown_0x20{ 0 };
+
+    int unknown_0x24{ 0 };
+
+    /**
+     * @brief areaNo
+     */
+    unsigned char areaNo{ 0 };
+
+    /**
+     * @brief gridXNo
+     */
+    unsigned char gridXNo{ 0 };
+
+    /**
+     * @brief gridZNo
+     */
+    unsigned char gridZNo{ 0 };
+
+    unsigned char pad3[1];
+
+    /**
+     * @brief posX
+     */
+    float posX{ 0.0f };
+
+    /**
+     * @brief posY
+     */
+    float posY{ 0.0f };
+
+    /**
+     * @brief posZ
+     */
+    float posZ{ 0.0f };
+
+    /**
+     * @brief signSubCategoryId
+     */
+    int signSubCategoryId{ 0 };
+
+    /**
+     * @brief locationTextId
+     */
+    int locationTextId{ 0 };
+
+    /**
+     * @brief sortId
+     */
+    int sortId{ 0 };
+
+    /**
+     * @brief endPad
+     */
+    unsigned char endPad[4];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::SIGN_PUDDLE_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::SIGN_PUDDLE_PARAM_ST) == 72,
     "SIGN_PUDDLE_PARAM_ST paramdef size does not match detected size");

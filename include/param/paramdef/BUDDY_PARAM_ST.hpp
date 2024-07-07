@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct BUDDY_PARAM_ST {
     /**
@@ -187,27 +187,45 @@ struct BUDDY_PARAM_ST {
      */
     int generateAnimId{ -1 };
 
-    unsigned int Unk1{ 0 };
-    unsigned int Unk2{ 0 };
-    int Unk3{ 0 };
-    int Unk4{ 0 };
-    int Unk5{ 0 };
-    int Unk6{ 0 };
-    int Unk7{ 0 };
-    int Unk8{ 0 };
-    int Unk9{ 0 };
-    int Unk10{ 0 };
-    unsigned int Unk11{ 0 };
-    int Unk12{ 0 };
-    int Unk13{ 0 };
-    int Unk14{ 0 };
-    int Unk15{ 0 };
-    int Unk16{ 0 };
-    unsigned int Unk17{ 0 };
+    unsigned char Reserve2[4];
+
+    unsigned int unknown_0x5c{ 0 };
+
+    unsigned int unknown_0x60{ 0 };
+
+    int unknown_0x64{ 0 };
+
+    int unknown_0x68{ 0 };
+
+    int unknown_0x6c{ 0 };
+
+    int unknown_0x70{ 0 };
+
+    int unknown_0x74{ 0 };
+
+    int unknown_0x78{ 0 };
+
+    int unknown_0x7c{ 0 };
+
+    int unknown_0x80{ 0 };
+
+    unsigned int unknown_0x84{ 0 };
+
+    int unknown_0x88{ 0 };
+
+    int unknown_0x8c{ 0 };
+
+    int unknown_0x90{ 0 };
+
+    int unknown_0x94{ 0 };
+
+    int unknown_0x98{ 0 };
+
+    unsigned int unknown_0x9c{ 0 };
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::BUDDY_PARAM_ST) == 160,
+static_assert(sizeof(from::paramdef::BUDDY_PARAM_ST) == 164,
     "BUDDY_PARAM_ST paramdef size does not match detected size");

@@ -5,11 +5,11 @@
 
 using namespace from;
 
-LIBER_SINGLETON_INSTANCE(CS::SoloParamRepositoryImp);
+LIBER_SINGLETON_INSTANCE(CS::SoloParamRepository);
 
 using namespace from::CS;
 
-bool SoloParamRepositoryImp::wait_for_params(int timeout) {
+bool SoloParamRepository::wait_for_params(int timeout) {
     auto are_params_ready = [](int& num_loaded) {
         auto param_repository_ref = instance();
         if (!param_repository_ref)
@@ -37,4 +37,4 @@ bool SoloParamRepositoryImp::wait_for_params(int timeout) {
 }
 
 ParamResCap::~ParamResCap() = default;
-SoloParamRepositoryImp::CSWepReinforceTree::~CSWepReinforceTree() = default;
+SoloParamRepository::CSWepReinforceTree::~CSWepReinforceTree() = default;

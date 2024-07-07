@@ -265,9 +265,13 @@ struct PLAY_REGION_PARAM_ST {
      */
     bool isAutoIntrudePoint : 1 { false };
 
-    unsigned char pad1 : 7;
+	unsigned char pad1_old: 7;
 
-    unsigned char pad2[2];
+	unsigned char unknown_0x45_1: 1 { 0 };
+
+	unsigned char pad1: 6;
+
+	unsigned char pad2[2];
 
     /**
      * @brief Yellow robe's old man host restriction event flag
@@ -599,5 +603,5 @@ struct PLAY_REGION_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::PLAY_REGION_PARAM_ST) == 272,
+static_assert(sizeof(from::paramdef::PLAY_REGION_PARAM_ST) == 276,
     "PLAY_REGION_PARAM_ST paramdef size does not match detected size");

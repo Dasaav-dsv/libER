@@ -53,7 +53,7 @@ void patch_hkaskeleton_crash() {
 void FD4MemoryManager::init_allocators() {
     auto allocator_table = reinterpret_cast<from::allocator<void>*>(
         liber::symbol<"FD4::FD4MemoryManager::GLOBAL_allocator_table">::get());
-    for (int i = 0; i < 20; ++i) std::construct_at(allocator_table + i);
+    for (int i = 0; i < 21; ++i) std::construct_at(allocator_table + i);
     int& allocator_ranges_count = *reinterpret_cast<int*>(liber::symbol<
         "FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count">::get());
     allocator_ranges_count = 1;
@@ -62,6 +62,8 @@ void FD4MemoryManager::init_allocators() {
     std::construct_at(&allocator_ranges_1.allocator);
     allocator_ranges_1.range_begin = nullptr;
     allocator_ranges_1.range_end = (void*)(1ull << 47);
+    patch_gaitem_dialog_vtable(
+        liber::symbol<"CS::DepositoryDialog::vtable">::get());
     patch_gaitem_dialog_vtable(
         liber::symbol<"CS::GaitemSelectDialog::vtable">::get());
     patch_gaitem_dialog_vtable(

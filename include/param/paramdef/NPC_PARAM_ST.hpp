@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct NPC_PARAM_ST {
     /**
@@ -1656,6 +1656,8 @@ struct NPC_PARAM_ST {
 
     unsigned char pad1[1];
 
+    unsigned char unknown_0x1e3{ 0 };
+
     /**
      * @brief Lock camera parameter ID
      *
@@ -1999,6 +2001,11 @@ struct NPC_PARAM_ST {
     unsigned char pad7[1];
 
     /**
+     * @brief isConsideredUndead
+     */
+    bool isConsideredUndead{ false };
+
+    /**
      * @brief Wheel control type
      */
     unsigned char wheelRotType{ 0 };
@@ -2205,11 +2212,18 @@ struct NPC_PARAM_ST {
      */
     float lockScoreOffset{ 0.f };
 
-    unsigned char pad12[8];
+    unsigned char pad12_old[8];
+
+    /**
+     * @brief dlcGameClearSpEffectID
+     */
+    int dlcGameClearSpEffectID{ 0 };
+
+    unsigned char pad12[4];
 };
 
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::NPC_PARAM_ST) == 736,
+static_assert(sizeof(from::paramdef::NPC_PARAM_ST) == 752,
     "NPC_PARAM_ST paramdef size does not match detected size");

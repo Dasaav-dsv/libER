@@ -14,7 +14,7 @@ void example_base() {
     // A timeout value of -1 means waiting indefinitely. A positive
     // timeout value means the function will return if the condition
     // is not met in the alloted time
-    from::CS::SoloParamRepositoryImp::wait_for_params(-1);
+    from::CS::SoloParamRepository::wait_for_params(-1);
     // Create a param instance on the stack with default field values
     from::paramdef::POSTURE_CONTROL_PARAM_PRO_ST posture_pro{};
     // Set fields:
