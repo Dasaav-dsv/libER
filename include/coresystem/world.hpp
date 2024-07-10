@@ -239,8 +239,7 @@ private:
     WorldAreaInfoBase*
         area_info_pointer_array[34]; // Map (m10, m19, ..., m60) count times two
     int block_info_count;
-    WorldBlockInfo* block_info =
-        this->block_info_array; // Pointer to +0xA20
+    WorldBlockInfo* block_info = this->block_info_array; // Pointer to +0xA20
     bool liber_unknown;
     alignas(16) WorldAreaInfo area_info_array[28];
     alignas(16) WorldBlockInfo block_info_array[192];
@@ -264,7 +263,7 @@ public:
 private:
     WorldAreaInfo* area_info;
     WorldInfoOwner* world_owner;
-    long long liber_unknown[406]; // A LOT of resource file capsules
+    long long liber_unknown[405]; // A LOT of resource file capsules
     struct {
         void* vtable;
         WorldAreaResBase* owner;
@@ -305,7 +304,7 @@ public:
     LIBERAPI virtual ~WorldBlockRes();
 
 private:
-    long long liber_unknown[348];
+    long long liber_unknown[347];
     struct {
         void* vtable;
         WorldBlockRes* owner;
@@ -393,7 +392,7 @@ private:
     float player_distance;
     from::map<float, WorldLodBlockRes*> lod_blocks;
     WorldAreaTile tile;
-    long long liber_unknown[18];
+    long long liber_unknown[17];
     float player_coordinates[4];
     long long liber_unknown[54];
     bool is_lod;
@@ -447,7 +446,10 @@ private:
     int area_res_pointer_count;
     int liber_unknown;
     WorldAreaTile tile_res;
-    long long liber_unknown[17];
+    long long liber_unknown[16];
+    area_id area_ids[98];
+    int area_ids_count;
+    long long liber_unknown;
     float liber_unknown[4];
     from::set<liber::dummy> liber_unknown;
     long long liber_unknown;
@@ -495,7 +497,7 @@ LIBER_ASSERT_OFFS(0xB220, grid_area_info_array);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldAreaResBase);
-LIBER_ASSERT_SIZE(0xCD8);
+LIBER_ASSERT_SIZE(0xCD0);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldBlockResBase);
@@ -503,7 +505,7 @@ LIBER_ASSERT_SIZE(0xB0);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldBlockRes);
-LIBER_ASSERT_SIZE(0xBA0);
+LIBER_ASSERT_SIZE(0xB98);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldLodBlockRes);
@@ -511,21 +513,23 @@ LIBER_ASSERT_SIZE(0x108);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldAreaRes);
-LIBER_ASSERT_SIZE(0xCF0);
+LIBER_ASSERT_SIZE(0xCE8);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldGridAreaRes);
-LIBER_ASSERT_SIZE(0xF90);
-LIBER_ASSERT_OFFS(0xF80, is_lod);
+LIBER_ASSERT_SIZE(0xF80);
+LIBER_ASSERT_OFFS(0xF70, is_lod);
 LIBER_ASSERTS_END;
 
 LIBER_ASSERTS_BEGIN(WorldRes);
-LIBER_ASSERT_SIZE(0xB3950);
+LIBER_ASSERT_SIZE(0xB33A0);
 LIBER_ASSERT_OFFS(0xB798, tile);
 LIBER_ASSERT_OFFS(0xB7D0, area_res_array);
-LIBER_ASSERT_OFFS(0x22210, block_res_array);
-LIBER_ASSERT_OFFS(0xADA10, grid_area_res_array);
-LIBER_ASSERT_OFFS(0xB3888, tile_res);
+LIBER_ASSERT_OFFS(0x22130, block_res_array);
+LIBER_ASSERT_OFFS(0xAD330, grid_area_res_array);
+LIBER_ASSERT_OFFS(0xB3140, area_res_pointer_count);
+LIBER_ASSERT_OFFS(0xB3148, tile_res);
+LIBER_ASSERT_OFFS(0xB31D8, area_ids);
 LIBER_ASSERTS_END;
 } // namespace CS
 } // namespace from
