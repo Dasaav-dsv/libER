@@ -49,7 +49,7 @@ public:
         } current_state;
 
         enum : char {
-            UNLOADED = 0,
+            NONE = 0,
             DISABLED = 2,
             ENABLED = 4
         } target_state;
@@ -410,15 +410,15 @@ private:
     void* liber_unknown;
 };
 
-class WorldChrManImp {
+class WorldChrMan {
 public:
-    FD4_SINGLETON_CLASS(WorldChrManImp);
+    FD4_SINGLETON_CLASS(WorldChrMan);
 
-    virtual ~WorldChrManImp() LIBER_INTERFACE_ONLY;
+    virtual ~WorldChrMan() LIBER_INTERFACE_ONLY;
 
 private:
-    using void_task_type = CSEzVoidTask<CSEzTask, WorldChrManImp>;
-    using update_task_type = CSEzUpdateTask<CSEzRabbitTask, WorldChrManImp>;
+    using void_task_type = CSEzVoidTask<CSEzTask, WorldChrMan>;
+    using update_task_type = CSEzUpdateTask<CSEzRabbitTask, WorldChrMan>;
 
     struct chr_set_update_node {
         ChrIns* chr_to_update;
@@ -580,7 +580,7 @@ LIBER_ASSERT_SIZE(0x110);
 LIBER_ASSERT_OFFS(0xA0, home_pos);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(WorldChrManImp);
+LIBER_ASSERTS_BEGIN(WorldChrMan);
 LIBER_ASSERT_SIZE(0x1F3E0);
 LIBER_ASSERT_OFFS(0x10, area_chr_array);
 LIBER_ASSERT_OFFS(0x470, block_chr_array);

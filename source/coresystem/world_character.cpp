@@ -3,7 +3,7 @@
 
 using namespace from;
 
-LIBER_SINGLETON_INSTANCE(CS::WorldChrManImp);
+LIBER_SINGLETON_INSTANCE(CS::WorldChrMan);
 
 using namespace from::CS;
 
