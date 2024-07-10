@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15.0)
-project(libER VERSION 0.1.4.2 LANGUAGES C CXX)
+project(libER VERSION 0.1.5.0 LANGUAGES C CXX)
 
 # Must build with C++20 or newer
 set(CMAKE_CXX_STANDARD 20)

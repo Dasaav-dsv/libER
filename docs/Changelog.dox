@@ -48,4 +48,11 @@
  *     - Update existing paramdefs
  *   - Update SoloParamRepository
  * 
+ * ## Version 0.1.5.0:
+ *   - Update FD4 task layouts
+ *   - Annotate detail/preprocessor.hpp macros
+ *   - Correct string type in FD4StepTemplateBase
+ *   - Anchor vtables across the library
+ *   - Step task instrumentation/hooking
+ *   - Fix double free in base ER havok code
  */
