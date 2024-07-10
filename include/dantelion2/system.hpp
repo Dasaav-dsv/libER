@@ -42,14 +42,5 @@ LIBERAPI bool wait_for_system(int timeout) noexcept;
  * @return false not initialized
  */
 LIBERAPI bool is_system_initialized() noexcept;
-
-// A singleton that deals with locale
-// and stdio. Seldom used.
-// class DLRuntimeImpl {
-// public:
-//     FD4_SINGLETON_CLASS(DLRuntimeImpl);
-
-//     virtual ~DLRuntimeImpl() LIBER_INTERFACE_ONLY;
-// };
 } // namespace DLSY
 } // namespace from

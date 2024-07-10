@@ -5,7 +5,7 @@ namespace from {
 namespace paramdef {
 /**
  * @brief This struct was automatically generated from XML paramdefs.
- * 
+ *
  */
 struct SWORD_ARTS_PARAM_ST {
     /**
@@ -153,7 +153,10 @@ struct SWORD_ARTS_PARAM_ST {
      */
     signed char shieldIconType{ 0 };
 
-    unsigned char pad[1];
+    /**
+     * @brief swordArtsTypeNew
+     */
+    unsigned short swordArtsTypeNew{ 0 };
 
     /**
      * @brief Icon ID
@@ -171,5 +174,5 @@ struct SWORD_ARTS_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::SWORD_ARTS_PARAM_ST) == 32,
+static_assert(sizeof(from::paramdef::SWORD_ARTS_PARAM_ST) == 36,
     "SWORD_ARTS_PARAM_ST paramdef size does not match detected size");

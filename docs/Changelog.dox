@@ -37,4 +37,22 @@
  *   - Autogenerate paramdef headers with ParamStructGenerator by <a href="https://github.com/tremwil">tremwil</a> and <a href="https://github.com/Nordgaren">Nordgaren</a>
  *   - Add paramdef Doxygen documentation based on Nordgaren's translations
  * 
+ * ## Version 0.1.4.1:
+ *   - Initial library post-DLC update (ver. 1.12.3)
+ *   - Support for earlier versions is foregone, no new major executable updates are expected
+ *   - Minor naming scheme fixes (remove Imp/Impl/Implement from singleton names)
+ * 
+ * ## Version 0.1.4.2:
+ *   - Using Smithbox paramdefs:
+ *     - Add 8 new DLC param tables
+ *     - Update existing paramdefs
+ *   - Update SoloParamRepository
+ * 
+ * ## Version 0.1.5.0:
+ *   - Update FD4 task layouts
+ *   - Annotate detail/preprocessor.hpp macros
+ *   - Correct string type in FD4StepTemplateBase
+ *   - Anchor vtables across the library
+ *   - Step task instrumentation/hooking
+ *   - Fix double free in base ER havok code
  */

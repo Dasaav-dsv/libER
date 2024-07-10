@@ -20,11 +20,11 @@ namespace CS {
  * See source/memory/from_allocator.cpp for the implementation.
  *
  */
-class CSMemoryImp : public FD4::FD4MemoryManager {
+class CSMemory : public FD4::FD4MemoryManager {
 public:
-    LIBER_CLASS(CSMemoryImp);
+    LIBER_CLASS(CSMemory);
 
-    LIBERAPI virtual ~CSMemoryImp();
+    LIBERAPI virtual ~CSMemory();
 
 private:
     virtual void liber_unknown() {}
@@ -33,7 +33,7 @@ private:
     bool liber_unknown = false;
 };
 
-LIBER_ASSERTS_BEGIN(CSMemoryImp);
+LIBER_ASSERTS_BEGIN(CSMemory);
 LIBER_ASSERT_SIZE(0x2B8);
 LIBER_ASSERTS_END;
 } // namespace CS

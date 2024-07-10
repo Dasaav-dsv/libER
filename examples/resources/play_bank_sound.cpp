@@ -28,5 +28,5 @@ void example_base() {
         return;
     }
     // Play v020240300 (from vc201.bnk we loaded earlier) 
-    (void)from::CS::CSSoundImp::play_system_sound('v', 20240300);
+    (void)from::CS::CSSound::play_system_sound('v', 20240300);
 }

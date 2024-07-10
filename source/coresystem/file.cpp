@@ -13,8 +13,8 @@
 using namespace from;
 namespace fs = std::filesystem;
 
-LIBER_SINGLETON_INSTANCE(CS::CSFileImp);
-LIBER_SINGLETON_INSTANCE(CS::CSFD4MoWwisebankRepositoryImp);
+LIBER_SINGLETON_INSTANCE(CS::CSFile);
+LIBER_SINGLETON_INSTANCE(CS::CSFD4MoWwisebankRepository);
 
 #define LIBER_RESOURCE_EXTENSION(EXT)     \
     { fs::path("." LIBER_STRINGIFY(EXT)), \
@@ -78,8 +78,8 @@ void file_request::init_request() {
 
 liber::optref<FD4::FD4ResRep> get_file_repository(bool load_bnk) {
     if (load_bnk)
-        return CS::CSFD4MoWwisebankRepositoryImp::instance();
-    auto csfile = CS::CSFileImp::instance();
+        return CS::CSFD4MoWwisebankRepository::instance();
+    auto csfile = CS::CSFile::instance();
     if (!csfile.has_reference())
         return std::nullopt;
     return *csfile.reference().get_file_repository();
@@ -89,7 +89,7 @@ void load_file_cap(const fs::path& path, file_request::loader_type loader,
     bool load_bnk) {
     if (!load_bnk) {
         FD4::FD4FileCap* file_cap =
-            loader(&CS::CSFileImp::instance().reference(), path.c_str(),
+            loader(&CS::CSFile::instance().reference(), path.c_str(),
                 nullptr, nullptr, nullptr, nullptr);
         file_cap->ref_count() = 0x4000'0000;
         return;
@@ -97,9 +97,9 @@ void load_file_cap(const fs::path& path, file_request::loader_type loader,
     fs::path file = path.filename();
     file.replace_extension();
     FD4::FD4FileCap* file_cap =
-        liber::function<"CS::CSFD4MoWwisebankRepositoryImp::load_soundbank",
+        liber::function<"CS::CSFD4MoWwisebankRepository::load_soundbank",
             FD4::FD4FileCap*>::
-            call(&CS::CSFD4MoWwisebankRepositoryImp::instance().reference(),
+            call(&CS::CSFD4MoWwisebankRepository::instance().reference(),
                 file.c_str(), file.c_str(), false);
     file_cap->ref_count() = 0x4000'0000;
     auto& [overrides, mutex] = bnk_overrides();
@@ -165,7 +165,7 @@ void file_request::file_request_task::eztask_execute(FD4::FD4TaskData*) {
     case CS::CSResourceRepository::NAME:                \
         res_repository = *reinterpret_cast<uintptr_t*>( \
             liber::symbol<"CS::" LIBER_STRINGIFY(       \
-                NAME) "Imp::instance">::get());         \
+                NAME) "::instance">::get());         \
         break;
 
 void from::resource_request::resource_request_task::eztask_execute(

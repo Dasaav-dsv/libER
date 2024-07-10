@@ -52,13 +52,13 @@ void DLRuntimeClass::add_method_invoker(DLMethodInvoker* invoker,
 
 const from::vector<DLRuntimeClassHolder>&
 DLRuntimeClass::get_registered_classes() noexcept {
-    return *reinterpret_cast<from::vector<DLRuntimeClassHolder>*>(liber::symbol<
+    return **reinterpret_cast<from::vector<DLRuntimeClassHolder>**>(liber::symbol<
         "DLRF::DLRuntimeClass::GLOBAL_registered_classes">::get());
 }
 
 const from::vector<DLRuntimeClassPair>&
 DLRuntimeClass::get_runtime_pairs() noexcept {
-    return *reinterpret_cast<from::vector<DLRuntimeClassPair>*>(
+    return **reinterpret_cast<from::vector<DLRuntimeClassPair>**>(
         liber::symbol<"DLRF::DLRuntimeClass::GLOBAL_runtime_pairs">::get());
 }
 

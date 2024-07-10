@@ -275,7 +275,7 @@ private:
     mutable std::unique_ptr<paramdef_type> dummy_param;
 
     liber::optref<param_file*> get_file() noexcept {
-        auto repository = CS::SoloParamRepositoryImp::instance();
+        auto repository = CS::SoloParamRepository::instance();
         if (!repository)
             return std::nullopt;
         return repository.reference().get_param_file(index);

@@ -2,4 +2,4 @@
 
 using namespace from::CS;
 
-CSMemoryImp::~CSMemoryImp() = default;
+CSMemory::~CSMemory() = default;

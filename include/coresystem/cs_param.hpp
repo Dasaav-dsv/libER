@@ -60,11 +60,11 @@ private:
  * The capsules are stored in a flat table with param::param_count entries.
  *
  */
-class SoloParamRepositoryImp : public FD4::FD4ResCap {
+class SoloParamRepository : public FD4::FD4ResCap {
 public:
-    FD4_SINGLETON_CLASS(SoloParamRepositoryImp);
+    FD4_SINGLETON_CLASS(SoloParamRepository);
 
-    virtual ~SoloParamRepositoryImp() LIBER_INTERFACE_ONLY;
+    virtual ~SoloParamRepository() LIBER_INTERFACE_ONLY;
 
     /**
      * @brief Lock until the param repository is loaded or the time runs out.
@@ -110,10 +110,12 @@ private:
     from::vector<std::pair<int, int>> liber_unknown;
     from::set<int> liber_unknown;
     from::set<int> liber_unknown;
+    from::set<int> liber_unknown;
+    from::set<int> liber_unknown;
 };
 
-LIBER_ASSERTS_BEGIN(SoloParamRepositoryImp);
-LIBER_ASSERT_SIZE(0x3558);
+LIBER_ASSERTS_BEGIN(SoloParamRepository);
+LIBER_ASSERT_SIZE(0x37C8);
 LIBER_ASSERTS_END;
 }; // namespace CS
 }; // namespace from

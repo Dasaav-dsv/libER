@@ -14,18 +14,18 @@
 namespace from {
 namespace CS {
 
-class CSWindowImp;
+class CSWindow;
 class CSScreenModeCtrl;
 
 /**
  * @brief The singleton responsible for managing the game window
  * and graphics settings.
  */
-class CSWindowImp : public FD4::FD4ComponentBase {
+class CSWindow : public FD4::FD4ComponentBase {
 public:
-    FD4_SINGLETON_CLASS(CSWindowImp);
+    FD4_SINGLETON_CLASS(CSWindow);
 
-    virtual ~CSWindowImp() LIBER_INTERFACE_ONLY;
+    virtual ~CSWindow() LIBER_INTERFACE_ONLY;
 
     /// @cond DOXYGEN_SKIP
     using window_handle_type = void*;
@@ -161,7 +161,7 @@ private:
     graphics_settings graphics_settings;
 };
 
-LIBER_ASSERTS_BEGIN(CSWindowImp);
+LIBER_ASSERTS_BEGIN(CSWindow);
 LIBER_ASSERT_OFFS(0x8, window_handle);
 LIBER_ASSERT_OFFS(0x20, window_position);
 LIBER_ASSERT_OFFS(0x28, window_size);
