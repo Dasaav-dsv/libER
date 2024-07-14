@@ -1654,8 +1654,6 @@ struct NPC_PARAM_ST {
      */
     signed char freezeGuardResist{ 0 };
 
-    unsigned char pad1[1];
-
     unsigned char unknown_0x1e3{ 0 };
 
     /**
@@ -1998,8 +1996,6 @@ struct NPC_PARAM_ST {
      */
     unsigned char chrNavimeshFlag_Dead{ 0 };
 
-    unsigned char pad7[1];
-
     /**
      * @brief isConsideredUndead
      */
@@ -2212,8 +2208,6 @@ struct NPC_PARAM_ST {
      */
     float lockScoreOffset{ 0.f };
 
-    unsigned char pad12_old[8];
-
     /**
      * @brief dlcGameClearSpEffectID
      */
@@ -2225,5 +2219,5 @@ struct NPC_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::NPC_PARAM_ST) == 752,
+static_assert(sizeof(from::paramdef::NPC_PARAM_ST) == 736,
     "NPC_PARAM_ST paramdef size does not match detected size");

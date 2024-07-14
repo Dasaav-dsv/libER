@@ -77,8 +77,6 @@ struct CUTSCENE_MAP_ID_PARAM_ST {
      */
     int RefCamPosHitPartsID{ -1 };
 
-    unsigned char reserved_2_old[12];
-
     int unknown_0x18{ 0 };
 
     unsigned char reserved_2[8];
@@ -110,5 +108,5 @@ struct CUTSCENE_MAP_ID_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::CUTSCENE_MAP_ID_PARAM_ST) == 60,
+static_assert(sizeof(from::paramdef::CUTSCENE_MAP_ID_PARAM_ST) == 48,
     "CUTSCENE_MAP_ID_PARAM_ST paramdef size does not match detected size");

@@ -1186,8 +1186,6 @@ struct EQUIP_PARAM_WEAPON_ST {
      */
     bool invisibleOnRemo : 1 { false };
 
-	unsigned char unk1: 3;
-
 	unsigned char unknown_0x17c_5: 1 { 0 };
 
 	unsigned char unknown_0x17c_6: 1 { 0 };
@@ -1879,8 +1877,6 @@ struct EQUIP_PARAM_WEAPON_ST {
      */
     float vsPlayerDmgCorrectRate_Curse{ 1.f };
 
-    unsigned char pad_old[8];
-
     /**
      * @brief restrictSpecialSwordArt
      */
@@ -1892,5 +1888,5 @@ struct EQUIP_PARAM_WEAPON_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::EQUIP_PARAM_WEAPON_ST) == 676,
+static_assert(sizeof(from::paramdef::EQUIP_PARAM_WEAPON_ST) == 664,
     "EQUIP_PARAM_WEAPON_ST paramdef size does not match detected size");

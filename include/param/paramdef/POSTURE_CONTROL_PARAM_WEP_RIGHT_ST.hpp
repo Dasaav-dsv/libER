@@ -278,8 +278,6 @@ struct POSTURE_CONTROL_PARAM_WEP_RIGHT_ST {
      */
     short a016_leftWristIO{ 0 };
 
-    unsigned char pad[4];
-
     int unknown_0x6c{ 0 };
 
     int unknown_0x70{ 0 };
@@ -305,6 +303,6 @@ struct POSTURE_CONTROL_PARAM_WEP_RIGHT_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::POSTURE_CONTROL_PARAM_WEP_RIGHT_ST) == 148,
+static_assert(sizeof(from::paramdef::POSTURE_CONTROL_PARAM_WEP_RIGHT_ST) == 144,
     "POSTURE_CONTROL_PARAM_WEP_RIGHT_ST paramdef size does not match detected "
     "size");

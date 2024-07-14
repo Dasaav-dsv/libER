@@ -1310,8 +1310,6 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float aiSightRate_midnightA{ 1.f };
 
-	unsigned char reserve4_2[4];
-
 	int unknown_0x230 { 0 };
 
     /**
@@ -1994,10 +1992,6 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
      */
     float bonfireCheckEnemyRange{ -1.f };
 
-    unsigned char reserved_124_0[48];
-
-    unsigned char reserved_124_1[32];
-
     int unknown_0x2f0{ 0 };
 
     int unknown_0x2f4{ 0 };
@@ -2041,8 +2035,6 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
     float unknown_0x340{ 0.0f };
 
     float unknown_0x344{ 0.0f };
-
-    unsigned char pad_0x348[40];
 
     int unknown_0x34c{ 0 };
 
@@ -2091,5 +2083,5 @@ struct GAME_SYSTEM_COMMON_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::GAME_SYSTEM_COMMON_PARAM_ST) == 1148,
+static_assert(sizeof(from::paramdef::GAME_SYSTEM_COMMON_PARAM_ST) == 1024,
     "GAME_SYSTEM_COMMON_PARAM_ST paramdef size does not match detected size");

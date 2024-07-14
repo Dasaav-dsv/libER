@@ -187,8 +187,6 @@ struct BUDDY_PARAM_ST {
      */
     int generateAnimId{ -1 };
 
-    unsigned char Reserve2[4];
-
     unsigned int unknown_0x5c{ 0 };
 
     unsigned int unknown_0x60{ 0 };
@@ -227,5 +225,5 @@ struct BUDDY_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::BUDDY_PARAM_ST) == 164,
+static_assert(sizeof(from::paramdef::BUDDY_PARAM_ST) == 160,
     "BUDDY_PARAM_ST paramdef size does not match detected size");
