@@ -214,6 +214,13 @@ private:
     int liber_unknown = 0;
 };
 
+struct dummy_step : public FD4::FD4StepTemplateBase<dummy_step, FD4::FD4TaskBase> {
+    enum step_method_index : int {
+        STEP_INVALID = -1,
+        STEP_SIZE
+    };
+};
+
 // Internal FD4TaskManager structures
 struct FD4TaskEntryGroup {
     LIBER_CLASS(FD4TaskEntryGroup);
@@ -321,14 +328,14 @@ private:
 } // namespace FD4
 } // namespace from
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, void, from::FD4::FD4StepBaseInterface);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, from::FD4::dummy_step, from::FD4::FD4StepBaseInterface);
 LIBER_ASSERT_SIZE(0xA8);
 LIBER_ASSERT_OFFS(0x8, steps);
 LIBER_ASSERT_OFFS(0x68, unk_wstr);
 LIBER_ASSERT_OFFS(0x98, state);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, void, from::FD4::FD4TaskBase);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, from::FD4::dummy_step, from::FD4::FD4TaskBase);
 LIBER_ASSERT_SIZE(0xB0);
 LIBER_ASSERT_OFFS(0x10, steps);
 LIBER_ASSERT_OFFS(0x70, unk_wstr);
