@@ -75,7 +75,7 @@
 #define LIBER_CLASS(CLASSNAME) \
     using self = CLASSNAME;    \
     template <typename>        \
-    friend class _liber_asserts
+    friend class ::_liber_asserts
 
 // A class declaration with deleted constructors.
 // Only instances created by ELDEN RING directly may be used
