@@ -448,8 +448,6 @@ struct WEP_ABSORP_POS_PARAM_ST {
      */
     unsigned char dispPosType_leftHang_3{ 0 };
 
-    unsigned char reserve_old[12];
-
     signed char unknown_0x54{ 0 };
 
     signed char unknown_0x55{ 0 };
@@ -464,5 +462,5 @@ struct WEP_ABSORP_POS_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::WEP_ABSORP_POS_PARAM_ST) == 108,
+static_assert(sizeof(from::paramdef::WEP_ABSORP_POS_PARAM_ST) == 96,
     "WEP_ABSORP_POS_PARAM_ST paramdef size does not match detected size");

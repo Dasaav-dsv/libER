@@ -146,14 +146,6 @@ struct SWORD_ARTS_PARAM_ST {
     short useMagicPoint_R2{ 0 };
 
     /**
-     * @brief Shield type icon (overwrite)
-     *
-     * If you do not overwrite it, the icon will be displayed based on the
-     * swashbuckler ID of the weapon para.
-     */
-    signed char shieldIconType{ 0 };
-
-    /**
      * @brief swordArtsTypeNew
      */
     unsigned short swordArtsTypeNew{ 0 };
@@ -174,5 +166,5 @@ struct SWORD_ARTS_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::SWORD_ARTS_PARAM_ST) == 36,
+static_assert(sizeof(from::paramdef::SWORD_ARTS_PARAM_ST) == 32,
     "SWORD_ARTS_PARAM_ST paramdef size does not match detected size");

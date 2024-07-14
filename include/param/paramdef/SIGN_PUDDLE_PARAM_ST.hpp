@@ -32,8 +32,6 @@ struct SIGN_PUDDLE_PARAM_ST {
      */
     int matchAreaId{ 0 };
 
-    unsigned char pad1[24];
-
     int unknown_0x20{ 0 };
 
     int unknown_0x24{ 0 };
@@ -94,5 +92,5 @@ struct SIGN_PUDDLE_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::SIGN_PUDDLE_PARAM_ST) == 72,
+static_assert(sizeof(from::paramdef::SIGN_PUDDLE_PARAM_ST) == 48,
     "SIGN_PUDDLE_PARAM_ST paramdef size does not match detected size");

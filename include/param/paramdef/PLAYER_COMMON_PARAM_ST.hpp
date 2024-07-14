@@ -374,8 +374,6 @@ struct PLAYER_COMMON_PARAM_ST {
      */
     int resistCurseItemLotParamId_map{ -1 };
 
-    unsigned char reserved41_old[52];
-
     int unknown_0xcc{ 0 };
 
     int unknown_0xd0{ 0 };
@@ -394,5 +392,5 @@ struct PLAYER_COMMON_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::PLAYER_COMMON_PARAM_ST) == 308,
+static_assert(sizeof(from::paramdef::PLAYER_COMMON_PARAM_ST) == 256,
     "PLAYER_COMMON_PARAM_ST paramdef size does not match detected size");

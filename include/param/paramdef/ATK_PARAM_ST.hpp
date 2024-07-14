@@ -1467,8 +1467,6 @@ struct ATK_PARAM_ST {
      */
     int finalDamageRateId{ 0 };
 
-    unsigned char pad7_old[12];
-
     /**
      * @brief subCategory3
      */
@@ -1485,5 +1483,5 @@ struct ATK_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::ATK_PARAM_ST) == 468,
+static_assert(sizeof(from::paramdef::ATK_PARAM_ST) == 456,
     "ATK_PARAM_ST paramdef size does not match detected size");
