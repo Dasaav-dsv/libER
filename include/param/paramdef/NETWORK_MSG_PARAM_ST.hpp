@@ -220,8 +220,6 @@ struct NETWORK_MSG_PARAM_ST {
      */
     int forceJoinBlack_C_Npc{ -1 };
 
-    unsigned char pad2[28];
-
     int unknown_0xa4{ 0 };
 
     int unknown_0xa8{ 0 };
@@ -238,5 +236,5 @@ struct NETWORK_MSG_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::NETWORK_MSG_PARAM_ST) == 220,
+static_assert(sizeof(from::paramdef::NETWORK_MSG_PARAM_ST) == 192,
     "NETWORK_MSG_PARAM_ST paramdef size does not match detected size");

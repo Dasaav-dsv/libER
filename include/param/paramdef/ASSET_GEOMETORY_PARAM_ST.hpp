@@ -217,8 +217,6 @@ struct ASSET_GEOMETORY_PARAM_ST {
      */
     bool isAttackBacklash : 1 { true };
 
-    unsigned char Reserve_2 : 1;
-
     /**
      * @brief Is it a ladder?
      *
@@ -899,8 +897,6 @@ struct ASSET_GEOMETORY_PARAM_ST {
      */
     unsigned char excludeActivateRatio_PS4_Legacy{ 0 };
 
-    unsigned char Reserve_0_Old[32];
-
     unsigned char unknown_0x120{ 0 };
 
     unsigned char unknown_0x121{ 0 };
@@ -919,5 +915,5 @@ struct ASSET_GEOMETORY_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::ASSET_GEOMETORY_PARAM_ST) == 352,
+static_assert(sizeof(from::paramdef::ASSET_GEOMETORY_PARAM_ST) == 320,
     "ASSET_GEOMETORY_PARAM_ST paramdef size does not match detected size");

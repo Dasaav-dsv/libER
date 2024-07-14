@@ -119,8 +119,6 @@ struct WORLD_MAP_POINT_PARAM_ST {
      */
     bool dispMask01 : 1 { false };
 
-    unsigned char pad2_0_0 : 6;
-
     /**
      * @brief dispMask02
      */
@@ -513,8 +511,6 @@ struct WORLD_MAP_POINT_PARAM_ST {
      */
     unsigned char entryFEType{ 0 };
 
-    unsigned char pad4_old[9];
-
     unsigned char unknown_0xb7{ 0 };
 
     unsigned char unknown_0xb8{ 0 };
@@ -607,5 +603,5 @@ struct WORLD_MAP_POINT_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::WORLD_MAP_POINT_PARAM_ST) == 272,
+static_assert(sizeof(from::paramdef::WORLD_MAP_POINT_PARAM_ST) == 256,
     "WORLD_MAP_POINT_PARAM_ST paramdef size does not match detected size");

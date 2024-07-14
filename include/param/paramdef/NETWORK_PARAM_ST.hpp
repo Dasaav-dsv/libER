@@ -174,8 +174,6 @@ struct NETWORK_PARAM_ST {
      */
     float breakInRequestTimeOutSec{ 20.f };
 
-    unsigned char pad_1_old[4];
-
     unsigned char unknown_0x7c{ 0 };
 
     unsigned char pad_1[3];
@@ -880,5 +878,5 @@ struct NETWORK_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::NETWORK_PARAM_ST) == 636,
+static_assert(sizeof(from::paramdef::NETWORK_PARAM_ST) == 632,
     "NETWORK_PARAM_ST paramdef size does not match detected size");

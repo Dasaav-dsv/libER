@@ -149,8 +149,6 @@ struct CHARACTER_INIT_PARAM {
      */
     int equip_Accessory04{ -1 };
 
-	unsigned char pad8_old[4];
-
 	unsigned char unknown_0x50 { 0 };
 
 	unsigned char unknown_0x51 { 0 };
@@ -761,5 +759,5 @@ struct CHARACTER_INIT_PARAM {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::CHARACTER_INIT_PARAM) == 324,
+static_assert(sizeof(from::paramdef::CHARACTER_INIT_PARAM) == 320,
     "CHARACTER_INIT_PARAM paramdef size does not match detected size");

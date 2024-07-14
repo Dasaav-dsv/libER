@@ -100,11 +100,6 @@ struct CS_GRAPHICS_CONFIG_PARAM_ST {
     unsigned char m_volumetricEffectQuality{ 3 };
 
     /**
-     * @brief m_dummy
-     */
-    unsigned char m_dummy_0[3];
-
-    /**
      * @brief m_RayTracingQuality
      */
     unsigned char m_RayTracingQuality{ 0 };
@@ -118,5 +113,5 @@ struct CS_GRAPHICS_CONFIG_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::CS_GRAPHICS_CONFIG_PARAM_ST) == 19,
+static_assert(sizeof(from::paramdef::CS_GRAPHICS_CONFIG_PARAM_ST) == 16,
     "CS_GRAPHICS_CONFIG_PARAM_ST paramdef size does not match detected size");

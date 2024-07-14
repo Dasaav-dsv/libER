@@ -342,8 +342,6 @@ struct EQUIP_PARAM_GEM_ST {
      */
     unsigned char defaultWepAttr{ 0 };
 
-    unsigned char pad2_old[2];
-
     /**
      * @brief isSpecialSwordArt
      */
@@ -604,8 +602,6 @@ struct EQUIP_PARAM_GEM_ST {
      */
     bool canMountWep_Torch : 1 { false };
 
-    unsigned char reserved_canMountWep : 4;
-
     /**
      * @brief canMountWep_HandToHand
      */
@@ -625,8 +621,6 @@ struct EQUIP_PARAM_GEM_ST {
      * @brief canMountWep_ThrowingWeapon
      */
     unsigned char canMountWep_ThrowingWeapon : 1 { 0 };
-
-    unsigned char reserved2_canMountWep_old[3];
 
     /**
      * @brief canMountWep_ReverseHandSword
@@ -703,5 +697,5 @@ struct EQUIP_PARAM_GEM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::EQUIP_PARAM_GEM_ST) == 104,
+static_assert(sizeof(from::paramdef::EQUIP_PARAM_GEM_ST) == 96,
     "EQUIP_PARAM_GEM_ST paramdef size does not match detected size");

@@ -108,8 +108,6 @@ struct BONFIRE_WARP_PARAM_ST {
      */
     bool dispMask01 : 1 { false };
 
-    unsigned char pad1_old : 6;
-
     /**
      * @brief dispMask02
      */
@@ -539,5 +537,5 @@ struct BONFIRE_WARP_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::BONFIRE_WARP_PARAM_ST) == 240,
+static_assert(sizeof(from::paramdef::BONFIRE_WARP_PARAM_ST) == 236,
     "BONFIRE_WARP_PARAM_ST paramdef size does not match detected size");

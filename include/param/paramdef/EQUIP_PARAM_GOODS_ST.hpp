@@ -183,8 +183,6 @@ struct EQUIP_PARAM_GOODS_ST {
     */
     unsigned char spEffectCategory{ 0 };
 
-    unsigned char pad3[1];
-
     unsigned char unknown_0x40{ 0 };
 
     /**
@@ -573,8 +571,6 @@ struct EQUIP_PARAM_GOODS_ST {
      */
     bool isUseNoAttackRegion : 1 { true };
 
-    unsigned char pad1_old : 7;
-
     unsigned char unknown_0x73_1 : 1 { 0 };
 
     unsigned char unknown_0x73_2 : 1 { 0 };
@@ -739,5 +735,5 @@ struct EQUIP_PARAM_GOODS_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::EQUIP_PARAM_GOODS_ST) == 184,
+static_assert(sizeof(from::paramdef::EQUIP_PARAM_GOODS_ST) == 176,
     "EQUIP_PARAM_GOODS_ST paramdef size does not match detected size");

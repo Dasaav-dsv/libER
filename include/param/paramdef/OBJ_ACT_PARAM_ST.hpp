@@ -161,8 +161,6 @@ struct OBJ_ACT_PARAM_ST {
      */
     int preActionSfxId{ -1 };
 
-    unsigned char pad2_old[40];
-
     unsigned char unknown_0x38{ 0 };
 
     unsigned char unknown_0x3c{ 0 };
@@ -181,5 +179,5 @@ struct OBJ_ACT_PARAM_ST {
 }; // namespace paramdef
 }; // namespace from
 
-static_assert(sizeof(from::paramdef::OBJ_ACT_PARAM_ST) == 136,
+static_assert(sizeof(from::paramdef::OBJ_ACT_PARAM_ST) == 96,
     "OBJ_ACT_PARAM_ST paramdef size does not match detected size");
