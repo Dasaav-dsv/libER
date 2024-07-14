@@ -55,4 +55,8 @@
  *   - Anchor vtables across the library
  *   - Step task instrumentation/hooking
  *   - Fix double free in base ER havok code
+ * 
+ * ## Version 0.1.5.1:
+ *   - RemovedVersion Smithbox param hotfix
+ * 
  */
