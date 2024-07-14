@@ -161,7 +161,10 @@ private:
     graphics_settings graphics_settings;
 };
 
-LIBER_ASSERTS_BEGIN(CSWindow);
+} // namespace CS
+} // namespace from
+
+LIBER_ASSERTS_BEGIN(from::CS::CSWindow);
 LIBER_ASSERT_OFFS(0x8, window_handle);
 LIBER_ASSERT_OFFS(0x20, window_position);
 LIBER_ASSERT_OFFS(0x28, window_size);
@@ -189,6 +192,3 @@ LIBER_ASSERT_OFFS(0x124, graphics_settings.global_illumination_quality);
 LIBER_ASSERT_OFFS(0x128, graphics_settings.grass_quality);
 LIBER_ASSERT_OFFS(0x128, graphics_settings.grass_quality);
 LIBER_ASSERTS_END;
-
-} // namespace CS
-} // namespace from

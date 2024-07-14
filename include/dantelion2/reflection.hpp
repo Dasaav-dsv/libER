@@ -423,23 +423,23 @@ public:
         DLRuntimeClassTemplate::dl_runtime_class_name_w.string
     };
 };
+} // namespace DLRF
+} // namespace from
 
-LIBER_ASSERTS_BEGIN(DLRuntimeMethod);
+LIBER_ASSERTS_BEGIN(from::DLRF::DLRuntimeMethod);
 LIBER_ASSERT_SIZE(0x70);
 LIBER_ASSERT_OFFS(0x18, invokers);
 LIBER_ASSERT_OFFS(0x60, mutex);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(DLRuntimeObjectHolder, DLRuntimeMethod);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::DLRF::DLRuntimeObjectHolder, from::DLRF::DLRuntimeMethod);
 LIBER_ASSERT_SIZE(0x20);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(DLRuntimeClass);
+LIBER_ASSERTS_BEGIN(from::DLRF::DLRuntimeClass);
 LIBER_ASSERT_SIZE(0x38);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(DLRuntimeClassImpl, liber::dummy);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::DLRF::DLRuntimeClassImpl, liber::dummy);
 LIBER_ASSERT_SIZE(0x48);
 LIBER_ASSERTS_END;
-} // namespace DLRF
-} // namespace from

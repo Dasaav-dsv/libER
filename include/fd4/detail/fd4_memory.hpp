@@ -51,11 +51,11 @@ private:
     int liber_unknown = 0;
     bool liber_unknown = false;
 };
+} // namespace FD4
+} // namespace from
 
-LIBER_ASSERTS_BEGIN(FD4MemoryManager);
+LIBER_ASSERTS_BEGIN(from::FD4::FD4MemoryManager);
 LIBER_ASSERT_SIZE(0x2B0);
 LIBER_ASSERT_OFFS(0x60, allocator_names);
 LIBER_ASSERT_OFFS(0x288, size);
 LIBER_ASSERTS_END;
-} // namespace FD4
-} // namespace from

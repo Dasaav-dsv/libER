@@ -137,11 +137,11 @@ void GXDrawTask::eztask_execute(FD4::FD4TaskData* data) {
     liber::function<"GXBS::GXDrawQueue::queue_callback", void>::call(draw_queue,
         &liber_draw_callback, this, this, priority);
 }
+} // namespace GXBS
+} // namespace from
 
-LIBER_ASSERTS_BEGIN(GXSwapChain);
+LIBER_ASSERTS_BEGIN(from::GXBS::GXSwapChain);
 LIBER_ASSERT_SIZE(0x170);
 LIBER_ASSERT_OFFS(0x68, main_texture);
 LIBER_ASSERT_OFFS(0xE8, depth_stencil_buffer);
 LIBER_ASSERTS_END;
-} // namespace GXBS
-} // namespace from

@@ -266,9 +266,9 @@ private:
     void* task_seeds_0x60[6];
     bool liber_unknown;
 };
-
-LIBER_ASSERTS_BEGIN(CSTask);
-LIBER_ASSERT_SIZE(0xE8);
-LIBER_ASSERTS_END;
 } // namespace CS
 } // namespace from
+
+LIBER_ASSERTS_BEGIN(from::CS::CSTask);
+LIBER_ASSERT_SIZE(0xE8);
+LIBER_ASSERTS_END;

@@ -332,14 +332,7 @@ inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
     return lhs.get() <=> nullptr;
 }
 
-LIBER_ASSERTS_BEGIN(DLReferenceCountObject);
-LIBER_ASSERT_SIZE(0x10);
-LIBER_ASSERTS_END;
-
 struct dummy_rfco : DLReferenceCountObject {};
-LIBER_ASSERTS_TEMPLATE_BEGIN(DLReferenceCountPtr, dummy_rfco);
-LIBER_ASSERT_SIZE(0x8);
-LIBER_ASSERTS_END;
 } // namespace DLUT
 
 /**
@@ -357,3 +350,11 @@ template <typename T, typename... Args>
         std::forward<Args>(args)...);
 }
 } // namespace from
+
+LIBER_ASSERTS_BEGIN(from::DLUT::DLReferenceCountObject);
+LIBER_ASSERT_SIZE(0x10);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::DLUT::DLReferenceCountPtr, from::DLUT::dummy_rfco);
+LIBER_ASSERT_SIZE(0x8);
+LIBER_ASSERTS_END;

@@ -32,9 +32,9 @@ private:
 
     bool liber_unknown = false;
 };
-
-LIBER_ASSERTS_BEGIN(CSMemory);
-LIBER_ASSERT_SIZE(0x2B8);
-LIBER_ASSERTS_END;
 } // namespace CS
 } // namespace from
+
+LIBER_ASSERTS_BEGIN(from::CS::CSMemory);
+LIBER_ASSERT_SIZE(0x2B8);
+LIBER_ASSERTS_END;

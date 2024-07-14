@@ -318,22 +318,24 @@ private:
         bool liber_unknown;
     }* liber_unknown;
 };
+} // namespace FD4
+} // namespace from
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void, FD4StepBaseInterface);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, void, from::FD4::FD4StepBaseInterface);
 LIBER_ASSERT_SIZE(0xA8);
 LIBER_ASSERT_OFFS(0x8, steps);
 LIBER_ASSERT_OFFS(0x68, unk_wstr);
 LIBER_ASSERT_OFFS(0x98, state);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_TEMPLATE_BEGIN(FD4StepTemplateBase, void, FD4TaskBase);
+LIBER_ASSERTS_TEMPLATE_BEGIN(from::FD4::FD4StepTemplateBase, void, from::FD4::FD4TaskBase);
 LIBER_ASSERT_SIZE(0xB0);
 LIBER_ASSERT_OFFS(0x10, steps);
 LIBER_ASSERT_OFFS(0x70, unk_wstr);
 LIBER_ASSERT_OFFS(0xA0, state);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(FD4TaskEntryGroup);
+LIBER_ASSERTS_BEGIN(from::FD4::FD4TaskEntryGroup);
 LIBER_ASSERT_SIZE(0xD0);
 LIBER_ASSERT_OFFS(0x08, entries);
 LIBER_ASSERT_OFFS(0x28, states);
@@ -341,9 +343,7 @@ LIBER_ASSERT_OFFS(0x48, queue);
 LIBER_ASSERT_OFFS(0x80, group_id);
 LIBER_ASSERTS_END;
 
-LIBER_ASSERTS_BEGIN(FD4TaskManager);
+LIBER_ASSERTS_BEGIN(from::FD4::FD4TaskManager);
 LIBER_ASSERT_SIZE(0x58);
 LIBER_ASSERT_OFFS(0x40, cs_task);
 LIBER_ASSERTS_END;
-} // namespace FD4
-} // namespace from

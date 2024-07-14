@@ -33,7 +33,7 @@ struct string_hash {
 
     /**
      * @brief Construct a new string hash object.
-     * 
+     *
      * @param str the string
      */
     explicit string_hash(const wchar_t* str)
@@ -229,9 +229,9 @@ private:
  * may be related to weak referencing.
  */
 using DLString = std::pair<from::wstring, bool>;
-
-LIBER_ASSERTS_BEGIN(FD4BasicHashString);
-LIBER_ASSERT_SIZE(0x40);
-LIBER_ASSERTS_END;
 } // namespace DLTX
 } // namespace from
+
+LIBER_ASSERTS_BEGIN(from::DLTX::FD4BasicHashString);
+LIBER_ASSERT_SIZE(0x40);
+LIBER_ASSERTS_END;

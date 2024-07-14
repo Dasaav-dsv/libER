@@ -196,19 +196,6 @@ private:
     mutable DLKR::DLPlainLightMutex mutex;
 };
 
-LIBER_ASSERTS_BEGIN(DLFileDevice);
-LIBER_ASSERT_SIZE(0x40);
-LIBER_ASSERTS_END;
-
-LIBER_ASSERTS_BEGIN(DLFileOperator);
-LIBER_ASSERT_SIZE(0x60);
-LIBER_ASSERTS_END;
-
-LIBER_ASSERTS_BEGIN(DLFileDeviceManager);
-LIBER_ASSERT_SIZE(0xE8);
-LIBER_ASSERT_OFFS(0xB8, mutex);
-LIBER_ASSERTS_END;
-
 } // namespace DLIO
 // Dantelion input/output devices (older namespace, has D postfix)
 namespace DLIOD {
@@ -233,13 +220,26 @@ private:
     void* liber_unknown;
     int liber_unknown;
 };
-
-LIBER_ASSERTS_BEGIN(MicrosoftDiskFileOperator);
-LIBER_ASSERT_SIZE(0xD8);
-LIBER_ASSERT_OFFS(0x6C, file_info);
-LIBER_ASSERT_OFFS(0xA0, cursor_pos);
-LIBER_ASSERTS_END;
 } // namespace msvc90_windows
 } // namespace DLIOD
 } // namespace from
 /// @endcond
+
+LIBER_ASSERTS_BEGIN(from::DLIO::DLFileDevice);
+LIBER_ASSERT_SIZE(0x40);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(from::DLIO::DLFileOperator);
+LIBER_ASSERT_SIZE(0x60);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(from::DLIO::DLFileDeviceManager);
+LIBER_ASSERT_SIZE(0xE8);
+LIBER_ASSERT_OFFS(0xB8, mutex);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(from::DLIOD::msvc90_windows::MicrosoftDiskFileOperator);
+LIBER_ASSERT_SIZE(0xD8);
+LIBER_ASSERT_OFFS(0x6C, file_info);
+LIBER_ASSERT_OFFS(0xA0, cursor_pos);
+LIBER_ASSERTS_END;

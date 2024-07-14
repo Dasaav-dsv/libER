@@ -94,10 +94,6 @@ private:
     } _dummy_section;
 };
 
-LIBER_ASSERTS_BEGIN(DLPlainLightMutex);
-LIBER_ASSERT_SIZE(0x30);
-LIBER_ASSERTS_END;
-
 /**
  * @brief A wrapper around a Windows kernel mutex.
  *
@@ -144,10 +140,6 @@ private:
     HANDLE mutex_handle;
 };
 
-LIBER_ASSERTS_BEGIN(DLPlainMutex);
-LIBER_ASSERT_SIZE(0x10);
-LIBER_ASSERTS_END;
-
 /**
  * @brief A wrapper around a Windows Critical Section (with a spincount).
  *
@@ -179,9 +171,17 @@ public:
 private:
     int spin_count;
 };
-
-LIBER_ASSERTS_BEGIN(DLPlainAdaptiveMutex);
-LIBER_ASSERT_SIZE(0x38);
-LIBER_ASSERTS_END;
 } // namespace DLKR
 } // namespace from
+
+LIBER_ASSERTS_BEGIN(from::DLKR::DLPlainLightMutex);
+LIBER_ASSERT_SIZE(0x30);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(from::DLKR::DLPlainMutex);
+LIBER_ASSERT_SIZE(0x10);
+LIBER_ASSERTS_END;
+
+LIBER_ASSERTS_BEGIN(from::DLKR::DLPlainAdaptiveMutex);
+LIBER_ASSERT_SIZE(0x38);
+LIBER_ASSERTS_END;
