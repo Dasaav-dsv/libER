@@ -798,6 +798,7 @@ public:
         STEP_LeaveSessionWait,
         STEP_SignIn,
         STEP_SignInWaitAndLogIn,
+        STEP_WaitChrTypeSyncReady_forInvadeNpcWorld,
         STEP_CreateDrawPlan,
         STEP_InitAnim,
         STEP_FixedGridInitPos,
