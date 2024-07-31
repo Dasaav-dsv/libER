@@ -3,6 +3,9 @@
 #include <detail/singleton.hpp>
 #include <detail/windows.inl>
 
+#include <thread>
+#include <chrono>
+
 using namespace from;
 
 LIBER_SINGLETON_INSTANCE(CS::SoloParamRepository);
@@ -25,11 +28,11 @@ bool CS::SoloParamRepository::wait_for_params(int timeout) {
         while (!are_params_ready(num_loaded)) {
             if (GetTickCount64() > wait)
                 return false;
-            YieldProcessor();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
     else {
-        while (!are_params_ready(num_loaded)) YieldProcessor();
+        while (!are_params_ready(num_loaded)) std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     return true;
 }

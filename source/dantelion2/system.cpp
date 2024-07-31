@@ -3,6 +3,9 @@
 
 #include <detail/windows.inl>
 
+#include <thread>
+#include <chrono>
+
 using namespace from;
 
 bool DLSY::wait_for_system(int timeout) noexcept {
@@ -13,11 +16,11 @@ bool DLSY::wait_for_system(int timeout) noexcept {
         while (*counter == 0) {
             if (GetTickCount64() > wait)
                 return false;
-            YieldProcessor();
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
     else {
-        while (*counter == 0) YieldProcessor();
+        while (*counter == 0) std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     return true;
 }
