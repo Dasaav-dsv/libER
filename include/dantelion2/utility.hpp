@@ -34,43 +34,55 @@ public:
 };
 
 /**
- * @brief Abstract class for implementing reference counting garbage collection.
+ * @brief Class for implementing reference counting garbage collection.
  *
  * Commonly used in ELDEN RING's codebase.
  *
- * @note Derived classes must provide a deleter method.
+ * @note Instances of DLReferenceCountObject can only be constructed on the
+ * heap, using with @ref from::make_refcounted.
+ *
+ * @note Derived classes may override the deleter method.
  *
  */
 class DLReferenceCountObject {
 public:
     LIBER_CLASS(DLReferenceCountObject);
 
-    DLReferenceCountObject() : counter(0){};
-
     /**
      * @brief The deleter method to call when reference count reaches zero.
      *
      */
-    virtual void deleter() = 0;
+    virtual void deleter() {
+        this->~DLReferenceCountObject();
+        get_allocator_of(this).deallocate(this);
+    }
+
     virtual ~DLReferenceCountObject() = default;
 
-private:
-    template <typename T>
-        requires std::derived_from<T, DLReferenceCountObject>
-    friend class DLReferenceCountPtr;
-
-    // Number of references to object
+    /**
+     * @brief Get number of references to object.
+     *
+     * @return int reference count
+     */
     int count() const noexcept {
         return this->counter.load(std::memory_order_relaxed);
     }
 
-    // Reference object
+    /**
+     * @brief Increment the object's reference count.
+     *
+     */
     void ref() noexcept {
         ++this->counter;
     }
 
-    // Unreference object; there cannot
-    // be more ref() calls than unref() calls
+    /**
+     * @brief Unreference object; there cannot be more ref() calls than unref()
+     * calls.
+     *
+     * @throws std::runtime_error bad unref() call
+     *
+     */
     void unref() {
         int value = this->counter.fetch_add(-1, std::memory_order_seq_cst);
         if (value == 1)
@@ -79,7 +91,22 @@ private:
             throw std::runtime_error("bad unref() call");
     }
 
-    std::atomic_int counter;
+protected:
+    /**
+     * @brief Protected DLReferenceCountObject constructor.
+     *
+     * @note Instances of DLReferenceCountObject can only be constructed on the
+     * heap, using with @ref from::make_refcounted.
+     * 
+     */
+    DLReferenceCountObject() noexcept = default;
+
+private:
+    template <typename T, typename... Args>
+        requires std::derived_from<T, DLReferenceCountObject>
+    friend inline auto make_refcounted();
+
+    std::atomic_int counter = 0;
 };
 
 // A refcounted pointer that models std::shared_ptr
@@ -103,7 +130,7 @@ public:
     DLReferenceCountPtr() noexcept : raw(nullptr) {}
 
     /**
-     * @brief Construct a new DLReferenceCountPtr (std::nullopt).
+     * @brief Construct a new DLReferenceCountPtr (std::nullptr_t).
      *
      */
     DLReferenceCountPtr(std::nullptr_t) noexcept : raw(nullptr) {}
@@ -294,8 +321,8 @@ private:
 };
 
 /**
- * @brief DLReferenceCountPtr comparison. 
- * 
+ * @brief DLReferenceCountPtr comparison.
+ *
  */
 template <typename T, typename U>
 inline bool operator==(const DLReferenceCountPtr<T>& lhs,
@@ -304,8 +331,8 @@ inline bool operator==(const DLReferenceCountPtr<T>& lhs,
 }
 
 /**
- * @brief DLReferenceCountPtr comparison. 
- * 
+ * @brief DLReferenceCountPtr comparison.
+ *
  */
 template <typename T, typename U>
 inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
@@ -314,8 +341,8 @@ inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
 }
 
 /**
- * @brief DLReferenceCountPtr comparison. 
- * 
+ * @brief DLReferenceCountPtr comparison.
+ *
  */
 template <typename T, typename U>
 inline bool operator==(const DLReferenceCountPtr<U>& lhs, std::nullptr_t) {
@@ -323,8 +350,8 @@ inline bool operator==(const DLReferenceCountPtr<U>& lhs, std::nullptr_t) {
 }
 
 /**
- * @brief DLReferenceCountPtr comparison. 
- * 
+ * @brief DLReferenceCountPtr comparison.
+ *
  */
 template <typename T, typename U>
 inline std::strong_ordering operator<=>(const DLReferenceCountPtr<T>& lhs,
@@ -344,16 +371,21 @@ LIBER_ASSERTS_END;
 
 /**
  * @brief Construct a reference counted object with the default libER allocator.
- * 
+ *
  * @tparam T class that derives from DLReferenceCountObject
- * @param args constructor parameters
- * @return [[nodiscard]] DLUT::DLReferenceCountPtr<T> the resulting refcounted pointer
+ * @param args constructor arguments
+ * @return [[nodiscard]] DLUT::DLReferenceCountPtr<T> the resulting refcounted
+ * pointer
  */
 template <typename T, typename... Args>
     requires std::derived_from<T, DLUT::DLReferenceCountObject>
-[[nodiscard]] inline DLUT::DLReferenceCountPtr<T> make_refcounted(
-    Args&&... args) {
-    return allocate_refcounted(from::allocator<T>{},
-        std::forward<Args>(args)...);
+[[nodiscard]] inline auto make_refcounted(Args&&... args) {
+    from::allocator<T> allocator;
+    using altraits = std::allocator_traits<decltype(allocator)>;
+    T* p = altraits::allocate(allocator, 1);
+    if (!p)
+        return DLUT::DLReferenceCountPtr<T>(nullptr);
+    altraits::construct(allocator, p, std::forward<Args>(args)...);
+    return DLUT::DLReferenceCountPtr<T>(p);
 }
 } // namespace from
