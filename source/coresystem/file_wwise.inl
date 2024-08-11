@@ -1,4 +1,3 @@
-#include <SharedMutex.h>
 #include <coresystem/file/file.hpp>
 #include <dantelion2/fileio.hpp>
 #include <detail/functions.hpp>
@@ -6,26 +5,25 @@
 
 #include <algorithm>
 #include <exception>
+#include <filesystem>
 #include <memory>
 #include <mutex>
 #include <shared_mutex>
 #include <span>
 #include <unordered_map>
-#include <filesystem>
 
 using namespace from;
 namespace fs = std::filesystem;
 
 auto& bnk_overrides() {
-    static std::pair<std::unordered_map<fs::path, fs::path>,
-        WinTypes::SharedMutex>
+    static std::pair<std::unordered_map<fs::path, fs::path>, std::shared_mutex>
         overrides;
     return overrides;
 }
 
 auto& wem_overrides() {
     static std::pair<std::unordered_map<std::wstring, std::wstring>,
-        WinTypes::SharedMutex>
+        std::shared_mutex>
         overrides;
     return overrides;
 }
