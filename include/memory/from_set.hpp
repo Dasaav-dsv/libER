@@ -19,7 +19,6 @@ namespace from {
  * @brief std::set with from::allocator.
  *
  */
-template <typename T, typename Pred = std::less<T>,
-    typename AllocatorTag = from::default_allocator_tag>
-using set = std::set<T, Pred, from::allocator<T, AllocatorTag>>;
+template <typename T, typename Pred = std::less<T>>
+using set = std::set<T, Pred, from::allocator<T>>;
 } // namespace from

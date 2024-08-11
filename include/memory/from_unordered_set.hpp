@@ -19,8 +19,7 @@ namespace from {
  * @brief std::unordered_set with from::allocator.
  *
  */
-template <typename T, typename Hash, typename Eq,
-    typename AllocatorTag = from::default_allocator_tag>
+template <typename T, typename Hash, typename Eq>
 using unordered_set =
-    std::unordered_set<T, Hash, Eq, from::allocator<T, AllocatorTag>>;
+    std::unordered_set<T, Hash, Eq, from::allocator<T>>;
 } // namespace from

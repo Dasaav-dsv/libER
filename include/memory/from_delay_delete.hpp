@@ -12,6 +12,7 @@
 #include <memory/from_allocator.hpp>
 #include <memory>
 
+std::default_delete<int[]>;
 namespace from {
 /**
  * @brief Signature of the function called when an object is to be deleted.
@@ -31,86 +32,23 @@ LIBERAPI void request_delete(delay_deleter deleter, void* p);
  * @brief Delay deleter that models std::default_delete.
  *
  * @tparam T type of the target object
- * @tparam AllocatorTag allocator to use with the object
  */
-template <typename T, typename AllocatorTag>
-class delay_delete : private from::allocator<T, AllocatorTag> {
-    using base_type = from::allocator<T, AllocatorTag>;
-
-    const base_type& base() const noexcept {
-        return static_cast<const base_type&>(*this);
-    }
-
-public:
-    delay_delete() noexcept : base_type() {}
-
+template <typename T>
+struct delay_delete {
     /**
-     * @brief Copy constructor.
+     * @brief Default constructor.
      *
      */
-    delay_delete(const delay_delete&) noexcept : base_type() {}
-
-    /**
-     * @brief Move constructor.
-     *
-     */
-    delay_delete(delay_delete&&) noexcept : base_type() {}
+    constexpr delay_delete() noexcept = default;
 
     /**
      * @brief Copy template constructor.
      *
-     * @tparam U type of another target object convertible to T by pointer
+     * @tparam U type of another target object
      */
     template <typename U>
         requires std::convertible_to<U*, T*>
-    delay_delete(const delay_delete<U, AllocatorTag>&) noexcept : base_type() {}
-
-    /**
-     * @brief Move template constructor.
-     *
-     * @tparam U type of another target object convertible to T by pointer
-     */
-    template <typename U>
-        requires std::convertible_to<U*, T*>
-    delay_delete(delay_delete<U, AllocatorTag>&&) noexcept : base_type() {}
-
-    /**
-     * @brief Copy assignment operator.
-     *
-     */
-    delay_delete& operator=(const delay_delete&) noexcept {
-        return *this;
-    }
-
-    /**
-     * @brief Copy template assignment operator.
-     *
-     * @tparam U type of another target object convertible to T by pointer
-     */
-    template <typename U>
-        requires std::convertible_to<U*, T*>
-    delay_delete& operator=(const delay_delete<U, AllocatorTag>&) noexcept {
-        return *this;
-    }
-
-    /**
-     * @brief Move assignment operator.
-     *
-     */
-    delay_delete& operator=(delay_delete&&) noexcept {
-        return *this;
-    }
-
-    /**
-     * @brief Move template assignment operator.
-     *
-     * @tparam U type of another target object convertible to T by pointer
-     */
-    template <typename U>
-        requires std::convertible_to<U*, T*>
-    delay_delete& operator=(delay_delete<U, AllocatorTag>&&) noexcept {
-        return *this;
-    }
+    delay_delete(const delay_delete<U>&) noexcept {}
 
     /**
      * @brief Request object deletion.
@@ -121,22 +59,16 @@ public:
      * @param p pointer to object to delete
      */
     void operator()(T* p) const noexcept {
-        request_delete(
-            [](void* p) {
-                base_type proxy_allocator;
-                std::allocator_traits<base_type>::destroy(proxy_allocator,
-                    reinterpret_cast<T*>(p));
-                proxy_allocator.deallocate(reinterpret_cast<T*>(p), 1);
-            },
-            p);
+        request_delete(&delay_deleter, static_cast<void*>(p));
+    }
+
+private:
+    static void delay_deleter(void* p) {
+        T* target = reinterpret_cast<T*>(p);
+        auto allocator = get_allocator_of(target);
+        using altraits = std::allocator_traits<decltype(allocator)>;
+        altraits::destroy(allocator, target);
+        altraits::deallocate(allocator, target, 1);
     }
 };
-
-// TODO: implement
-/**
- * @brief Not implemented.
- *
- */
-template <typename T, typename AllocatorTag>
-class delay_delete<T[], AllocatorTag> {};
 } // namespace from

@@ -19,6 +19,6 @@ namespace from {
  * @brief std::forward_list with from::allocator.
  *
  */
-template <typename T, typename AllocatorTag = from::default_allocator_tag>
-using forward_list = std::forward_list<T, from::allocator<T, AllocatorTag>>;
+template <typename T>
+using forward_list = std::forward_list<T, from::allocator<T>>;
 } // namespace from
