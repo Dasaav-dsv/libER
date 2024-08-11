@@ -13,6 +13,8 @@
 // Part of namespace DLKR and DLKRD
 #include <memory/from_allocator.hpp>
 
+#include <new>
+
 // Forward declarations to not include Windows.h
 struct _RTL_CRITICAL_SECTION;
 
@@ -83,10 +85,11 @@ private:
     }
 
     struct alignas(8) _critical_section {
-        char _dummy_section_bytes[0x28];
+        std::byte _dummy_section_bytes[0x28];
 
         _RTL_CRITICAL_SECTION* get() noexcept {
-            return reinterpret_cast<_RTL_CRITICAL_SECTION*>(this);
+            return std::launder(reinterpret_cast<_RTL_CRITICAL_SECTION*>(
+                &this->_dummy_section_bytes));
         }
     } _dummy_section;
 };
