@@ -13,14 +13,9 @@
 
 #include <detail/preprocessor.hpp>
 
-#include <bitset>
 #include <cstddef>
 #include <cstdint>
-#include <memory>
 #include <utility>
-
-// For std::terminate
-#include <stdexcept>
 
 namespace from {
 namespace DLKR {
@@ -48,7 +43,7 @@ public:
      *
      * @return int allocator identifier
      */
-    virtual int _allocator_id() = 0;
+    virtual int get_allocator_id() = 0;
 
     /**
      * @brief Unknown function which is defined in the interface, never
@@ -56,7 +51,7 @@ public:
      *
      * @return int unknown
      */
-    virtual int _unused() {
+    virtual int _unk0x10() {
         return -1;
     }
 
@@ -65,30 +60,30 @@ public:
      *
      * 0x20 indicates thread safety (most commonly checked).
      *
-     * @return std::bitset<8> flags
+     * @return int& flags
      */
-    virtual std::bitset<8> heap_flags() = 0;
+    virtual int& get_heap_flags(int& flags) = 0;
 
     /**
      * @brief The total capacity of the heap, in bytes.
      *
      * @return size_t heap capacity
      */
-    virtual size_t heap_capacity() = 0;
+    virtual size_t get_heap_capacity() = 0;
 
     /**
      * @brief How many bytes out of the total capacity are allocated.
      *
      * @return size_t heap size
      */
-    virtual size_t heap_size() = 0;
+    virtual size_t get_heap_size() = 0;
 
     /**
      * @brief The remaining capacity of the backing heap.
      *
      * @return size_t backing heap capacity
      */
-    virtual size_t backing_heap_capacity() = 0;
+    virtual size_t get_heap_backing_capacity() = 0;
 
     /**
      * @brief Total number of objects that have been allocated on the
@@ -96,7 +91,7 @@ public:
      *
      * @return size_t allocated object count
      */
-    virtual size_t heap_allocation_count() = 0;
+    virtual size_t get_heap_allocation_count() = 0;
 
     /**
      * @brief Check how big a given memory block is.
@@ -156,18 +151,16 @@ public:
     /**
      * @brief Free previously allocated memory.
      *
-     * @param p pointer to a block of previously allocated memory.
+     * @param p pointer to a block of previously allocated memory
      */
     virtual void deallocate(void* p) = 0;
 
     /**
      * @brief Unknown method, isn't supported by any class that implements
-     * DLKR::DLAllocator
+     * DLKR::DLAllocator.
      *
      */
-    virtual void _unsupported() {
-        std::terminate();
-    }
+    virtual void _unk0x70() {}
 
     /**
      * @brief Allocate a block of at least this many bytes.
@@ -178,7 +171,9 @@ public:
      * @param cb the number of bytes to allocate
      * @return void* pointer to the allocated memory
      */
-    virtual void* allocate_second(size_t cb) = 0;
+    virtual void* allocate2(size_t cb) {
+        return this->allocate(cb);
+    }
 
     /**
      * @brief Allocate a block of at least this many bytes with a given
@@ -191,7 +186,9 @@ public:
      * @param alignment the alignment of the allocated memory
      * @return void* pointer to the allocated memory
      */
-    virtual void* allocate_second_aligned(size_t cb, size_t alignment) = 0;
+    virtual void* allocate2_aligned(size_t cb, size_t alignment) {
+        return this->allocate2_aligned(cb, alignment);
+    }
 
     /**
      * @brief Reallocate a memory block with a new size.
@@ -204,7 +201,9 @@ public:
      * @param cb the number of bytes to allocate
      * @return void* pointer to the allocated memory
      */
-    virtual void* reallocate_second(void* p, size_t cb) = 0;
+    virtual void* reallocate2(void* p, size_t cb) {
+        return this->reallocate(p, cb);
+    }
 
     /**
      * @brief Reallocate an aligned memory block with a new size.
@@ -218,8 +217,9 @@ public:
      * @param alignment the alignment of the allocated memory
      * @return void* pointer to the allocated memory
      */
-    virtual void* reallocate_second_aligned(void* p, size_t cb,
-        size_t alignment) = 0;
+    virtual void* reallocate2_aligned(void* p, size_t cb, size_t alignment) {
+        return this->reallocate_aligned(p, cb, alignment);
+    }
 
     /**
      * @brief Free previously allocated memory.
@@ -227,74 +227,74 @@ public:
      *
      * @param p pointer to a block of previously allocated memory.
      */
-    virtual void deallocate_second(void* p) = 0;
+    virtual void deallocate2(void* p) {
+        this->deallocate(p);
+    }
 
     /**
      * @brief Unknown method, seemingly unused.
      *
      */
-    virtual bool _unknown_bool() {
+    virtual bool _unk0xA0() {
         return false;
     }
 
     /**
-     * @brief Does memory block belong to the first bound allocator?
+     * @brief Does the pointed to memory block belong to this allocator?
      *
-     * @note Seems unused.
      */
-    virtual bool belongs_to_first(void* p) = 0;
+    virtual bool check_owned(void* p) = 0;
 
     /**
-     * @brief Does memory block belong to the second bound allocator?
+     * @brief Seemingly unused.
      *
-     * @note Seems unused.
      */
-    virtual bool belongs_to_second(void* p) = 0;
+    virtual bool _unk0xB0(std::nullptr_t) {
+        return false;
+    }
 
     /**
      * @brief Lock the allocator's mutex (if present and accessible).
      *
      */
-    virtual void lock() {}
+    virtual void lock() = 0;
 
     /**
      * @brief Unlock the allocator's mutex (if present and accessible).
      *
      */
-    virtual void unlock() {}
+    virtual void unlock() = 0;
 
     /**
-     * @brief Get the memory block base that this memory belongs to.
+     * @brief Get the memory block that this memory belongs to.
      *
      * @warning May panic if this memory isn't owned by this allocator.
      *
      * @param p pointer to the memory block
      * @return void* pointer to the memory block base
      */
-    virtual void* get_memory_block(void* p) = 0;
+    virtual void* get_block(void* p) = 0;
 };
 
-struct DLBackAllocator : public DLAllocator {};
+/**
+ * @brief Get the allocator of memory allocated by ELDEN RING.
+ *
+ * @param p pointer to a block of memory
+ * @return DLAllocator& allocator interface
+ */
+LIBERAPI DLAllocator& get_dlallocator_of(const void* p) noexcept;
+
+/**
+ * @brief Get a compatible ELDEN RING base allocator.
+ *
+ * This allocator uses Windows heaps.
+ * @note Only memory allocated by this allocator
+ * should be accessed through its interface.
+ *
+ * @return DLAllocator& allocator interface
+ */
+LIBERAPI DLAllocator& get_base_allocator() noexcept;
 } // namespace DLKR
-
-/**
- * @brief Default libER allocator that gets embedded
- * in objects as needed for ER ABI compatibility.
- *
- */
-struct default_allocator_tag {};
-
-/**
- * @brief Default libER allocator with an empty base.
- *
- * ELDEN RING may use it instead of explicitly specifying
- * the allocator for an object.
- *
- */
-struct default_empty_base_allocator_tag {};
-
-template <typename AllocatorTag>
-class allocator_base;
 
 /**
  * @brief The main libER stand-in for ER allocator proxies.
@@ -303,28 +303,13 @@ class allocator_base;
  * requirements.
  *
  * @tparam T allocated type
- * @tparam AllocatorTag allocator tag, most often @ref default_allocator_tag or
- * @ref default_empty_base_allocator_tag
  */
-template <typename T, typename AllocatorTag = default_allocator_tag>
-class allocator : private allocator_base<AllocatorTag> {
-    using base_type = allocator_base<AllocatorTag>;
-    using proxy_type = DLKR::DLAllocator;
+template <typename T>
+class allocator {
+    using base_type = DLKR::DLAllocator;
     using alloc_type = std::conditional_t<std::is_same_v<T, void>, char, T>;
 
-    base_type& base() noexcept {
-        return static_cast<base_type&>(*this);
-    }
-    const base_type& base() const noexcept {
-        return static_cast<const base_type&>(*this);
-    }
-
-    proxy_type& proxy() noexcept {
-        return this->base().get_allocator();
-    }
-    const proxy_type& proxy() const noexcept {
-        return this->base().get_allocator();
-    }
+    base_type* base;
 
 public:
     /**
@@ -358,7 +343,20 @@ public:
      */
     using is_always_equal = std::false_type;
 
-    allocator() noexcept : base_type() {}
+    /**
+     * @brief Default allocator constructor.
+     *
+     */
+    allocator() noexcept : base(&DLKR::get_base_allocator()) {}
+
+    /**
+     * @brief Allocator copy constructor.
+     *
+     * Required by allocator completeness requirements.
+     *
+     * @param other
+     */
+    allocator(const allocator& other) noexcept : base(other.base) {}
 
     /**
      * @brief Allocator copy constructor.
@@ -369,15 +367,15 @@ public:
      * @param other
      */
     template <typename U>
-    allocator(const allocator<U>& other) noexcept : base_type(other.base()) {}
+    allocator(const allocator<U>& other) noexcept : base(other.base) {}
 
     /**
      * @brief Wrap an existing DLKR::DLAllocator.
      *
-     * @param dl_allocator the allocator to use
+     * @param allocator the allocator to use
      */
-    allocator(DLKR::DLAllocator* dl_allocator) noexcept
-        : base_type(dl_allocator) {}
+    explicit allocator(base_type* allocator_base) noexcept
+        : base(allocator_base) {}
 
     /**
      * @brief Allocate n instances of uninitialized memory for T
@@ -386,7 +384,7 @@ public:
      * @return T* pointer to allocated memory
      */
     [[nodiscard]] T* allocate(size_type n) {
-        return reinterpret_cast<T*>(this->proxy().allocate_aligned(
+        return reinterpret_cast<T*>(this->base->allocate_aligned(
             n * sizeof(alloc_type), alignof(alloc_type)));
     }
 
@@ -397,11 +395,11 @@ public:
      * @param n is ignored by DLKR::DLAllocator and can be zero
      */
     void deallocate(T* p, size_type n = 0) {
-        this->proxy().deallocate((void*)p);
+        this->base->deallocate(static_cast<void*>(p));
     }
 
     /**
-     * @brief Allocator equality comparison friend declaration.
+     * @brief Allocator equality comparison.
      *
      */
     template <typename T1, typename T2>
@@ -415,51 +413,18 @@ public:
  */
 template <typename T1, typename T2>
 bool operator==(const allocator<T1>& lhs, const allocator<T2>& rhs) noexcept {
-    return std::addressof(lhs.proxy()) == std::addressof(rhs.proxy());
+    return lhs.base == rhs.base;
 }
 
 /**
- * @brief Internal allocator base class.
+ * @brief Get the allocator of an object allocated by ELDEN RING.
  *
- * Used for empty base class optimization based on the allocator tag.
- *
- * Pointer to allocator implementation.
- * 
+ * @param p pointer to object
+ * @return from::allocator<T> allocator
  */
-template <>
-class allocator_base<default_allocator_tag> {
-    DLKR::DLAllocator* allocator;
-
-public:
-/// @cond DOXYGEN_SKIP
-    LIBERAPI allocator_base() noexcept;
-
-    allocator_base(DLKR::DLAllocator* dl_allocator) noexcept
-        : allocator(dl_allocator) {}
-
-    DLKR::DLAllocator& get_allocator() const noexcept {
-        return *this->allocator;
-    }
-/// @endcond
-};
-
-/**
- * @brief Internal allocator base class.
- *
- * Used for empty base class optimization based on the allocator tag.
- *
- * Zero size (empty base) implementation.
- * 
- */
-template <>
-class allocator_base<default_empty_base_allocator_tag> {
-public:
-/// @cond DOXYGEN_SKIP
-    allocator_base() noexcept = default;
-
-    allocator_base(DLKR::DLAllocator* dl_allocator) noexcept {}
-
-    LIBERAPI DLKR::DLAllocator& get_allocator() const noexcept;
-/// @endcond
-};
+template <typename T>
+from::allocator<T> get_allocator_of(const T* p) noexcept {
+    return from::allocator<T>(
+        &DLKR::get_dlallocator_of(static_cast<const void*>(p)));
+}
 } // namespace from
