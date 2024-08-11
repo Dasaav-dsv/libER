@@ -20,13 +20,10 @@ struct symbol;
 #define LIBER_ADD_SYMBOL(NAME)       \
     template <>                      \
     struct symbol<#NAME> {           \
-        static int value;            \
         static void* get() noexcept; \
     };
 
-// clang-format off
-#include LIBER_INCLUDIFY(LIBER_TARGET_VERSION/LIBER_SYMBOL_LIST)
-// clang-format on
+#include <symbol_list.inl>
 
 #undef LIBER_ADD_SYMBOL
 } // namespace liber
