@@ -117,6 +117,8 @@ bool liber_draw_callback(uintptr_t device_context, GXDrawTask* task) {
     task->scissor_rect = reinterpret_cast<D3D12_RECT*>(
         device_context + GXDEVICEPROXY_RECT_OFFSET);
     task->draw();
+    // Unreference task after executing its callback
+    task->unref_after_callback();
     return false;
 }
 
@@ -134,6 +136,8 @@ void GXDrawTask::eztask_execute(FD4::FD4TaskData* data) {
         return;
     void* draw_queue = draw_queue_array[draw_queue_selector];
     int priority = this->draw_scene == HDR_SCENE ? -1 : -2;
+    // Reference task before queueing its callback
+    this->ref_for_callback();
     liber::function<"GXBS::GXDrawQueue::queue_callback", void>::call(draw_queue,
         &liber_draw_callback, this, this, priority);
 }

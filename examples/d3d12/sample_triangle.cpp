@@ -177,9 +177,9 @@ void example_base() {
         return;
     }
     // Create the draw task with a smart pointer
-    // that has a delay deleter. This is important for the
-    // task to be properly unregistered on destruction
-    auto task = from::make_unique<draw_sample>();
+    // that has a reference counter. Classes that implement
+    // from::GXBS::GXDrawTask cannot be created on the stack.
+    auto task = from::make_refcounted<draw_sample>();
     // Set the render target/layer on which to draw
     // UI_SCENE (called UIScene by ELDEN RING) is the HUD and menu
     // HDR_SCENE (called HDRScene by ELDEN RING) is the game world,
@@ -191,7 +191,7 @@ void example_base() {
     task->set_scene(from::GXBS::GXDrawTask::UI_SCENE);
     // Call for the draw task to be registered and executed
     task->register_task();
-    // Sleep before letting the task unique_ptr go out of scope
+    // Sleep before letting the smart task pointer go out of scope
     // and cease rendering as it gets destroyed
     Sleep(20'000);
 }
