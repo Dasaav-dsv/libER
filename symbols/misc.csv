@@ -1,0 +1,10 @@
+"\"" R","cppsv-fmt(cppsv"
+GLOBAL_init_flip_counter,0x3D8569C
+DLKR::DLAllocator::get_dlallocator_of,0xE1A330
+CS::CSEzTask::register_task,0xEB1820
+CS::CSEzTaskProxy::free_task,0xEB1910
+CS::CSSound::make_system_sound,0xDAB560
+CS::CSSound::play_character_sound,0x4AD210
+GXBS::GXDrawQueue::queue_callback,0x1AEAA30
+GLOBAL_ID3D12RootSignature,0x4801090
+),"cppsv-fmt"

@@ -1,28 +1,16 @@
 #ifdef LIBER_ADD_SYMBOL
-// allocators.csv
-LIBER_ADD_SYMBOL(DLKR::DLAllocator::SYSTEM)
-LIBER_ADD_SYMBOL(DLKR::DLAllocator::get_allocator_of)
-LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_table)
-LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_ranges_count)
-LIBER_ADD_SYMBOL(FD4::FD4MemoryManager::GLOBAL_allocator_ranges)
-LIBER_ADD_SYMBOL(DLKR::DLBackAllocator::get)
 // reflection.csv
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_registered_classes)
 LIBER_ADD_SYMBOL(DLRF::DLRuntimeClass::GLOBAL_runtime_pairs)
 // misc.csv
 LIBER_ADD_SYMBOL(GLOBAL_init_flip_counter)
+LIBER_ADD_SYMBOL(DLKR::DLAllocator::get_dlallocator_of)
 LIBER_ADD_SYMBOL(CS::CSEzTask::register_task)
 LIBER_ADD_SYMBOL(CS::CSEzTaskProxy::free_task)
 LIBER_ADD_SYMBOL(CS::CSSound::make_system_sound)
 LIBER_ADD_SYMBOL(CS::CSSound::play_character_sound)
 LIBER_ADD_SYMBOL(GXBS::GXDrawQueue::queue_callback)
 LIBER_ADD_SYMBOL(GLOBAL_ID3D12RootSignature)
-LIBER_ADD_SYMBOL(CS::DepositoryDialog::vtable)
-LIBER_ADD_SYMBOL(CS::GaitemSelectDialog::vtable)
-LIBER_ADD_SYMBOL(CS::InventoryDialog::vtable)
-LIBER_ADD_SYMBOL(CS::BaseChangeDstSelectDialog::vtable)
-LIBER_ADD_SYMBOL(CS::ExchangeShopDialog::vtable)
-LIBER_ADD_SYMBOL(CS::ShopDialog::vtable)
 // singletons.csv
 LIBER_ADD_SYMBOL(DLSY::DLRuntime::instance)
 LIBER_ADD_SYMBOL(DLIO::DLFileDeviceManager::instance)
