@@ -78,7 +78,7 @@ struct optref {
      * @param other
      */
     template <typename U>
-        requires std::convertible_to<U, T>
+        requires std::convertible_to<U&, T&>
     constexpr optref(const optref<U>& other) noexcept
         : optref([&]() -> optref {
               if (!other.has_reference())

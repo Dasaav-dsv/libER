@@ -62,7 +62,7 @@ class SoloParamRepository : public FD4::FD4ResCap {
 public:
     FD4_SINGLETON_CLASS(SoloParamRepository);
 
-    virtual ~SoloParamRepository() LIBER_INTERFACE_ONLY;
+    virtual ~SoloParamRepository() = 0;
 
     /**
      * @brief Lock until the param repository is loaded or the time runs out.

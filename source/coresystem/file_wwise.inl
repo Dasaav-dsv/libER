@@ -1,7 +1,6 @@
 #include <coresystem/file/file.hpp>
 #include <dantelion2/fileio.hpp>
 #include <detail/functions.hpp>
-#include <detail/singleton.hpp>
 
 #include <algorithm>
 #include <exception>
@@ -95,8 +94,8 @@ bool format_wem_override(DLTX::DLString* out, DLTX::DLString* in) {
 
 void override_wwise_loader_once() {
     static bool _ = []() {
-        void* loader = *reinterpret_cast<void**>(liber::symbol<
-            "DLMOW::FilePackageLowLevelIOBlocking::instance">::get());
+        void* loader = liber::symbol<
+            "GLOBAL_FilePackageLowLevelIOBlocking">::as<void*>();
         if (!loader)
             std::terminate();
         reinterpret_cast<void**>(loader)[9] = (void*)&format_wem_override;
@@ -119,8 +118,8 @@ void override_wwise_loader_once() {
 }
 
 bool is_init_loaded() {
-    uintptr_t instance = *reinterpret_cast<uintptr_t*>(
-        liber::symbol<"AK::BankManager::instance">::get());
+    uintptr_t instance =
+        liber::symbol<"GLOBAL_BankManager">::as<uintptr_t>();
     if (!instance)
         return false;
     return *reinterpret_cast<int*>(instance + 0xB8);

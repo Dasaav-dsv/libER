@@ -1,12 +1,9 @@
 #include <coresystem/task.hpp>
 #include <detail/functions.hpp>
-#include <detail/singleton.hpp>
 
 #include <utility>
 
 using namespace from;
-
-LIBER_SINGLETON_INSTANCE(CS::CSTaskImp);
 
 using namespace CS;
 

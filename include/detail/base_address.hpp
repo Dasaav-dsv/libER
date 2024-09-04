@@ -1,26 +1,22 @@
 #pragma once
 
 #include <detail/defines.hpp>
+#include <detail/windows_peb.hpp>
 
 #include <cstddef>
 #include <cstdint>
 
-namespace liber {
-class _base_address {
-public:
-    LIBERAPI _base_address() noexcept;
+namespace liber::base_address {
+inline void* offset(uintptr_t offset) noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base() + offset);
+}
 
-    void* get() const noexcept {
-        return offset(0);
-    }
+template <uintptr_t Offset>
+inline void* const_offset() noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base() + Offset);
+}
 
-    void* offset(uintptr_t offset) const noexcept {
-        return reinterpret_cast<void*>(base + offset);
-    }
-
-private:
-    const uintptr_t base;
-};
-
-LIBERAPI extern _base_address base_address;
-} // namespace liber
+inline void* get() noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base());
+}
+} // namespace liber::base_address

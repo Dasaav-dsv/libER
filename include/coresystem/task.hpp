@@ -179,7 +179,7 @@ class CSTaskImp {
 public:
     FD4_SINGLETON_CLASS(CSTaskImp);
 
-    virtual ~CSTaskImp() LIBER_INTERFACE_ONLY;
+    virtual ~CSTaskImp() = 0;
 
     /**
      * @brief Get the associated CSTask instance.
@@ -213,7 +213,7 @@ class CSTaskBase {
     };
 
 public:
-    virtual ~CSTaskBase() LIBER_INTERFACE_ONLY;
+    virtual ~CSTaskBase() = 0;
 
     from::allocator<void> liber_unknown;
 
@@ -243,7 +243,7 @@ class CSTask : private CSTaskBase {
 public:
     LIBER_INTERFACE_CLASS(CSTask);
 
-    virtual ~CSTask() LIBER_INTERFACE_ONLY;
+    virtual ~CSTask() = 0;
 
     /**
      * @brief Get every task group
@@ -255,12 +255,12 @@ public:
     }
 
 private:
-    virtual void add_task_group(const wchar_t* name) LIBER_INTERFACE_ONLY;
-    virtual bool unk_set_task_group(cstgi) LIBER_INTERFACE_ONLY;
+    virtual void add_task_group(const wchar_t* name) = 0;
+    virtual bool unk_set_task_group(cstgi) = 0;
     virtual bool set_task_group_state(cstgi id,
-        bool state) LIBER_INTERFACE_ONLY;
-    virtual void debug_print() LIBER_INTERFACE_ONLY;
-    virtual void queue_tasks(void* unk1, void* unk2) LIBER_INTERFACE_ONLY;
+        bool state) = 0;
+    virtual void debug_print() = 0;
+    virtual void queue_tasks(void* unk1, void* unk2) = 0;
 
     from::allocator<void> liber_unknown;
     void* liber_unknown[8];

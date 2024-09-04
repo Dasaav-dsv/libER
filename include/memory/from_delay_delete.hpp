@@ -12,7 +12,6 @@
 #include <memory/from_allocator.hpp>
 #include <memory>
 
-std::default_delete<int[]>;
 namespace from {
 /**
  * @brief Signature of the function called when an object is to be deleted.
@@ -59,7 +58,7 @@ struct delay_delete {
      * @param p pointer to object to delete
      */
     void operator()(T* p) const noexcept {
-        request_delete(&delay_deleter, static_cast<void*>(p));
+            (&delay_deleter, static_cast<void*>(p));
     }
 
 private:

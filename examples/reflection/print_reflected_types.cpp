@@ -20,13 +20,17 @@ void example_base() {
     }
     // Get a vector of all DLRuntimeClasses that have been
     // registered so far by ELDEN RING
-    const auto& registered_classes =
+    auto registered_classes =
         from::DLRF::DLRuntimeClass::get_registered_classes();
-    for (const auto& registered_class : registered_classes) {
+    if (!registered_classes) {
+        std::cout << "registered_classes is null!\n";
+        return;
+    }
+    for (const auto& class_holder : *registered_classes) {
         // Print out the DLRuntimeClass address and name
-        std::cout << registered_class.get() << ' '
-                  << registered_class.get()->class_name();
-        const auto& methods = registered_class.get()->get_methods();
+        std::cout << class_holder.instance << ' '
+                  << class_holder.name;
+        const auto& methods = class_holder.instance->get_methods();
         if (methods.empty()) {
             std::cout << '\n';
             continue;
@@ -34,8 +38,8 @@ void example_base() {
         // Print out the DLRuntimeClass methods, if present
         std::cout << " and its methods:\n";
         for (const auto& method : methods) {
-            std::cout << "    " << method.get()->get_method_name();
-            const auto& invokers = method.get()->get_invokers();
+            std::cout << "    " << method.name;
+            const auto& invokers = method.instance->get_invokers();
             if (invokers.empty())
                 continue;
             std::cout << " and its invokers: ";

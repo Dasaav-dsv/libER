@@ -1,13 +1,10 @@
 #include <coresystem/sound.hpp>
 #include <detail/functions.hpp>
-#include <detail/singleton.hpp>
 
 #include <stdexcept>
 #include <utility>
 
 using namespace from;
-
-LIBER_SINGLETON_INSTANCE(CS::CSSound);
 
 // clang-format off
 char sound_type_lut[] = {

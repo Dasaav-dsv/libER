@@ -14,7 +14,7 @@ add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
 target_compile_definitions("objlibER" PUBLIC LIBERAPI_EXPORT)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options("objlibER" PUBLIC "-Wno-unused")
+    target_compile_options("objlibER" PUBLIC "-Wno-unused" "-Wno-inconsistent-missing-override")
 endif()
 
 # Include directories:
@@ -33,9 +33,6 @@ target_sources("objlibER" PUBLIC
 # Core source files
 target_sources("objlibER" PUBLIC
     "source/detail/app_version.cpp"
-    "source/detail/base_address.cpp"
-    "source/detail/symbols.cpp"
-    "source/detail/preprocessor.cpp"
 )
 
 # Memory source files
@@ -47,7 +44,6 @@ target_sources("objlibER" PUBLIC
 # Namespace DL source files
 target_sources("objlibER" PUBLIC
     "source/dantelion2/kernel_runtime.cpp"
-    "source/dantelion2/reflection.cpp"
     "source/dantelion2/system.cpp"
     "source/dantelion2/utility.cpp"
     "source/dantelion2/fileio.cpp"
@@ -56,7 +52,6 @@ target_sources("objlibER" PUBLIC
 # Namespace FD4 source files
 target_sources("objlibER" PUBLIC
     "source/fd4/time.cpp"
-    "source/fd4/component.cpp"
     "source/fd4/resource.cpp"
     "source/fd4/detail/fd4_task.cpp"
 )
@@ -65,7 +60,6 @@ target_sources("objlibER" PUBLIC
 target_sources("objlibER" PUBLIC
     "source/coresystem/cs_param.cpp"
     "source/coresystem/task.cpp"
-    "source/coresystem/window.cpp"
     "source/coresystem/file.cpp"
     "source/coresystem/sound.cpp"
 )
@@ -82,15 +76,15 @@ target_sources("objlibER" PUBLIC
 
 # Target libER[d].dll
 add_library("libER" SHARED $<TARGET_OBJECTS:objlibER>)
-target_include_directories("libER" PUBLIC "include")
+target_include_directories("libER" PUBLIC "include" "symbols")
 # Target libER_static[d].lib
 add_library("libER_static" STATIC $<TARGET_OBJECTS:objlibER>)
-target_include_directories("libER_static" PUBLIC "include")
+target_include_directories("libER_static" PUBLIC "include" "symbols")
 # Debug build "d" postfix in libERd.*
 set_target_properties("libER" "libER_static" PROPERTIES DEBUG_POSTFIX d)
 
 # No unused warnings with clang-cl
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options("libER" PUBLIC "-Wno-unused")
-    target_compile_options("libER_static" PUBLIC "-Wno-unused")
+    target_compile_options("libER" PUBLIC "-Wno-unused" "-Wno-inconsistent-missing-override")
+    target_compile_options("libER_static" PUBLIC "-Wno-unused" "-Wno-inconsistent-missing-override")
 endif()

@@ -68,7 +68,8 @@ struct FD4TaskData {
      * @return CS::CSTaskGroup
      */
     CS::CSTaskGroup get_task_group() const noexcept {
-        return static_cast<CS::CSTaskGroup>(CS_TASK_GROUP_ID(this->task_group_id));
+        return static_cast<CS::CSTaskGroup>(
+            CS_TASK_GROUP_ID(this->task_group_id));
     }
 
     /**
@@ -128,20 +129,21 @@ class FD4StepTemplateInterface<FD4TaskBase> : public FD4TaskBase {
 public:
     FD4_RUNTIME_CLASS(FD4StepTemplateInterface);
 
+    virtual void step_execute(FD4TaskData*) = 0;
+    virtual bool is_step_init() = 0;
+    virtual int get_step_index() = 0;
+
 private:
-    virtual void execute_second(FD4TaskData*) LIBER_INTERFACE;
-    virtual bool test_int_0x48() LIBER_INTERFACE;
-    virtual int get_int_0x48() LIBER_INTERFACE;
-    virtual bool unk_tree_op1() LIBER_INTERFACE;
-    virtual bool unk_tree_op2() LIBER_INTERFACE;
-    virtual bool unk_tree_op3() LIBER_INTERFACE;
-    virtual bool unk_tree_op4() LIBER_INTERFACE;
-    virtual bool unk_tree_op5() LIBER_INTERFACE;
-    virtual bool unk_tree_op6() LIBER_INTERFACE;
-    virtual bool unk_tree_op7() LIBER_INTERFACE;
-    virtual bool unk_tree_op8() LIBER_INTERFACE;
-    virtual bool unk_tree_op9() LIBER_INTERFACE;
-    virtual bool unk_tree_op10() LIBER_INTERFACE;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
+    virtual bool liber_unknown() = 0;
 };
 
 // TODO:
@@ -162,9 +164,9 @@ public:
     FD4_RUNTIME_CLASS(FD4StepTemplateBase);
 
 private:
-    virtual bool unk_tree_op11() LIBER_INTERFACE;
-    virtual bool unk_tree_op12() LIBER_INTERFACE;
-    virtual bool unk_tree_op13() LIBER_INTERFACE;
+    virtual bool unk_tree_op11() = 0;
+    virtual bool unk_tree_op12() = 0;
+    virtual bool unk_tree_op13() = 0;
 
     using steps_type = std::pair<void (*)(Impl*), const char*>;
 
@@ -223,7 +225,7 @@ class FD4TaskManager {
 public:
     FD4_SINGLETON_CLASS(FD4TaskManager);
 
-    virtual ~FD4TaskManager() LIBER_INTERFACE_ONLY;
+    virtual ~FD4TaskManager() = 0;
 
 private:
     from::allocator<void> liber_unknown;

@@ -88,8 +88,8 @@ private:
         std::byte _dummy_section_bytes[0x28];
 
         _RTL_CRITICAL_SECTION* get() noexcept {
-            return std::launder(reinterpret_cast<_RTL_CRITICAL_SECTION*>(
-                &this->_dummy_section_bytes));
+            return reinterpret_cast<_RTL_CRITICAL_SECTION*>(
+                &this->_dummy_section_bytes);
         }
     } _dummy_section;
 };
