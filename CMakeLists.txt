@@ -14,7 +14,11 @@ add_definitions(-D_ITERATOR_DEBUG_LEVEL=0)
 target_compile_definitions("objlibER" PUBLIC LIBERAPI_EXPORT)
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options("objlibER" PUBLIC "-Wno-unused" "-Wno-inconsistent-missing-override")
+    target_compile_options("objlibER" PUBLIC
+        "-Wno-unused"
+        "-Wno-inconsistent-missing-override"
+        "-Wno-invalid-offsetof"
+    )
 endif()
 
 # Include directories:
