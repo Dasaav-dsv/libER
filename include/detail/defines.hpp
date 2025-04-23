@@ -15,7 +15,7 @@
 #endif
 
 // The ELDEN RING app binary version this build of libER targets
-#define LIBER_TARGET_VERSION "1.13.0"
+#define LIBER_TARGET_VERSION "1.16.0"
 
 // Invalid version constant
 // All version fields are negative 16-bit integers
