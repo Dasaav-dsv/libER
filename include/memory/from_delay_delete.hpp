@@ -58,7 +58,7 @@ struct delay_delete {
      * @param p pointer to object to delete
      */
     void operator()(T* p) const noexcept {
-            (&delay_deleter, static_cast<void*>(p));
+        request_delete(&delay_deleter, static_cast<void*>(p));
     }
 
 private:
