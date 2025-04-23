@@ -26,19 +26,17 @@ using shared_ptr = std::shared_ptr<T>;
  * Uses a delay deleter from::delay_delete.
  *
  * @tparam T type to point to
- * @tparam AllocatorTag allocator type
  * @param args type constructor arguments
- * @return from::shared_ptr<T, AllocatorTag> resulting pointer
+ * @return from::shared_ptr<T> resulting pointer
  */
-template <typename T,
-    typename AllocatorTag = from::default_allocator_tag,
-    typename... Args>
+template <typename T, typename... Args>
 [[nodiscard]] from::shared_ptr<T> make_shared(Args&&... args) {
-    using allocator_type = from::allocator<T, AllocatorTag>;
-    allocator_type allocator;
-    T* p = allocator.allocate(1);
-    std::allocator_traits<allocator_type>::construct(allocator, p,
-        std::forward<Args>(args)...);
-    return from::shared_ptr<T>{ p, from::delay_delete<T, AllocatorTag>{} };
+    from::allocator<T> allocator;
+    using altraits = std::allocator_traits<decltype(allocator)>;
+    T* p = altraits::allocate(allocator, 1);
+    if (!p)
+        return nullptr;
+    altraits::construct(allocator, p, std::forward<Args>(args)...);
+    return from::shared_ptr<T>{ p, from::delay_delete<T>{} };
 }
 } // namespace from

@@ -19,6 +19,6 @@ namespace from {
  * @brief std::vector with from::allocator.
  *
  */
-template <typename T, typename AllocatorTag = from::default_allocator_tag>
-using vector = std::vector<T, from::allocator<T, AllocatorTag>>;
+template <typename T>
+using vector = std::vector<T, from::allocator<T>>;
 } // namespace from

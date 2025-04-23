@@ -8,6 +8,9 @@
 #pragma once
 
 #include <coresystem/task.hpp>
+#include <dantelion2/utility.hpp>
+
+#include <utility>
 
 // D3D12 resource forward declarations
 struct ID3D12Device;
@@ -42,7 +45,7 @@ namespace GXBS {
  * @see from::CS::CSEzTask
  *
  */
-class GXDrawTask : private CS::CSEzTask {
+class GXDrawTask : public DLUT::DLReferenceCountObject, public CS::CSEzTask {
 public:
     /**
      * @brief Whether the task should draw on top of the UI.
@@ -64,14 +67,8 @@ public:
     /**
      * @brief Register the draw task, i.e. start its execution.
      *
-     * The drawing is sequenced in order of the tasks' registration.
-     * The task_group parameter is ignored, the tasks will always register
-     * in the from::CS::CSTaskGroup::GraphicsStep task group.
-     *
-     * @param task_group is ignored, always from::CS::CSTaskGroup::GraphicsStep
      */
-    void register_task(
-        CS::CSTaskGroup task_group = CS::CSTaskGroup::INVALID) override {
+    void register_task() {
         CS::CSEzTask::register_task(CS::CSTaskGroup::GraphicsStep);
     }
 
@@ -188,6 +185,16 @@ public:
     }
 
 private:
+    void ref_for_callback() noexcept {
+        if (!std::exchange(this->callback_referenced, true))
+            static_cast<DLUT::DLReferenceCountObject*>(this)->ref();
+    }
+
+    void unref_after_callback() noexcept {
+        if (std::exchange(this->callback_referenced, false))
+            static_cast<DLUT::DLReferenceCountObject*>(this)->unref();
+    }
+
     LIBERAPI void eztask_execute(FD4::FD4TaskData* data) override final;
 
     friend bool liber_draw_callback(uintptr_t device_context, GXDrawTask* task);
@@ -200,6 +207,7 @@ private:
     D3D12_VIEWPORT* viewport = nullptr;
     D3D12_RECT* scissor_rect = nullptr;
     scene draw_scene = HDR_SCENE;
+    bool callback_referenced = false;
     float delta_time = 0.0f;
     int times_called = 0;
 };

@@ -20,23 +20,29 @@ namespace liber {
 // Passing references to the ELDEN RING ABI
 // is more error-prone, automatic moves are
 // not an option.
-template <literal_string Name, typename Return>
+template <sym_table::sym_key Name, typename Return>
 struct function {
     template <typename... Args>
-    static inline Return call(Args&&... args) {
-        return reinterpret_cast<Return (*)(std::decay_t<Args>...)>(
-            liber::symbol<Name>::get())(args...);
+    static Return call(Args&&... args) {
+        using symbol = liber::symbol<Name>;
+        using function_type = Return(std::decay_t<Args>...);
+        decltype(auto) function =
+            symbol::template as_unchecked<function_type>();
+        return function(args...);
     }
 };
 
 // Template partial specialization
 // for functions or methods without a return value
-template <literal_string Name>
+template <sym_table::sym_key Name>
 struct function<Name, void> {
     template <typename... Args>
-    static inline void call(Args&&... args) {
-        reinterpret_cast<void (*)(std::decay_t<Args>...)>(
-            liber::symbol<Name>::get())(args...);
+    static void call(Args&&... args) {
+        using symbol = liber::symbol<Name>;
+        using function_type = void(std::decay_t<Args>...);
+        decltype(auto) function =
+            symbol::template as_unchecked<function_type>();
+        function(args...);
     }
 };
 } // namespace liber

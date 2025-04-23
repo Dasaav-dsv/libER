@@ -8,17 +8,15 @@
 #pragma once
 
 #include <dantelion2/reflection.hpp>
-#include <detail/literal_string.hpp>
 #include <detail/preprocessor.hpp>
 
-// LIBER_CLASS specialization that implements
+// LIBER_CLASS specialization that uses
 // DLRuntimeClass reflection for CLASSNAME
-// The class must inherit from FD4ComponentBase
-#define FD4_RUNTIME_CLASS(CLASSNAME)                                    \
-    from::DLRF::DLRuntimeClass* get_runtime_class() noexcept override { \
-        return &from::DLRF::DLRuntimeClassTemplate<CLASSNAME,           \
-            LIBER_STRINGIFY(CLASSNAME)>::dl_runtime_class;              \
-    }                                                                   \
+#define FD4_RUNTIME_CLASS(CLASSNAME)                                         \
+    virtual from::DLRF::DLRuntimeClass* get_runtime_class() const noexcept { \
+        return from::DLRF::DLRuntimeClass::get_runtime_class(                \
+            LIBER_STRINGIFY(CLASSNAME));                                     \
+    }                                                                        \
     LIBER_CLASS(CLASSNAME)
 
 namespace from {
@@ -32,12 +30,7 @@ namespace FD4 {
  *
  */
 struct FD4ComponentBase {
-    /**
-     * @brief Get the runtime class object
-     *
-     * @return DLRF::DLRuntimeClass* pointer to the runtime class
-     */
-    LIBERAPI virtual DLRF::DLRuntimeClass* get_runtime_class() noexcept;
+    FD4_RUNTIME_CLASS(FD4ComponentBase);
 
     virtual ~FD4ComponentBase() = default;
 };

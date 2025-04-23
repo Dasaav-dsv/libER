@@ -19,6 +19,6 @@ namespace from {
  * @brief std::deque with from::allocator.
  *
  */
-template <typename T, typename AllocatorTag = from::default_allocator_tag>
-using deque = std::deque<T, from::allocator<T, AllocatorTag>>;
+template <typename T>
+using deque = std::deque<T, from::allocator<T>>;
 } // namespace from

@@ -17,9 +17,8 @@ namespace from {
  * @brief std::unique_ptr with from::allocator and from::delay_delete.
  *
  */
-template <typename T,
-    typename AllocatorTag = from::default_empty_base_allocator_tag>
-using unique_ptr = std::unique_ptr<T, from::delay_delete<T, AllocatorTag>>;
+template <typename T>
+using unique_ptr = std::unique_ptr<T, from::delay_delete<T>>;
 
 /**
  * @brief from::unique_ptr make_unique implementation
@@ -27,25 +26,21 @@ using unique_ptr = std::unique_ptr<T, from::delay_delete<T, AllocatorTag>>;
  * Uses a delay deleter from::delay_delete.
  *
  * @tparam T type to point to
- * @tparam AllocatorTag allocator type
  * @param args type constructor arguments
- * @return from::unique_ptr<T, AllocatorTag> resulting pointer
+ * @return from::unique_ptr<T> resulting pointer
  */
-template <typename T,
-    typename AllocatorTag = from::default_empty_base_allocator_tag,
-    typename... Args>
-[[nodiscard]] from::unique_ptr<T, AllocatorTag> make_unique(Args&&... args) {
-    using allocator_type = from::allocator<T, AllocatorTag>;
-    allocator_type allocator;
-    T* p = allocator.allocate(1);
-    std::allocator_traits<allocator_type>::construct(allocator, p,
-        std::forward<Args>(args)...);
-    return from::unique_ptr<T, AllocatorTag>{ p };
+template <typename T, typename... Args>
+[[nodiscard]] from::unique_ptr<T> make_unique(Args&&... args) {
+    from::allocator<T> allocator;
+    using altraits = std::allocator_traits<decltype(allocator)>;
+    T* p = altraits::allocate(allocator, 1);
+    if (!p)
+        return nullptr;
+    altraits::construct(allocator, p, std::forward<Args>(args)...);
+    return from::unique_ptr<T>{ p };
 }
 
 // Compile time size checks - failing these means binary incompatibility
-static_assert(sizeof(from::unique_ptr<char>) == 8,
-    "ELDEN RING ABI requirement");
-static_assert(sizeof(from::unique_ptr<char, from::default_allocator_tag>) == 16,
+static_assert(sizeof(from::unique_ptr<std::byte>) == 8,
     "ELDEN RING ABI requirement");
 } // namespace from

@@ -1,13 +1,22 @@
 #pragma once
 
-/*
- * Functions to retrieve the process base address, caching it
- */
+#include <detail/defines.hpp>
+#include <detail/windows_peb.hpp>
 
-namespace liber {
-// Get the process base address
-void* base_address() noexcept;
+#include <cstddef>
+#include <cstdint>
 
-// Get an offset pointer from the process base address
-void* base_offset(int offset) noexcept;
-} // namespace liber
+namespace liber::base_address {
+inline void* offset(uintptr_t offset) noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base() + offset);
+}
+
+template <uintptr_t Offset>
+inline void* const_offset() noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base() + Offset);
+}
+
+inline void* get() noexcept {
+    return reinterpret_cast<void*>(winpeb::get_base());
+}
+} // namespace liber::base_address

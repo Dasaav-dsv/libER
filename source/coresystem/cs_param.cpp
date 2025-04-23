@@ -1,11 +1,8 @@
 #include <coresystem/cs_param.hpp>
 #include <detail/functions.hpp>
-#include <detail/singleton.hpp>
 #include <detail/windows.inl>
 
 using namespace from;
-
-LIBER_SINGLETON_INSTANCE(CS::SoloParamRepository);
 
 bool CS::SoloParamRepository::wait_for_params(int timeout) {
     auto are_params_ready = [](int& num_loaded) {

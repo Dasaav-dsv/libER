@@ -19,6 +19,6 @@ namespace from {
  * @brief std::list with from::allocator.
  *
  */
-template <typename T, typename AllocatorTag = from::default_allocator_tag>
-using list = std::list<T, from::allocator<T, AllocatorTag>>;
+template <typename T>
+using list = std::list<T, from::allocator<T>>;
 } // namespace from

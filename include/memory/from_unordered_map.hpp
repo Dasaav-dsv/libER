@@ -20,8 +20,7 @@ namespace from {
  *
  */
 template <typename K, typename V, typename Hash = std::hash<K>,
-    typename Eq = std::equal_to<K>,
-    typename AllocatorTag = from::default_allocator_tag>
+    typename Eq = std::equal_to<K>>
 using unordered_map = std::unordered_map<K, V, Hash, Eq,
-    from::allocator<std::pair<const K, V>, AllocatorTag>>;
+    from::allocator<std::pair<const K, V>>>;
 } // namespace from

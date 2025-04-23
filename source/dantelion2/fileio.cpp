@@ -1,12 +1,9 @@
 #include <dantelion2/fileio.hpp>
-#include <detail/singleton.hpp>
 
 #include <algorithm>
 #include <mutex>
 
 using namespace from;
-
-LIBER_SINGLETON_INSTANCE(DLIO::DLFileDeviceManager);
 
 bool DLIO::DLFileDeviceManager::is_virtual_path(
     const std::filesystem::path& path) {

@@ -25,7 +25,7 @@ class CSWindow : public FD4::FD4ComponentBase {
 public:
     FD4_SINGLETON_CLASS(CSWindow);
 
-    virtual ~CSWindow() LIBER_INTERFACE_ONLY;
+    virtual ~CSWindow() = 0;
 
     /// @cond DOXYGEN_SKIP
     using window_handle_type = void*;

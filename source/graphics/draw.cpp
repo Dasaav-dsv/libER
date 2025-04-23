@@ -75,11 +75,11 @@ struct GXSwapChain {
     int resolution_y;
     int target_framerate;
     int liber_unknown[19];
-    void* main_texture;                    // DLCG3::CGTexture2D
+    void* main_texture;              // DLCG3::CGTexture2D
     CGView* main_render_target_view; // DLCG3::CGRenderTargetView
-    void* textures[3];                     // DLCG3::CGTexture2D
+    void* textures[3];               // DLCG3::CGTexture2D
     CGView* render_target_views[3];  // DLCG3::CGRenderTargetView
-    GXBuffer* render_targets[3];           // GXBS::GXRenderTarget2D
+    GXBuffer* render_targets[3];     // GXBS::GXRenderTarget2D
     void* liber_unknown[3];
     int target_count; // 3
     void* liber_unknown;
@@ -92,15 +92,14 @@ struct GXSwapChain {
 
 bool liber_draw_callback(uintptr_t device_context, GXDrawTask* task) {
     ++task->times_called;
-    uintptr_t draw_base =
-        *reinterpret_cast<uintptr_t*>(liber::symbol<"GXBS::GXDrawBase">::get());
+    uintptr_t draw_base = liber::symbol<"GLOBAL_GXDrawBase">::as<uintptr_t>();
     d3d12_env* environment =
         *reinterpret_cast<d3d12_env**>(draw_base + GXDRAWBASE_D3D12_ENV_OFFSET);
     GXSwapChain* sc = *reinterpret_cast<GXSwapChain**>(
         draw_base + GXDRAWBASE_GXSWAPCHAIN_OFFSET);
     task->device = environment->bound_device->device;
-    task->root_signature = *reinterpret_cast<ID3D12RootSignature**>(
-        liber::symbol<"GLOBAL_ID3D12RootSignature">::get());
+    task->root_signature =
+        liber::symbol<"GLOBAL_ID3D12RootSignature">::as<ID3D12RootSignature*>();
     task->command_queue = environment->command_queue;
     CGView* rtv = [&]() {
         if (task->get_scene() == GXDrawTask::UI_SCENE)
@@ -117,13 +116,14 @@ bool liber_draw_callback(uintptr_t device_context, GXDrawTask* task) {
     task->scissor_rect = reinterpret_cast<D3D12_RECT*>(
         device_context + GXDEVICEPROXY_RECT_OFFSET);
     task->draw();
+    // Unreference task after executing its callback
+    task->unref_after_callback();
     return false;
 }
 
 void GXDrawTask::eztask_execute(FD4::FD4TaskData* data) {
     this->delta_time = data->get_dt();
-    uintptr_t draw_base =
-        *reinterpret_cast<uintptr_t*>(liber::symbol<"GXBS::GXDrawBase">::get());
+    uintptr_t draw_base = liber::symbol<"GLOBAL_GXDrawBase">::as<uintptr_t>();
     if (!draw_base)
         return;
     void** draw_queue_array = reinterpret_cast<void**>(
@@ -134,6 +134,8 @@ void GXDrawTask::eztask_execute(FD4::FD4TaskData* data) {
         return;
     void* draw_queue = draw_queue_array[draw_queue_selector];
     int priority = this->draw_scene == HDR_SCENE ? -1 : -2;
+    // Reference task before queueing its callback
+    this->ref_for_callback();
     liber::function<"GXBS::GXDrawQueue::queue_callback", void>::call(draw_queue,
         &liber_draw_callback, this, this, priority);
 }

@@ -130,9 +130,9 @@ public:
      * 
      * @param value on/off
      */
-    virtual void set_debug(bool value) LIBER_INTERFACE;
+    virtual void set_debug(bool value) = 0;
 
-    virtual void liber_unknown() LIBER_INTERFACE;
+    virtual void liber_unknown() = 0;
 
 private:
     bool debug;
