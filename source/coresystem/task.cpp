@@ -19,10 +19,7 @@ void CSEzTask::register_task(CSTaskGroup task_group) {
 }
 
 void CSEzTask::free_task() {
-    if (!this->proxy)
-        return;
-    liber::function<"CS::CSEzTaskProxy::free_task", void>::call(this->proxy);
-    this->proxy = nullptr;
+    liber::function<"CS::CSEzTask::free_task", void>::call(this);
 }
 
 CSTaskGroup CSEzTask::get_task_group() const noexcept {
