@@ -13,11 +13,6 @@
 #include <utility>
 
 namespace liber {
-/// @cond DOXYGEN_SKIP
-template <typename T>
-concept not_reference = !std::is_reference_v<T>;
-/// @endcond
-
 /**
  * @brief A std::optional<std::reference_wrapper<T>> wrapper for lvalue
  * references.
@@ -27,7 +22,7 @@ concept not_reference = !std::is_reference_v<T>;
  * @tparam T the (optionally) referenced object
  */
 template <typename T>
-    requires not_reference<T>
+    requires requires { !std::is_reference_v<T>; }
 struct optref {
     /**
      * @brief Value type.
