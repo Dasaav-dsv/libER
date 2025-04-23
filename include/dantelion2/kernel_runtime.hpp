@@ -9,18 +9,12 @@
 
 #include <dantelion2/utility.hpp>
 #include <detail/preprocessor.hpp>
+#include <detail/minwin.inl>
 
 // Part of namespace DLKR and DLKRD
 #include <memory/from_allocator.hpp>
 
 #include <new>
-
-// Forward declarations to not include Windows.h
-struct _RTL_CRITICAL_SECTION;
-
-/// @cond DOXYGEN_SKIP
-using HANDLE = void*;
-/// @endcond
 
 namespace from {
 // Windows Kernel runtime functionality;
@@ -80,18 +74,7 @@ public:
     DLPlainLightMutex(DLPlainLightMutex&&) noexcept = delete;
 
 private:
-    _RTL_CRITICAL_SECTION* critical_section() noexcept {
-        return this->_dummy_section.get();
-    }
-
-    struct alignas(8) _critical_section {
-        std::byte _dummy_section_bytes[0x28];
-
-        _RTL_CRITICAL_SECTION* get() noexcept {
-            return reinterpret_cast<_RTL_CRITICAL_SECTION*>(
-                &this->_dummy_section_bytes);
-        }
-    } _dummy_section;
+    CRITICAL_SECTION critical_section;
 };
 
 LIBER_ASSERTS_BEGIN(DLPlainLightMutex);

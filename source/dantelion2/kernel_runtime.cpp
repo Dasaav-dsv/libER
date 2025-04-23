@@ -5,27 +5,27 @@
 using namespace from::DLKR;
 
 DLPlainLightMutex::DLPlainLightMutex() noexcept {
-    InitializeCriticalSection(this->critical_section());
+    InitializeCriticalSection(&this->critical_section);
 }
 
 DLPlainLightMutex::DLPlainLightMutex(int spin_count) noexcept {
-    InitializeCriticalSectionAndSpinCount(this->critical_section(), spin_count);
+    InitializeCriticalSectionAndSpinCount(&this->critical_section, spin_count);
 }
 
 DLPlainLightMutex::~DLPlainLightMutex() noexcept {
-    DeleteCriticalSection(this->critical_section());
+    DeleteCriticalSection(&this->critical_section);
 }
 
 void DLPlainLightMutex::lock() noexcept {
-    EnterCriticalSection(this->critical_section());
+    EnterCriticalSection(&this->critical_section);
 }
 
 void DLPlainLightMutex::unlock() noexcept {
-    LeaveCriticalSection(this->critical_section());
+    LeaveCriticalSection(&this->critical_section);
 }
 
 bool DLPlainLightMutex::try_lock() noexcept {
-    return TryEnterCriticalSection(this->critical_section());
+    return TryEnterCriticalSection(&this->critical_section);
 }
 
 DLPlainMutex::DLPlainMutex() noexcept
