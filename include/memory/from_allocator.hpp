@@ -187,7 +187,7 @@ public:
      * @return void* pointer to the allocated memory
      */
     virtual void* allocate2_aligned(size_t cb, size_t alignment) {
-        return this->allocate2_aligned(cb, alignment);
+        return this->allocate_aligned(cb, alignment);
     }
 
     /**
