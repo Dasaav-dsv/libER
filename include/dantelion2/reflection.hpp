@@ -123,6 +123,15 @@ public:
     /**
      * @brief Get a derived class's base class.
      *
+     * @return DLRuntimeClass* (may be null if not derived)
+     */
+    DLRuntimeClass* get_base() noexcept {
+        return this->base_class;
+    }
+
+    /**
+     * @brief Get a derived class's base class.
+     *
      * @return const DLRuntimeClass* (may be null if not derived)
      *
      */
