@@ -18,7 +18,7 @@ namespace DLSY {
  * runs out.
  *
  * Initialization is performed by the game's main thread, post-entry. Returns
- * true on success, false on timeout. Timeout can be -1 (indefinite wait).
+ * true on success, false on timeout. Timeout can be (unsigned int)-1 (indefinite wait).
  *
  * @warning **POTENTIAL DEADLOCK**
  *
@@ -31,7 +31,7 @@ namespace DLSY {
  * @return true wait succeeded
  * @return false wait timed out
  */
-LIBERAPI bool wait_for_system(int timeout) noexcept;
+LIBERAPI bool wait_for_system(unsigned int timeout) noexcept;
 
 /**
  * @brief Check if ELDEN RING system resources are initialized.
